@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainTrafficSimulator</class>
+ <widget class="QMainWindow" name="MainTrafficSimulator">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1664</width>
+    <height>947</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainTrafficSimulator</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="5" column="0">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout_15" columnstretch="1,8,1,8,1,8,1,8,2">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="5">
+       <widget class="QSpinBox" name="sbFontSize">
+        <property name="minimum">
+         <number>8</number>
+        </property>
+        <property name="maximum">
+         <number>30</number>
+        </property>
+        <property name="value">
+         <number>13</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QComboBox" name="cbTheme"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="cbLegend">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Top</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Bottom</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Left</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Right</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>No Legend</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="lbFontSize">
+        <property name="text">
+         <string>Font Size:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="indent">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QFontComboBox" name="cbFont"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lbLegend">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string>Legend:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="indent">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="lbTheme">
+        <property name="text">
+         <string>Theme:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="indent">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="lbFont">
+        <property name="text">
+         <string>Font:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="indent">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="8">
+       <widget class="QLCDNumber" name="lcdNumber"/>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tabConfig">
+       <attribute name="title">
+        <string>Configuration</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="gbRoadConfig">
+          <property name="title">
+           <string>Road Configuration</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,0,0,0,0">
+           <property name="horizontalSpacing">
+            <number>3</number>
+           </property>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblCyclesNum">
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Number of cycles:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="indent">
+              <number>10</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="lblLaneChange">
+             <property name="text">
+              <string>Enable lane changing:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="indent">
+              <number>10</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lblCyclesToSkip">
+             <property name="text">
+              <string>Number of cycles to skip:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="indent">
+              <number>10</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblSegmentsNum">
+             <property name="text">
+              <string>Road length [segments]:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="indent">
+              <number>10</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QSpinBox" name="sbCyclesNum">
+             <property name="minimum">
+              <number>10</number>
+             </property>
+             <property name="maximum">
+              <number>10000</number>
+             </property>
+             <property name="value">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="QSpinBox" name="sbSegmentsNum">
+             <property name="minimum">
+              <number>100</number>
+             </property>
+             <property name="maximum">
+              <number>10000</number>
+             </property>
+             <property name="value">
+              <number>200</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QSpinBox" name="sbCyclesToSkip">
+             <property name="maximum">
+              <number>10000</number>
+             </property>
+             <property name="value">
+              <number>100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="2">
+            <widget class="QCheckBox" name="cbChangeLane">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="gbCarLengths">
+          <property name="title">
+           <string>Car Length Configuraion</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <item row="0" column="0">
+            <widget class="QTableWidget" name="tbwCarLengthProb"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="gbDiagramsConfig">
+          <property name="title">
+           <string>Diagram Configuration</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_7">
+           <item row="1" column="0" colspan="3">
+            <widget class="QGroupBox" name="gbFDiagramConfig">
+             <property name="title">
+              <string>Fundamental Diagram</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_8">
+              <item row="2" column="1" colspan="2">
+               <widget class="QSpinBox" name="sbTestsNum">
+                <property name="frame">
+                 <bool>true</bool>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>1000</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" colspan="2">
+               <widget class="QComboBox" name="cmbDensityPoints">
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>10</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>100</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lblDensityPoints">
+                <property name="text">
+                 <string>Number of density points:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="indent">
+                 <number>10</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lblTestsNum">
+                <property name="text">
+                 <string>Number of tests:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="indent">
+                 <number>10</number>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="3">
+               <widget class="QPushButton" name="btnFDiagramConfig">
+                <property name="text">
+                 <string>Generate Fundamental Diagram</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="3">
+            <widget class="QGroupBox" name="gbSTDiagramConfig">
+             <property name="title">
+              <string>Space-time Diagram</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_9">
+              <item row="0" column="0">
+               <widget class="QLabel" name="lblCurrentDensity">
+                <property name="text">
+                 <string>Car density:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="indent">
+                 <number>10</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" colspan="2">
+               <widget class="QSpinBox" name="sbCurrentDensity">
+                <property name="suffix">
+                 <string>%</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="value">
+                 <number>50</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="3">
+               <widget class="QPushButton" name="btnSTDiagramConfig">
+                <property name="text">
+                 <string>Generate Space-time Diagram</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QGroupBox" name="gbCarProfiles">
+          <property name="title">
+           <string>Driver Profiles</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_11" rowstretch="0,3,0,0,0">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblDriverProfiles">
+             <property name="text">
+              <string>Driver Profiles</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QTableWidget" name="tbwDPFromArchive"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QTableWidget" name="tbwDriverProfiles"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="btnAddDriverProfile">
+             <property name="text">
+              <string>Add Driver Profile</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblDPFromArchive">
+             <property name="text">
+              <string>Driver Profiles from Archive</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabConsole">
+       <attribute name="title">
+        <string>Console</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="1" column="0">
+         <widget class="QPushButton" name="btnStartSimulationConsole">
+          <property name="text">
+           <string>Generate Space-time Diagram</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QTextEdit" name="txeConsoleOutput">
+          <property name="font">
+           <font>
+            <family>Courier New</family>
+           </font>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabSTDiagram">
+       <attribute name="title">
+        <string>Space-time Diagram</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="1" column="3">
+         <widget class="QChartView" name="qcvSTDiagramRight"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QChartView" name="qcvSTDiagramLeft"/>
+        </item>
+        <item row="3" column="1" colspan="3">
+         <layout class="QGridLayout" name="gridLayout_13" columnstretch="1,8">
+          <item row="0" column="1">
+           <widget class="QPushButton" name="btnSTDiagram">
+            <property name="text">
+             <string>Generate Space-time Diagram</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="btnSaveSTDiagram">
+            <property name="text">
+             <string>Save Diagram</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabFDiagram">
+       <attribute name="title">
+        <string>Fundamental Diagram</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="1" column="0">
+         <widget class="QChartView" name="qcvFDiagramLeft"/>
+        </item>
+        <item row="4" column="0" colspan="3">
+         <layout class="QGridLayout" name="gridLayout_14" columnstretch="0,1,0">
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="cbApproximate">
+            <property name="text">
+             <string>Approximate</string>
+            </property>
+            <property name="tristate">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="btnFDiagram">
+            <property name="text">
+             <string>Generate Fundamental Diagram</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="btnSaveFDiagram">
+            <property name="text">
+             <string>Save Diagram</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="1">
+         <widget class="QChartView" name="qcvFDiagramRight"/>
+        </item>
+        <item row="1" column="2">
+         <widget class="QChartView" name="qcvFDiagramSum"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Archive</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_12">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tbwArchiveDiagramF"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="btnReadData">
+          <property name="text">
+           <string>Read Data</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1664</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>qchartview.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>txeConsoleOutput</tabstop>
+  <tabstop>btnStartSimulationConsole</tabstop>
+  <tabstop>qcvSTDiagramRight</tabstop>
+  <tabstop>qcvSTDiagramLeft</tabstop>
+  <tabstop>qcvFDiagramLeft</tabstop>
+  <tabstop>qcvFDiagramSum</tabstop>
+  <tabstop>qcvFDiagramRight</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

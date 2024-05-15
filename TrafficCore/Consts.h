@@ -1,7 +1,7 @@
 #pragma once
 
 #define MIN_SEGMENTS 20
-#define MAX_SEGMENTS 10000
+#define MAX_SEGMENTS 100000
 
 #define MAX_CARS_SET 25
 #define MAX_NUMBER_OF_DRIVER_TYPES 3

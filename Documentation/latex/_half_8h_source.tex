@@ -1,0 +1,948 @@
+\doxysection{Half.\+h}
+\hypertarget{_half_8h_source}{}\label{_half_8h_source}\index{Eigen/src/Core/arch/Default/Half.h@{Eigen/src/Core/arch/Default/Half.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ The\ conversion\ routines\ are\ Copyright\ (c)\ Fabian\ Giesen,\ 2016.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ The\ original\ license\ follows:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Copyright\ (c)\ Fabian\ Giesen,\ 2016}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ modification,\ are\ permitted.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ THE\ COPYRIGHT\ HOLDERS\ AND\ CONTRIBUTORS}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ "{}AS\ IS"{}\ AND\ ANY\ EXPRESS\ OR\ IMPLIED\ WARRANTIES,\ INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ LIMITED\ TO,\ THE\ IMPLIED\ WARRANTIES\ OF\ MERCHANTABILITY\ AND\ FITNESS\ FOR}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ A\ PARTICULAR\ PURPOSE\ ARE\ DISCLAIMED.\ IN\ NO\ EVENT\ SHALL\ THE\ COPYRIGHT}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ HOLDER\ OR\ CONTRIBUTORS\ BE\ LIABLE\ FOR\ ANY\ DIRECT,\ INDIRECT,\ INCIDENTAL,}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ SPECIAL,\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES\ (INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ LIMITED\ TO,\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;\ LOSS\ OF\ USE,}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ DATA,\ OR\ PROFITS;\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND\ ON\ ANY}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ THEORY\ OF\ LIABILITY,\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ (INCLUDING\ NEGLIGENCE\ OR\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ OF\ THIS\ SOFTWARE,\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ Standard\ 16-\/bit\ float\ type,\ mostly\ useful\ for\ GPUs.\ Defines\ a\ new}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ type\ Eigen::half\ (inheriting\ either\ from\ CUDA's\ or\ HIP's\ \_\_half\ struct)\ with}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ operator\ overloads\ such\ that\ it\ behaves\ basically\ as\ an\ arithmetic}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ type.\ It\ will\ be\ quite\ slow\ on\ CPUs\ (so\ it\ is\ recommended\ to\ stay}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ in\ fp32\ for\ CPUs,\ except\ for\ simple\ parameter\ conversions,\ I/O}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ to\ disk\ and\ the\ likes),\ but\ fast\ on\ GPUs.}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_HALF\_H}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ EIGEN\_HALF\_H}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_GPU\_FP16)\ ||\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ When\ compiling\ with\ GPU\ support,\ the\ "{}\_\_half\_raw"{}\ base\ class\ as\ well\ as}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ some\ other\ routines\ are\ defined\ in\ the\ GPU\ compiler\ header\ files}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ (cuda\_fp16.h,\ hip\_fp16.h),\ and\ they\ are\ not\ tagged\ constexpr}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ As\ a\ consequence,\ we\ get\ compile\ failures\ when\ compiling\ Eigen\ with}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ GPU\ support.\ Hence\ the\ need\ to\ disable\ EIGEN\_CONSTEXPR\ when\ building}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ Eigen\ with\ GPU\ support}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \#pragma\ push\_macro("{}EIGEN\_CONSTEXPR"{})}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \#undef\ EIGEN\_CONSTEXPR}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \#define\ EIGEN\_CONSTEXPR}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ F16\_PACKET\_FUNCTION(PACKET\_F,\ PACKET\_F16,\ METHOD)\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\ \ template\ <>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\ \ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ EIGEN\_UNUSED\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ PACKET\_F16\ METHOD<PACKET\_F16>(const\ PACKET\_F16\&\ \_x)\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \ \ return\ float2half(METHOD<PACKET\_F>(half2float(\_x)));\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{struct\ }half;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{namespace\ }half\_impl\ \{}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ We\ want\ to\ use\ the\ \_\_half\_raw\ struct\ from\ the\ HIP\ header\ file\ only\ during\ the\ device\ compile\ phase.}}
+\DoxyCodeLine{00067\ \textcolor{comment}{//\ This\ is\ required\ because\ of\ a\ quirk\ in\ the\ way\ TensorFlow\ GPU\ builds\ are\ done.}}
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ When\ compiling\ TensorFlow\ source\ code\ with\ GPU\ support,\ files\ that}}
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ *\ contain\ GPU\ kernels\ (i.e.\ *.cu.cc\ files)\ are\ compiled\ via\ hipcc}}
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ \ *\ do\ not\ contain\ GPU\ kernels\ (\ i.e.\ *.cc\ files)\ are\ compiled\ via\ gcc\ (typically)}}
+\DoxyCodeLine{00071\ \textcolor{comment}{//}}
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ Tensorflow\ uses\ the\ Eigen::half\ type\ as\ its\ FP16\ type,\ and\ there\ are\ functions\ that}}
+\DoxyCodeLine{00073\ \textcolor{comment}{//\ \ *\ are\ defined\ in\ a\ file\ that\ gets\ compiled\ via\ hipcc\ AND}}
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ \ *\ have\ Eigen::half\ as\ a\ pass-\/by-\/value\ argument\ AND}}
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ \ *\ are\ called\ in\ a\ file\ that\ gets\ compiled\ via\ gcc}}
+\DoxyCodeLine{00076\ \textcolor{comment}{//}}
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ In\ the\ scenario\ described\ above\ the\ caller\ and\ callee\ will\ see\ different\ versions}}
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ of\ the\ Eigen::half\ base\ class\ \_\_half\_raw,\ and\ they\ will\ be\ compiled\ by\ different\ compilers}}
+\DoxyCodeLine{00079\ \textcolor{comment}{//}}
+\DoxyCodeLine{00080\ \textcolor{comment}{//\ There\ appears\ to\ be\ an\ ABI\ mismatch\ between\ gcc\ and\ clang\ (which\ is\ called\ by\ hipcc)\ that\ results\ in}}
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ the\ callee\ getting\ corrupted\ values\ for\ the\ Eigen::half\ argument.}}
+\DoxyCodeLine{00082\ \textcolor{comment}{//}}
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ Making\ the\ host\ side\ compile\ phase\ of\ hipcc\ use\ the\ same\ Eigen::half\ impl,\ as\ the\ gcc\ compile,\ resolves}}
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ this\ error,\ and\ hence\ the\ following\ convoluted\ \#if\ condition}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#if\ !defined(EIGEN\_HAS\_GPU\_FP16)\ ||\ !defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ Make\ our\ own\ \_\_half\_raw\ definition\ that\ is\ similar\ to\ CUDA's.}}
+\DoxyCodeLine{00087\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\ \{}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_HAS\_GPU\_FP16)\ \&\&\ !defined(EIGEN\_GPU\_COMPILE\_PHASE))}}
+\DoxyCodeLine{00089\ \ \ \textcolor{comment}{//\ Eigen::half\ can\ be\ used\ as\ the\ datatype\ for\ shared\ memory\ declarations\ (in\ Eigen\ and\ TF)}}
+\DoxyCodeLine{00090\ \ \ \textcolor{comment}{//\ The\ element\ type\ for\ shared\ memory\ cannot\ have\ non-\/trivial\ constructors}}
+\DoxyCodeLine{00091\ \ \ \textcolor{comment}{//\ and\ hence\ the\ following\ special\ casing\ (which\ skips\ the\ zero-\/initilization).}}
+\DoxyCodeLine{00092\ \ \ \textcolor{comment}{//\ Note\ that\ this\ check\ gets\ done\ even\ in\ the\ host\ compilation\ phase,\ and}}
+\DoxyCodeLine{00093\ \ \ \textcolor{comment}{//\ hence\ the\ need\ for\ this}}
+\DoxyCodeLine{00094\ \ \ EIGEN\_DEVICE\_FUNC\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}()\ \{\}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00096\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}()\ :\ x(0)\ \{\}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00099\ \ \ \textcolor{keyword}{explicit}\ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}(numext::uint16\_t\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{raw}})\ :\ x(numext::bit\_cast<\_\_fp16>(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{raw}}))\ \{}
+\DoxyCodeLine{00100\ \ \ \}}
+\DoxyCodeLine{00101\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_fp16}}\ x;}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{explicit}\ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}(numext::uint16\_t\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{raw}})\ :\ x(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{raw}})\ \{\}}
+\DoxyCodeLine{00104\ \ \ numext::uint16\_t\ x;}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_HIP\_FP16)}}
+\DoxyCodeLine{00109\ \ \ \textcolor{comment}{//\ Nothing\ to\ do\ here}}
+\DoxyCodeLine{00110\ \ \ \textcolor{comment}{//\ HIP\ fp16\ header\ file\ has\ a\ definition\ for\ \_\_half\_raw}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_CUDA\_FP16)}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\ \ \#if\ EIGEN\_CUDA\_SDK\_VER\ <\ 90000}}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ In\ CUDA\ <\ 9.0,\ \_\_half\ is\ the\ equivalent\ of\ CUDA\ 9's\ \_\_half\_raw}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}};}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\ \ \#endif\ }\textcolor{comment}{//\ defined(EIGEN\_HAS\_CUDA\_FP16)}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#elif\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{typedef}\ cl::sycl::half\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}};}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\ raw\_uint16\_to\_half(numext::uint16\_t\ x);}
+\DoxyCodeLine{00121\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\ float\_to\_half\_rtne(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ff}});}
+\DoxyCodeLine{00122\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{float}\ half\_to\_float(\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}});}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_base}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\ \{}
+\DoxyCodeLine{00125\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_base}}()\ \{\}}
+\DoxyCodeLine{00126\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_base}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{\}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_GPU\_FP16)}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\ \#if\ defined(EIGEN\_HAS\_HIP\_FP16)}}
+\DoxyCodeLine{00130\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_base}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{\ x\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half\_as\_ushort}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}});\ \}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\ \#elif\ defined(EIGEN\_HAS\_CUDA\_FP16)}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\ \ \#if\ EIGEN\_CUDA\_SDK\_VER\ >=\ 90000}}
+\DoxyCodeLine{00133\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_base}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}(*(\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}*)\&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{\}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\ \#endif}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00137\ \};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \}\ \textcolor{comment}{//\ namespace\ half\_impl}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{comment}{//\ Class\ definition.}}
+\DoxyCodeLine{00142\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1half}{half}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_impl::half\_base}}\ \{}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \textcolor{comment}{//\ Writing\ this\ out\ as\ separate\ \#if-\/else\ blocks\ to\ make\ the\ code\ easier\ to\ follow}}
+\DoxyCodeLine{00145\ \ \ \textcolor{comment}{//\ The\ same\ applies\ to\ most\ \#if-\/else\ blocks\ in\ this\ file}}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#if\ !defined(EIGEN\_HAS\_GPU\_FP16)\ ||\ !defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{00147\ \ \ \textcolor{comment}{//\ Use\ the\ same\ base\ class\ for\ the\ following\ two\ scenarios}}
+\DoxyCodeLine{00148\ \ \ \textcolor{comment}{//\ *\ when\ compiling\ without\ GPU\ support\ enabled}}
+\DoxyCodeLine{00149\ \ \ \textcolor{comment}{//\ *\ during\ host\ compile\ phase\ when\ compiling\ with\ GPU\ support\ enabled}}
+\DoxyCodeLine{00150\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{half\_impl::\_\_half\_raw}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}};}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_HIP\_FP16)}}
+\DoxyCodeLine{00152\ \ \ \textcolor{comment}{//\ Nothing\ to\ do\ here}}
+\DoxyCodeLine{00153\ \ \ \textcolor{comment}{//\ HIP\ fp16\ header\ file\ has\ a\ definition\ for\ \_\_half\_raw}}
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_CUDA\_FP16)}}
+\DoxyCodeLine{00155\ \ \ \textcolor{comment}{//\ Note\ that\ EIGEN\_CUDA\_SDK\_VER\ is\ set\ to\ 0\ even\ when\ compiling\ with\ HIP,\ so}}
+\DoxyCodeLine{00156\ \ \ \textcolor{comment}{//\ (EIGEN\_CUDA\_SDK\_VER\ <\ 90000)\ is\ true\ even\ for\ HIP!\ \ So\ keeping\ this\ within}}
+\DoxyCodeLine{00157\ \ \ \textcolor{comment}{//\ \#if\ defined(EIGEN\_HAS\_CUDA\_FP16)\ is\ needed}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\ \ \#if\ defined(EIGEN\_CUDA\_SDK\_VER)\ \&\&\ EIGEN\_CUDA\_SDK\_VER\ <\ 90000}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{half\_impl::\_\_half\_raw}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}};}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}()\ \{\}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_impl::half\_base}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{\}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_GPU\_FP16)}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\ \#if\ defined(EIGEN\_HAS\_HIP\_FP16)}}
+\DoxyCodeLine{00169\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_impl::half\_base}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{\}}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\ \#elif\ defined(EIGEN\_HAS\_CUDA\_FP16)}}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\ \ \#if\ defined(EIGEN\_CUDA\_SDK\_VER)\ \&\&\ EIGEN\_CUDA\_SDK\_VER\ >=\ 90000}}
+\DoxyCodeLine{00172\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_impl::half\_base}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{\}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\ \#endif}}
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{keyword}{explicit}\ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(\textcolor{keywordtype}{bool}\ b)}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_impl::half\_base}}(half\_impl::raw\_uint16\_to\_half(b\ ?\ 0x3c00\ :\ 0))\ \{\}}
+\DoxyCodeLine{00180\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00181\ \ \ \textcolor{keyword}{explicit}\ EIGEN\_DEVICE\_FUNC\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{val}})}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_impl::half\_base}}(half\_impl::float\_to\_half\_rtne(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{val}})))\ \{\}}
+\DoxyCodeLine{00183\ \ \ \textcolor{keyword}{explicit}\ EIGEN\_DEVICE\_FUNC\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(\textcolor{keywordtype}{float}\ f)}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_impl::half\_base}}(half\_impl::float\_to\_half\_rtne(f))\ \{\}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \textcolor{comment}{//\ Following\ the\ convention\ of\ numpy,\ converting\ between\ complex\ and}}
+\DoxyCodeLine{00187\ \ \ \textcolor{comment}{//\ float\ will\ lead\ to\ loss\ of\ imag\ value.}}
+\DoxyCodeLine{00188\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ RealScalar>}
+\DoxyCodeLine{00189\ \ \ \textcolor{keyword}{explicit}\ EIGEN\_DEVICE\_FUNC\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(std::complex<RealScalar>\ c)}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1half__base}{half\_impl::half\_base}}(half\_impl::float\_to\_half\_rtne(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(c.real())))\ \{\}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{operator}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}()\textcolor{keyword}{\ const\ }\{\ \ \textcolor{comment}{//\ NOLINT:\ Allow\ implicit\ conversion\ to\ float,\ because\ it\ is\ lossless.}}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{return}\ half\_impl::half\_to\_float(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00194\ \ \ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_GPU\_FP16)\ \&\&\ !defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{00197\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{operator}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00198\ \ \ \ \ ::\_\_half\_raw\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{hr}};}
+\DoxyCodeLine{00199\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{hr}}.x\ =\ x;}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{hr}});}
+\DoxyCodeLine{00201\ \ \ \}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00203\ \};}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{keyword}{namespace\ }std\ \{}
+\DoxyCodeLine{00208\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00209\ \textcolor{keyword}{struct\ }numeric\_limits<\mbox{\hyperlink{namespace_eigen}{Eigen}}::half>\ \{}
+\DoxyCodeLine{00210\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_specialized\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00211\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_signed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00212\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_integer\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00213\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_exact\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00214\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ has\_infinity\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00215\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ has\_quiet\_NaN\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00216\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ has\_signaling\_NaN\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00217\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ float\_denorm\_style\ has\_denorm\ =\ denorm\_present;}
+\DoxyCodeLine{00218\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ has\_denorm\_loss\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00219\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::float\_round\_style\ round\_style\ =\ std::round\_to\_nearest;}
+\DoxyCodeLine{00220\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_iec559\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00221\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_bounded\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00222\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ is\_modulo\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00223\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ digits\ =\ 11;}
+\DoxyCodeLine{00224\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ digits10\ =\ 3;\ \ \ \ \ \ \textcolor{comment}{//\ according\ to\ http://half.sourceforge.net/structstd\_1\_1numeric\_\_limits\_3\_01half\_\_float\_1\_1half\_01\_4.html}}
+\DoxyCodeLine{00225\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ max\_digits10\ =\ 5;\ \ \textcolor{comment}{//\ according\ to\ http://half.sourceforge.net/structstd\_1\_1numeric\_\_limits\_3\_01half\_\_float\_1\_1half\_01\_4.html}}
+\DoxyCodeLine{00226\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ radix\ =\ 2;}
+\DoxyCodeLine{00227\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ min\_exponent\ =\ -\/13;}
+\DoxyCodeLine{00228\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ min\_exponent10\ =\ -\/4;}
+\DoxyCodeLine{00229\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ max\_exponent\ =\ 16;}
+\DoxyCodeLine{00230\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ max\_exponent10\ =\ 4;}
+\DoxyCodeLine{00231\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ traps\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00232\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ tinyness\_before\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ (min)()\ \{\ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(0x400);\ \}}
+\DoxyCodeLine{00235\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ lowest()\ \{\ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(0xfbff);\ \}}
+\DoxyCodeLine{00236\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ (max)()\ \{\ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(0x7bff);\ \}}
+\DoxyCodeLine{00237\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ epsilon()\ \{\ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(0x0800);\ \}}
+\DoxyCodeLine{00238\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ round\_error()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}(0.5);\ \}}
+\DoxyCodeLine{00239\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ infinity()\ \{\ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(0x7c00);\ \}}
+\DoxyCodeLine{00240\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ quiet\_NaN()\ \{\ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(0x7e00);\ \}}
+\DoxyCodeLine{00241\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ signaling\_NaN()\ \{\ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(0x7d00);\ \}}
+\DoxyCodeLine{00242\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ denorm\_min()\ \{\ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(0x1);\ \}}
+\DoxyCodeLine{00243\ \};}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \textcolor{comment}{//\ If\ std::numeric\_limits<T>\ is\ specialized,\ should\ also\ specialize}}
+\DoxyCodeLine{00246\ \textcolor{comment}{//\ std::numeric\_limits<const\ T>,\ std::numeric\_limits<volatile\ T>,\ and}}
+\DoxyCodeLine{00247\ \textcolor{comment}{//\ std::numeric\_limits<const\ volatile\ T>}}
+\DoxyCodeLine{00248\ \textcolor{comment}{//\ https://stackoverflow.com/a/16519653/}}
+\DoxyCodeLine{00249\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00250\ \textcolor{keyword}{struct\ }numeric\_limits<const\ \mbox{\hyperlink{namespace_eigen}{Eigen}}::half>\ :\ numeric\_limits<Eigen::half>\ \{\};}
+\DoxyCodeLine{00251\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00252\ \textcolor{keyword}{struct\ }numeric\_limits<volatile\ \mbox{\hyperlink{namespace_eigen}{Eigen}}::half>\ :\ numeric\_limits<Eigen::half>\ \{\};}
+\DoxyCodeLine{00253\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00254\ \textcolor{keyword}{struct\ }numeric\_limits<const\ volatile\ \mbox{\hyperlink{namespace_eigen}{Eigen}}::half>\ :\ numeric\_limits<Eigen::half>\ \{\};}
+\DoxyCodeLine{00255\ \}\ \textcolor{comment}{//\ end\ namespace\ std}}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \textcolor{keyword}{namespace\ }half\_impl\ \{}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(EIGEN\_CUDA\_ARCH)\ \&\&\ \(\backslash\)}}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\ \ \ \ \ EIGEN\_CUDA\_ARCH\ >=\ 530)\ ||\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\ \ \ \ (defined(EIGEN\_HAS\_HIP\_FP16)\ \&\&\ defined(HIP\_DEVICE\_COMPILE))}}
+\DoxyCodeLine{00264\ \textcolor{comment}{//\ Note:\ We\ deliberatly\ do\ *not*\ define\ this\ to\ 1\ even\ if\ we\ have\ Arm's\ native}}
+\DoxyCodeLine{00265\ \textcolor{comment}{//\ fp16\ type\ since\ GPU\ halfs\ are\ rather\ different\ from\ native\ CPU\ halfs.}}
+\DoxyCodeLine{00266\ \textcolor{comment}{//\ TODO:\ Rename\ to\ something\ like\ EIGEN\_HAS\_NATIVE\_GPU\_FP16}}
+\DoxyCodeLine{00267\ \textcolor{preprocessor}{\#define\ EIGEN\_HAS\_NATIVE\_FP16}}
+\DoxyCodeLine{00268\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \textcolor{comment}{//\ Intrinsics\ for\ native\ fp16\ support.\ Note\ that\ on\ current\ hardware,}}
+\DoxyCodeLine{00271\ \textcolor{comment}{//\ these\ are\ no\ faster\ than\ fp32\ arithmetic\ (you\ need\ to\ use\ the\ half2}}
+\DoxyCodeLine{00272\ \textcolor{comment}{//\ versions\ to\ get\ the\ ALU\ speed\ increased),\ but\ you\ do\ save\ the}}
+\DoxyCodeLine{00273\ \textcolor{comment}{//\ conversion\ steps\ back\ and\ forth.}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_NATIVE\_FP16)}}
+\DoxyCodeLine{00276\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\ operator\ +\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_CUDA\_SDK\_VER)\ \&\&\ EIGEN\_CUDA\_SDK\_VER\ >=\ 90000}}
+\DoxyCodeLine{00278\ \ \ \textcolor{keywordflow}{return}\ \_\_hadd(::\_\_half(a),\ ::\_\_half(b));}
+\DoxyCodeLine{00279\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00280\ \ \ \textcolor{keywordflow}{return}\ \_\_hadd(a,\ b);}
+\DoxyCodeLine{00281\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00282\ \}}
+\DoxyCodeLine{00283\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\ operator\ *\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00284\ \ \ \textcolor{keywordflow}{return}\ \_\_hmul(a,\ b);}
+\DoxyCodeLine{00285\ \}}
+\DoxyCodeLine{00286\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\ operator\ -\/\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00287\ \ \ \textcolor{keywordflow}{return}\ \_\_hsub(a,\ b);}
+\DoxyCodeLine{00288\ \}}
+\DoxyCodeLine{00289\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\ operator\ /\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00290\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_CUDA\_SDK\_VER)\ \&\&\ EIGEN\_CUDA\_SDK\_VER\ >=\ 90000}}
+\DoxyCodeLine{00291\ \ \ \textcolor{keywordflow}{return}\ \_\_hdiv(a,\ b);}
+\DoxyCodeLine{00292\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00293\ \ \ \textcolor{keywordtype}{float}\ num\ =\ \_\_half2float(a);}
+\DoxyCodeLine{00294\ \ \ \textcolor{keywordtype}{float}\ denom\ =\ \_\_half2float(b);}
+\DoxyCodeLine{00295\ \ \ \textcolor{keywordflow}{return}\ \_\_float2half(num\ /\ denom);}
+\DoxyCodeLine{00296\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00297\ \}}
+\DoxyCodeLine{00298\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\ operator\ -\/\ (\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00299\ \ \ \textcolor{keywordflow}{return}\ \_\_hneg(a);}
+\DoxyCodeLine{00300\ \}}
+\DoxyCodeLine{00301\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\&\ operator\ +=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00302\ \ \ a\ =\ a\ +\ b;}
+\DoxyCodeLine{00303\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00304\ \}}
+\DoxyCodeLine{00305\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\&\ operator\ *=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00306\ \ \ a\ =\ a\ *\ b;}
+\DoxyCodeLine{00307\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00308\ \}}
+\DoxyCodeLine{00309\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\&\ operator\ -\/=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00310\ \ \ a\ =\ a\ -\/\ b;}
+\DoxyCodeLine{00311\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00312\ \}}
+\DoxyCodeLine{00313\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ half\&\ operator\ /=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00314\ \ \ a\ =\ a\ /\ b;}
+\DoxyCodeLine{00315\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00316\ \}}
+\DoxyCodeLine{00317\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ \textcolor{keywordtype}{bool}\ operator\ ==\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00318\ \ \ \textcolor{keywordflow}{return}\ \_\_heq(a,\ b);}
+\DoxyCodeLine{00319\ \}}
+\DoxyCodeLine{00320\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ \textcolor{keywordtype}{bool}\ operator\ !=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00321\ \ \ \textcolor{keywordflow}{return}\ \_\_hne(a,\ b);}
+\DoxyCodeLine{00322\ \}}
+\DoxyCodeLine{00323\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ \textcolor{keywordtype}{bool}\ operator\ <\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00324\ \ \ \textcolor{keywordflow}{return}\ \_\_hlt(a,\ b);}
+\DoxyCodeLine{00325\ \}}
+\DoxyCodeLine{00326\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ \textcolor{keywordtype}{bool}\ operator\ <=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00327\ \ \ \textcolor{keywordflow}{return}\ \_\_hle(a,\ b);}
+\DoxyCodeLine{00328\ \}}
+\DoxyCodeLine{00329\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ \textcolor{keywordtype}{bool}\ operator\ >\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00330\ \ \ \textcolor{keywordflow}{return}\ \_\_hgt(a,\ b);}
+\DoxyCodeLine{00331\ \}}
+\DoxyCodeLine{00332\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ \textcolor{keywordtype}{bool}\ operator\ >=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00333\ \ \ \textcolor{keywordflow}{return}\ \_\_hge(a,\ b);}
+\DoxyCodeLine{00334\ \}}
+\DoxyCodeLine{00335\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00338\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ +\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00339\ \ \ \textcolor{keywordflow}{return}\ half(vaddh\_f16(a.x,\ b.x));}
+\DoxyCodeLine{00340\ \}}
+\DoxyCodeLine{00341\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ *\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00342\ \ \ \textcolor{keywordflow}{return}\ half(vmulh\_f16(a.x,\ b.x));}
+\DoxyCodeLine{00343\ \}}
+\DoxyCodeLine{00344\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ -\/\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00345\ \ \ \textcolor{keywordflow}{return}\ half(vsubh\_f16(a.x,\ b.x));}
+\DoxyCodeLine{00346\ \}}
+\DoxyCodeLine{00347\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ /\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00348\ \ \ \textcolor{keywordflow}{return}\ half(vdivh\_f16(a.x,\ b.x));}
+\DoxyCodeLine{00349\ \}}
+\DoxyCodeLine{00350\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ -\/\ (\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00351\ \ \ \textcolor{keywordflow}{return}\ half(vnegh\_f16(a.x));}
+\DoxyCodeLine{00352\ \}}
+\DoxyCodeLine{00353\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\&\ operator\ +=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00354\ \ \ a\ =\ half(vaddh\_f16(a.x,\ b.x));}
+\DoxyCodeLine{00355\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00356\ \}}
+\DoxyCodeLine{00357\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\&\ operator\ *=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00358\ \ \ a\ =\ half(vmulh\_f16(a.x,\ b.x));}
+\DoxyCodeLine{00359\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00360\ \}}
+\DoxyCodeLine{00361\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\&\ operator\ -\/=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00362\ \ \ a\ =\ half(vsubh\_f16(a.x,\ b.x));}
+\DoxyCodeLine{00363\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00364\ \}}
+\DoxyCodeLine{00365\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\&\ operator\ /=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00366\ \ \ a\ =\ half(vdivh\_f16(a.x,\ b.x));}
+\DoxyCodeLine{00367\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00368\ \}}
+\DoxyCodeLine{00369\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ ==\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00370\ \ \ \textcolor{keywordflow}{return}\ vceqh\_f16(a.x,\ b.x);}
+\DoxyCodeLine{00371\ \}}
+\DoxyCodeLine{00372\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ !=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00373\ \ \ \textcolor{keywordflow}{return}\ !vceqh\_f16(a.x,\ b.x);}
+\DoxyCodeLine{00374\ \}}
+\DoxyCodeLine{00375\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ <\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00376\ \ \ \textcolor{keywordflow}{return}\ vclth\_f16(a.x,\ b.x);}
+\DoxyCodeLine{00377\ \}}
+\DoxyCodeLine{00378\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ <=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00379\ \ \ \textcolor{keywordflow}{return}\ vcleh\_f16(a.x,\ b.x);}
+\DoxyCodeLine{00380\ \}}
+\DoxyCodeLine{00381\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ >\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00382\ \ \ \textcolor{keywordflow}{return}\ vcgth\_f16(a.x,\ b.x);}
+\DoxyCodeLine{00383\ \}}
+\DoxyCodeLine{00384\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ >=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00385\ \ \ \textcolor{keywordflow}{return}\ vcgeh\_f16(a.x,\ b.x);}
+\DoxyCodeLine{00386\ \}}
+\DoxyCodeLine{00387\ \textcolor{comment}{//\ We\ need\ to\ distinguish\ ‘clang\ as\ the\ CUDA\ compiler’\ from\ ‘clang\ as\ the\ host\ compiler,}}
+\DoxyCodeLine{00388\ \textcolor{comment}{//\ invoked\ by\ NVCC’\ (e.g.\ on\ MacOS).\ The\ former\ needs\ to\ see\ both\ host\ and\ device\ implementation}}
+\DoxyCodeLine{00389\ \textcolor{comment}{//\ of\ the\ functions,\ while\ the\ latter\ can\ only\ deal\ with\ one\ of\ them.}}
+\DoxyCodeLine{00390\ \textcolor{preprocessor}{\#elif\ !defined(EIGEN\_HAS\_NATIVE\_FP16)\ ||\ (EIGEN\_COMP\_CLANG\ \&\&\ !EIGEN\_COMP\_NVCC)\ }\textcolor{comment}{//\ Emulate\ support\ for\ half\ floats}}
+\DoxyCodeLine{00391\ }
+\DoxyCodeLine{00392\ \textcolor{preprocessor}{\#if\ EIGEN\_COMP\_CLANG\ \&\&\ defined(EIGEN\_CUDACC)}}
+\DoxyCodeLine{00393\ \textcolor{comment}{//\ We\ need\ to\ provide\ emulated\ *host-\/side*\ FP16\ operators\ for\ clang.}}
+\DoxyCodeLine{00394\ \textcolor{preprocessor}{\#pragma\ push\_macro("{}EIGEN\_DEVICE\_FUNC"{})}}
+\DoxyCodeLine{00395\ \textcolor{preprocessor}{\#undef\ EIGEN\_DEVICE\_FUNC}}
+\DoxyCodeLine{00396\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(EIGEN\_HAS\_NATIVE\_FP16)}}
+\DoxyCodeLine{00397\ \textcolor{preprocessor}{\#define\ EIGEN\_DEVICE\_FUNC\ \_\_host\_\_}}
+\DoxyCodeLine{00398\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{//\ both\ host\ and\ device\ need\ emulated\ ops.}}
+\DoxyCodeLine{00399\ \textcolor{preprocessor}{\#define\ EIGEN\_DEVICE\_FUNC\ \_\_host\_\_\ \_\_device\_\_}}
+\DoxyCodeLine{00400\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00401\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00403\ \textcolor{comment}{//\ Definitions\ for\ CPUs\ and\ older\ HIP+CUDA,\ mostly\ working\ through\ conversion}}
+\DoxyCodeLine{00404\ \textcolor{comment}{//\ to/from\ fp32.}}
+\DoxyCodeLine{00405\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ +\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00406\ \ \ \textcolor{keywordflow}{return}\ half(\textcolor{keywordtype}{float}(a)\ +\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00407\ \}}
+\DoxyCodeLine{00408\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ *\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00409\ \ \ \textcolor{keywordflow}{return}\ half(\textcolor{keywordtype}{float}(a)\ *\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00410\ \}}
+\DoxyCodeLine{00411\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ -\/\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00412\ \ \ \textcolor{keywordflow}{return}\ half(\textcolor{keywordtype}{float}(a)\ -\/\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00413\ \}}
+\DoxyCodeLine{00414\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ /\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00415\ \ \ \textcolor{keywordflow}{return}\ half(\textcolor{keywordtype}{float}(a)\ /\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00416\ \}}
+\DoxyCodeLine{00417\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ -\/\ (\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00418\ \ \ half\ result;}
+\DoxyCodeLine{00419\ \ \ result.x\ =\ a.x\ \string^\ 0x8000;}
+\DoxyCodeLine{00420\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00421\ \}}
+\DoxyCodeLine{00422\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\&\ operator\ +=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00423\ \ \ a\ =\ half(\textcolor{keywordtype}{float}(a)\ +\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00424\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00425\ \}}
+\DoxyCodeLine{00426\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\&\ operator\ *=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00427\ \ \ a\ =\ half(\textcolor{keywordtype}{float}(a)\ *\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00428\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00429\ \}}
+\DoxyCodeLine{00430\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\&\ operator\ -\/=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00431\ \ \ a\ =\ half(\textcolor{keywordtype}{float}(a)\ -\/\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00432\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00433\ \}}
+\DoxyCodeLine{00434\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\&\ operator\ /=\ (half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00435\ \ \ a\ =\ half(\textcolor{keywordtype}{float}(a)\ /\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00436\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00437\ \}}
+\DoxyCodeLine{00438\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ ==\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00439\ \ \ \textcolor{keywordflow}{return}\ numext::equal\_strict(\textcolor{keywordtype}{float}(a),\textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00440\ \}}
+\DoxyCodeLine{00441\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ !=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00442\ \ \ \textcolor{keywordflow}{return}\ numext::not\_equal\_strict(\textcolor{keywordtype}{float}(a),\ \textcolor{keywordtype}{float}(b));}
+\DoxyCodeLine{00443\ \}}
+\DoxyCodeLine{00444\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ <\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00445\ \ \ \textcolor{keywordflow}{return}\ float(a)\ <\ float(b);}
+\DoxyCodeLine{00446\ \}}
+\DoxyCodeLine{00447\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ <=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00448\ \ \ \textcolor{keywordflow}{return}\ float(a)\ <=\ float(b);}
+\DoxyCodeLine{00449\ \}}
+\DoxyCodeLine{00450\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ >\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00451\ \ \ \textcolor{keywordflow}{return}\ float(a)\ >\ float(b);}
+\DoxyCodeLine{00452\ \}}
+\DoxyCodeLine{00453\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ operator\ >=\ (\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00454\ \ \ \textcolor{keywordflow}{return}\ float(a)\ >=\ float(b);}
+\DoxyCodeLine{00455\ \}}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00457\ \textcolor{preprocessor}{\#if\ defined(\_\_clang\_\_)\ \&\&\ defined(\_\_CUDA\_\_)}}
+\DoxyCodeLine{00458\ \textcolor{preprocessor}{\#pragma\ pop\_macro("{}EIGEN\_DEVICE\_FUNC"{})}}
+\DoxyCodeLine{00459\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00460\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ Emulate\ support\ for\ half\ floats}}
+\DoxyCodeLine{00461\ }
+\DoxyCodeLine{00462\ \textcolor{comment}{//\ Division\ by\ an\ index.\ Do\ it\ in\ full\ float\ precision\ to\ avoid\ accuracy}}
+\DoxyCodeLine{00463\ \textcolor{comment}{//\ issues\ in\ converting\ the\ denominator\ to\ half.}}
+\DoxyCodeLine{00464\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator\ /\ (\textcolor{keyword}{const}\ half\&\ a,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ b)\ \{}
+\DoxyCodeLine{00465\ \ \ \textcolor{keywordflow}{return}\ half(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(a)\ /\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(b));}
+\DoxyCodeLine{00466\ \}}
+\DoxyCodeLine{00467\ }
+\DoxyCodeLine{00468\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator++(half\&\ a)\ \{}
+\DoxyCodeLine{00469\ \ \ a\ +=\ half(1);}
+\DoxyCodeLine{00470\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00471\ \}}
+\DoxyCodeLine{00472\ }
+\DoxyCodeLine{00473\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator-\/-\/(half\&\ a)\ \{}
+\DoxyCodeLine{00474\ \ \ a\ -\/=\ half(1);}
+\DoxyCodeLine{00475\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00476\ \}}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00478\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator++(half\&\ a,\ \textcolor{keywordtype}{int})\ \{}
+\DoxyCodeLine{00479\ \ \ half\ original\_value\ =\ a;}
+\DoxyCodeLine{00480\ \ \ ++a;}
+\DoxyCodeLine{00481\ \ \ \textcolor{keywordflow}{return}\ original\_value;}
+\DoxyCodeLine{00482\ \}}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ operator-\/-\/(half\&\ a,\ \textcolor{keywordtype}{int})\ \{}
+\DoxyCodeLine{00485\ \ \ half\ original\_value\ =\ a;}
+\DoxyCodeLine{00486\ \ \ -\/-\/a;}
+\DoxyCodeLine{00487\ \ \ \textcolor{keywordflow}{return}\ original\_value;}
+\DoxyCodeLine{00488\ \}}
+\DoxyCodeLine{00489\ }
+\DoxyCodeLine{00490\ \textcolor{comment}{//\ Conversion\ routines,\ including\ fallbacks\ for\ the\ host\ or\ older\ CUDA.}}
+\DoxyCodeLine{00491\ \textcolor{comment}{//\ Note\ that\ newer\ Intel\ CPUs\ (Haswell\ or\ newer)\ have\ vectorized\ versions\ of}}
+\DoxyCodeLine{00492\ \textcolor{comment}{//\ these\ in\ hardware.\ If\ we\ need\ more\ performance\ on\ older/other\ CPUs,\ they\ are}}
+\DoxyCodeLine{00493\ \textcolor{comment}{//\ also\ possible\ to\ vectorize\ directly.}}
+\DoxyCodeLine{00494\ }
+\DoxyCodeLine{00495\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \_\_half\_raw\ raw\_uint16\_to\_half(numext::uint16\_t\ x)\ \{}
+\DoxyCodeLine{00496\ \ \ \textcolor{comment}{//\ We\ cannot\ simply\ do\ a\ "{}return\ \_\_half\_raw(x)"{}\ here,\ because\ \_\_half\_raw\ is\ union\ type}}
+\DoxyCodeLine{00497\ \ \ \textcolor{comment}{//\ in\ the\ hip\_fp16\ header\ file,\ and\ that\ will\ trigger\ a\ compile\ error}}
+\DoxyCodeLine{00498\ \ \ \textcolor{comment}{//\ On\ the\ other\ hand,\ having\ anything\ but\ a\ return\ statement\ also\ triggers\ a\ compile\ error}}
+\DoxyCodeLine{00499\ \ \ \textcolor{comment}{//\ because\ this\ is\ constexpr\ function.}}
+\DoxyCodeLine{00500\ \ \ \textcolor{comment}{//\ Fortunately,\ since\ we\ need\ to\ disable\ EIGEN\_CONSTEXPR\ for\ GPU\ anyway,\ we\ can\ get\ out}}
+\DoxyCodeLine{00501\ \ \ \textcolor{comment}{//\ of\ this\ catch22\ by\ having\ separate\ bodies\ for\ GPU\ /\ non\ GPU}}
+\DoxyCodeLine{00502\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_GPU\_FP16)}}
+\DoxyCodeLine{00503\ \ \ \ \_\_half\_raw\ h;}
+\DoxyCodeLine{00504\ \ \ \ h.x\ =\ x;}
+\DoxyCodeLine{00505\ \ \ \textcolor{keywordflow}{return}\ h;}
+\DoxyCodeLine{00506\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00507\ \ \ \textcolor{keywordflow}{return}\ \_\_half\_raw(x);}
+\DoxyCodeLine{00508\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00509\ \}}
+\DoxyCodeLine{00510\ }
+\DoxyCodeLine{00511\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ numext::uint16\_t\ raw\_half\_as\_uint16(\textcolor{keyword}{const}\ \_\_half\_raw\&\ h)\ \{}
+\DoxyCodeLine{00512\ \ \ \textcolor{comment}{//\ HIP/CUDA/Default\ have\ a\ member\ 'x'\ of\ type\ uint16\_t.}}
+\DoxyCodeLine{00513\ \ \ \textcolor{comment}{//\ For\ ARM64\ native\ half,\ the\ member\ 'x'\ is\ of\ type\ \_\_fp16,\ so\ we\ need\ to\ bit-\/cast.}}
+\DoxyCodeLine{00514\ \ \ \textcolor{comment}{//\ For\ SYCL,\ cl::sycl::half\ is\ \_Float16,\ so\ cast\ directly.}}
+\DoxyCodeLine{00515\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00516\ \ \ \textcolor{keywordflow}{return}\ numext::bit\_cast<numext::uint16\_t>(h.x);}
+\DoxyCodeLine{00517\ \textcolor{preprocessor}{\#elif\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{00518\ \ \ \textcolor{keywordflow}{return}\ numext::bit\_cast<numext::uint16\_t>(h);}
+\DoxyCodeLine{00519\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00520\ \ \ \textcolor{keywordflow}{return}\ h.x;}
+\DoxyCodeLine{00521\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00522\ \}}
+\DoxyCodeLine{00523\ }
+\DoxyCodeLine{00524\ \textcolor{keyword}{union\ }\mbox{\hyperlink{union_eigen_1_1half__impl_1_1float32__bits}{float32\_bits}}\ \{}
+\DoxyCodeLine{00525\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ u;}
+\DoxyCodeLine{00526\ \ \ \textcolor{keywordtype}{float}\ f;}
+\DoxyCodeLine{00527\ \};}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00529\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\ float\_to\_half\_rtne(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ff}})\ \{}
+\DoxyCodeLine{00530\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(EIGEN\_CUDA\_ARCH)\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 300)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00531\ \textcolor{preprocessor}{\ \ (defined(EIGEN\_HAS\_HIP\_FP16)\ \&\&\ defined(EIGEN\_HIP\_DEVICE\_COMPILE))}}
+\DoxyCodeLine{00532\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_half}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{tmp\_ff}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_float2half}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ff}});}
+\DoxyCodeLine{00533\ \ \ \textcolor{keywordflow}{return}\ *(\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}*)\&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{tmp\_ff}};}
+\DoxyCodeLine{00534\ }
+\DoxyCodeLine{00535\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_FP16\_C)}}
+\DoxyCodeLine{00536\ \ \ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}};}
+\DoxyCodeLine{00537\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}}.x\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_cvtss\_sh}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ff}},\ 0);}
+\DoxyCodeLine{00538\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}};}
+\DoxyCodeLine{00539\ }
+\DoxyCodeLine{00540\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00541\ \ \ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half__raw}{\_\_half\_raw}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}};}
+\DoxyCodeLine{00542\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}}.x\ =\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_fp16}}\textcolor{keyword}{>}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ff}});}
+\DoxyCodeLine{00543\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}};}
+\DoxyCodeLine{00544\ }
+\DoxyCodeLine{00545\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00546\ \ \ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1float32__bits}{float32\_bits}}\ f;\ f.f\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ff}};}
+\DoxyCodeLine{00547\ }
+\DoxyCodeLine{00548\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1float32__bits}{float32\_bits}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{f32infty}}\ =\ \{\ 255\ <<\ 23\ \};}
+\DoxyCodeLine{00549\ \ \ \textcolor{keyword}{const}\ float32\_bits\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{f16max}}\ =\ \{\ (127\ +\ 16)\ <<\ 23\ \};}
+\DoxyCodeLine{00550\ \ \ \textcolor{keyword}{const}\ float32\_bits\ denorm\_magic\ =\ \{\ ((127\ -\/\ 15)\ +\ (23\ -\/\ 10)\ +\ 1)\ <<\ 23\ \};}
+\DoxyCodeLine{00551\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ sign\_mask\ =\ 0x80000000u;}
+\DoxyCodeLine{00552\ \ \ \_\_half\_raw\ o;}
+\DoxyCodeLine{00553\ \ \ o.x\ =\ \textcolor{keyword}{static\_cast<}numext::uint16\_t\textcolor{keyword}{>}(0x0u);}
+\DoxyCodeLine{00554\ }
+\DoxyCodeLine{00555\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ sign\ =\ f.u\ \&\ sign\_mask;}
+\DoxyCodeLine{00556\ \ \ f.u\ \string^=\ sign;}
+\DoxyCodeLine{00557\ }
+\DoxyCodeLine{00558\ \ \ \textcolor{comment}{//\ NOTE\ all\ the\ integer\ compares\ in\ this\ function\ can\ be\ safely}}
+\DoxyCodeLine{00559\ \ \ \textcolor{comment}{//\ compiled\ into\ signed\ compares\ since\ all\ operands\ are\ below}}
+\DoxyCodeLine{00560\ \ \ \textcolor{comment}{//\ 0x80000000.\ Important\ if\ you\ want\ fast\ straight\ SSE2\ code}}
+\DoxyCodeLine{00561\ \ \ \textcolor{comment}{//\ (since\ there's\ no\ unsigned\ PCMPGTD).}}
+\DoxyCodeLine{00562\ }
+\DoxyCodeLine{00563\ \ \ \textcolor{keywordflow}{if}\ (f.u\ >=\ f16max.u)\ \{\ \ \textcolor{comment}{//\ result\ is\ Inf\ or\ NaN\ (all\ exponent\ bits\ set)}}
+\DoxyCodeLine{00564\ \ \ \ \ o.x\ =\ (f.u\ >\ f32infty.u)\ ?\ 0x7e00\ :\ 0x7c00;\ \textcolor{comment}{//\ NaN-\/>qNaN\ and\ Inf-\/>Inf}}
+\DoxyCodeLine{00565\ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \ \textcolor{comment}{//\ (De)normalized\ number\ or\ zero}}
+\DoxyCodeLine{00566\ \ \ \ \ \textcolor{keywordflow}{if}\ (f.u\ <\ (113\ <<\ 23))\ \{\ \ \textcolor{comment}{//\ resulting\ FP16\ is\ subnormal\ or\ zero}}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \textcolor{comment}{//\ use\ a\ magic\ value\ to\ align\ our\ 10\ mantissa\ bits\ at\ the\ bottom\ of}}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \textcolor{comment}{//\ the\ float.\ as\ long\ as\ FP\ addition\ is\ round-\/to-\/nearest-\/even\ this}}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \textcolor{comment}{//\ just\ works.}}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ f.f\ +=\ denorm\_magic.f;}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \textcolor{comment}{//\ and\ one\ integer\ subtract\ of\ the\ bias\ later,\ we\ have\ our\ final\ float!}}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ o.x\ =\ \textcolor{keyword}{static\_cast<}numext::uint16\_t\textcolor{keyword}{>}(f.u\ -\/\ denorm\_magic.u);}
+\DoxyCodeLine{00574\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ mant\_odd\ =\ (f.u\ >>\ 13)\ \&\ 1;\ \textcolor{comment}{//\ resulting\ mantissa\ is\ odd}}
+\DoxyCodeLine{00576\ }
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \textcolor{comment}{//\ update\ exponent,\ rounding\ bias\ part\ 1}}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \textcolor{comment}{//\ Equivalent\ to\ \`{}f.u\ +=\ ((unsigned\ int)(15\ -\/\ 127)\ <<\ 23)\ +\ 0xfff`,\ but}}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \textcolor{comment}{//\ without\ arithmetic\ overflow.}}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ f.u\ +=\ 0xc8000fffU;}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \textcolor{comment}{//\ rounding\ bias\ part\ 2}}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ f.u\ +=\ mant\_odd;}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \textcolor{comment}{//\ take\ the\ bits!}}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ o.x\ =\ \textcolor{keyword}{static\_cast<}numext::uint16\_t\textcolor{keyword}{>}(f.u\ >>\ 13);}
+\DoxyCodeLine{00585\ \ \ \ \ \}}
+\DoxyCodeLine{00586\ \ \ \}}
+\DoxyCodeLine{00587\ }
+\DoxyCodeLine{00588\ \ \ o.x\ |=\ \textcolor{keyword}{static\_cast<}numext::uint16\_t\textcolor{keyword}{>}(sign\ >>\ 16);}
+\DoxyCodeLine{00589\ \ \ \textcolor{keywordflow}{return}\ o;}
+\DoxyCodeLine{00590\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00591\ \}}
+\DoxyCodeLine{00592\ }
+\DoxyCodeLine{00593\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{float}\ half\_to\_float(\_\_half\_raw\ h)\ \{}
+\DoxyCodeLine{00594\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(EIGEN\_CUDA\_ARCH)\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 300)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00595\ \textcolor{preprocessor}{\ \ (defined(EIGEN\_HAS\_HIP\_FP16)\ \&\&\ defined(EIGEN\_HIP\_DEVICE\_COMPILE))}}
+\DoxyCodeLine{00596\ \ \ \textcolor{keywordflow}{return}\ \_\_half2float(h);}
+\DoxyCodeLine{00597\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_FP16\_C)}}
+\DoxyCodeLine{00598\ \ \ \textcolor{keywordflow}{return}\ \_cvtsh\_ss(h.x);}
+\DoxyCodeLine{00599\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00600\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(h.x);}
+\DoxyCodeLine{00601\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00602\ \ \ \textcolor{keyword}{const}\ float32\_bits\ magic\ =\ \{\ 113\ <<\ 23\ \};}
+\DoxyCodeLine{00603\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ shifted\_exp\ =\ 0x7c00\ <<\ 13;\ \textcolor{comment}{//\ exponent\ mask\ after\ shift}}
+\DoxyCodeLine{00604\ \ \ float32\_bits\ o;}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00606\ \ \ o.u\ =\ (h.x\ \&\ 0x7fff)\ <<\ 13;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ exponent/mantissa\ bits}}
+\DoxyCodeLine{00607\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ exp\ =\ shifted\_exp\ \&\ o.u;\ \ \ \textcolor{comment}{//\ just\ the\ exponent}}
+\DoxyCodeLine{00608\ \ \ o.u\ +=\ (127\ -\/\ 15)\ <<\ 23;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ exponent\ adjust}}
+\DoxyCodeLine{00609\ }
+\DoxyCodeLine{00610\ \ \ \textcolor{comment}{//\ handle\ exponent\ special\ cases}}
+\DoxyCodeLine{00611\ \ \ \textcolor{keywordflow}{if}\ (exp\ ==\ shifted\_exp)\ \{\ \ \ \ \ \textcolor{comment}{//\ Inf/NaN?}}
+\DoxyCodeLine{00612\ \ \ \ \ o.u\ +=\ (128\ -\/\ 16)\ <<\ 23;\ \ \ \ \textcolor{comment}{//\ extra\ exp\ adjust}}
+\DoxyCodeLine{00613\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (exp\ ==\ 0)\ \{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Zero/Denormal?}}
+\DoxyCodeLine{00614\ \ \ \ \ o.u\ +=\ 1\ <<\ 23;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ extra\ exp\ adjust}}
+\DoxyCodeLine{00615\ \ \ \ \ o.f\ -\/=\ magic.f;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ renormalize}}
+\DoxyCodeLine{00616\ \ \ \}}
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00618\ \ \ o.u\ |=\ (h.x\ \&\ 0x8000)\ <<\ 16;\ \ \ \ \textcolor{comment}{//\ sign\ bit}}
+\DoxyCodeLine{00619\ \ \ \textcolor{keywordflow}{return}\ o.f;}
+\DoxyCodeLine{00620\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00621\ \}}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00623\ \textcolor{comment}{//\ -\/-\/-\/\ standard\ functions\ -\/-\/-\/}}
+\DoxyCodeLine{00624\ }
+\DoxyCodeLine{00625\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ bool\ (isinf)(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00626\ \textcolor{preprocessor}{\#ifdef\ EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC}}
+\DoxyCodeLine{00627\ \ \ \textcolor{keywordflow}{return}\ (numext::bit\_cast<numext::uint16\_t>(a.x)\ \&\ 0x7fff)\ ==\ 0x7c00;}
+\DoxyCodeLine{00628\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00629\ \ \ \textcolor{keywordflow}{return}\ (a.x\ \&\ 0x7fff)\ ==\ 0x7c00;}
+\DoxyCodeLine{00630\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00631\ \}}
+\DoxyCodeLine{00632\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ bool\ (isnan)(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00633\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(EIGEN\_CUDA\_ARCH)\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 530)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00634\ \textcolor{preprocessor}{\ \ (defined(EIGEN\_HAS\_HIP\_FP16)\ \&\&\ defined(EIGEN\_HIP\_DEVICE\_COMPILE))}}
+\DoxyCodeLine{00635\ \ \ \textcolor{keywordflow}{return}\ \_\_hisnan(a);}
+\DoxyCodeLine{00636\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00637\ \ \ \textcolor{keywordflow}{return}\ (numext::bit\_cast<numext::uint16\_t>(a.x)\ \&\ 0x7fff)\ >\ 0x7c00;}
+\DoxyCodeLine{00638\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00639\ \ \ \textcolor{keywordflow}{return}\ (a.x\ \&\ 0x7fff)\ >\ 0x7c00;}
+\DoxyCodeLine{00640\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00641\ \}}
+\DoxyCodeLine{00642\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ bool\ (isfinite)(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00643\ \ \ \textcolor{keywordflow}{return}\ !(isinf\ EIGEN\_NOT\_A\_MACRO\ (a))\ \&\&\ !(isnan\ EIGEN\_NOT\_A\_MACRO\ (a));}
+\DoxyCodeLine{00644\ \}}
+\DoxyCodeLine{00645\ }
+\DoxyCodeLine{00646\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ abs(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00647\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00648\ \ \ \textcolor{keywordflow}{return}\ half(vabsh\_f16(a.x));}
+\DoxyCodeLine{00649\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00650\ \ \ half\ result;}
+\DoxyCodeLine{00651\ \ \ result.x\ =\ a.x\ \&\ 0x7FFF;}
+\DoxyCodeLine{00652\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00653\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00654\ \}}
+\DoxyCodeLine{00655\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ exp(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00656\ \textcolor{preprocessor}{\#if\ (EIGEN\_CUDA\_SDK\_VER\ >=\ 80000\ \&\&\ defined\ EIGEN\_CUDA\_ARCH\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 530)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00657\ \textcolor{preprocessor}{\ \ defined(EIGEN\_HIP\_DEVICE\_COMPILE)}}
+\DoxyCodeLine{00658\ \ \ \textcolor{keywordflow}{return}\ half(hexp(a));}
+\DoxyCodeLine{00659\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00660\ \ \ \ \textcolor{keywordflow}{return}\ half(::expf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00661\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00662\ \}}
+\DoxyCodeLine{00663\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ expm1(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00664\ \ \ \textcolor{keywordflow}{return}\ half(numext::expm1(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00665\ \}}
+\DoxyCodeLine{00666\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ log(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00667\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ EIGEN\_CUDA\_SDK\_VER\ >=\ 80000\ \&\&\ defined(EIGEN\_CUDA\_ARCH)\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 530)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00668\ \textcolor{preprocessor}{\ \ (defined(EIGEN\_HAS\_HIP\_FP16)\ \&\&\ defined(EIGEN\_HIP\_DEVICE\_COMPILE))}}
+\DoxyCodeLine{00669\ \ \ \textcolor{keywordflow}{return}\ half(::hlog(a));}
+\DoxyCodeLine{00670\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00671\ \ \ \textcolor{keywordflow}{return}\ half(::logf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00672\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00673\ \}}
+\DoxyCodeLine{00674\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ log1p(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00675\ \ \ \textcolor{keywordflow}{return}\ half(numext::log1p(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00676\ \}}
+\DoxyCodeLine{00677\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ log10(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00678\ \ \ \textcolor{keywordflow}{return}\ half(::log10f(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00679\ \}}
+\DoxyCodeLine{00680\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ log2(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00681\ \ \ \textcolor{keywordflow}{return}\ half(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(EIGEN\_LOG2E)\ *\ ::logf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00682\ \}}
+\DoxyCodeLine{00683\ }
+\DoxyCodeLine{00684\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ sqrt(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00685\ \textcolor{preprocessor}{\#if\ (EIGEN\_CUDA\_SDK\_VER\ >=\ 80000\ \&\&\ defined\ EIGEN\_CUDA\_ARCH\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 530)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00686\ \textcolor{preprocessor}{\ \ defined(EIGEN\_HIP\_DEVICE\_COMPILE)}}
+\DoxyCodeLine{00687\ \ \ \textcolor{keywordflow}{return}\ half(hsqrt(a));}
+\DoxyCodeLine{00688\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00689\ \ \ \ \ \textcolor{keywordflow}{return}\ half(::sqrtf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00690\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00691\ \}}
+\DoxyCodeLine{00692\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ pow(\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00693\ \ \ \textcolor{keywordflow}{return}\ half(::powf(\textcolor{keywordtype}{float}(a),\ \textcolor{keywordtype}{float}(b)));}
+\DoxyCodeLine{00694\ \}}
+\DoxyCodeLine{00695\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ sin(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00696\ \ \ \textcolor{keywordflow}{return}\ half(::sinf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00697\ \}}
+\DoxyCodeLine{00698\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ cos(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00699\ \ \ \textcolor{keywordflow}{return}\ half(::cosf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00700\ \}}
+\DoxyCodeLine{00701\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ tan(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00702\ \ \ \textcolor{keywordflow}{return}\ half(::tanf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00703\ \}}
+\DoxyCodeLine{00704\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ tanh(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00705\ \ \ \textcolor{keywordflow}{return}\ half(::tanhf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00706\ \}}
+\DoxyCodeLine{00707\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ asin(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00708\ \ \ \textcolor{keywordflow}{return}\ half(::asinf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00709\ \}}
+\DoxyCodeLine{00710\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ acos(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00711\ \ \ \textcolor{keywordflow}{return}\ half(::acosf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00712\ \}}
+\DoxyCodeLine{00713\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ floor(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00714\ \textcolor{preprocessor}{\#if\ (EIGEN\_CUDA\_SDK\_VER\ >=\ 80000\ \&\&\ defined\ EIGEN\_CUDA\_ARCH\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 300)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00715\ \textcolor{preprocessor}{\ \ defined(EIGEN\_HIP\_DEVICE\_COMPILE)}}
+\DoxyCodeLine{00716\ \ \ \textcolor{keywordflow}{return}\ half(hfloor(a));}
+\DoxyCodeLine{00717\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00718\ \ \ \textcolor{keywordflow}{return}\ half(::floorf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00719\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00720\ \}}
+\DoxyCodeLine{00721\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ ceil(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00722\ \textcolor{preprocessor}{\#if\ (EIGEN\_CUDA\_SDK\_VER\ >=\ 80000\ \&\&\ defined\ EIGEN\_CUDA\_ARCH\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 300)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00723\ \textcolor{preprocessor}{\ \ defined(EIGEN\_HIP\_DEVICE\_COMPILE)}}
+\DoxyCodeLine{00724\ \ \ \textcolor{keywordflow}{return}\ half(hceil(a));}
+\DoxyCodeLine{00725\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00726\ \ \ \textcolor{keywordflow}{return}\ half(::ceilf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00727\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00728\ \}}
+\DoxyCodeLine{00729\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ rint(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00730\ \ \ \textcolor{keywordflow}{return}\ half(::rintf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00731\ \}}
+\DoxyCodeLine{00732\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ round(\textcolor{keyword}{const}\ half\&\ a)\ \{}
+\DoxyCodeLine{00733\ \ \ \textcolor{keywordflow}{return}\ half(::roundf(\textcolor{keywordtype}{float}(a)));}
+\DoxyCodeLine{00734\ \}}
+\DoxyCodeLine{00735\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ fmod(\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00736\ \ \ \textcolor{keywordflow}{return}\ half(::fmodf(\textcolor{keywordtype}{float}(a),\ \textcolor{keywordtype}{float}(b)));}
+\DoxyCodeLine{00737\ \}}
+\DoxyCodeLine{00738\ }
+\DoxyCodeLine{00739\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ (min)(\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00740\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(EIGEN\_CUDA\_ARCH)\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 530)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00741\ \textcolor{preprocessor}{\ \ (defined(EIGEN\_HAS\_HIP\_FP16)\ \&\&\ defined(EIGEN\_HIP\_DEVICE\_COMPILE))}}
+\DoxyCodeLine{00742\ \ \ \textcolor{keywordflow}{return}\ \_\_hlt(b,\ a)\ ?\ b\ :\ a;}
+\DoxyCodeLine{00743\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00744\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ f1\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(a);}
+\DoxyCodeLine{00745\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ f2\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(b);}
+\DoxyCodeLine{00746\ \ \ \textcolor{keywordflow}{return}\ f2\ <\ f1\ ?\ b\ :\ a;}
+\DoxyCodeLine{00747\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00748\ \}}
+\DoxyCodeLine{00749\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ half\ (max)(\textcolor{keyword}{const}\ half\&\ a,\ \textcolor{keyword}{const}\ half\&\ b)\ \{}
+\DoxyCodeLine{00750\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(EIGEN\_CUDA\_ARCH)\ \&\&\ EIGEN\_CUDA\_ARCH\ >=\ 530)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00751\ \textcolor{preprocessor}{\ \ (defined(EIGEN\_HAS\_HIP\_FP16)\ \&\&\ defined(EIGEN\_HIP\_DEVICE\_COMPILE))}}
+\DoxyCodeLine{00752\ \ \ \textcolor{keywordflow}{return}\ \_\_hlt(a,\ b)\ ?\ b\ :\ a;}
+\DoxyCodeLine{00753\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00754\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ f1\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(a);}
+\DoxyCodeLine{00755\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ f2\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(b);}
+\DoxyCodeLine{00756\ \ \ \textcolor{keywordflow}{return}\ f1\ <\ f2\ ?\ b\ :\ a;}
+\DoxyCodeLine{00757\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00758\ \}}
+\DoxyCodeLine{00759\ }
+\DoxyCodeLine{00760\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_NO\_IO}}
+\DoxyCodeLine{00761\ EIGEN\_ALWAYS\_INLINE\ std::ostream\&\ operator\ <<\ (std::ostream\&\ os,\ \textcolor{keyword}{const}\ half\&\ v)\ \{}
+\DoxyCodeLine{00762\ \ \ os\ <<\ static\_cast<float>(v);}
+\DoxyCodeLine{00763\ \ \ \textcolor{keywordflow}{return}\ os;}
+\DoxyCodeLine{00764\ \}}
+\DoxyCodeLine{00765\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00766\ }
+\DoxyCodeLine{00767\ \}\ \textcolor{comment}{//\ end\ namespace\ half\_impl}}
+\DoxyCodeLine{00768\ }
+\DoxyCodeLine{00769\ \textcolor{comment}{//\ import\ Eigen::half\_impl::half\ into\ Eigen\ namespace}}
+\DoxyCodeLine{00770\ \textcolor{comment}{//\ using\ half\_impl::half;}}
+\DoxyCodeLine{00771\ }
+\DoxyCodeLine{00772\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00773\ }
+\DoxyCodeLine{00774\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00775\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1random__default__impl}{random\_default\_impl}}<\mbox{\hyperlink{struct_eigen_1_1half}{half}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}>}
+\DoxyCodeLine{00776\ \{}
+\DoxyCodeLine{00777\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}\&\ x,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}\&\ y)}
+\DoxyCodeLine{00778\ \ \ \{}
+\DoxyCodeLine{00779\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ +\ (y-\/x)\ *\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(\textcolor{keywordtype}{float}(std::rand())\ /\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{RAND\_MAX}}));}
+\DoxyCodeLine{00780\ \ \ \}}
+\DoxyCodeLine{00781\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}\ run()}
+\DoxyCodeLine{00782\ \ \ \{}
+\DoxyCodeLine{00783\ \ \ \ \ \textcolor{keywordflow}{return}\ run(\mbox{\hyperlink{struct_eigen_1_1half}{half}}(-\/1.f),\ \mbox{\hyperlink{struct_eigen_1_1half}{half}}(1.f));}
+\DoxyCodeLine{00784\ \ \ \}}
+\DoxyCodeLine{00785\ \};}
+\DoxyCodeLine{00786\ }
+\DoxyCodeLine{00787\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1is__arithmetic}{is\_arithmetic}}<\mbox{\hyperlink{struct_eigen_1_1half}{half}}>\ \{\ \textcolor{keyword}{enum}\ \{\ value\ =\ \textcolor{keyword}{true}\ \};\ \};}
+\DoxyCodeLine{00788\ }
+\DoxyCodeLine{00789\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{00790\ }
+\DoxyCodeLine{00791\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits}}<\mbox{\hyperlink{namespace_eigen}{Eigen}}::\mbox{\hyperlink{struct_eigen_1_1half}{half}}>}
+\DoxyCodeLine{00792\ \ \ \ \ :\ \mbox{\hyperlink{struct_eigen_1_1_generic_num_traits}{GenericNumTraits}}<Eigen::half>}
+\DoxyCodeLine{00793\ \{}
+\DoxyCodeLine{00794\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00795\ \ \ \ \ IsSigned\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00796\ \ \ \ \ IsInteger\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00797\ \ \ \ \ IsComplex\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00798\ \ \ \ \ RequireInitialization\ =\ \textcolor{keyword}{false}}
+\DoxyCodeLine{00799\ \ \ \};}
+\DoxyCodeLine{00800\ }
+\DoxyCodeLine{00801\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \textcolor{keyword}{static}\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ epsilon()\ \{}
+\DoxyCodeLine{00802\ \ \ \ \ \textcolor{keywordflow}{return}\ half\_impl::raw\_uint16\_to\_half(0x0800);}
+\DoxyCodeLine{00803\ \ \ \}}
+\DoxyCodeLine{00804\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \textcolor{keyword}{static}\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ dummy\_precision()\ \{}
+\DoxyCodeLine{00805\ \ \ \ \ \textcolor{keywordflow}{return}\ half\_impl::raw\_uint16\_to\_half(0x211f);\ \textcolor{comment}{//\ \ Eigen::half(1e-\/2f);}}
+\DoxyCodeLine{00806\ \ \ \}}
+\DoxyCodeLine{00807\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \textcolor{keyword}{static}\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ highest()\ \{}
+\DoxyCodeLine{00808\ \ \ \ \ \textcolor{keywordflow}{return}\ half\_impl::raw\_uint16\_to\_half(0x7bff);}
+\DoxyCodeLine{00809\ \ \ \}}
+\DoxyCodeLine{00810\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \textcolor{keyword}{static}\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ lowest()\ \{}
+\DoxyCodeLine{00811\ \ \ \ \ \textcolor{keywordflow}{return}\ half\_impl::raw\_uint16\_to\_half(0xfbff);}
+\DoxyCodeLine{00812\ \ \ \}}
+\DoxyCodeLine{00813\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \textcolor{keyword}{static}\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ infinity()\ \{}
+\DoxyCodeLine{00814\ \ \ \ \ \textcolor{keywordflow}{return}\ half\_impl::raw\_uint16\_to\_half(0x7c00);}
+\DoxyCodeLine{00815\ \ \ \}}
+\DoxyCodeLine{00816\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR\ \textcolor{keyword}{static}\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ quiet\_NaN()\ \{}
+\DoxyCodeLine{00817\ \ \ \ \ \textcolor{keywordflow}{return}\ half\_impl::raw\_uint16\_to\_half(0x7e00);}
+\DoxyCodeLine{00818\ \ \ \}}
+\DoxyCodeLine{00819\ \};}
+\DoxyCodeLine{00820\ }
+\DoxyCodeLine{00821\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{00822\ }
+\DoxyCodeLine{00823\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_GPU\_FP16)\ ||\ defined(EIGEN\_HAS\_ARM64\_FP16\_SCALAR\_ARITHMETIC)}}
+\DoxyCodeLine{00824\ \textcolor{preprocessor}{\ \ \#pragma\ pop\_macro("{}EIGEN\_CONSTEXPR"{})}}
+\DoxyCodeLine{00825\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00826\ }
+\DoxyCodeLine{00827\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00828\ \textcolor{keyword}{namespace\ }numext\ \{}
+\DoxyCodeLine{00829\ }
+\DoxyCodeLine{00830\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{00831\ }
+\DoxyCodeLine{00832\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00833\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE\ bool(isnan)(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\&\ h)\ \{}
+\DoxyCodeLine{00834\ \ \ \textcolor{keywordflow}{return}\ (half\_impl::isnan)(h);}
+\DoxyCodeLine{00835\ \}}
+\DoxyCodeLine{00836\ }
+\DoxyCodeLine{00837\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00838\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE\ bool(isinf)(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\&\ h)\ \{}
+\DoxyCodeLine{00839\ \ \ \textcolor{keywordflow}{return}\ (half\_impl::isinf)(h);}
+\DoxyCodeLine{00840\ \}}
+\DoxyCodeLine{00841\ }
+\DoxyCodeLine{00842\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00843\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE\ bool(isfinite)(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\&\ h)\ \{}
+\DoxyCodeLine{00844\ \ \ \textcolor{keywordflow}{return}\ (half\_impl::isfinite)(h);}
+\DoxyCodeLine{00845\ \}}
+\DoxyCodeLine{00846\ }
+\DoxyCodeLine{00847\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00848\ }
+\DoxyCodeLine{00849\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00850\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ bit\_cast<Eigen::half,\ uint16\_t>(\textcolor{keyword}{const}\ uint16\_t\&\ src)\ \{}
+\DoxyCodeLine{00851\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}(Eigen::half\_impl::raw\_uint16\_to\_half(src));}
+\DoxyCodeLine{00852\ \}}
+\DoxyCodeLine{00853\ }
+\DoxyCodeLine{00854\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00855\ EIGEN\_STRONG\_INLINE\ EIGEN\_DEVICE\_FUNC\ uint16\_t\ bit\_cast<uint16\_t,\ Eigen::half>(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\&\ src)\ \{}
+\DoxyCodeLine{00856\ \ \ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_half\_as\_uint16(src);}
+\DoxyCodeLine{00857\ \}}
+\DoxyCodeLine{00858\ }
+\DoxyCodeLine{00859\ \}\ \ \textcolor{comment}{//\ namespace\ numext}}
+\DoxyCodeLine{00860\ \}\ \ \textcolor{comment}{//\ namespace\ Eigen}}
+\DoxyCodeLine{00861\ }
+\DoxyCodeLine{00862\ \textcolor{comment}{//\ Add\ the\ missing\ shfl*\ intrinsics.}}
+\DoxyCodeLine{00863\ \textcolor{comment}{//\ The\ \_\_shfl*\ functions\ are\ only\ valid\ on\ HIP\ or\ \_CUDA\_ARCH\_\ >=\ 300.}}
+\DoxyCodeLine{00864\ \textcolor{comment}{//\ \ \ CUDA\ defines\ them\ for\ (\_\_CUDA\_ARCH\_\_\ >=\ 300\ ||\ !defined(\_\_CUDA\_ARCH\_\_))}}
+\DoxyCodeLine{00865\ \textcolor{comment}{//}}
+\DoxyCodeLine{00866\ \textcolor{comment}{//\ HIP\ and\ CUDA\ prior\ to\ SDK\ 9.0\ define}}
+\DoxyCodeLine{00867\ \textcolor{comment}{//\ \ \ \ \_\_shfl,\ \_\_shfl\_up,\ \_\_shfl\_down,\ \_\_shfl\_xor\ for\ int\ and\ float}}
+\DoxyCodeLine{00868\ \textcolor{comment}{//\ CUDA\ since\ 9.0\ deprecates\ those\ and\ instead\ defines}}
+\DoxyCodeLine{00869\ \textcolor{comment}{//\ \ \ \ \_\_shfl\_sync,\ \_\_shfl\_up\_sync,\ \_\_shfl\_down\_sync,\ \_\_shfl\_xor\_sync,}}
+\DoxyCodeLine{00870\ \textcolor{comment}{//\ \ \ \ with\ native\ support\ for\ \_\_half\ and\ \_\_nv\_bfloat16}}
+\DoxyCodeLine{00871\ \textcolor{comment}{//}}
+\DoxyCodeLine{00872\ \textcolor{comment}{//\ Note\ that\ the\ following\ are\ \_\_device\_\_\ -\/\ only\ functions.}}
+\DoxyCodeLine{00873\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_CUDACC)\ \&\&\ (!defined(EIGEN\_CUDA\_ARCH)\ ||\ EIGEN\_CUDA\_ARCH\ >=\ 300))\ \(\backslash\)}}
+\DoxyCodeLine{00874\ \textcolor{preprocessor}{\ \ \ \ ||\ defined(EIGEN\_HIPCC)}}
+\DoxyCodeLine{00875\ }
+\DoxyCodeLine{00876\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ EIGEN\_CUDA\_SDK\_VER\ >=\ 90000}}
+\DoxyCodeLine{00877\ }
+\DoxyCodeLine{00878\ \_\_device\_\_\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_shfl\_sync(\textcolor{keywordtype}{unsigned}\ mask,\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ var,\ \textcolor{keywordtype}{int}\ srcLane,\ \textcolor{keywordtype}{int}\ width=warpSize)\ \{}
+\DoxyCodeLine{00879\ \ \ \textcolor{keyword}{const}\ \_\_half\ h\ =\ var;}
+\DoxyCodeLine{00880\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\textcolor{keyword}{>}(\_\_shfl\_sync(mask,\ h,\ srcLane,\ width));}
+\DoxyCodeLine{00881\ \}}
+\DoxyCodeLine{00882\ }
+\DoxyCodeLine{00883\ \_\_device\_\_\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_shfl\_up\_sync(\textcolor{keywordtype}{unsigned}\ mask,\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ var,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ delta,\ \textcolor{keywordtype}{int}\ width=warpSize)\ \{}
+\DoxyCodeLine{00884\ \ \ \textcolor{keyword}{const}\ \_\_half\ h\ =\ var;}
+\DoxyCodeLine{00885\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\textcolor{keyword}{>}(\_\_shfl\_up\_sync(mask,\ h,\ delta,\ width));}
+\DoxyCodeLine{00886\ \}}
+\DoxyCodeLine{00887\ }
+\DoxyCodeLine{00888\ \_\_device\_\_\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_shfl\_down\_sync(\textcolor{keywordtype}{unsigned}\ mask,\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ var,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ delta,\ \textcolor{keywordtype}{int}\ width=warpSize)\ \{}
+\DoxyCodeLine{00889\ \ \ \textcolor{keyword}{const}\ \_\_half\ h\ =\ var;}
+\DoxyCodeLine{00890\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\textcolor{keyword}{>}(\_\_shfl\_down\_sync(mask,\ h,\ delta,\ width));}
+\DoxyCodeLine{00891\ \}}
+\DoxyCodeLine{00892\ }
+\DoxyCodeLine{00893\ \_\_device\_\_\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_shfl\_xor\_sync(\textcolor{keywordtype}{unsigned}\ mask,\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ var,\ \textcolor{keywordtype}{int}\ laneMask,\ \textcolor{keywordtype}{int}\ width=warpSize)\ \{}
+\DoxyCodeLine{00894\ \ \ \textcolor{keyword}{const}\ \_\_half\ h\ =\ var;}
+\DoxyCodeLine{00895\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\textcolor{keyword}{>}(\_\_shfl\_xor\_sync(mask,\ h,\ laneMask,\ width));}
+\DoxyCodeLine{00896\ \}}
+\DoxyCodeLine{00897\ }
+\DoxyCodeLine{00898\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{//\ HIP\ or\ CUDA\ SDK\ <\ 9.0}}
+\DoxyCodeLine{00899\ }
+\DoxyCodeLine{00900\ \_\_device\_\_\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_shfl(\mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ var,\ \textcolor{keywordtype}{int}\ srcLane,\ \textcolor{keywordtype}{int}\ width=warpSize)\ \{}
+\DoxyCodeLine{00901\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ivar\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(Eigen::numext::bit\_cast<Eigen::numext::uint16\_t>(var));}
+\DoxyCodeLine{00902\ \ \ \textcolor{keywordflow}{return}\ Eigen::numext::bit\_cast<Eigen::half>(\textcolor{keyword}{static\_cast<}Eigen::numext::uint16\_t\textcolor{keyword}{>}(\_\_shfl(ivar,\ srcLane,\ width)));}
+\DoxyCodeLine{00903\ \}}
+\DoxyCodeLine{00904\ }
+\DoxyCodeLine{00905\ \_\_device\_\_\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_shfl\_up(\mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ var,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ delta,\ \textcolor{keywordtype}{int}\ width=warpSize)\ \{}
+\DoxyCodeLine{00906\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ivar\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(Eigen::numext::bit\_cast<Eigen::numext::uint16\_t>(var));}
+\DoxyCodeLine{00907\ \ \ \textcolor{keywordflow}{return}\ Eigen::numext::bit\_cast<Eigen::half>(\textcolor{keyword}{static\_cast<}Eigen::numext::uint16\_t\textcolor{keyword}{>}(\_\_shfl\_up(ivar,\ delta,\ width)));}
+\DoxyCodeLine{00908\ \}}
+\DoxyCodeLine{00909\ }
+\DoxyCodeLine{00910\ \_\_device\_\_\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_shfl\_down(\mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ var,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ delta,\ \textcolor{keywordtype}{int}\ width=warpSize)\ \{}
+\DoxyCodeLine{00911\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ivar\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(Eigen::numext::bit\_cast<Eigen::numext::uint16\_t>(var));}
+\DoxyCodeLine{00912\ \ \ \textcolor{keywordflow}{return}\ Eigen::numext::bit\_cast<Eigen::half>(\textcolor{keyword}{static\_cast<}Eigen::numext::uint16\_t\textcolor{keyword}{>}(\_\_shfl\_down(ivar,\ delta,\ width)));}
+\DoxyCodeLine{00913\ \}}
+\DoxyCodeLine{00914\ }
+\DoxyCodeLine{00915\ \_\_device\_\_\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_shfl\_xor(\mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ var,\ \textcolor{keywordtype}{int}\ laneMask,\ \textcolor{keywordtype}{int}\ width=warpSize)\ \{}
+\DoxyCodeLine{00916\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ivar\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(Eigen::numext::bit\_cast<Eigen::numext::uint16\_t>(var));}
+\DoxyCodeLine{00917\ \ \ \textcolor{keywordflow}{return}\ Eigen::numext::bit\_cast<Eigen::half>(\textcolor{keyword}{static\_cast<}Eigen::numext::uint16\_t\textcolor{keyword}{>}(\_\_shfl\_xor(ivar,\ laneMask,\ width)));}
+\DoxyCodeLine{00918\ \}}
+\DoxyCodeLine{00919\ }
+\DoxyCodeLine{00920\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HIP\ vs\ CUDA}}
+\DoxyCodeLine{00921\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_shfl*}}
+\DoxyCodeLine{00922\ }
+\DoxyCodeLine{00923\ \textcolor{comment}{//\ ldg()\ has\ an\ overload\ for\ \_\_half\_raw,\ but\ we\ also\ need\ one\ for\ Eigen::half.}}
+\DoxyCodeLine{00924\ \textcolor{preprocessor}{\#if\ (defined(EIGEN\_CUDACC)\ \&\&\ (!defined(EIGEN\_CUDA\_ARCH)\ ||\ EIGEN\_CUDA\_ARCH\ >=\ 350))\ \(\backslash\)}}
+\DoxyCodeLine{00925\ \textcolor{preprocessor}{\ \ \ \ ||\ defined(EIGEN\_HIPCC)}}
+\DoxyCodeLine{00926\ EIGEN\_STRONG\_INLINE\ \_\_device\_\_\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\ \_\_ldg(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}*\ ptr)\ \{}
+\DoxyCodeLine{00927\ \ \ \textcolor{keywordflow}{return}\ Eigen::half\_impl::raw\_uint16\_to\_half(\_\_ldg(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const\ }Eigen::numext::uint16\_t*\textcolor{keyword}{>}(ptr)));}
+\DoxyCodeLine{00928\ \}}
+\DoxyCodeLine{00929\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_ldg}}
+\DoxyCodeLine{00930\ }
+\DoxyCodeLine{00931\ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_STD\_HASH}}
+\DoxyCodeLine{00932\ \textcolor{keyword}{namespace\ }std\ \{}
+\DoxyCodeLine{00933\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00934\ \textcolor{keyword}{struct\ }hash<\mbox{\hyperlink{namespace_eigen}{Eigen}}::half>\ \{}
+\DoxyCodeLine{00935\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_STRONG\_INLINE\ std::size\_t\ operator()(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1half}{Eigen::half}}\&\ a)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00936\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(Eigen::numext::bit\_cast<Eigen::numext::uint16\_t>(a));}
+\DoxyCodeLine{00937\ \ \ \}}
+\DoxyCodeLine{00938\ \};}
+\DoxyCodeLine{00939\ \}\ \textcolor{comment}{//\ end\ namespace\ std}}
+\DoxyCodeLine{00940\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00941\ }
+\DoxyCodeLine{00942\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EIGEN\_HALF\_H}}
+
+\end{DoxyCode}

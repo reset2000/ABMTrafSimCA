@@ -1,0 +1,96 @@
+\doxysection{Math\+Functions.\+h}
+\hypertarget{arch_2_alti_vec_2_math_functions_8h_source}{}\label{arch_2_alti_vec_2_math_functions_8h_source}\index{Eigen/src/Core/arch/AltiVec/MathFunctions.h@{Eigen/src/Core/arch/AltiVec/MathFunctions.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007\ Julien\ Pommier}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Copyright\ (C)\ 2009\ Gael\ Guennebaud\ <gael.guennebaud@inria.fr>}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ Copyright\ (C)\ 2016\ Konstantinos\ Margaritis\ <markos@freevec.org>}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_MATH\_FUNCTIONS\_ALTIVEC\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ EIGEN\_MATH\_FUNCTIONS\_ALTIVEC\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00020\ Packet4f\ plog<Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ \_x)}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordflow}{return}\ plog\_float(\_x);}
+\DoxyCodeLine{00023\ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00026\ Packet4f\ pexp<Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ \_x)}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \textcolor{keywordflow}{return}\ pexp\_float(\_x);}
+\DoxyCodeLine{00029\ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00032\ Packet4f\ psin<Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ \_x)}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{return}\ psin\_float(\_x);}
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00038\ Packet4f\ pcos<Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ \_x)}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordflow}{return}\ pcos\_float(\_x);}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_COMP\_CLANG}}
+\DoxyCodeLine{00044\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00045\ Packet4f\ prsqrt<Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ x)}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordflow}{return}\ \ vec\_rsqrt(x);}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#ifdef\ \_\_VSX\_\_}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_COMP\_CLANG}}
+\DoxyCodeLine{00053\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00054\ Packet2d\ prsqrt<Packet2d>(\textcolor{keyword}{const}\ Packet2d\&\ x)}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordflow}{return}\ \ vec\_rsqrt(x);}
+\DoxyCodeLine{00057\ \}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00061\ Packet4f\ psqrt<Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ x)}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordflow}{return}\ \ vec\_sqrt(x);}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00067\ Packet2d\ psqrt<Packet2d>(\textcolor{keyword}{const}\ Packet2d\&\ x)}
+\DoxyCodeLine{00068\ \{}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordflow}{return}\ \ vec\_sqrt(x);}
+\DoxyCodeLine{00070\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{template}<>\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED}
+\DoxyCodeLine{00073\ Packet2d\ pexp<Packet2d>(\textcolor{keyword}{const}\ Packet2d\&\ \_x)}
+\DoxyCodeLine{00074\ \{}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{return}\ pexp\_double(\_x);}
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ Hyperbolic\ Tangent\ function.}}
+\DoxyCodeLine{00080\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00081\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_UNUSED\ Packet4f}
+\DoxyCodeLine{00082\ ptanh<Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ x)\ \{}
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordflow}{return}\ internal::generic\_fast\_tanh\_float(x);}
+\DoxyCodeLine{00084\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \}\ \ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \}\ \ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ EIGEN\_MATH\_FUNCTIONS\_ALTIVEC\_H}}
+
+\end{DoxyCode}

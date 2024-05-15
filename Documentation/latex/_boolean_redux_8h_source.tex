@@ -1,0 +1,145 @@
+\doxysection{Boolean\+Redux.\+h}
+\hypertarget{_boolean_redux_8h_source}{}\label{_boolean_redux_8h_source}\index{Eigen/src/Core/BooleanRedux.h@{Eigen/src/Core/BooleanRedux.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2008\ Gael\ Guennebaud\ <gael.guennebaud@inria.fr>}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_ALLANDANY\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ EIGEN\_ALLANDANY\_H}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived,\ \textcolor{keywordtype}{int}\ UnrollCount,\ \textcolor{keywordtype}{int}\ Rows>}
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1all__unroller}{all\_unroller}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ col\ =\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{UnrollCount}}-\/1)\ /\ Rows,}
+\DoxyCodeLine{00022\ \ \ \ \ row\ =\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{UnrollCount}}-\/1)\ \%\ Rows}
+\DoxyCodeLine{00023\ \ \ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ run(\textcolor{keyword}{const}\ Derived\ \&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{mat}})}
+\DoxyCodeLine{00026\ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1all__unroller}{all\_unroller<Derived,\ UnrollCount-\/1,\ Rows>::run}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{mat}})\ \&\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{mat}}.coeff(row,\ col);}
+\DoxyCodeLine{00028\ \ \ \}}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived,\ \textcolor{keywordtype}{int}\ Rows>}
+\DoxyCodeLine{00032\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1all__unroller}{all\_unroller}}<Derived,\ 0,\ Rows>}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ run(\textcolor{keyword}{const}\ Derived\ \&\textcolor{comment}{/*mat*/})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived,\ \textcolor{keywordtype}{int}\ Rows>}
+\DoxyCodeLine{00038\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1all__unroller}{all\_unroller}}<Derived,\ \mbox{\hyperlink{namespace_eigen_ad81fa7195215a0ce30017dfac309f0b2}{Dynamic}},\ Rows>}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ run(\textcolor{keyword}{const}\ Derived\ \&)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived,\ \textcolor{keywordtype}{int}\ UnrollCount,\ \textcolor{keywordtype}{int}\ Rows>}
+\DoxyCodeLine{00044\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1any__unroller}{any\_unroller}}}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ col\ =\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{UnrollCount}}-\/1)\ /\ Rows,}
+\DoxyCodeLine{00048\ \ \ \ \ row\ =\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{UnrollCount}}-\/1)\ \%\ Rows}
+\DoxyCodeLine{00049\ \ \ \};}
+\DoxyCodeLine{00050\ \ \ }
+\DoxyCodeLine{00051\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ run(\textcolor{keyword}{const}\ Derived\ \&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{mat}})}
+\DoxyCodeLine{00052\ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1any__unroller}{any\_unroller<Derived,\ UnrollCount-\/1,\ Rows>::run}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{mat}})\ ||\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{mat}}.coeff(row,\ col);}
+\DoxyCodeLine{00054\ \ \ \}}
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived,\ \textcolor{keywordtype}{int}\ Rows>}
+\DoxyCodeLine{00058\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1any__unroller}{any\_unroller}}<Derived,\ 0,\ Rows>}
+\DoxyCodeLine{00059\ \{}
+\DoxyCodeLine{00060\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ run(\textcolor{keyword}{const}\ Derived\ \&\ \textcolor{comment}{/*mat*/})\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived,\ \textcolor{keywordtype}{int}\ Rows>}
+\DoxyCodeLine{00064\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1any__unroller}{any\_unroller}}<Derived,\ \mbox{\hyperlink{namespace_eigen_ad81fa7195215a0ce30017dfac309f0b2}{Dynamic}},\ Rows>}
+\DoxyCodeLine{00065\ \{}
+\DoxyCodeLine{00066\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ run(\textcolor{keyword}{const}\ Derived\ \&)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00067\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00079\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_dense_base_a1b2641cc14a6ad2ee9703df770c096af}{DenseBase<Derived>::all}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00080\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00081\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1evaluator}{internal::evaluator<Derived>}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Evaluator}};}
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{unroll}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a25cb495affdbd796198462b8ef06be91}{SizeAtCompileTime}}\ !=\ \mbox{\hyperlink{namespace_eigen_ad81fa7195215a0ce30017dfac309f0b2}{Dynamic}}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \&\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a25cb495affdbd796198462b8ef06be91}{SizeAtCompileTime}}\ *\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(Evaluator::CoeffReadCost)\ +\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::AddCost}}))\ <=\ EIGEN\_UNROLLING\_LIMIT}
+\DoxyCodeLine{00085\ \ \ \};}
+\DoxyCodeLine{00086\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Evaluator}}\ evaluator(derived());}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{unroll}})}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1all__unroller}{internal::all\_unroller}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{Evaluator}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{unroll}}\ ?\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base_a25cb495affdbd796198462b8ef06be91}{SizeAtCompileTime}})\ :\ \mbox{\hyperlink{namespace_eigen_ad81fa7195215a0ce30017dfac309f0b2}{Dynamic}},\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<Derived>::RowsAtCompileTime}}>::run(evaluator);}
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00090\ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ =\ 0;\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ <\ cols();\ ++\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}})}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ i\ =\ 0;\ i\ <\ rows();\ ++i)}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!evaluator.coeff(i,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00095\ \ \ \}}
+\DoxyCodeLine{00096\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00102\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00103\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_dense_base_ae2fd88cfd0f2bf9cc493d0a29cbc8695}{DenseBase<Derived>::any}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00104\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1evaluator}{internal::evaluator<Derived>}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Evaluator}};}
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{unroll}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a25cb495affdbd796198462b8ef06be91}{SizeAtCompileTime}}\ !=\ \mbox{\hyperlink{namespace_eigen_ad81fa7195215a0ce30017dfac309f0b2}{Dynamic}}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \&\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a25cb495affdbd796198462b8ef06be91}{SizeAtCompileTime}}\ *\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(Evaluator::CoeffReadCost)\ +\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::AddCost}}))\ <=\ EIGEN\_UNROLLING\_LIMIT}
+\DoxyCodeLine{00109\ \ \ \};}
+\DoxyCodeLine{00110\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Evaluator}}\ evaluator(derived());}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{unroll}})}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1any__unroller}{internal::any\_unroller}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{Evaluator}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{unroll}}\ ?\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base_a25cb495affdbd796198462b8ef06be91}{SizeAtCompileTime}})\ :\ \mbox{\hyperlink{namespace_eigen_ad81fa7195215a0ce30017dfac309f0b2}{Dynamic}},\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<Derived>::RowsAtCompileTime}}>::run(evaluator);}
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00114\ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ =\ 0;\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ <\ cols();\ ++\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}})}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ i\ =\ 0;\ i\ <\ rows();\ ++i)}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (evaluator.coeff(i,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00119\ \ \ \}}
+\DoxyCodeLine{00120\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00126\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00127\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Eigen::Index}}\ \mbox{\hyperlink{class_eigen_1_1_dense_base_a87e937cc19720ffc223c9a62484d0a61}{DenseBase<Derived>::count}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00128\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00129\ \ \ \textcolor{keywordflow}{return}\ derived().template\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cast<bool>}}().template\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cast<Index>}}().\mbox{\hyperlink{class_eigen_1_1_dense_base_ac7b6e2d5e05f37b6cd3f213d28fdac24}{sum}}();}
+\DoxyCodeLine{00130\ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00137\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_dense_base_ab13d158c900560d3e1b25d85d2d33dd6}{DenseBase<Derived>::hasNaN}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00138\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#if\ EIGEN\_COMP\_MSVC\ ||\ (defined\ \_\_FAST\_MATH\_\_)}}
+\DoxyCodeLine{00140\ \ \ \textcolor{keywordflow}{return}\ derived().\mbox{\hyperlink{class_eigen_1_1_matrix_base_a6bd01a3c94daf864579f14510aa320f8}{array}}().isNaN().\mbox{\hyperlink{class_eigen_1_1_dense_base_ae2fd88cfd0f2bf9cc493d0a29cbc8695}{any}}();}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00142\ \ \ \textcolor{keywordflow}{return}\ !((derived().array()==derived().array()).\mbox{\hyperlink{class_eigen_1_1_dense_base_a1b2641cc14a6ad2ee9703df770c096af}{all}}());}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00144\ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00150\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00151\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_dense_base_af1e669fd3aaae50a4870dc1b8f3b8884}{DenseBase<Derived>::allFinite}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00152\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#if\ EIGEN\_COMP\_MSVC\ ||\ (defined\ \_\_FAST\_MATH\_\_)}}
+\DoxyCodeLine{00154\ \ \ \textcolor{keywordflow}{return}\ derived().\mbox{\hyperlink{class_eigen_1_1_matrix_base_a6bd01a3c94daf864579f14510aa320f8}{array}}().isFinite().\mbox{\hyperlink{class_eigen_1_1_dense_base_a1b2641cc14a6ad2ee9703df770c096af}{all}}();}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordflow}{return}\ !((derived()-\/derived()).\mbox{\hyperlink{class_eigen_1_1_dense_base_ab13d158c900560d3e1b25d85d2d33dd6}{hasNaN}}());}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00158\ \}}
+\DoxyCodeLine{00159\ \ \ \ \ }
+\DoxyCodeLine{00160\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EIGEN\_ALLANDANY\_H}}
+
+\end{DoxyCode}

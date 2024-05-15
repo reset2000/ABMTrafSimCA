@@ -1,0 +1,320 @@
+\doxysection{Diagonal\+Matrix.\+h}
+\hypertarget{_diagonal_matrix_8h_source}{}\label{_diagonal_matrix_8h_source}\index{Eigen/src/Core/DiagonalMatrix.h@{Eigen/src/Core/DiagonalMatrix.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2009\ Gael\ Guennebaud\ <gael.guennebaud@inria.fr>}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2009\ Benoit\ Jacob\ <jacob.benoit.1@gmail.com>}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_DIAGONALMATRIX\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ EIGEN\_DIAGONALMATRIX\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{\ }
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_PARSED\_BY\_DOXYGEN}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_eigen_1_1_diagonal_base}{DiagonalBase}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{struct_eigen_1_1_eigen_base}{EigenBase}}<Derived>}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<Derived>::DiagonalVectorType}}\ DiagonalVectorType;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ DiagonalVectorType::Scalar\ Scalar;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ DiagonalVectorType::RealScalar\ RealScalar;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<Derived>::StorageKind}}\ StorageKind;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<Derived>::StorageIndex}}\ StorageIndex;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ RowsAtCompileTime\ =\ DiagonalVectorType::SizeAtCompileTime,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ ColsAtCompileTime\ =\ DiagonalVectorType::SizeAtCompileTime,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ MaxRowsAtCompileTime\ =\ DiagonalVectorType::MaxSizeAtCompileTime,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ MaxColsAtCompileTime\ =\ DiagonalVectorType::MaxSizeAtCompileTime,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ IsVectorAtCompileTime\ =\ 0,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ Flags\ =\ \mbox{\hyperlink{group__flags_ga3c186ad80ddcf5e2ed3d7ee31cca1860}{NoPreferredStorageOrderBit}}}
+\DoxyCodeLine{00034\ \ \ \ \ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Matrix<Scalar,\ RowsAtCompileTime,\ ColsAtCompileTime,\ 0,\ MaxRowsAtCompileTime,\ MaxColsAtCompileTime>}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DenseMatrixType}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DenseMatrixType}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DenseType}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalMatrix<Scalar,DiagonalVectorType::SizeAtCompileTime,DiagonalVectorType::MaxSizeAtCompileTime>}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{PlainObject}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Derived\&\ derived()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const\ }Derived*\textcolor{keyword}{>}(\textcolor{keyword}{this});\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{inline}\ Derived\&\ derived()\ \{\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{static\_cast<}Derived*\textcolor{keyword}{>}(\textcolor{keyword}{this});\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DenseMatrixType}}\ toDenseMatrix()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ derived();\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ DiagonalVectorType\&\ diagonal()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ derived().\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}();\ \}}
+\DoxyCodeLine{00050\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{inline}\ DiagonalVectorType\&\ diagonal()\ \{\ \textcolor{keywordflow}{return}\ derived().\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}();\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_eigen_1_1_eigen_base_a554f30542cc2316add4b1ea0a492ff02}{Index}}\ rows()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ diagonal().size();\ \}}
+\DoxyCodeLine{00055\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_eigen_1_1_eigen_base_a554f30542cc2316add4b1ea0a492ff02}{Index}}\ cols()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ diagonal().size();\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ MatrixDerived>}
+\DoxyCodeLine{00059\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Product<Derived,MatrixDerived,LazyProduct>}}}
+\DoxyCodeLine{00061\ \ \ \ \ operator*(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<MatrixDerived>}}\ \&matrix)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00062\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Product<Derived,\ MatrixDerived,\ LazyProduct>}}(derived(),matrix.derived());}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalWrapper<const\ CwiseUnaryOp<internal::scalar\_inverse\_op<Scalar>}},\ \textcolor{keyword}{const}\ DiagonalVectorType>\ >\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{InverseReturnType}};}
+\DoxyCodeLine{00067\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{InverseReturnType}}}
+\DoxyCodeLine{00069\ \ \ \ \ inverse()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00070\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{InverseReturnType}}(diagonal().cwiseInverse());}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper}{DiagonalWrapper}}<\textcolor{keyword}{const}\ EIGEN\_EXPR\_BINARYOP\_SCALAR\_RETURN\_TYPE(DiagonalVectorType,Scalar,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{product}})\ >}
+\DoxyCodeLine{00076\ \ \ \ \ operator*(\textcolor{keyword}{const}\ Scalar\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00077\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalWrapper<const\ EIGEN\_EXPR\_BINARYOP\_SCALAR\_RETURN\_TYPE(DiagonalVectorType,Scalar,product)\ >}}(diagonal()\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar}});}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper}{DiagonalWrapper}}<\textcolor{keyword}{const}\ EIGEN\_SCALAR\_BINARYOP\_EXPR\_RETURN\_TYPE(Scalar,DiagonalVectorType,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{product}})\ >}
+\DoxyCodeLine{00082\ \ \ \ \ operator*(\textcolor{keyword}{const}\ Scalar\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_base}{DiagonalBase}}\&\ other)}
+\DoxyCodeLine{00083\ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalWrapper<const\ EIGEN\_SCALAR\_BINARYOP\_EXPR\_RETURN\_TYPE(Scalar,DiagonalVectorType,product)\ >}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar}}\ *\ other.diagonal());}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{00088\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ EIGEN\_PARSED\_BY\_DOXYGEN}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{unspecified\_expression\_type}}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper}{DiagonalWrapper}}<\textcolor{keyword}{const}\ EIGEN\_CWISE\_BINARY\_RETURN\_TYPE(DiagonalVectorType,\textcolor{keyword}{typename}\ OtherDerived::DiagonalVectorType,sum)\ >}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00094\ \ \ \ \ operator+(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalBase<OtherDerived>}}\&\ other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00095\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (diagonal()\ +\ other.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}()).asDiagonal();}
+\DoxyCodeLine{00097\ \ \ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{00100\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ EIGEN\_PARSED\_BY\_DOXYGEN}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{unspecified\_expression\_type}}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper}{DiagonalWrapper}}<\textcolor{keyword}{const}\ EIGEN\_CWISE\_BINARY\_RETURN\_TYPE(DiagonalVectorType,\textcolor{keyword}{typename}\ OtherDerived::DiagonalVectorType,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{difference}})\ >}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00106\ \ \ \ \ operator-\/(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalBase<OtherDerived>}}\&\ other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00107\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (diagonal()\ -\/\ other.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}()).asDiagonal();}
+\DoxyCodeLine{00109\ \ \ \ \ \}}
+\DoxyCodeLine{00110\ \};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00128\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ \_Scalar,\ \textcolor{keywordtype}{int}\ SizeAtCompileTime,\ \textcolor{keywordtype}{int}\ MaxSizeAtCompileTime>}
+\DoxyCodeLine{00129\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{traits}}<\mbox{\hyperlink{class_eigen_1_1_diagonal_matrix}{DiagonalMatrix}}<\_Scalar,SizeAtCompileTime,MaxSizeAtCompileTime>\ >}
+\DoxyCodeLine{00130\ \ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{traits}}<Matrix<\_Scalar,SizeAtCompileTime,SizeAtCompileTime,0,MaxSizeAtCompileTime,MaxSizeAtCompileTime>\ >}
+\DoxyCodeLine{00131\ \{}
+\DoxyCodeLine{00132\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Matrix<\_Scalar,SizeAtCompileTime,1,0,MaxSizeAtCompileTime,1>}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalVectorType}};}
+\DoxyCodeLine{00133\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1_diagonal_shape}{DiagonalShape}}\ \mbox{\hyperlink{struct_eigen_1_1_diagonal_shape}{StorageKind}};}
+\DoxyCodeLine{00134\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ Flags\ =\ \mbox{\hyperlink{group__flags_gae2c323957f20dfdc6cb8f44428eaec1a}{LvalueBit}}\ |\ \mbox{\hyperlink{group__flags_ga3c186ad80ddcf5e2ed3d7ee31cca1860}{NoPreferredStorageOrderBit}}}
+\DoxyCodeLine{00136\ \ \ \};}
+\DoxyCodeLine{00137\ \};}
+\DoxyCodeLine{00138\ \}}
+\DoxyCodeLine{00139\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ \_Scalar,\ \textcolor{keywordtype}{int}\ SizeAtCompileTime,\ \textcolor{keywordtype}{int}\ MaxSizeAtCompileTime>}
+\DoxyCodeLine{00140\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_eigen_1_1_diagonal_matrix}{DiagonalMatrix}}}
+\DoxyCodeLine{00141\ \ \ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_base}{DiagonalBase}}<DiagonalMatrix<\_Scalar,SizeAtCompileTime,MaxSizeAtCompileTime>\ >}
+\DoxyCodeLine{00142\ \{}
+\DoxyCodeLine{00143\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\ \ \ \ \#ifndef\ EIGEN\_PARSED\_BY\_DOXYGEN}}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<DiagonalMatrix>::DiagonalVectorType}}\ DiagonalVectorType;}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix}{DiagonalMatrix}}\&\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix}{Nested}};}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{typedef}\ \_Scalar\ Scalar;}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<DiagonalMatrix>::StorageKind}}\ StorageKind;}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<DiagonalMatrix>::StorageIndex}}\ StorageIndex;}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ DiagonalVectorType\ m\_diagonal;}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00159\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ DiagonalVectorType\&\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a0b41b299ab8c1fa1982e645d77b20acc}{diagonal}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_diagonal;\ \}}
+\DoxyCodeLine{00162\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keyword}{inline}\ DiagonalVectorType\&\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a65f190aea36300a3e232990299c0bf85}{diagonal}}()\ \{\ \textcolor{keywordflow}{return}\ m\_diagonal;\ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00166\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a828c0f7d55a4f66908e76b3af1acc37f}{DiagonalMatrix}}()\ \{\}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00170\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a82e6fd9b8f7f614bc05b4f941a875d7a}{DiagonalMatrix}}(\mbox{\hyperlink{struct_eigen_1_1_eigen_base_a554f30542cc2316add4b1ea0a492ff02}{Index}}\ dim)\ :\ m\_diagonal(dim)\ \{\}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00174\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a1443056b287f069d6771d7945e45ad60}{DiagonalMatrix}}(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y)\ :\ m\_diagonal(x,y)\ \{\}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00178\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_aebf160f0165e6602249cbe03148f6c04}{DiagonalMatrix}}(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y,\ \textcolor{keyword}{const}\ Scalar\&\ z)\ :\ m\_diagonal(x,y,z)\ \{\}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\ \ \ \ \#if\ EIGEN\_HAS\_CXX11}}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ArgTypes}}>}
+\DoxyCodeLine{00193\ \ \ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_STRONG\_INLINE}
+\DoxyCodeLine{00194\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a828c0f7d55a4f66908e76b3af1acc37f}{DiagonalMatrix}}(\textcolor{keyword}{const}\ Scalar\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{a0}},\ \textcolor{keyword}{const}\ Scalar\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{a1}},\ \textcolor{keyword}{const}\ Scalar\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{a2}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ArgTypes}}\&...\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{args}})}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ :\ m\_diagonal(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{a0}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{a1}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{a2}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{args}}...)\ \{\}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00200\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keyword}{explicit}\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a828c0f7d55a4f66908e76b3af1acc37f}{DiagonalMatrix}}(\textcolor{keyword}{const}\ std::initializer\_list<std::initializer\_list<Scalar>>\&\ list)}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ :\ m\_diagonal(list)\ \{\}}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\ \ \ \ \#endif\ \ }\textcolor{comment}{//\ EIGEN\_HAS\_CXX11}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{00207\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_ad7d030d35ab1f1b2f3e51860069f4226}{DiagonalMatrix}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalBase<OtherDerived>}}\&\ other)\ :\ m\_diagonal(other.\mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a0b41b299ab8c1fa1982e645d77b20acc}{diagonal}}())\ \{\}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\ \ \ \ \#ifndef\ EIGEN\_PARSED\_BY\_DOXYGEN}}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_ad5efd7a4e35667a76cdbbdb664bb92c5}{DiagonalMatrix}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix}{DiagonalMatrix}}\&\ other)\ :\ m\_diagonal(other.\mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a0b41b299ab8c1fa1982e645d77b20acc}{diagonal}}())\ \{\}}
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{00217\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a3a6492f390f0d881f14376e673fd42c3}{DiagonalMatrix}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<OtherDerived>}}\&\ other)\ :\ m\_diagonal(other)}
+\DoxyCodeLine{00219\ \ \ \ \ \{\}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{00223\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00224\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix}{DiagonalMatrix}}\&\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_ad19ed07fd98078ec9a74b00f4703e820}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalBase<OtherDerived>}}\&\ other)}
+\DoxyCodeLine{00225\ \ \ \ \ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ m\_diagonal\ =\ other.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}();}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \textcolor{preprocessor}{\ \ \ \ \#ifndef\ EIGEN\_PARSED\_BY\_DOXYGEN}}
+\DoxyCodeLine{00234\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00235\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix}{DiagonalMatrix}}\&\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a80e85a0cf89983bfcb7dae06ee792926}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix}{DiagonalMatrix}}\&\ other)}
+\DoxyCodeLine{00236\ \ \ \ \ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ m\_diagonal\ =\ other.\mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a0b41b299ab8c1fa1982e645d77b20acc}{diagonal}}();}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00239\ \ \ \ \ \}}
+\DoxyCodeLine{00240\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00243\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a4ebe032fddd2507357c0bb233637c450}{resize}}(\mbox{\hyperlink{struct_eigen_1_1_eigen_base_a554f30542cc2316add4b1ea0a492ff02}{Index}}\ \mbox{\hyperlink{struct_eigen_1_1_eigen_base_a9f40726259520d7e9c5ce58d19d62e79}{size}})\ \{\ m\_diagonal.\mbox{\hyperlink{class_eigen_1_1_dense_base_a13027a493a68a13496610caf3d81bd3e}{resize}}(\mbox{\hyperlink{struct_eigen_1_1_eigen_base_a9f40726259520d7e9c5ce58d19d62e79}{size}});\ \}}
+\DoxyCodeLine{00246\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a4d9b1c1fd53e4bee2e94098c8378db8e}{setZero}}()\ \{\ m\_diagonal.\mbox{\hyperlink{class_eigen_1_1_dense_base_ac74411ddeea2545bf20baf14613be47e}{setZero}}();\ \}}
+\DoxyCodeLine{00249\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a9f1a1ca602e5432b6856d3a6783a6d1c}{setZero}}(\mbox{\hyperlink{struct_eigen_1_1_eigen_base_a554f30542cc2316add4b1ea0a492ff02}{Index}}\ \mbox{\hyperlink{struct_eigen_1_1_eigen_base_a9f40726259520d7e9c5ce58d19d62e79}{size}})\ \{\ m\_diagonal.\mbox{\hyperlink{class_eigen_1_1_dense_base_ac74411ddeea2545bf20baf14613be47e}{setZero}}(\mbox{\hyperlink{struct_eigen_1_1_eigen_base_a9f40726259520d7e9c5ce58d19d62e79}{size}});\ \}}
+\DoxyCodeLine{00252\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_a4d52100471c1212cbaba950b0c39f8c9}{setIdentity}}()\ \{\ m\_diagonal.\mbox{\hyperlink{class_eigen_1_1_dense_base_ad18970fd7d9f9c3d8db9d05fa8652a25}{setOnes}}();\ \}}
+\DoxyCodeLine{00255\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_matrix_ae0cb9721da2963320857ec4b64eed1ea}{setIdentity}}(\mbox{\hyperlink{struct_eigen_1_1_eigen_base_a554f30542cc2316add4b1ea0a492ff02}{Index}}\ \mbox{\hyperlink{struct_eigen_1_1_eigen_base_a9f40726259520d7e9c5ce58d19d62e79}{size}})\ \{\ m\_diagonal.\mbox{\hyperlink{class_eigen_1_1_dense_base_ad18970fd7d9f9c3d8db9d05fa8652a25}{setOnes}}(\mbox{\hyperlink{struct_eigen_1_1_eigen_base_a9f40726259520d7e9c5ce58d19d62e79}{size}});\ \}}
+\DoxyCodeLine{00257\ \};}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00273\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00274\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ \_DiagonalVectorType>}
+\DoxyCodeLine{00275\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{traits}}<\mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper}{DiagonalWrapper}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_DiagonalVectorType}}>\ >}
+\DoxyCodeLine{00276\ \{}
+\DoxyCodeLine{00277\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_DiagonalVectorType}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalVectorType}};}
+\DoxyCodeLine{00278\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ DiagonalVectorType::Scalar\ Scalar;}
+\DoxyCodeLine{00279\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ DiagonalVectorType::StorageIndex\ StorageIndex;}
+\DoxyCodeLine{00280\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1_diagonal_shape}{DiagonalShape}}\ \mbox{\hyperlink{struct_eigen_1_1_diagonal_shape}{StorageKind}};}
+\DoxyCodeLine{00281\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{traits<DiagonalVectorType>::XprKind}}\ XprKind;}
+\DoxyCodeLine{00282\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ RowsAtCompileTime\ =\ DiagonalVectorType::SizeAtCompileTime,}
+\DoxyCodeLine{00284\ \ \ \ \ ColsAtCompileTime\ =\ DiagonalVectorType::SizeAtCompileTime,}
+\DoxyCodeLine{00285\ \ \ \ \ MaxRowsAtCompileTime\ =\ DiagonalVectorType::MaxSizeAtCompileTime,}
+\DoxyCodeLine{00286\ \ \ \ \ MaxColsAtCompileTime\ =\ DiagonalVectorType::MaxSizeAtCompileTime,}
+\DoxyCodeLine{00287\ \ \ \ \ Flags\ =\ \ (\mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{traits<DiagonalVectorType>::Flags}}\ \&\ \mbox{\hyperlink{group__flags_gae2c323957f20dfdc6cb8f44428eaec1a}{LvalueBit}})\ |\ \mbox{\hyperlink{group__flags_ga3c186ad80ddcf5e2ed3d7ee31cca1860}{NoPreferredStorageOrderBit}}}
+\DoxyCodeLine{00288\ \ \ \};}
+\DoxyCodeLine{00289\ \};}
+\DoxyCodeLine{00290\ \}}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ \_DiagonalVectorType>}
+\DoxyCodeLine{00293\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper}{DiagonalWrapper}}}
+\DoxyCodeLine{00294\ \ \ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_base}{DiagonalBase}}<DiagonalWrapper<\_DiagonalVectorType>\ >,\ \mbox{\hyperlink{class_eigen_1_1internal_1_1no__assignment__operator}{internal::no\_assignment\_operator}}}
+\DoxyCodeLine{00295\ \{}
+\DoxyCodeLine{00296\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00297\ \textcolor{preprocessor}{\ \ \ \ \#ifndef\ EIGEN\_PARSED\_BY\_DOXYGEN}}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_DiagonalVectorType}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalVectorType}};}
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper}{DiagonalWrapper}}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper}{Nested}};}
+\DoxyCodeLine{00300\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00303\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper_a81574f47272fd5e519a19135a306529d}{DiagonalWrapper}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalVectorType}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{a\_diagonal}})\ :\ m\_diagonal(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{a\_diagonal}})\ \{\}}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00307\ \ \ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalVectorType}}\&\ \mbox{\hyperlink{class_eigen_1_1_diagonal_wrapper_a092b3eb01f5202fb28cef77c1914b55c}{diagonal}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_diagonal;\ \}}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keyword}{typename}\ DiagonalVectorType::Nested\ m\_diagonal;}
+\DoxyCodeLine{00312\ \};}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00323\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00324\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ DiagonalWrapper<const\ Derived>}
+\DoxyCodeLine{00325\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a22df3e4cfe9e81535c3590fd91fd639c}{MatrixBase<Derived>::asDiagonal}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00326\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00327\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{DiagonalWrapper<const\ Derived>}}(derived());}
+\DoxyCodeLine{00328\ \}}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00338\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00339\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a97027ea54c8cd1ddb1c578fee5cedc67}{MatrixBase<Derived>::isDiagonal}}(\textcolor{keyword}{const}\ RealScalar\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00340\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00341\ \ \ \textcolor{keywordflow}{if}(cols()\ !=\ rows())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00342\ \ \ RealScalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{maxAbsOnDiagonal}}\ =\ \textcolor{keyword}{static\_cast<}RealScalar\textcolor{keyword}{>}(-\/1);}
+\DoxyCodeLine{00343\ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ =\ 0;\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ <\ cols();\ ++\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}})}
+\DoxyCodeLine{00344\ \ \ \{}
+\DoxyCodeLine{00345\ \ \ \ \ RealScalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{absOnDiagonal}}\ =\ numext::abs(coeff(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}},\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}));}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{absOnDiagonal}}\ >\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{maxAbsOnDiagonal}})\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{maxAbsOnDiagonal}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{absOnDiagonal}};}
+\DoxyCodeLine{00347\ \ \ \}}
+\DoxyCodeLine{00348\ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ =\ 0;\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ <\ cols();\ ++\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}})}
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}};\ ++i)}
+\DoxyCodeLine{00350\ \ \ \ \ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!internal::isMuchSmallerThan(coeff(i,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{maxAbsOnDiagonal}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}}))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!internal::isMuchSmallerThan(coeff(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}},\ i),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{maxAbsOnDiagonal}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}}))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00353\ \ \ \ \ \}}
+\DoxyCodeLine{00354\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00355\ \}}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1storage__kind__to__shape}{storage\_kind\_to\_shape}}<\mbox{\hyperlink{struct_eigen_1_1_diagonal_shape}{DiagonalShape}}>\ \{\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1_diagonal_shape}{DiagonalShape}}\ \mbox{\hyperlink{struct_eigen_1_1_diagonal_shape}{Shape}};\ \};}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1_diagonal2_dense}{Diagonal2Dense}}\ \{\};}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00363\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1_assignment_kind}{AssignmentKind}}<\mbox{\hyperlink{struct_eigen_1_1_dense_shape}{DenseShape}},\mbox{\hyperlink{struct_eigen_1_1_diagonal_shape}{DiagonalShape}}>\ \{\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_diagonal2_dense}{Diagonal2Dense}}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_diagonal2_dense}{Kind}};\ \};}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \textcolor{comment}{//\ Diagonal\ matrix\ to\ Dense\ assignment}}
+\DoxyCodeLine{00366\ \textcolor{keyword}{template}<\ \textcolor{keyword}{typename}\ DstXprType,\ \textcolor{keyword}{typename}\ SrcXprType,\ \textcolor{keyword}{typename}\ Functor>}
+\DoxyCodeLine{00367\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1_assignment}{Assignment}}<DstXprType,\ SrcXprType,\ Functor,\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_diagonal2_dense}{Diagonal2Dense}}>}
+\DoxyCodeLine{00368\ \{}
+\DoxyCodeLine{00369\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ run(DstXprType\ \&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}},\ \textcolor{keyword}{const}\ SrcXprType\ \&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{src}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1assign__op}{internal::assign\_op<typename\ DstXprType::Scalar,typename\ SrcXprType::Scalar>}}\ \&\textcolor{comment}{/*func*/})}
+\DoxyCodeLine{00370\ \ \ \{}
+\DoxyCodeLine{00371\ \ \ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{dstRows}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{src}}.rows();}
+\DoxyCodeLine{00372\ \ \ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{dstCols}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{src}}.cols();}
+\DoxyCodeLine{00373\ \ \ \ \ \textcolor{keywordflow}{if}((\mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}}.rows()!=\mbox{\hyperlink{class_eigen_1_1_matrix_base}{dstRows}})\ ||\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}}.cols()!=\mbox{\hyperlink{class_eigen_1_1_matrix_base}{dstCols}}))}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}}.\mbox{\hyperlink{class_eigen_1_1_dense_base_a13027a493a68a13496610caf3d81bd3e}{resize}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{dstRows}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{dstCols}});}
+\DoxyCodeLine{00375\ \ \ \ \ }
+\DoxyCodeLine{00376\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}}.\mbox{\hyperlink{class_eigen_1_1_dense_base_ac74411ddeea2545bf20baf14613be47e}{setZero}}();}
+\DoxyCodeLine{00377\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}()\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{src}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}();}
+\DoxyCodeLine{00378\ \ \ \}}
+\DoxyCodeLine{00379\ \ \ }
+\DoxyCodeLine{00380\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ run(DstXprType\ \&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}},\ \textcolor{keyword}{const}\ SrcXprType\ \&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{src}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1add__assign__op}{internal::add\_assign\_op<typename\ DstXprType::Scalar,typename\ SrcXprType::Scalar>}}\ \&\textcolor{comment}{/*func*/})}
+\DoxyCodeLine{00381\ \ \ \{\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}()\ +=\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{src}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}();\ \}}
+\DoxyCodeLine{00382\ \ \ }
+\DoxyCodeLine{00383\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ run(DstXprType\ \&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}},\ \textcolor{keyword}{const}\ SrcXprType\ \&\mbox{\hyperlink{class_eigen_1_1_matrix_base}{src}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1sub__assign__op}{internal::sub\_assign\_op<typename\ DstXprType::Scalar,typename\ SrcXprType::Scalar>}}\ \&\textcolor{comment}{/*func*/})}
+\DoxyCodeLine{00384\ \ \ \{\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{dst}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}()\ -\/=\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{src}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_aecfec14fd51817fd3e8b61219e81a01e}{diagonal}}();\ \}}
+\DoxyCodeLine{00385\ \};}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \}\ \textcolor{comment}{//\ namespace\ internal}}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EIGEN\_DIAGONALMATRIX\_H}}
+
+\end{DoxyCode}

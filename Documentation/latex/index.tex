@@ -1,0 +1,49 @@
+\chapter{ABMTraf\+Sim\+CA}
+\hypertarget{index}{}\label{index}\index{ABMTrafSimCA@{ABMTrafSimCA}}
+\label{index_md__r_e_a_d_m_e}%
+\Hypertarget{index_md__r_e_a_d_m_e}%
+ABMTraf\+Sim\+CA is a desktop application written in C++ with a user interface implemented with the Qt library. It contains all the basic functions which are necessary to carry out traffic modelling and simulation based on the CA model. The developed software enables users to adapt the system to their needs freely and allows the observation of the traffic phenomenon through two types of diagrams (space-\/time and fundamental diagrams). Such diagrams are the most expected by researchers dealing with the indicated topics. The implemented model serves a straight, two-\/lane road with a determined density of vehicles and periodic boundary conditions. Thanks to that, a constant percentage of occupied CA cells during the simulation is maintained. \hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Features}{Features}}\label{index_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Simulating traffic based on parameters set by the user.
+\item Creating agents (driver profiles) with certain simulation properties.
+\item Creating sets of parameters for road such as length, number of cycles, diagram parameters etc.
+\item Customisation of desirable car lengths to achieve more realistic simulations.
+\item Implementation of a traffic model enabling realistic acceleration and braking of vehicles, including a safe distance and emergency braking.
+\item Space-\/time diagrams allow users to see the results of a single simulation iteration with a specific density for each lane separately.
+\item Fundamental diagrams allow users to see the flow of cars for set densities based on data averaged from multiple simulations.
+\item Storage of generated diagrams and sets of parameters in the database for later use.
+\item Customisation of display styles for space-\/time and fundamental diagrams. 
+\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{index_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Windows or Linux 64-\/bit operating system
+\item C++ 17+
+\item Qt 6.\+5.\+0+
+\item Qt Creator 10.\+0.\+0+ 
+\end{DoxyItemize}\hypertarget{index_autotoc_md3}{}\doxysection{\texorpdfstring{Installation}{Installation}}\label{index_autotoc_md3}
+The application should be run through Qt Creator (version 10.\+0.\+0+). To launch the application, the user should click “\+Open Project” button and choose “\+CMake\+Lists.\+txt” file from the downloaded repository, then run the app using “\+Run” button (Ctrl + R shortcut on Windows). \hypertarget{index_autotoc_md4}{}\doxysection{\texorpdfstring{Authors}{Authors}}\label{index_autotoc_md4}
+Patryk Górka~\newline
+ \href{mailto:gp46518@zut.edu.pl}{\texttt{ gp46518@zut.\+edu.\+pl}}
+
+Krzysztof Małecki~\newline
+ \href{mailto:krzysztof.malecki@zut.edu.pl}{\texttt{ krzysztof.\+malecki@zut.\+edu.\+pl}} \hypertarget{index_autotoc_md5}{}\doxysection{\texorpdfstring{License}{License}}\label{index_autotoc_md5}
+ABMTraf\+Sim\+CA was created using GPL v.\+3.\+0 license (see \href{./LICENSE}{\texttt{ LICENSE.\+TXT}}). \hypertarget{index_autotoc_md6}{}\doxysection{\texorpdfstring{Version history}{Version history}}\label{index_autotoc_md6}
+
+\begin{DoxyItemize}
+\item 1.\+0.\+0 – implementation of console-\/based traffic simulator
+\begin{DoxyItemize}
+\item 2.\+0.\+0 – first version of basic UI created in Qt
+\item 2.\+1.\+0 – database and snapshot creation before closing program
+\begin{DoxyItemize}
+\item 2.\+1.\+1 – loading snapshots from database
+\end{DoxyItemize}
+\item 2.\+2.\+0 – generating space-\/time and fundamental diagrams
+\item 2.\+3.\+0 – added multithreading to shorten simulation time
+\item 2.\+4.\+0 – saving and loading driver types using database
+\item 2.\+5.\+0 – added different diagram styles and fonts
+\begin{DoxyItemize}
+\item 2.\+5.\+1 – fixed colour being displayed incorrectly depending on the motive 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}

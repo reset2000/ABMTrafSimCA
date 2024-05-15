@@ -1,0 +1,378 @@
+\doxysection{Complex.\+h}
+\hypertarget{_a_v_x_2_complex_8h_source}{}\label{_a_v_x_2_complex_8h_source}\index{Eigen/src/Core/arch/AVX/Complex.h@{Eigen/src/Core/arch/AVX/Complex.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2014\ Benoit\ Steiner\ (benoit.steiner.goog@gmail.com)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_COMPLEX\_AVX\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ EIGEN\_COMPLEX\_AVX\_H}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ float\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}()\ \{\}}
+\DoxyCodeLine{00021\ \ \ EIGEN\_STRONG\_INLINE\ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_m256}}\&\ a)\ :\ v(a)\ \{\}}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_m256}}\ \ v;}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_VECTORIZE\_AVX512}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1packet__traits}{packet\_traits}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<float>\ >\ \ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1default__packet__traits}{default\_packet\_traits}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}\ type;}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cf}{Packet2cf}}\ \mbox{\hyperlink{struct_eigen_1_1half}{half}};}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ Vectorizable\ =\ 1,}
+\DoxyCodeLine{00032\ \ \ \ \ AlignedOnScalar\ =\ 1,}
+\DoxyCodeLine{00033\ \ \ \ \ size\ =\ 4,}
+\DoxyCodeLine{00034\ \ \ \ \ HasHalfPacket\ =\ 1,}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ HasAdd\ \ \ \ =\ 1,}
+\DoxyCodeLine{00037\ \ \ \ \ HasSub\ \ \ \ =\ 1,}
+\DoxyCodeLine{00038\ \ \ \ \ HasMul\ \ \ \ =\ 1,}
+\DoxyCodeLine{00039\ \ \ \ \ HasDiv\ \ \ \ =\ 1,}
+\DoxyCodeLine{00040\ \ \ \ \ HasNegate\ =\ 1,}
+\DoxyCodeLine{00041\ \ \ \ \ HasSqrt\ \ \ =\ 1,}
+\DoxyCodeLine{00042\ \ \ \ \ HasAbs\ \ \ \ =\ 0,}
+\DoxyCodeLine{00043\ \ \ \ \ HasAbs2\ \ \ =\ 0,}
+\DoxyCodeLine{00044\ \ \ \ \ HasMin\ \ \ \ =\ 0,}
+\DoxyCodeLine{00045\ \ \ \ \ HasMax\ \ \ \ =\ 0,}
+\DoxyCodeLine{00046\ \ \ \ \ HasSetLinear\ =\ 0}
+\DoxyCodeLine{00047\ \ \ \};}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1unpacket__traits}{unpacket\_traits}}<\mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}>\ \{}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{typedef}\ std::complex<float>\ type;}
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cf}{Packet2cf}}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cf}{half}};}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Packet8f}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{as\_real}};}
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ size=4,}
+\DoxyCodeLine{00057\ \ \ \ \ alignment=\mbox{\hyperlink{group__enums_gga45fe06e29902b7a2773de05ba27b47a1a8a380b1cd0c3e5a6cceac06f8235157a}{Aligned32}},}
+\DoxyCodeLine{00058\ \ \ \ \ vectorizable=\textcolor{keyword}{true},}
+\DoxyCodeLine{00059\ \ \ \ \ masked\_load\_available=\textcolor{keyword}{false},}
+\DoxyCodeLine{00060\ \ \ \ \ masked\_store\_available=\textcolor{keyword}{false}}
+\DoxyCodeLine{00061\ \ \ \};}
+\DoxyCodeLine{00062\ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{padd<Packet4cf>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}\&\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}\&\ b)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet4cf}{Packet4cf}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_mm256\_add\_ps}}(a.v,b.v));\ \}}
+\DoxyCodeLine{00065\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{psub<Packet4cf>}}(\textcolor{keyword}{const}\ Packet4cf\&\ a,\ \textcolor{keyword}{const}\ Packet4cf\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet4cf(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_mm256\_sub\_ps}}(a.v,b.v));\ \}}
+\DoxyCodeLine{00066\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pnegate(\textcolor{keyword}{const}\ Packet4cf\&\ a)}
+\DoxyCodeLine{00067\ \{}
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(pnegate(a.v));}
+\DoxyCodeLine{00069\ \}}
+\DoxyCodeLine{00070\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pconj(\textcolor{keyword}{const}\ Packet4cf\&\ a)}
+\DoxyCodeLine{00071\ \{}
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{const}\ \_\_m256\ mask\ =\ \_mm256\_castsi256\_ps(\_mm256\_setr\_epi32(0x00000000,0x80000000,0x00000000,0x80000000,0x00000000,0x80000000,0x00000000,0x80000000));}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_xor\_ps(a.v,mask));}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pmul<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a,\ \textcolor{keyword}{const}\ Packet4cf\&\ b)}
+\DoxyCodeLine{00077\ \{}
+\DoxyCodeLine{00078\ \ \ \_\_m256\ tmp1\ =\ \_mm256\_mul\_ps(\_mm256\_moveldup\_ps(a.v),\ b.v);}
+\DoxyCodeLine{00079\ \ \ \_\_m256\ tmp2\ =\ \_mm256\_mul\_ps(\_mm256\_movehdup\_ps(a.v),\ \_mm256\_permute\_ps(b.v,\ \_MM\_SHUFFLE(2,3,0,1)));}
+\DoxyCodeLine{00080\ \ \ \_\_m256\ result\ =\ \_mm256\_addsub\_ps(tmp1,\ tmp2);}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(result);}
+\DoxyCodeLine{00082\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00085\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pcmp\_eq(\textcolor{keyword}{const}\ Packet4cf\&\ a,\ \textcolor{keyword}{const}\ Packet4cf\&\ b)\ \{}
+\DoxyCodeLine{00086\ \ \ \_\_m256\ eq\ =\ \_mm256\_cmp\_ps(a.v,\ b.v,\ \_CMP\_EQ\_OQ);}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_and\_ps(eq,\ \_mm256\_permute\_ps(eq,\ 0xb1)));}
+\DoxyCodeLine{00088\ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ ptrue<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a)\ \{\ \textcolor{keywordflow}{return}\ Packet4cf(ptrue(Packet8f(a.v)));\ \}}
+\DoxyCodeLine{00091\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pand\ \ \ <Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a,\ \textcolor{keyword}{const}\ Packet4cf\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_and\_ps(a.v,b.v));\ \}}
+\DoxyCodeLine{00092\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ por\ \ \ \ <Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a,\ \textcolor{keyword}{const}\ Packet4cf\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_or\_ps(a.v,b.v));\ \}}
+\DoxyCodeLine{00093\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pxor\ \ \ <Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a,\ \textcolor{keyword}{const}\ Packet4cf\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_xor\_ps(a.v,b.v));\ \}}
+\DoxyCodeLine{00094\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pandnot<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a,\ \textcolor{keyword}{const}\ Packet4cf\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_andnot\_ps(b.v,a.v));\ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pload\ <Packet4cf>(\textcolor{keyword}{const}\ std::complex<float>*\ from)\ \{\ EIGEN\_DEBUG\_ALIGNED\_LOAD\ \textcolor{keywordflow}{return}\ Packet4cf(pload<Packet8f>(\&numext::real\_ref(*from)));\ \}}
+\DoxyCodeLine{00097\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ ploadu<Packet4cf>(\textcolor{keyword}{const}\ std::complex<float>*\ from)\ \{\ EIGEN\_DEBUG\_UNALIGNED\_LOAD\ \textcolor{keywordflow}{return}\ Packet4cf(ploadu<Packet8f>(\&numext::real\_ref(*from)));\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pset1<Packet4cf>(\textcolor{keyword}{const}\ std::complex<float>\&\ from)}
+\DoxyCodeLine{00101\ \{}
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_castpd\_ps(\_mm256\_broadcast\_sd((\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\&from)));}
+\DoxyCodeLine{00103\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ ploaddup<Packet4cf>(\textcolor{keyword}{const}\ std::complex<float>*\ from)}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \textcolor{comment}{//\ FIXME\ The\ following\ might\ be\ optimized\ using\ \_mm256\_movedup\_pd}}
+\DoxyCodeLine{00108\ \ \ Packet2cf\ a\ =\ ploaddup<Packet2cf>(from);}
+\DoxyCodeLine{00109\ \ \ Packet2cf\ b\ =\ ploaddup<Packet2cf>(from+1);}
+\DoxyCodeLine{00110\ \ \ \textcolor{keywordflow}{return}\ \ Packet4cf(\_mm256\_insertf128\_ps(\_mm256\_castps128\_ps256(a.v),\ b.v,\ 1));}
+\DoxyCodeLine{00111\ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ pstore\ <std::complex<float>\ >(std::complex<float>*\ to,\ \textcolor{keyword}{const}\ Packet4cf\&\ from)\ \{\ EIGEN\_DEBUG\_ALIGNED\_STORE\ pstore(\&numext::real\_ref(*to),\ from.v);\ \}}
+\DoxyCodeLine{00114\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ pstoreu<std::complex<float>\ >(std::complex<float>*\ to,\ \textcolor{keyword}{const}\ Packet4cf\&\ from)\ \{\ EIGEN\_DEBUG\_UNALIGNED\_STORE\ pstoreu(\&numext::real\_ref(*to),\ from.v);\ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ Packet4cf\ pgather<std::complex<float>,\ Packet4cf>(\textcolor{keyword}{const}\ std::complex<float>*\ from,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ stride)}
+\DoxyCodeLine{00117\ \{}
+\DoxyCodeLine{00118\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_set\_ps(std::imag(from[3*stride]),\ std::real(from[3*stride]),}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::imag(from[2*stride]),\ std::real(from[2*stride]),}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::imag(from[1*stride]),\ std::real(from[1*stride]),}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::imag(from[0*stride]),\ std::real(from[0*stride])));}
+\DoxyCodeLine{00122\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ pscatter<std::complex<float>,\ Packet4cf>(std::complex<float>*\ to,\ \textcolor{keyword}{const}\ Packet4cf\&\ from,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ stride)}
+\DoxyCodeLine{00125\ \{}
+\DoxyCodeLine{00126\ \ \ \_\_m128\ low\ =\ \_mm256\_extractf128\_ps(from.v,\ 0);}
+\DoxyCodeLine{00127\ \ \ to[stride*0]\ =\ std::complex<float>(\_mm\_cvtss\_f32(\_mm\_shuffle\_ps(low,\ low,\ 0)),}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_cvtss\_f32(\_mm\_shuffle\_ps(low,\ low,\ 1)));}
+\DoxyCodeLine{00129\ \ \ to[stride*1]\ =\ std::complex<float>(\_mm\_cvtss\_f32(\_mm\_shuffle\_ps(low,\ low,\ 2)),}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_cvtss\_f32(\_mm\_shuffle\_ps(low,\ low,\ 3)));}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \_\_m128\ high\ =\ \_mm256\_extractf128\_ps(from.v,\ 1);}
+\DoxyCodeLine{00133\ \ \ to[stride*2]\ =\ std::complex<float>(\_mm\_cvtss\_f32(\_mm\_shuffle\_ps(high,\ high,\ 0)),}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_cvtss\_f32(\_mm\_shuffle\_ps(high,\ high,\ 1)));}
+\DoxyCodeLine{00135\ \ \ to[stride*3]\ =\ std::complex<float>(\_mm\_cvtss\_f32(\_mm\_shuffle\_ps(high,\ high,\ 2)),}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_cvtss\_f32(\_mm\_shuffle\_ps(high,\ high,\ 3)));}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ std::complex<float>\ \ pfirst<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a)}
+\DoxyCodeLine{00141\ \{}
+\DoxyCodeLine{00142\ \ \ \textcolor{keywordflow}{return}\ pfirst(Packet2cf(\_mm256\_castps256\_ps128(a.v)));}
+\DoxyCodeLine{00143\ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ preverse(\textcolor{keyword}{const}\ Packet4cf\&\ a)\ \{}
+\DoxyCodeLine{00146\ \ \ \_\_m128\ low\ \ =\ \_mm256\_extractf128\_ps(a.v,\ 0);}
+\DoxyCodeLine{00147\ \ \ \_\_m128\ high\ =\ \_mm256\_extractf128\_ps(a.v,\ 1);}
+\DoxyCodeLine{00148\ \ \ \_\_m128d\ lowd\ \ =\ \_mm\_castps\_pd(low);}
+\DoxyCodeLine{00149\ \ \ \_\_m128d\ highd\ =\ \_mm\_castps\_pd(high);}
+\DoxyCodeLine{00150\ \ \ low\ \ =\ \_mm\_castpd\_ps(\_mm\_shuffle\_pd(lowd,lowd,0x1));}
+\DoxyCodeLine{00151\ \ \ high\ =\ \_mm\_castpd\_ps(\_mm\_shuffle\_pd(highd,highd,0x1));}
+\DoxyCodeLine{00152\ \ \ \_\_m256\ result\ =\ \_mm256\_setzero\_ps();}
+\DoxyCodeLine{00153\ \ \ result\ =\ \_mm256\_insertf128\_ps(result,\ low,\ 1);}
+\DoxyCodeLine{00154\ \ \ result\ =\ \_mm256\_insertf128\_ps(result,\ high,\ 0);}
+\DoxyCodeLine{00155\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(result);}
+\DoxyCodeLine{00156\ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ std::complex<float>\ predux<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a)}
+\DoxyCodeLine{00159\ \{}
+\DoxyCodeLine{00160\ \ \ \textcolor{keywordflow}{return}\ predux(padd(Packet2cf(\_mm256\_extractf128\_ps(a.v,0)),}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Packet2cf(\_mm256\_extractf128\_ps(a.v,1))));}
+\DoxyCodeLine{00162\ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ std::complex<float>\ predux\_mul<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a)}
+\DoxyCodeLine{00165\ \{}
+\DoxyCodeLine{00166\ \ \ \textcolor{keywordflow}{return}\ predux\_mul(pmul(Packet2cf(\_mm256\_extractf128\_ps(a.v,\ 0)),}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Packet2cf(\_mm256\_extractf128\_ps(a.v,\ 1))));}
+\DoxyCodeLine{00168\ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ EIGEN\_MAKE\_CONJ\_HELPER\_CPLX\_REAL(Packet4cf,Packet8f)}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pdiv<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a,\ \textcolor{keyword}{const}\ Packet4cf\&\ b)}
+\DoxyCodeLine{00173\ \{}
+\DoxyCodeLine{00174\ \ \ Packet4cf\ num\ =\ pmul(a,\ pconj(b));}
+\DoxyCodeLine{00175\ \ \ \_\_m256\ tmp\ =\ \_mm256\_mul\_ps(b.v,\ b.v);}
+\DoxyCodeLine{00176\ \ \ \_\_m256\ tmp2\ \ \ \ =\ \_mm256\_shuffle\_ps(tmp,tmp,0xB1);}
+\DoxyCodeLine{00177\ \ \ \_\_m256\ denom\ =\ \_mm256\_add\_ps(tmp,\ tmp2);}
+\DoxyCodeLine{00178\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_div\_ps(num.v,\ denom));}
+\DoxyCodeLine{00179\ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ pcplxflip<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ x)}
+\DoxyCodeLine{00182\ \{}
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordflow}{return}\ Packet4cf(\_mm256\_shuffle\_ps(x.v,\ x.v,\ \_MM\_SHUFFLE(2,\ 3,\ 0\ ,1)));}
+\DoxyCodeLine{00184\ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ double\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00187\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}}
+\DoxyCodeLine{00188\ \{}
+\DoxyCodeLine{00189\ \ \ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}()\ \{\}}
+\DoxyCodeLine{00190\ \ \ EIGEN\_STRONG\_INLINE\ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_m256d}}\&\ a)\ :\ v(a)\ \{\}}
+\DoxyCodeLine{00191\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_\_m256d}}\ \ v;}
+\DoxyCodeLine{00192\ \};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_VECTORIZE\_AVX512}}
+\DoxyCodeLine{00195\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1packet__traits}{packet\_traits}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<double>\ >\ \ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1default__packet__traits}{default\_packet\_traits}}}
+\DoxyCodeLine{00196\ \{}
+\DoxyCodeLine{00197\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{type}};}
+\DoxyCodeLine{00198\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet1cd}{Packet1cd}}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet1cd}{half}};}
+\DoxyCodeLine{00199\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00200\ \ \ \ \ Vectorizable\ =\ 1,}
+\DoxyCodeLine{00201\ \ \ \ \ AlignedOnScalar\ =\ 0,}
+\DoxyCodeLine{00202\ \ \ \ \ size\ =\ 2,}
+\DoxyCodeLine{00203\ \ \ \ \ HasHalfPacket\ =\ 1,}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ HasAdd\ \ \ \ =\ 1,}
+\DoxyCodeLine{00206\ \ \ \ \ HasSub\ \ \ \ =\ 1,}
+\DoxyCodeLine{00207\ \ \ \ \ HasMul\ \ \ \ =\ 1,}
+\DoxyCodeLine{00208\ \ \ \ \ HasDiv\ \ \ \ =\ 1,}
+\DoxyCodeLine{00209\ \ \ \ \ HasNegate\ =\ 1,}
+\DoxyCodeLine{00210\ \ \ \ \ HasSqrt\ \ \ =\ 1,}
+\DoxyCodeLine{00211\ \ \ \ \ HasAbs\ \ \ \ =\ 0,}
+\DoxyCodeLine{00212\ \ \ \ \ HasAbs2\ \ \ =\ 0,}
+\DoxyCodeLine{00213\ \ \ \ \ HasMin\ \ \ \ =\ 0,}
+\DoxyCodeLine{00214\ \ \ \ \ HasMax\ \ \ \ =\ 0,}
+\DoxyCodeLine{00215\ \ \ \ \ HasSetLinear\ =\ 0}
+\DoxyCodeLine{00216\ \ \ \};}
+\DoxyCodeLine{00217\ \};}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1unpacket__traits}{unpacket\_traits}}<\mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}>\ \{}
+\DoxyCodeLine{00221\ \ \ \textcolor{keyword}{typedef}\ std::complex<double>\ type;}
+\DoxyCodeLine{00222\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet1cd}{Packet1cd}}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet1cd}{half}};}
+\DoxyCodeLine{00223\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{Packet4d}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{as\_real}};}
+\DoxyCodeLine{00224\ \ \ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ size=2,}
+\DoxyCodeLine{00226\ \ \ \ \ alignment=\mbox{\hyperlink{group__enums_gga45fe06e29902b7a2773de05ba27b47a1a8a380b1cd0c3e5a6cceac06f8235157a}{Aligned32}},}
+\DoxyCodeLine{00227\ \ \ \ \ vectorizable=\textcolor{keyword}{true},}
+\DoxyCodeLine{00228\ \ \ \ \ masked\_load\_available=\textcolor{keyword}{false},}
+\DoxyCodeLine{00229\ \ \ \ \ masked\_store\_available=\textcolor{keyword}{false}}
+\DoxyCodeLine{00230\ \ \ \};}
+\DoxyCodeLine{00231\ \};}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{padd<Packet2cd>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}\&\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}\&\ b)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1_packet2cd}{Packet2cd}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_mm256\_add\_pd}}(a.v,b.v));\ \}}
+\DoxyCodeLine{00234\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{psub<Packet2cd>}}(\textcolor{keyword}{const}\ Packet2cd\&\ a,\ \textcolor{keyword}{const}\ Packet2cd\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet2cd(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_mm256\_sub\_pd}}(a.v,b.v));\ \}}
+\DoxyCodeLine{00235\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pnegate(\textcolor{keyword}{const}\ Packet2cd\&\ a)\ \{\ \textcolor{keywordflow}{return}\ Packet2cd(pnegate(a.v));\ \}}
+\DoxyCodeLine{00236\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pconj(\textcolor{keyword}{const}\ Packet2cd\&\ a)}
+\DoxyCodeLine{00237\ \{}
+\DoxyCodeLine{00238\ \ \ \textcolor{keyword}{const}\ \_\_m256d\ mask\ =\ \_mm256\_castsi256\_pd(\_mm256\_set\_epi32(0x80000000,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0));}
+\DoxyCodeLine{00239\ \ \ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_xor\_pd(a.v,mask));}
+\DoxyCodeLine{00240\ \}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pmul<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a,\ \textcolor{keyword}{const}\ Packet2cd\&\ b)}
+\DoxyCodeLine{00243\ \{}
+\DoxyCodeLine{00244\ \ \ \_\_m256d\ tmp1\ =\ \_mm256\_shuffle\_pd(a.v,a.v,0x0);}
+\DoxyCodeLine{00245\ \ \ \_\_m256d\ even\ =\ \_mm256\_mul\_pd(tmp1,\ b.v);}
+\DoxyCodeLine{00246\ \ \ \_\_m256d\ tmp2\ =\ \_mm256\_shuffle\_pd(a.v,a.v,0xF);}
+\DoxyCodeLine{00247\ \ \ \_\_m256d\ tmp3\ =\ \_mm256\_shuffle\_pd(b.v,b.v,0x5);}
+\DoxyCodeLine{00248\ \ \ \_\_m256d\ odd\ \ =\ \_mm256\_mul\_pd(tmp2,\ tmp3);}
+\DoxyCodeLine{00249\ \ \ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_addsub\_pd(even,\ odd));}
+\DoxyCodeLine{00250\ \}}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00253\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pcmp\_eq(\textcolor{keyword}{const}\ Packet2cd\&\ a,\ \textcolor{keyword}{const}\ Packet2cd\&\ b)\ \{}
+\DoxyCodeLine{00254\ \ \ \_\_m256d\ eq\ =\ \_mm256\_cmp\_pd(a.v,\ b.v,\ \_CMP\_EQ\_OQ);}
+\DoxyCodeLine{00255\ \ \ \textcolor{keywordflow}{return}\ Packet2cd(pand(eq,\ \_mm256\_permute\_pd(eq,\ 0x5)));}
+\DoxyCodeLine{00256\ \}}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ ptrue<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a)\ \{\ \textcolor{keywordflow}{return}\ Packet2cd(ptrue(Packet4d(a.v)));\ \}}
+\DoxyCodeLine{00259\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pand\ \ \ <Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a,\ \textcolor{keyword}{const}\ Packet2cd\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_and\_pd(a.v,b.v));\ \}}
+\DoxyCodeLine{00260\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ por\ \ \ \ <Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a,\ \textcolor{keyword}{const}\ Packet2cd\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_or\_pd(a.v,b.v));\ \}}
+\DoxyCodeLine{00261\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pxor\ \ \ <Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a,\ \textcolor{keyword}{const}\ Packet2cd\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_xor\_pd(a.v,b.v));\ \}}
+\DoxyCodeLine{00262\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pandnot<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a,\ \textcolor{keyword}{const}\ Packet2cd\&\ b)\ \{\ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_andnot\_pd(b.v,a.v));\ \}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pload\ <Packet2cd>(\textcolor{keyword}{const}\ std::complex<double>*\ from)}
+\DoxyCodeLine{00265\ \{\ EIGEN\_DEBUG\_ALIGNED\_LOAD\ \textcolor{keywordflow}{return}\ Packet2cd(pload<Packet4d>((\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*)from));\ \}}
+\DoxyCodeLine{00266\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ ploadu<Packet2cd>(\textcolor{keyword}{const}\ std::complex<double>*\ from)}
+\DoxyCodeLine{00267\ \{\ EIGEN\_DEBUG\_UNALIGNED\_LOAD\ \textcolor{keywordflow}{return}\ Packet2cd(ploadu<Packet4d>((\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*)from));\ \}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pset1<Packet2cd>(\textcolor{keyword}{const}\ std::complex<double>\&\ from)}
+\DoxyCodeLine{00270\ \{}
+\DoxyCodeLine{00271\ \ \ \textcolor{comment}{//\ in\ case\ casting\ to\ a\ \_\_m128d*\ is\ really\ not\ safe,\ then\ we\ can\ still\ fallback\ to\ this\ version:\ (much\ slower\ though)}}
+\DoxyCodeLine{00272\ \textcolor{comment}{//\ \ \ return\ Packet2cd(\_mm256\_loadu2\_m128d((const\ double*)\&from,(const\ double*)\&from));}}
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_broadcast\_pd((\textcolor{keyword}{const}\ \_\_m128d*)(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*)\&from));}
+\DoxyCodeLine{00274\ \}}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ ploaddup<Packet2cd>(\textcolor{keyword}{const}\ std::complex<double>*\ from)\ \{\ \textcolor{keywordflow}{return}\ pset1<Packet2cd>(*from);\ \}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ pstore\ <std::complex<double>\ >(std::complex<double>\ *\ \ \ to,\ \textcolor{keyword}{const}\ Packet2cd\&\ from)\ \{\ EIGEN\_DEBUG\_ALIGNED\_STORE\ pstore((\textcolor{keywordtype}{double}*)to,\ from.v);\ \}}
+\DoxyCodeLine{00279\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ pstoreu<std::complex<double>\ >(std::complex<double>\ *\ \ \ to,\ \textcolor{keyword}{const}\ Packet2cd\&\ from)\ \{\ EIGEN\_DEBUG\_UNALIGNED\_STORE\ pstoreu((\textcolor{keywordtype}{double}*)to,\ from.v);\ \}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ Packet2cd\ pgather<std::complex<double>,\ Packet2cd>(\textcolor{keyword}{const}\ std::complex<double>*\ from,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ stride)}
+\DoxyCodeLine{00282\ \{}
+\DoxyCodeLine{00283\ \ \ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_set\_pd(std::imag(from[1*stride]),\ std::real(from[1*stride]),}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::imag(from[0*stride]),\ std::real(from[0*stride])));}
+\DoxyCodeLine{00285\ \}}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ pscatter<std::complex<double>,\ Packet2cd>(std::complex<double>*\ to,\ \textcolor{keyword}{const}\ Packet2cd\&\ from,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ stride)}
+\DoxyCodeLine{00288\ \{}
+\DoxyCodeLine{00289\ \ \ \_\_m128d\ low\ =\ \_mm256\_extractf128\_pd(from.v,\ 0);}
+\DoxyCodeLine{00290\ \ \ to[stride*0]\ =\ std::complex<double>(\_mm\_cvtsd\_f64(low),\ \_mm\_cvtsd\_f64(\_mm\_shuffle\_pd(low,\ low,\ 1)));}
+\DoxyCodeLine{00291\ \ \ \_\_m128d\ high\ =\ \_mm256\_extractf128\_pd(from.v,\ 1);}
+\DoxyCodeLine{00292\ \ \ to[stride*1]\ =\ std::complex<double>(\_mm\_cvtsd\_f64(high),\ \_mm\_cvtsd\_f64(\_mm\_shuffle\_pd(high,\ high,\ 1)));}
+\DoxyCodeLine{00293\ \}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ std::complex<double>\ pfirst<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a)}
+\DoxyCodeLine{00296\ \{}
+\DoxyCodeLine{00297\ \ \ \_\_m128d\ low\ =\ \_mm256\_extractf128\_pd(a.v,\ 0);}
+\DoxyCodeLine{00298\ \ \ EIGEN\_ALIGN16\ \textcolor{keywordtype}{double}\ res[2];}
+\DoxyCodeLine{00299\ \ \ \_mm\_store\_pd(res,\ low);}
+\DoxyCodeLine{00300\ \ \ \textcolor{keywordflow}{return}\ std::complex<double>(res[0],res[1]);}
+\DoxyCodeLine{00301\ \}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ preverse(\textcolor{keyword}{const}\ Packet2cd\&\ a)\ \{}
+\DoxyCodeLine{00304\ \ \ \_\_m256d\ result\ =\ \_mm256\_permute2f128\_pd(a.v,\ a.v,\ 1);}
+\DoxyCodeLine{00305\ \ \ \textcolor{keywordflow}{return}\ Packet2cd(result);}
+\DoxyCodeLine{00306\ \}}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ std::complex<double>\ predux<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a)}
+\DoxyCodeLine{00309\ \{}
+\DoxyCodeLine{00310\ \ \ \textcolor{keywordflow}{return}\ predux(padd(Packet1cd(\_mm256\_extractf128\_pd(a.v,0)),}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Packet1cd(\_mm256\_extractf128\_pd(a.v,1))));}
+\DoxyCodeLine{00312\ \}}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ std::complex<double>\ predux\_mul<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a)}
+\DoxyCodeLine{00315\ \{}
+\DoxyCodeLine{00316\ \ \ \textcolor{keywordflow}{return}\ predux(pmul(Packet1cd(\_mm256\_extractf128\_pd(a.v,0)),}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Packet1cd(\_mm256\_extractf128\_pd(a.v,1))));}
+\DoxyCodeLine{00318\ \}}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ EIGEN\_MAKE\_CONJ\_HELPER\_CPLX\_REAL(Packet2cd,Packet4d)}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pdiv<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a,\ \textcolor{keyword}{const}\ Packet2cd\&\ b)}
+\DoxyCodeLine{00323\ \{}
+\DoxyCodeLine{00324\ \ \ Packet2cd\ num\ =\ pmul(a,\ pconj(b));}
+\DoxyCodeLine{00325\ \ \ \_\_m256d\ tmp\ =\ \_mm256\_mul\_pd(b.v,\ b.v);}
+\DoxyCodeLine{00326\ \ \ \_\_m256d\ denom\ =\ \_mm256\_hadd\_pd(tmp,\ tmp);}
+\DoxyCodeLine{00327\ \ \ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_div\_pd(num.v,\ denom));}
+\DoxyCodeLine{00328\ \}}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00330\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ pcplxflip<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ x)}
+\DoxyCodeLine{00331\ \{}
+\DoxyCodeLine{00332\ \ \ \textcolor{keywordflow}{return}\ Packet2cd(\_mm256\_shuffle\_pd(x.v,\ x.v,\ 0x5));}
+\DoxyCodeLine{00333\ \}}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00336\ ptranspose(PacketBlock<Packet4cf,4>\&\ kernel)\ \{}
+\DoxyCodeLine{00337\ \ \ \_\_m256d\ P0\ =\ \_mm256\_castps\_pd(kernel.packet[0].v);}
+\DoxyCodeLine{00338\ \ \ \_\_m256d\ P1\ =\ \_mm256\_castps\_pd(kernel.packet[1].v);}
+\DoxyCodeLine{00339\ \ \ \_\_m256d\ P2\ =\ \_mm256\_castps\_pd(kernel.packet[2].v);}
+\DoxyCodeLine{00340\ \ \ \_\_m256d\ P3\ =\ \_mm256\_castps\_pd(kernel.packet[3].v);}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \_\_m256d\ T0\ =\ \_mm256\_shuffle\_pd(P0,\ P1,\ 15);}
+\DoxyCodeLine{00343\ \ \ \_\_m256d\ T1\ =\ \_mm256\_shuffle\_pd(P0,\ P1,\ 0);}
+\DoxyCodeLine{00344\ \ \ \_\_m256d\ T2\ =\ \_mm256\_shuffle\_pd(P2,\ P3,\ 15);}
+\DoxyCodeLine{00345\ \ \ \_\_m256d\ T3\ =\ \_mm256\_shuffle\_pd(P2,\ P3,\ 0);}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ kernel.packet[1].v\ =\ \_mm256\_castpd\_ps(\_mm256\_permute2f128\_pd(T0,\ T2,\ 32));}
+\DoxyCodeLine{00348\ \ \ kernel.packet[3].v\ =\ \_mm256\_castpd\_ps(\_mm256\_permute2f128\_pd(T0,\ T2,\ 49));}
+\DoxyCodeLine{00349\ \ \ kernel.packet[0].v\ =\ \_mm256\_castpd\_ps(\_mm256\_permute2f128\_pd(T1,\ T3,\ 32));}
+\DoxyCodeLine{00350\ \ \ kernel.packet[2].v\ =\ \_mm256\_castpd\_ps(\_mm256\_permute2f128\_pd(T1,\ T3,\ 49));}
+\DoxyCodeLine{00351\ \}}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00353\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00354\ ptranspose(PacketBlock<Packet2cd,2>\&\ kernel)\ \{}
+\DoxyCodeLine{00355\ \ \ \_\_m256d\ tmp\ =\ \_mm256\_permute2f128\_pd(kernel.packet[0].v,\ kernel.packet[1].v,\ 0+(2<<4));}
+\DoxyCodeLine{00356\ \ \ kernel.packet[1].v\ =\ \_mm256\_permute2f128\_pd(kernel.packet[0].v,\ kernel.packet[1].v,\ 1+(3<<4));}
+\DoxyCodeLine{00357\ \ kernel.packet[0].v\ =\ tmp;}
+\DoxyCodeLine{00358\ \}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet2cd\ psqrt<Packet2cd>(\textcolor{keyword}{const}\ Packet2cd\&\ a)\ \{}
+\DoxyCodeLine{00361\ \ \ \textcolor{keywordflow}{return}\ psqrt\_complex<Packet2cd>(a);}
+\DoxyCodeLine{00362\ \}}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \textcolor{keyword}{template}<>\ EIGEN\_STRONG\_INLINE\ Packet4cf\ psqrt<Packet4cf>(\textcolor{keyword}{const}\ Packet4cf\&\ a)\ \{}
+\DoxyCodeLine{00365\ \ \ \textcolor{keywordflow}{return}\ psqrt\_complex<Packet4cf>(a);}
+\DoxyCodeLine{00366\ \}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00372\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EIGEN\_COMPLEX\_AVX\_H}}
+
+\end{DoxyCode}

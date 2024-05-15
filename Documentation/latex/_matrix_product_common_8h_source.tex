@@ -1,0 +1,227 @@
+\doxysection{Matrix\+Product\+Common.\+h}
+\hypertarget{_matrix_product_common_8h_source}{}\label{_matrix_product_common_8h_source}\index{Eigen/src/Core/arch/AltiVec/MatrixProductCommon.h@{Eigen/src/Core/arch/AltiVec/MatrixProductCommon.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\#define\ EIGEN\_POWER\_USE\_PREFETCH\ \ //\ Use\ prefetching\ in\ gemm\ routines}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifdef\ EIGEN\_POWER\_USE\_PREFETCH}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ EIGEN\_POWER\_PREFETCH(p)\ \ prefetch(p)}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ EIGEN\_POWER\_PREFETCH(p)}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ DataMapper,\ \textcolor{keyword}{typename}\ Index,\ const\ Index\ accRows>}
+\DoxyCodeLine{00013\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ gemm\_extra\_col(}
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{const}\ DataMapper\&\ res,}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{const}\ Scalar*\ lhs\_base,}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{const}\ Scalar*\ rhs\_base,}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ depth,}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideA,}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ offsetA,}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ row,}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ col,}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ remaining\_rows,}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ remaining\_cols,}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlpha);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ DataMapper,\ \textcolor{keyword}{typename}\ Index,\ const\ Index\ accRows,\ const\ Index\ accCols>}
+\DoxyCodeLine{00027\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ gemm\_extra\_row(}
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{const}\ DataMapper\&\ res,}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{const}\ Scalar*\ lhs\_base,}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{const}\ Scalar*\ rhs\_base,}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ depth,}
+\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideA,}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ offsetA,}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ row,}
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ col,}
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ rows,}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ cols,}
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ remaining\_rows,}
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlpha,}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{const}\ Packet\&\ pMask);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ DataMapper,\ \textcolor{keyword}{typename}\ Index,\ const\ Index\ accCols>}
+\DoxyCodeLine{00043\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ gemm\_unrolled\_col(}
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{const}\ DataMapper\&\ res,}
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{const}\ Scalar*\ lhs\_base,}
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{const}\ Scalar*\ rhs\_base,}
+\DoxyCodeLine{00047\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ depth,}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideA,}
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ offsetA,}
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\&\ row,}
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ rows,}
+\DoxyCodeLine{00052\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ col,}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ remaining\_cols,}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlpha);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Packet>}
+\DoxyCodeLine{00057\ EIGEN\_ALWAYS\_INLINE\ Packet\ bmask(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ remaining\_rows);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Packetc,\ \textcolor{keyword}{typename}\ DataMapper,\ \textcolor{keyword}{typename}\ Index,\ const\ Index\ accRows,\ const\ Index\ accCols,\ \textcolor{keywordtype}{bool}\ ConjugateLhs,\ \textcolor{keywordtype}{bool}\ ConjugateRhs,\ \textcolor{keywordtype}{bool}\ LhsIsReal,\ \textcolor{keywordtype}{bool}\ RhsIsReal>}
+\DoxyCodeLine{00060\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ gemm\_complex\_extra\_col(}
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{const}\ DataMapper\&\ res,}
+\DoxyCodeLine{00062\ \ \ \textcolor{keyword}{const}\ Scalar*\ lhs\_base,}
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{const}\ Scalar*\ rhs\_base,}
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ depth,}
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideA,}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ offsetA,}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideB,}
+\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ row,}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ col,}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ remaining\_rows,}
+\DoxyCodeLine{00071\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ remaining\_cols,}
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlphaReal,}
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlphaImag);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Packetc,\ \textcolor{keyword}{typename}\ DataMapper,\ \textcolor{keyword}{typename}\ Index,\ const\ Index\ accRows,\ const\ Index\ accCols,\ \textcolor{keywordtype}{bool}\ ConjugateLhs,\ \textcolor{keywordtype}{bool}\ ConjugateRhs,\ \textcolor{keywordtype}{bool}\ LhsIsReal,\ \textcolor{keywordtype}{bool}\ RhsIsReal>}
+\DoxyCodeLine{00076\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ gemm\_complex\_extra\_row(}
+\DoxyCodeLine{00077\ \ \ \textcolor{keyword}{const}\ DataMapper\&\ res,}
+\DoxyCodeLine{00078\ \ \ \textcolor{keyword}{const}\ Scalar*\ lhs\_base,}
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{const}\ Scalar*\ rhs\_base,}
+\DoxyCodeLine{00080\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ depth,}
+\DoxyCodeLine{00081\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideA,}
+\DoxyCodeLine{00082\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ offsetA,}
+\DoxyCodeLine{00083\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideB,}
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ row,}
+\DoxyCodeLine{00085\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ col,}
+\DoxyCodeLine{00086\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ rows,}
+\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ cols,}
+\DoxyCodeLine{00088\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ remaining\_rows,}
+\DoxyCodeLine{00089\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlphaReal,}
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlphaImag,}
+\DoxyCodeLine{00091\ \ \ \textcolor{keyword}{const}\ Packet\&\ pMask);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Packetc,\ \textcolor{keyword}{typename}\ DataMapper,\ \textcolor{keyword}{typename}\ Index,\ const\ Index\ accCols,\ \textcolor{keywordtype}{bool}\ ConjugateLhs,\ \textcolor{keywordtype}{bool}\ ConjugateRhs,\ \textcolor{keywordtype}{bool}\ LhsIsReal,\ \textcolor{keywordtype}{bool}\ RhsIsReal>}
+\DoxyCodeLine{00094\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ gemm\_complex\_unrolled\_col(}
+\DoxyCodeLine{00095\ \ \ \textcolor{keyword}{const}\ DataMapper\&\ res,}
+\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{const}\ Scalar*\ lhs\_base,}
+\DoxyCodeLine{00097\ \ \ \textcolor{keyword}{const}\ Scalar*\ rhs\_base,}
+\DoxyCodeLine{00098\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ depth,}
+\DoxyCodeLine{00099\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideA,}
+\DoxyCodeLine{00100\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ offsetA,}
+\DoxyCodeLine{00101\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ strideB,}
+\DoxyCodeLine{00102\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\&\ row,}
+\DoxyCodeLine{00103\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ rows,}
+\DoxyCodeLine{00104\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ col,}
+\DoxyCodeLine{00105\ \ \ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ remaining\_cols,}
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlphaReal,}
+\DoxyCodeLine{00107\ \ \ \textcolor{keyword}{const}\ Packet\&\ pAlphaImag);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ Packet>}
+\DoxyCodeLine{00110\ EIGEN\_ALWAYS\_INLINE\ Packet\ ploadLhs(\textcolor{keyword}{const}\ Scalar*\ lhs);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ DataMapper,\ \textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Index,\ const\ Index\ accCols,\ \textcolor{keywordtype}{int}\ N,\ \textcolor{keywordtype}{int}\ StorageOrder>}
+\DoxyCodeLine{00113\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bload(PacketBlock<Packet,4>\&\ acc,\ \textcolor{keyword}{const}\ DataMapper\&\ res,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ row,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ col);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ DataMapper,\ \textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Index,\ const\ Index\ accCols,\ \textcolor{keywordtype}{int}\ N,\ \textcolor{keywordtype}{int}\ StorageOrder>}
+\DoxyCodeLine{00116\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bload(PacketBlock<Packet,8>\&\ acc,\ \textcolor{keyword}{const}\ DataMapper\&\ res,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ row,\ \mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ col);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Packet>}
+\DoxyCodeLine{00119\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bscale(PacketBlock<Packet,4>\&\ acc,\ PacketBlock<Packet,4>\&\ accZ,\ \textcolor{keyword}{const}\ Packet\&\ pAlpha);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Packet,\ \textcolor{keywordtype}{int}\ N>}
+\DoxyCodeLine{00122\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bscalec(PacketBlock<Packet,N>\&\ aReal,\ PacketBlock<Packet,N>\&\ aImag,\ \textcolor{keyword}{const}\ Packet\&\ bReal,\ \textcolor{keyword}{const}\ Packet\&\ bImag,\ PacketBlock<Packet,N>\&\ cReal,\ PacketBlock<Packet,N>\&\ cImag);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{keyword}{const}\ \textcolor{keyword}{static}\ Packet16uc\ p16uc\_SETCOMPLEX32\_FIRST\ =\ \{\ \ 0,\ \ 1,\ \ 2,\ \ 3,}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 16,\ 17,\ 18,\ 19,}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4,\ \ 5,\ \ 6,\ \ 7,}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 20,\ 21,\ 22,\ 23\};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{keyword}{const}\ \textcolor{keyword}{static}\ Packet16uc\ p16uc\_SETCOMPLEX32\_SECOND\ =\ \{\ \ 8,\ \ 9,\ 10,\ 11,}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 24,\ 25,\ 26,\ 27,}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 12,\ 13,\ 14,\ 15,}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 28,\ 29,\ 30,\ 31\};}
+\DoxyCodeLine{00133\ \textcolor{comment}{//[a,b],[ai,bi]\ =\ [a,ai]\ -\/\ This\ is\ equivalent\ to\ p16uc\_GETREAL64}}
+\DoxyCodeLine{00134\ \textcolor{keyword}{const}\ \textcolor{keyword}{static}\ Packet16uc\ p16uc\_SETCOMPLEX64\_FIRST\ =\ \{\ \ 0,\ \ 1,\ \ 2,\ \ 3,\ \ 4,\ \ 5,\ \ 6,\ \ 7,}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 16,\ 17,\ 18,\ 19,\ 20,\ 21,\ 22,\ 23\};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{comment}{//[a,b],[ai,bi]\ =\ [b,bi]\ -\/\ This\ is\ equivalent\ to\ p16uc\_GETIMAG64}}
+\DoxyCodeLine{00138\ \textcolor{keyword}{const}\ \textcolor{keyword}{static}\ Packet16uc\ p16uc\_SETCOMPLEX64\_SECOND\ =\ \{\ \ 8,\ \ 9,\ 10,\ 11,\ 12,\ 13,\ 14,\ 15,}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 24,\ 25,\ 26,\ 27,\ 28,\ 29,\ 30,\ 31\};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{comment}{//\ Grab\ two\ decouples\ real/imaginary\ PacketBlocks\ and\ return\ two\ coupled\ (real/imaginary\ pairs)\ PacketBlocks.}}
+\DoxyCodeLine{00143\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Packetc>}
+\DoxyCodeLine{00144\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bcouple\_common(PacketBlock<Packet,4>\&\ taccReal,\ PacketBlock<Packet,4>\&\ taccImag,\ PacketBlock<Packetc,\ 4>\&\ acc1,\ PacketBlock<Packetc,\ 4>\&\ acc2)}
+\DoxyCodeLine{00145\ \{}
+\DoxyCodeLine{00146\ \ \ acc1.packet[0].v\ =\ vec\_perm(taccReal.packet[0],\ taccImag.packet[0],\ p16uc\_SETCOMPLEX32\_FIRST);}
+\DoxyCodeLine{00147\ \ \ acc1.packet[1].v\ =\ vec\_perm(taccReal.packet[1],\ taccImag.packet[1],\ p16uc\_SETCOMPLEX32\_FIRST);}
+\DoxyCodeLine{00148\ \ \ acc1.packet[2].v\ =\ vec\_perm(taccReal.packet[2],\ taccImag.packet[2],\ p16uc\_SETCOMPLEX32\_FIRST);}
+\DoxyCodeLine{00149\ \ \ acc1.packet[3].v\ =\ vec\_perm(taccReal.packet[3],\ taccImag.packet[3],\ p16uc\_SETCOMPLEX32\_FIRST);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ acc2.packet[0].v\ =\ vec\_perm(taccReal.packet[0],\ taccImag.packet[0],\ p16uc\_SETCOMPLEX32\_SECOND);}
+\DoxyCodeLine{00152\ \ \ acc2.packet[1].v\ =\ vec\_perm(taccReal.packet[1],\ taccImag.packet[1],\ p16uc\_SETCOMPLEX32\_SECOND);}
+\DoxyCodeLine{00153\ \ \ acc2.packet[2].v\ =\ vec\_perm(taccReal.packet[2],\ taccImag.packet[2],\ p16uc\_SETCOMPLEX32\_SECOND);}
+\DoxyCodeLine{00154\ \ \ acc2.packet[3].v\ =\ vec\_perm(taccReal.packet[3],\ taccImag.packet[3],\ p16uc\_SETCOMPLEX32\_SECOND);}
+\DoxyCodeLine{00155\ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Packetc>}
+\DoxyCodeLine{00158\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bcouple(PacketBlock<Packet,4>\&\ taccReal,\ PacketBlock<Packet,4>\&\ taccImag,\ PacketBlock<Packetc,8>\&\ tRes,\ PacketBlock<Packetc,\ 4>\&\ acc1,\ PacketBlock<Packetc,\ 4>\&\ acc2)}
+\DoxyCodeLine{00159\ \{}
+\DoxyCodeLine{00160\ \ \ bcouple\_common<Packet,\ Packetc>(taccReal,\ taccImag,\ acc1,\ acc2);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ acc1.packet[0]\ =\ padd<Packetc>(tRes.packet[0],\ acc1.packet[0]);}
+\DoxyCodeLine{00163\ \ \ acc1.packet[1]\ =\ padd<Packetc>(tRes.packet[1],\ acc1.packet[1]);}
+\DoxyCodeLine{00164\ \ \ acc1.packet[2]\ =\ padd<Packetc>(tRes.packet[2],\ acc1.packet[2]);}
+\DoxyCodeLine{00165\ \ \ acc1.packet[3]\ =\ padd<Packetc>(tRes.packet[3],\ acc1.packet[3]);}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ acc2.packet[0]\ =\ padd<Packetc>(tRes.packet[4],\ acc2.packet[0]);}
+\DoxyCodeLine{00168\ \ \ acc2.packet[1]\ =\ padd<Packetc>(tRes.packet[5],\ acc2.packet[1]);}
+\DoxyCodeLine{00169\ \ \ acc2.packet[2]\ =\ padd<Packetc>(tRes.packet[6],\ acc2.packet[2]);}
+\DoxyCodeLine{00170\ \ \ acc2.packet[3]\ =\ padd<Packetc>(tRes.packet[7],\ acc2.packet[3]);}
+\DoxyCodeLine{00171\ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Packetc>}
+\DoxyCodeLine{00174\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bcouple\_common(PacketBlock<Packet,1>\&\ taccReal,\ PacketBlock<Packet,1>\&\ taccImag,\ PacketBlock<Packetc,\ 1>\&\ acc1,\ PacketBlock<Packetc,\ 1>\&\ acc2)}
+\DoxyCodeLine{00175\ \{}
+\DoxyCodeLine{00176\ \ \ acc1.packet[0].v\ =\ vec\_perm(taccReal.packet[0],\ taccImag.packet[0],\ p16uc\_SETCOMPLEX32\_FIRST);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ acc2.packet[0].v\ =\ vec\_perm(taccReal.packet[0],\ taccImag.packet[0],\ p16uc\_SETCOMPLEX32\_SECOND);}
+\DoxyCodeLine{00179\ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Packet,\ \textcolor{keyword}{typename}\ Packetc>}
+\DoxyCodeLine{00182\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bcouple(PacketBlock<Packet,1>\&\ taccReal,\ PacketBlock<Packet,1>\&\ taccImag,\ PacketBlock<Packetc,2>\&\ tRes,\ PacketBlock<Packetc,\ 1>\&\ acc1,\ PacketBlock<Packetc,\ 1>\&\ acc2)}
+\DoxyCodeLine{00183\ \{}
+\DoxyCodeLine{00184\ \ \ bcouple\_common<Packet,\ Packetc>(taccReal,\ taccImag,\ acc1,\ acc2);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ acc1.packet[0]\ =\ padd<Packetc>(tRes.packet[0],\ acc1.packet[0]);}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ acc2.packet[0]\ =\ padd<Packetc>(tRes.packet[1],\ acc2.packet[0]);}
+\DoxyCodeLine{00189\ \}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00192\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bcouple\_common<Packet2d,\ Packet1cd>(PacketBlock<Packet2d,4>\&\ taccReal,\ PacketBlock<Packet2d,4>\&\ taccImag,\ PacketBlock<Packet1cd,\ 4>\&\ acc1,\ PacketBlock<Packet1cd,\ 4>\&\ acc2)}
+\DoxyCodeLine{00193\ \{}
+\DoxyCodeLine{00194\ \ \ acc1.packet[0].v\ =\ vec\_perm(taccReal.packet[0],\ taccImag.packet[0],\ p16uc\_SETCOMPLEX64\_FIRST);}
+\DoxyCodeLine{00195\ \ \ acc1.packet[1].v\ =\ vec\_perm(taccReal.packet[1],\ taccImag.packet[1],\ p16uc\_SETCOMPLEX64\_FIRST);}
+\DoxyCodeLine{00196\ \ \ acc1.packet[2].v\ =\ vec\_perm(taccReal.packet[2],\ taccImag.packet[2],\ p16uc\_SETCOMPLEX64\_FIRST);}
+\DoxyCodeLine{00197\ \ \ acc1.packet[3].v\ =\ vec\_perm(taccReal.packet[3],\ taccImag.packet[3],\ p16uc\_SETCOMPLEX64\_FIRST);}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ acc2.packet[0].v\ =\ vec\_perm(taccReal.packet[0],\ taccImag.packet[0],\ p16uc\_SETCOMPLEX64\_SECOND);}
+\DoxyCodeLine{00200\ \ \ acc2.packet[1].v\ =\ vec\_perm(taccReal.packet[1],\ taccImag.packet[1],\ p16uc\_SETCOMPLEX64\_SECOND);}
+\DoxyCodeLine{00201\ \ \ acc2.packet[2].v\ =\ vec\_perm(taccReal.packet[2],\ taccImag.packet[2],\ p16uc\_SETCOMPLEX64\_SECOND);}
+\DoxyCodeLine{00202\ \ \ acc2.packet[3].v\ =\ vec\_perm(taccReal.packet[3],\ taccImag.packet[3],\ p16uc\_SETCOMPLEX64\_SECOND);}
+\DoxyCodeLine{00203\ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00206\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{void}\ bcouple\_common<Packet2d,\ Packet1cd>(PacketBlock<Packet2d,1>\&\ taccReal,\ PacketBlock<Packet2d,1>\&\ taccImag,\ PacketBlock<Packet1cd,\ 1>\&\ acc1,\ PacketBlock<Packet1cd,\ 1>\&\ acc2)}
+\DoxyCodeLine{00207\ \{}
+\DoxyCodeLine{00208\ \ \ acc1.packet[0].v\ =\ vec\_perm(taccReal.packet[0],\ taccImag.packet[0],\ p16uc\_SETCOMPLEX64\_FIRST);}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ acc2.packet[0].v\ =\ vec\_perm(taccReal.packet[0],\ taccImag.packet[0],\ p16uc\_SETCOMPLEX64\_SECOND);}
+\DoxyCodeLine{00211\ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \textcolor{comment}{//\ This\ is\ necessary\ because\ ploadRhs\ for\ double\ returns\ a\ pair\ of\ vectors\ when\ MMA\ is\ enabled.}}
+\DoxyCodeLine{00214\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ Packet>}
+\DoxyCodeLine{00215\ EIGEN\_ALWAYS\_INLINE\ Packet\ ploadRhs(\textcolor{keyword}{const}\ Scalar*\ rhs)}
+\DoxyCodeLine{00216\ \{}
+\DoxyCodeLine{00217\ \ \ \textcolor{keywordflow}{return}\ ploadu<Packet>(rhs);}
+\DoxyCodeLine{00218\ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{00221\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+
+\end{DoxyCode}

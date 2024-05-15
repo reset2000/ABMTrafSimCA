@@ -1,0 +1,48 @@
+\doxysection{dbmanager.\+h}
+\hypertarget{dbmanager_8h_source}{}\label{dbmanager_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DBMANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DBMANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}qsqldatabase.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}qtdiagramf.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}qtdiagramst.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <QDir>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_db_manager}{DbManager}}\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_db_manager}{DbManager}}(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ createTables();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ saveDb(\mbox{\hyperlink{class_qt_diagram_f}{QtDiagramF}}\ \&qF);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ saveDb(\mbox{\hyperlink{class_qt_diagram_s_t}{QtDiagramST}}\ \&qST);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ readDb(QList<QtDiagramF*>\ \&qFList);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteDb(\mbox{\hyperlink{class_qt_diagram_f}{QtDiagramF}}\ \&qF);}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteDb(\mbox{\hyperlink{class_qt_diagram_s_t}{QtDiagramST}}\ \&qST);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ readSnapshot(\mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \&snapshot);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ updateSnapshot(\mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \&snapshot);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ \ \ QSqlDatabase\ db;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{const}\ QString\ DB\_NAME\ =\ \textcolor{stringliteral}{"{}traffic.sqlite"{}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ openDb();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ closeDb();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ countSnapshotRows();}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DBMANAGER\_H}}
+
+\end{DoxyCode}

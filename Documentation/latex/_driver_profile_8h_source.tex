@@ -1,0 +1,54 @@
+\doxysection{Driver\+Profile.\+h}
+\hypertarget{_driver_profile_8h_source}{}\label{_driver_profile_8h_source}\index{TrafficCore/DriverProfile.h@{TrafficCore/DriverProfile.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_driver_profile}{DriverProfile}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{string}\ name;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{int}\ maxSpeed;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ maxDR;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{float}\ dR;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ accPlus;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ accMinus;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{float}\ probability;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ probThreshold;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_driver_profile}{DriverProfile}}();}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_driver_profile}{DriverProfile}}(\textcolor{keywordtype}{string}\ name,\ \textcolor{keywordtype}{int}\ maxSpeed,\ \textcolor{keywordtype}{int}\ dR,\ \textcolor{keywordtype}{int}\ accPlus,\ \textcolor{keywordtype}{int}\ accMinus,\ \textcolor{keywordtype}{float}\ probability,\ \textcolor{keywordtype}{int}\ probThreshold);}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_driver_profile}{\string~DriverProfile}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ SetName(\textcolor{keywordtype}{string}\ name);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{string}\ GetName();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ SetMaxSpeed(\textcolor{keywordtype}{int}\ maxSpeed);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ GetMaxSpeed();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ SetMaxDR(\textcolor{keywordtype}{int}\ maxDR);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ GetMaxDR();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ SetDR(\textcolor{keywordtype}{float}\ dR);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{float}\ GetDR();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ SetAccPlus(\textcolor{keywordtype}{int}\ accPlus);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ GetAccPlus();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ SetAccMinus(\textcolor{keywordtype}{int}\ accMinus);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ GetAccMinus();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ SetProbability(\textcolor{keywordtype}{float}\ probability);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{float}\ GetProbability();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ SetProbThreshold(\textcolor{keywordtype}{int}\ probThreshold);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{int}\ GetProbThreshold();}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+
+\end{DoxyCode}

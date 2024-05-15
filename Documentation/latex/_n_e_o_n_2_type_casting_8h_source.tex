@@ -1,0 +1,1425 @@
+\doxysection{Type\+Casting.\+h}
+\hypertarget{_n_e_o_n_2_type_casting_8h_source}{}\label{_n_e_o_n_2_type_casting_8h_source}\index{Eigen/src/Core/arch/NEON/TypeCasting.h@{Eigen/src/Core/arch/NEON/TypeCasting.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2018\ Rasmus\ Munk\ Larsen\ <rmlarsen@google.com>}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Copyright\ (C)\ 2020\ Antonio\ Sanchez\ <cantonios@google.com>}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_TYPE\_CASTING\_NEON\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ EIGEN\_TYPE\_CASTING\_NEON\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ float}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00026\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00030\ EIGEN\_STRONG\_INLINE\ Packet2f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet2f>}}(\textcolor{keyword}{const}\ Packet2f\&\ a)\ \{}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00032\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00035\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ numext::int64\_t>\ \{}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00039\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ If\ float64\ exists,\ first\ convert\ to\ that\ to\ keep\ as\ much\ precision\ as\ possible.}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#if\ EIGEN\_ARCH\_ARM64}}
+\DoxyCodeLine{00044\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00045\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{00046\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_s64\_f64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_f64\_f32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_f32}}(a)));}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00050\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{00051\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_u64\_f64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_f64\_f32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_f32}}(a)));}
+\DoxyCodeLine{00053\ \}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00055\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00056\ EIGEN\_STRONG\_INLINE\ Packet2l\ pcast<Packet4f,\ Packet2l>(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{00057\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordflow}{return}\ vmovl\_s32(vget\_low\_s32(vcvtq\_s32\_f32(a)));}
+\DoxyCodeLine{00059\ \}}
+\DoxyCodeLine{00060\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00061\ EIGEN\_STRONG\_INLINE\ Packet2ul\ pcast<Packet4f,\ Packet2ul>(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{00062\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordflow}{return}\ vmovl\_u32(vget\_low\_u32(vcvtq\_u32\_f32(a)));}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ EIGEN\_ARCH\_ARM64}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00068\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ numext::int32\_t>\ \{}
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00072\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_s32\_f32}}(a);}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00076\ EIGEN\_STRONG\_INLINE\ Packet2i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet2i>}}(\textcolor{keyword}{const}\ Packet2f\&\ a)\ \{}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_s32\_f32}}(a);}
+\DoxyCodeLine{00078\ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00081\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00085\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_u32\_f32}}(a);}
+\DoxyCodeLine{00087\ \}}
+\DoxyCodeLine{00088\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00089\ EIGEN\_STRONG\_INLINE\ Packet2ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet2ui>}}(\textcolor{keyword}{const}\ Packet2f\&\ a)\ \{}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_u32\_f32}}(a);}
+\DoxyCodeLine{00091\ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00094\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ numext::int16\_t>\ \{}
+\DoxyCodeLine{00095\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00096\ \};}
+\DoxyCodeLine{00097\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00098\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet4f\&\ a,\ \textcolor{keyword}{const}\ Packet4f\&\ b)\ \{}
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_s32\_f32}}(a)),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_s32\_f32}}(b)));}
+\DoxyCodeLine{00100\ \}}
+\DoxyCodeLine{00101\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00102\ EIGEN\_STRONG\_INLINE\ Packet4s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet4s>}}(\textcolor{keyword}{const}\ Packet2f\&\ a,\ \textcolor{keyword}{const}\ Packet2f\&\ b)\ \{}
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_s32\_f32}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_s32\_f32}}(b)));}
+\DoxyCodeLine{00104\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00107\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00109\ \};}
+\DoxyCodeLine{00110\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00111\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet4f\&\ a,\ \textcolor{keyword}{const}\ Packet4f\&\ b)\ \{}
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_u32\_f32}}(a)),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_u32\_f32}}(b)));}
+\DoxyCodeLine{00113\ \}}
+\DoxyCodeLine{00114\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00115\ EIGEN\_STRONG\_INLINE\ Packet4us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet4us>}}(\textcolor{keyword}{const}\ Packet2f\&\ a,\ \textcolor{keyword}{const}\ Packet2f\&\ b)\ \{}
+\DoxyCodeLine{00116\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_u32\_f32}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_u32\_f32}}(b)));}
+\DoxyCodeLine{00117\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00120\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ numext::int8\_t>\ \{}
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00122\ \};}
+\DoxyCodeLine{00123\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00124\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet4f\&\ a,\ \textcolor{keyword}{const}\ Packet4f\&\ b,\ \textcolor{keyword}{const}\ Packet4f\&\ c,}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet4f\&\ d)\ \{}
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet8s>}}(a,\ b);}
+\DoxyCodeLine{00127\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet8s>}}(c,\ d);}
+\DoxyCodeLine{00128\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s16}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s16}}));}
+\DoxyCodeLine{00129\ \}}
+\DoxyCodeLine{00130\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00131\ EIGEN\_STRONG\_INLINE\ Packet8c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet8c>}}(\textcolor{keyword}{const}\ Packet2f\&\ a,\ \textcolor{keyword}{const}\ Packet2f\&\ b,\ \textcolor{keyword}{const}\ Packet2f\&\ c,}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2f\&\ d)\ \{}
+\DoxyCodeLine{00133\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet4s>}}(a,\ b);}
+\DoxyCodeLine{00134\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet4s>}}(c,\ d);}
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s16}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s16}}));}
+\DoxyCodeLine{00136\ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00139\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}},\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{00140\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00141\ \};}
+\DoxyCodeLine{00142\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00143\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet4f\&\ a,\ \textcolor{keyword}{const}\ Packet4f\&\ b,\ \textcolor{keyword}{const}\ Packet4f\&\ c,}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet4f\&\ d)\ \{}
+\DoxyCodeLine{00145\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet8us>}}(a,\ b);}
+\DoxyCodeLine{00146\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4f,\ Packet8us>}}(c,\ d);}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}));}
+\DoxyCodeLine{00148\ \}}
+\DoxyCodeLine{00149\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00150\ EIGEN\_STRONG\_INLINE\ Packet8uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet8uc>}}(\textcolor{keyword}{const}\ Packet2f\&\ a,\ \textcolor{keyword}{const}\ Packet2f\&\ b,\ \textcolor{keyword}{const}\ Packet2f\&\ c,}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2f\&\ d)\ \{}
+\DoxyCodeLine{00152\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet4us>}}(a,\ b);}
+\DoxyCodeLine{00153\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2f,\ Packet4us>}}(c,\ d);}
+\DoxyCodeLine{00154\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}));}
+\DoxyCodeLine{00155\ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00158\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ int8\_t}}
+\DoxyCodeLine{00159\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00160\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00161\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00162\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00163\ \};}
+\DoxyCodeLine{00164\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00165\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00166\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ 4\ bytes.}}
+\DoxyCodeLine{00167\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_f32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s8}}(a)))));}
+\DoxyCodeLine{00168\ \}}
+\DoxyCodeLine{00169\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00170\ EIGEN\_STRONG\_INLINE\ Packet2f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet2f>}}(\textcolor{keyword}{const}\ Packet8c\&\ a)\ \{}
+\DoxyCodeLine{00171\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ 2\ bytes.}}
+\DoxyCodeLine{00172\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_f32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s8}}(a)))));}
+\DoxyCodeLine{00173\ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00176\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{00177\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 8\ \};}
+\DoxyCodeLine{00178\ \};}
+\DoxyCodeLine{00179\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00180\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00181\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ two\ bytes.}}
+\DoxyCodeLine{00182\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s8}}(a))))));}
+\DoxyCodeLine{00183\ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00186\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{00187\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 8\ \};}
+\DoxyCodeLine{00188\ \};}
+\DoxyCodeLine{00189\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00190\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00191\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u64\_s64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet2l>}}(a));}
+\DoxyCodeLine{00192\ \}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00195\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{00196\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00197\ \};}
+\DoxyCodeLine{00198\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00199\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00200\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ 4\ bytes.}}
+\DoxyCodeLine{00201\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s8}}(a))));}
+\DoxyCodeLine{00202\ \}}
+\DoxyCodeLine{00203\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00204\ EIGEN\_STRONG\_INLINE\ Packet2i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet2i>}}(\textcolor{keyword}{const}\ Packet8c\&\ a)\ \{}
+\DoxyCodeLine{00205\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ 2\ bytes.}}
+\DoxyCodeLine{00206\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s8}}(a))));}
+\DoxyCodeLine{00207\ \}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00210\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{00211\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00212\ \};}
+\DoxyCodeLine{00213\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00214\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00215\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet4i>}}(a));}
+\DoxyCodeLine{00216\ \}}
+\DoxyCodeLine{00217\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00218\ EIGEN\_STRONG\_INLINE\ Packet2ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet2ui>}}(\textcolor{keyword}{const}\ Packet8c\&\ a)\ \{}
+\DoxyCodeLine{00219\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_u32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet2i>}}(a));}
+\DoxyCodeLine{00220\ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00223\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{00224\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00225\ \};}
+\DoxyCodeLine{00226\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00227\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00228\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00229\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s8}}(a));}
+\DoxyCodeLine{00230\ \}}
+\DoxyCodeLine{00231\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00232\ EIGEN\_STRONG\_INLINE\ Packet4s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet4s>}}(\textcolor{keyword}{const}\ Packet8c\&\ a)\ \{}
+\DoxyCodeLine{00233\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00234\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s8}}(a));}
+\DoxyCodeLine{00235\ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00238\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{00239\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00240\ \};}
+\DoxyCodeLine{00241\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00242\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00243\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u16\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet8s>}}(a));}
+\DoxyCodeLine{00244\ \}}
+\DoxyCodeLine{00245\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00246\ EIGEN\_STRONG\_INLINE\ Packet4us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet4us>}}(\textcolor{keyword}{const}\ Packet8c\&\ a)\ \{}
+\DoxyCodeLine{00247\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_u16\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet4s>}}(a));}
+\DoxyCodeLine{00248\ \}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00251\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{00252\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00253\ \};}
+\DoxyCodeLine{00254\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00255\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00256\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00257\ \}}
+\DoxyCodeLine{00258\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00259\ EIGEN\_STRONG\_INLINE\ Packet8c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet8c>}}(\textcolor{keyword}{const}\ Packet8c\&\ a)\ \{}
+\DoxyCodeLine{00260\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00261\ \}}
+\DoxyCodeLine{00262\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00263\ EIGEN\_STRONG\_INLINE\ Packet4c\ pcast<Packet4c,\ Packet4c>(\textcolor{keyword}{const}\ Packet4c\&\ a)\ \{}
+\DoxyCodeLine{00264\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00265\ \}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00268\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int8\_t,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{00269\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00270\ \};}
+\DoxyCodeLine{00271\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00272\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16c,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{00273\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u8\_s8}}(a);}
+\DoxyCodeLine{00274\ \}}
+\DoxyCodeLine{00275\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00276\ EIGEN\_STRONG\_INLINE\ Packet8uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8c,\ Packet8uc>}}(\textcolor{keyword}{const}\ Packet8c\&\ a)\ \{}
+\DoxyCodeLine{00277\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_u8\_s8}}(a);}
+\DoxyCodeLine{00278\ \}}
+\DoxyCodeLine{00279\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00280\ EIGEN\_STRONG\_INLINE\ Packet4uc\ pcast<Packet4c,\ Packet4uc>(\textcolor{keyword}{const}\ Packet4c\&\ a)\ \{}
+\DoxyCodeLine{00281\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Packet4uc\textcolor{keyword}{>}(a);}
+\DoxyCodeLine{00282\ \}}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00285\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ uint8\_t}}
+\DoxyCodeLine{00286\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00287\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00288\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00289\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00290\ \};}
+\DoxyCodeLine{00291\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00292\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00293\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ 4\ bytes.}}
+\DoxyCodeLine{00294\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_f32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u8}}(a)))));}
+\DoxyCodeLine{00295\ \}}
+\DoxyCodeLine{00296\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00297\ EIGEN\_STRONG\_INLINE\ Packet2f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet2f>}}(\textcolor{keyword}{const}\ Packet8uc\&\ a)\ \{}
+\DoxyCodeLine{00298\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ 2\ bytes.}}
+\DoxyCodeLine{00299\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_f32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u8}}(a)))));}
+\DoxyCodeLine{00300\ \}}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00303\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{00304\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 8\ \};}
+\DoxyCodeLine{00305\ \};}
+\DoxyCodeLine{00306\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00307\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00308\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ two\ bytes.}}
+\DoxyCodeLine{00309\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u8}}(a))))));}
+\DoxyCodeLine{00310\ \}}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00313\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{00314\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 8\ \};}
+\DoxyCodeLine{00315\ \};}
+\DoxyCodeLine{00316\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00317\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00318\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s64\_u64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet2ul>}}(a));}
+\DoxyCodeLine{00319\ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00322\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{00323\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00324\ \};}
+\DoxyCodeLine{00325\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00326\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00327\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ 4\ bytes.}}
+\DoxyCodeLine{00328\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u8}}(a))));}
+\DoxyCodeLine{00329\ \}}
+\DoxyCodeLine{00330\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00331\ EIGEN\_STRONG\_INLINE\ Packet2ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet2ui>}}(\textcolor{keyword}{const}\ Packet8uc\&\ a)\ \{}
+\DoxyCodeLine{00332\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ 2\ bytes.}}
+\DoxyCodeLine{00333\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u8}}(a))));}
+\DoxyCodeLine{00334\ \}}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00337\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{00338\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00339\ \};}
+\DoxyCodeLine{00340\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00341\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00342\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet4ui>}}(a));}
+\DoxyCodeLine{00343\ \}}
+\DoxyCodeLine{00344\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00345\ EIGEN\_STRONG\_INLINE\ Packet2i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet2i>}}(\textcolor{keyword}{const}\ Packet8uc\&\ a)\ \{}
+\DoxyCodeLine{00346\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet2ui>}}(a));}
+\DoxyCodeLine{00347\ \}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00350\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{00351\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00352\ \};}
+\DoxyCodeLine{00353\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00354\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00355\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00356\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u8}}(a));}
+\DoxyCodeLine{00357\ \}}
+\DoxyCodeLine{00358\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00359\ EIGEN\_STRONG\_INLINE\ Packet4us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet4us>}}(\textcolor{keyword}{const}\ Packet8uc\&\ a)\ \{}
+\DoxyCodeLine{00360\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00361\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u8}}(a));}
+\DoxyCodeLine{00362\ \}}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00365\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{00366\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00367\ \};}
+\DoxyCodeLine{00368\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00369\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00370\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s16\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet8us>}}(a));}
+\DoxyCodeLine{00371\ \}}
+\DoxyCodeLine{00372\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00373\ EIGEN\_STRONG\_INLINE\ Packet4s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet4s>}}(\textcolor{keyword}{const}\ Packet8uc\&\ a)\ \{}
+\DoxyCodeLine{00374\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s16\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet4us>}}(a));}
+\DoxyCodeLine{00375\ \}}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00378\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{00379\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00380\ \};}
+\DoxyCodeLine{00381\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00382\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00383\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00384\ \}}
+\DoxyCodeLine{00385\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00386\ EIGEN\_STRONG\_INLINE\ Packet8uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet8uc>}}(\textcolor{keyword}{const}\ Packet8uc\&\ a)\ \{}
+\DoxyCodeLine{00387\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00388\ \}}
+\DoxyCodeLine{00389\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00390\ EIGEN\_STRONG\_INLINE\ Packet4uc\ pcast<Packet4uc,\ Packet4uc>(\textcolor{keyword}{const}\ Packet4uc\&\ a)\ \{}
+\DoxyCodeLine{00391\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00392\ \}}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00395\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint8\_t,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{00396\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00397\ \};}
+\DoxyCodeLine{00398\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00399\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet16uc,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{00400\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s8\_u8}}(a);}
+\DoxyCodeLine{00401\ \}}
+\DoxyCodeLine{00402\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00403\ EIGEN\_STRONG\_INLINE\ Packet8c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8uc,\ Packet8c>}}(\textcolor{keyword}{const}\ Packet8uc\&\ a)\ \{}
+\DoxyCodeLine{00404\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s8\_u8}}(a);}
+\DoxyCodeLine{00405\ \}}
+\DoxyCodeLine{00406\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00407\ EIGEN\_STRONG\_INLINE\ Packet4c\ pcast<Packet4uc,\ Packet4c>(\textcolor{keyword}{const}\ Packet4uc\&\ a)\ \{}
+\DoxyCodeLine{00408\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Packet4c\textcolor{keyword}{>}(a);}
+\DoxyCodeLine{00409\ \}}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00412\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ int16\_t}}
+\DoxyCodeLine{00413\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00414\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00415\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00416\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00417\ \};}
+\DoxyCodeLine{00418\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00419\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{00420\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00421\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_f32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(a)));}
+\DoxyCodeLine{00422\ \}}
+\DoxyCodeLine{00423\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00424\ EIGEN\_STRONG\_INLINE\ Packet2f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4s,\ Packet2f>}}(\textcolor{keyword}{const}\ Packet4s\&\ a)\ \{}
+\DoxyCodeLine{00425\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00426\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_f32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(a)));}
+\DoxyCodeLine{00427\ \}}
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00429\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00430\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{00431\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00432\ \};}
+\DoxyCodeLine{00433\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00434\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{00435\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ two\ values.}}
+\DoxyCodeLine{00436\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(a))));}
+\DoxyCodeLine{00437\ \}}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00440\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{00441\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00442\ \};}
+\DoxyCodeLine{00443\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00444\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{00445\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u64\_s64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet2l>}}(a));}
+\DoxyCodeLine{00446\ \}}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00449\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{00450\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00451\ \};}
+\DoxyCodeLine{00452\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00453\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{00454\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00455\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s16}}(a));}
+\DoxyCodeLine{00456\ \}}
+\DoxyCodeLine{00457\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00458\ EIGEN\_STRONG\_INLINE\ Packet2i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4s,\ Packet2i>}}(\textcolor{keyword}{const}\ Packet4s\&\ a)\ \{}
+\DoxyCodeLine{00459\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00460\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s16}}(a));}
+\DoxyCodeLine{00461\ \}}
+\DoxyCodeLine{00462\ }
+\DoxyCodeLine{00463\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00464\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{00465\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00466\ \};}
+\DoxyCodeLine{00467\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00468\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{00469\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet4i>}}(a));}
+\DoxyCodeLine{00470\ \}}
+\DoxyCodeLine{00471\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00472\ EIGEN\_STRONG\_INLINE\ Packet2ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4s,\ Packet2ui>}}(\textcolor{keyword}{const}\ Packet4s\&\ a)\ \{}
+\DoxyCodeLine{00473\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_u32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4s,\ Packet2i>}}(a));}
+\DoxyCodeLine{00474\ \}}
+\DoxyCodeLine{00475\ }
+\DoxyCodeLine{00476\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00477\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{00478\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00479\ \};}
+\DoxyCodeLine{00480\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00481\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{00482\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00483\ \}}
+\DoxyCodeLine{00484\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00485\ EIGEN\_STRONG\_INLINE\ Packet4s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4s,\ Packet4s>}}(\textcolor{keyword}{const}\ Packet4s\&\ a)\ \{}
+\DoxyCodeLine{00486\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00487\ \}}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00489\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00490\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{00491\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00492\ \};}
+\DoxyCodeLine{00493\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00494\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{00495\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u16\_s16}}(a);}
+\DoxyCodeLine{00496\ \}}
+\DoxyCodeLine{00497\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00498\ EIGEN\_STRONG\_INLINE\ Packet4us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4s,\ Packet4us>}}(\textcolor{keyword}{const}\ Packet4s\&\ a)\ \{}
+\DoxyCodeLine{00499\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_u16\_s16}}(a);}
+\DoxyCodeLine{00500\ \}}
+\DoxyCodeLine{00501\ }
+\DoxyCodeLine{00502\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00503\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{00504\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00505\ \};}
+\DoxyCodeLine{00506\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00507\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet8s\&\ a,\ \textcolor{keyword}{const}\ Packet8s\&\ b)\ \{}
+\DoxyCodeLine{00508\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(b));}
+\DoxyCodeLine{00509\ \}}
+\DoxyCodeLine{00510\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00511\ EIGEN\_STRONG\_INLINE\ Packet8c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4s,\ Packet8c>}}(\textcolor{keyword}{const}\ Packet4s\&\ a,\ \textcolor{keyword}{const}\ Packet4s\&\ b)\ \{}
+\DoxyCodeLine{00512\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s16}}(a,\ b));}
+\DoxyCodeLine{00513\ \}}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00516\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int16\_t,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{00517\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00518\ \};}
+\DoxyCodeLine{00519\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00520\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8s,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet8s\&\ a,\ \textcolor{keyword}{const}\ Packet8s\&\ b)\ \{}
+\DoxyCodeLine{00521\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u16\_s16}}(a)),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u16\_s16}}(b)));}
+\DoxyCodeLine{00522\ \}}
+\DoxyCodeLine{00523\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00524\ EIGEN\_STRONG\_INLINE\ Packet8uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4s,\ Packet8uc>}}(\textcolor{keyword}{const}\ Packet4s\&\ a,\ \textcolor{keyword}{const}\ Packet4s\&\ b)\ \{}
+\DoxyCodeLine{00525\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_u16\_s16}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_u16\_s16}}(b)));}
+\DoxyCodeLine{00526\ \}}
+\DoxyCodeLine{00527\ }
+\DoxyCodeLine{00528\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00529\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ uint16\_t}}
+\DoxyCodeLine{00530\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00531\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00532\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00533\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00534\ \};}
+\DoxyCodeLine{00535\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00536\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{00537\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00538\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_f32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(a)));}
+\DoxyCodeLine{00539\ \}}
+\DoxyCodeLine{00540\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00541\ EIGEN\_STRONG\_INLINE\ Packet2f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet2f>}}(\textcolor{keyword}{const}\ Packet4us\&\ a)\ \{}
+\DoxyCodeLine{00542\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00543\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_f32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(a)));}
+\DoxyCodeLine{00544\ \}}
+\DoxyCodeLine{00545\ }
+\DoxyCodeLine{00546\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00547\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{00548\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00549\ \};}
+\DoxyCodeLine{00550\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00551\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{00552\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ two\ values.}}
+\DoxyCodeLine{00553\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(a))));}
+\DoxyCodeLine{00554\ \}}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00556\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00557\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{00558\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{00559\ \};}
+\DoxyCodeLine{00560\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00561\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{00562\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s64\_u64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet2ul>}}(a));}
+\DoxyCodeLine{00563\ \}}
+\DoxyCodeLine{00564\ }
+\DoxyCodeLine{00565\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00566\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{00567\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00568\ \};}
+\DoxyCodeLine{00569\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00570\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{00571\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00572\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u16}}(a));}
+\DoxyCodeLine{00573\ \}}
+\DoxyCodeLine{00574\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00575\ EIGEN\_STRONG\_INLINE\ Packet2ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet2ui>}}(\textcolor{keyword}{const}\ Packet4us\&\ a)\ \{}
+\DoxyCodeLine{00576\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00577\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u16}}(a));}
+\DoxyCodeLine{00578\ \}}
+\DoxyCodeLine{00579\ }
+\DoxyCodeLine{00580\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00581\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{00582\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00583\ \};}
+\DoxyCodeLine{00584\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00585\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{00586\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet4ui>}}(a));}
+\DoxyCodeLine{00587\ \}}
+\DoxyCodeLine{00588\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00589\ EIGEN\_STRONG\_INLINE\ Packet2i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet2i>}}(\textcolor{keyword}{const}\ Packet4us\&\ a)\ \{}
+\DoxyCodeLine{00590\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet2ui>}}(a));}
+\DoxyCodeLine{00591\ \}}
+\DoxyCodeLine{00592\ }
+\DoxyCodeLine{00593\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00594\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{00595\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00596\ \};}
+\DoxyCodeLine{00597\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00598\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{00599\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00600\ \}}
+\DoxyCodeLine{00601\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00602\ EIGEN\_STRONG\_INLINE\ Packet4us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet4us>}}(\textcolor{keyword}{const}\ Packet4us\&\ a)\ \{}
+\DoxyCodeLine{00603\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00604\ \}}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00606\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00607\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{00608\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00609\ \};}
+\DoxyCodeLine{00610\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00611\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{00612\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s16\_u16}}(a);}
+\DoxyCodeLine{00613\ \}}
+\DoxyCodeLine{00614\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00615\ EIGEN\_STRONG\_INLINE\ Packet4s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet4s>}}(\textcolor{keyword}{const}\ Packet4us\&\ a)\ \{}
+\DoxyCodeLine{00616\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s16\_u16}}(a);}
+\DoxyCodeLine{00617\ \}}
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00620\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{00621\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00622\ \};}
+\DoxyCodeLine{00623\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00624\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet8us\&\ a,\ \textcolor{keyword}{const}\ Packet8us\&\ b)\ \{}
+\DoxyCodeLine{00625\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(b));}
+\DoxyCodeLine{00626\ \}}
+\DoxyCodeLine{00627\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00628\ EIGEN\_STRONG\_INLINE\ Packet8uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet8uc>}}(\textcolor{keyword}{const}\ Packet4us\&\ a,\ \textcolor{keyword}{const}\ Packet4us\&\ b)\ \{}
+\DoxyCodeLine{00629\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(a,\ b));}
+\DoxyCodeLine{00630\ \}}
+\DoxyCodeLine{00631\ }
+\DoxyCodeLine{00632\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00633\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint16\_t,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{00634\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00635\ \};}
+\DoxyCodeLine{00636\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00637\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet8us\&\ a,\ \textcolor{keyword}{const}\ Packet8us\&\ b)\ \{}
+\DoxyCodeLine{00638\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s8\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet8us,\ Packet16uc>}}(a,\ b));}
+\DoxyCodeLine{00639\ \}}
+\DoxyCodeLine{00640\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00641\ EIGEN\_STRONG\_INLINE\ Packet8c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet8c>}}(\textcolor{keyword}{const}\ Packet4us\&\ a,\ \textcolor{keyword}{const}\ Packet4us\&\ b)\ \{}
+\DoxyCodeLine{00642\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s8\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4us,\ Packet8uc>}}(a,\ b));}
+\DoxyCodeLine{00643\ \}}
+\DoxyCodeLine{00644\ }
+\DoxyCodeLine{00645\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00646\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ int32\_t}}
+\DoxyCodeLine{00647\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00648\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00649\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00650\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00651\ \};}
+\DoxyCodeLine{00652\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00653\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{00654\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_f32\_s32}}(a);}
+\DoxyCodeLine{00655\ \}}
+\DoxyCodeLine{00656\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00657\ EIGEN\_STRONG\_INLINE\ Packet2f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet2f>}}(\textcolor{keyword}{const}\ Packet2i\&\ a)\ \{}
+\DoxyCodeLine{00658\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_f32\_s32}}(a);}
+\DoxyCodeLine{00659\ \}}
+\DoxyCodeLine{00660\ }
+\DoxyCodeLine{00661\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00662\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{00663\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00664\ \};}
+\DoxyCodeLine{00665\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00666\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{00667\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00668\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_s32}}(a));}
+\DoxyCodeLine{00669\ \}}
+\DoxyCodeLine{00670\ }
+\DoxyCodeLine{00671\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00672\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{00673\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00674\ \};}
+\DoxyCodeLine{00675\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00676\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{00677\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u64\_s64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet2l>}}(a));}
+\DoxyCodeLine{00678\ \}}
+\DoxyCodeLine{00679\ }
+\DoxyCodeLine{00680\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00681\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{00682\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00683\ \};}
+\DoxyCodeLine{00684\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00685\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{00686\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00687\ \}}
+\DoxyCodeLine{00688\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00689\ EIGEN\_STRONG\_INLINE\ Packet2i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet2i>}}(\textcolor{keyword}{const}\ Packet2i\&\ a)\ \{}
+\DoxyCodeLine{00690\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00691\ \}}
+\DoxyCodeLine{00692\ }
+\DoxyCodeLine{00693\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00694\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{00695\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00696\ \};}
+\DoxyCodeLine{00697\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00698\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{00699\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u32\_s32}}(a);}
+\DoxyCodeLine{00700\ \}}
+\DoxyCodeLine{00701\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00702\ EIGEN\_STRONG\_INLINE\ Packet2ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet2ui>}}(\textcolor{keyword}{const}\ Packet2i\&\ a)\ \{}
+\DoxyCodeLine{00703\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_u32\_s32}}(a);}
+\DoxyCodeLine{00704\ \}}
+\DoxyCodeLine{00705\ }
+\DoxyCodeLine{00706\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00707\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{00708\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00709\ \};}
+\DoxyCodeLine{00710\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00711\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet4i\&\ a,\ \textcolor{keyword}{const}\ Packet4i\&\ b)\ \{}
+\DoxyCodeLine{00712\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(b));}
+\DoxyCodeLine{00713\ \}}
+\DoxyCodeLine{00714\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00715\ EIGEN\_STRONG\_INLINE\ Packet4s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet4s>}}(\textcolor{keyword}{const}\ Packet2i\&\ a,\ \textcolor{keyword}{const}\ Packet2i\&\ b)\ \{}
+\DoxyCodeLine{00716\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s32}}(a,\ b));}
+\DoxyCodeLine{00717\ \}}
+\DoxyCodeLine{00718\ }
+\DoxyCodeLine{00719\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00720\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{00721\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00722\ \};}
+\DoxyCodeLine{00723\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00724\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet4i\&\ a,\ \textcolor{keyword}{const}\ Packet4i\&\ b)\ \{}
+\DoxyCodeLine{00725\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u32\_s32}}(a)),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u32\_s32}}(b)));}
+\DoxyCodeLine{00726\ \}}
+\DoxyCodeLine{00727\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00728\ EIGEN\_STRONG\_INLINE\ Packet4us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet4us>}}(\textcolor{keyword}{const}\ Packet2i\&\ a,\ \textcolor{keyword}{const}\ Packet2i\&\ b)\ \{}
+\DoxyCodeLine{00729\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s32}}(a,\ b)));}
+\DoxyCodeLine{00730\ \}}
+\DoxyCodeLine{00731\ }
+\DoxyCodeLine{00732\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00733\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{00734\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00735\ \};}
+\DoxyCodeLine{00736\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00737\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet4i\&\ a,\ \textcolor{keyword}{const}\ Packet4i\&\ b,\ \textcolor{keyword}{const}\ Packet4i\&\ c,}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet4i\&\ d)\ \{}
+\DoxyCodeLine{00739\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet8s>}}(a,\ b);}
+\DoxyCodeLine{00740\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet8s>}}(c,\ d);}
+\DoxyCodeLine{00741\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s16}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s16}}));}
+\DoxyCodeLine{00742\ \}}
+\DoxyCodeLine{00743\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00744\ EIGEN\_STRONG\_INLINE\ Packet8c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet8c>}}(\textcolor{keyword}{const}\ Packet2i\&\ a,\ \textcolor{keyword}{const}\ Packet2i\&\ b,\ \textcolor{keyword}{const}\ Packet2i\&\ c,}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2i\&\ d)\ \{}
+\DoxyCodeLine{00746\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s32}}(a,\ b));}
+\DoxyCodeLine{00747\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s32}}(c,\ d));}
+\DoxyCodeLine{00748\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s16}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s16}}));}
+\DoxyCodeLine{00749\ \}}
+\DoxyCodeLine{00750\ }
+\DoxyCodeLine{00751\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00752\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int32\_t,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{00753\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00754\ \};}
+\DoxyCodeLine{00755\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00756\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet4i\&\ a,\ \textcolor{keyword}{const}\ Packet4i\&\ b,\ \textcolor{keyword}{const}\ Packet4i\&\ c,}
+\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet4i\&\ d)\ \{}
+\DoxyCodeLine{00758\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet8us>}}(a,\ b);}
+\DoxyCodeLine{00759\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4i,\ Packet8us>}}(c,\ d);}
+\DoxyCodeLine{00760\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}));}
+\DoxyCodeLine{00761\ \}}
+\DoxyCodeLine{00762\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00763\ EIGEN\_STRONG\_INLINE\ Packet8uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet8uc>}}(\textcolor{keyword}{const}\ Packet2i\&\ a,\ \textcolor{keyword}{const}\ Packet2i\&\ b,\ \textcolor{keyword}{const}\ Packet2i\&\ c,}
+\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2i\&\ d)\ \{}
+\DoxyCodeLine{00765\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet4us>}}(a,\ b);}
+\DoxyCodeLine{00766\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2i,\ Packet4us>}}(c,\ d);}
+\DoxyCodeLine{00767\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}));}
+\DoxyCodeLine{00768\ \}}
+\DoxyCodeLine{00769\ }
+\DoxyCodeLine{00770\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00771\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ uint32\_t}}
+\DoxyCodeLine{00772\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00773\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00774\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00775\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00776\ \};}
+\DoxyCodeLine{00777\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00778\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a)\ \{}
+\DoxyCodeLine{00779\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_f32\_u32}}(a);}
+\DoxyCodeLine{00780\ \}}
+\DoxyCodeLine{00781\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00782\ EIGEN\_STRONG\_INLINE\ Packet2f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet2f>}}(\textcolor{keyword}{const}\ Packet2ui\&\ a)\ \{}
+\DoxyCodeLine{00783\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvt\_f32\_u32}}(a);}
+\DoxyCodeLine{00784\ \}}
+\DoxyCodeLine{00785\ }
+\DoxyCodeLine{00786\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00787\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{00788\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00789\ \};}
+\DoxyCodeLine{00790\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00791\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a)\ \{}
+\DoxyCodeLine{00792\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{00793\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovl\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vget\_low\_u32}}(a));}
+\DoxyCodeLine{00794\ \}}
+\DoxyCodeLine{00795\ }
+\DoxyCodeLine{00796\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00797\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{00798\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{00799\ \};}
+\DoxyCodeLine{00800\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00801\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a)\ \{}
+\DoxyCodeLine{00802\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s64\_u64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet2ul>}}(a));}
+\DoxyCodeLine{00803\ \}}
+\DoxyCodeLine{00804\ }
+\DoxyCodeLine{00805\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00806\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{00807\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00808\ \};}
+\DoxyCodeLine{00809\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00810\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a)\ \{}
+\DoxyCodeLine{00811\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00812\ \}}
+\DoxyCodeLine{00813\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00814\ EIGEN\_STRONG\_INLINE\ Packet2ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet2ui>}}(\textcolor{keyword}{const}\ Packet2ui\&\ a)\ \{}
+\DoxyCodeLine{00815\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00816\ \}}
+\DoxyCodeLine{00817\ }
+\DoxyCodeLine{00818\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00819\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{00820\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00821\ \};}
+\DoxyCodeLine{00822\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00823\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a)\ \{}
+\DoxyCodeLine{00824\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s32\_u32}}(a);}
+\DoxyCodeLine{00825\ \}}
+\DoxyCodeLine{00826\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00827\ EIGEN\_STRONG\_INLINE\ Packet2i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet2i>}}(\textcolor{keyword}{const}\ Packet2ui\&\ a)\ \{}
+\DoxyCodeLine{00828\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s32\_u32}}(a);}
+\DoxyCodeLine{00829\ \}}
+\DoxyCodeLine{00830\ }
+\DoxyCodeLine{00831\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00832\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{00833\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00834\ \};}
+\DoxyCodeLine{00835\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00836\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a,\ \textcolor{keyword}{const}\ Packet4ui\&\ b)\ \{}
+\DoxyCodeLine{00837\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(b));}
+\DoxyCodeLine{00838\ \}}
+\DoxyCodeLine{00839\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00840\ EIGEN\_STRONG\_INLINE\ Packet4us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet4us>}}(\textcolor{keyword}{const}\ Packet2ui\&\ a,\ \textcolor{keyword}{const}\ Packet2ui\&\ b)\ \{}
+\DoxyCodeLine{00841\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(a,\ b));}
+\DoxyCodeLine{00842\ \}}
+\DoxyCodeLine{00843\ }
+\DoxyCodeLine{00844\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00845\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{00846\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00847\ \};}
+\DoxyCodeLine{00848\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00849\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a,\ \textcolor{keyword}{const}\ Packet4ui\&\ b)\ \{}
+\DoxyCodeLine{00850\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s16\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet8us>}}(a,\ b));}
+\DoxyCodeLine{00851\ \}}
+\DoxyCodeLine{00852\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00853\ EIGEN\_STRONG\_INLINE\ Packet4s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet4s>}}(\textcolor{keyword}{const}\ Packet2ui\&\ a,\ \textcolor{keyword}{const}\ Packet2ui\&\ b)\ \{}
+\DoxyCodeLine{00854\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s16\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet4us>}}(a,\ b));}
+\DoxyCodeLine{00855\ \}}
+\DoxyCodeLine{00856\ }
+\DoxyCodeLine{00857\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00858\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{00859\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00860\ \};}
+\DoxyCodeLine{00861\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00862\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a,\ \textcolor{keyword}{const}\ Packet4ui\&\ b,\ \textcolor{keyword}{const}\ Packet4ui\&\ c,}
+\DoxyCodeLine{00863\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet4ui\&\ d)\ \{}
+\DoxyCodeLine{00864\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(b));}
+\DoxyCodeLine{00865\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(c),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(d));}
+\DoxyCodeLine{00866\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}));}
+\DoxyCodeLine{00867\ \}}
+\DoxyCodeLine{00868\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00869\ EIGEN\_STRONG\_INLINE\ Packet8uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet8uc>}}(\textcolor{keyword}{const}\ Packet2ui\&\ a,\ \textcolor{keyword}{const}\ Packet2ui\&\ b,\ \textcolor{keyword}{const}\ Packet2ui\&\ c,}
+\DoxyCodeLine{00870\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2ui\&\ d)\ \{}
+\DoxyCodeLine{00871\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(a,\ b));}
+\DoxyCodeLine{00872\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(c,\ d));}
+\DoxyCodeLine{00873\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}));}
+\DoxyCodeLine{00874\ \}}
+\DoxyCodeLine{00875\ }
+\DoxyCodeLine{00876\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00877\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint32\_t,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{00878\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00879\ \};}
+\DoxyCodeLine{00880\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00881\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet4ui\&\ a,\ \textcolor{keyword}{const}\ Packet4ui\&\ b,\ \textcolor{keyword}{const}\ Packet4ui\&\ c,}
+\DoxyCodeLine{00882\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet4ui\&\ d)\ \{}
+\DoxyCodeLine{00883\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s8\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet4ui,\ Packet16uc>}}(a,\ b,\ c,\ d));}
+\DoxyCodeLine{00884\ \}}
+\DoxyCodeLine{00885\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00886\ EIGEN\_STRONG\_INLINE\ Packet8c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet8c>}}(\textcolor{keyword}{const}\ Packet2ui\&\ a,\ \textcolor{keyword}{const}\ Packet2ui\&\ b,\ \textcolor{keyword}{const}\ Packet2ui\&\ c,}
+\DoxyCodeLine{00887\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2ui\&\ d)\ \{}
+\DoxyCodeLine{00888\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_s8\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ui,\ Packet8uc>}}(a,\ b,\ c,\ d));}
+\DoxyCodeLine{00889\ \}}
+\DoxyCodeLine{00890\ }
+\DoxyCodeLine{00891\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00892\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ int64\_t}}
+\DoxyCodeLine{00893\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00894\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00895\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00896\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00897\ \};}
+\DoxyCodeLine{00898\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00899\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet2l\&\ a,\ \textcolor{keyword}{const}\ Packet2l\&\ b)\ \{}
+\DoxyCodeLine{00900\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_f32\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s64}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s64}}(b)));}
+\DoxyCodeLine{00901\ \}}
+\DoxyCodeLine{00902\ }
+\DoxyCodeLine{00903\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00904\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{00905\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00906\ \};}
+\DoxyCodeLine{00907\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00908\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet2l\&\ a)\ \{}
+\DoxyCodeLine{00909\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{00910\ \}}
+\DoxyCodeLine{00911\ }
+\DoxyCodeLine{00912\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00913\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{00914\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00915\ \};}
+\DoxyCodeLine{00916\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00917\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet2l\&\ a)\ \{}
+\DoxyCodeLine{00918\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u64\_s64}}(a);}
+\DoxyCodeLine{00919\ \}}
+\DoxyCodeLine{00920\ }
+\DoxyCodeLine{00921\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00922\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{00923\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00924\ \};}
+\DoxyCodeLine{00925\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00926\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet2l\&\ a,\ \textcolor{keyword}{const}\ Packet2l\&\ b)\ \{}
+\DoxyCodeLine{00927\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s64}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s64}}(b));}
+\DoxyCodeLine{00928\ \}}
+\DoxyCodeLine{00929\ }
+\DoxyCodeLine{00930\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00931\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{00932\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00933\ \};}
+\DoxyCodeLine{00934\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00935\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet2l\&\ a,\ \textcolor{keyword}{const}\ Packet2l\&\ b)\ \{}
+\DoxyCodeLine{00936\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u64\_s64}}(a)),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_u64\_s64}}(b)));}
+\DoxyCodeLine{00937\ \}}
+\DoxyCodeLine{00938\ }
+\DoxyCodeLine{00939\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00940\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{00941\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00942\ \};}
+\DoxyCodeLine{00943\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00944\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet2l\&\ a,\ \textcolor{keyword}{const}\ Packet2l\&\ b,\ \textcolor{keyword}{const}\ Packet2l\&\ c,}
+\DoxyCodeLine{00945\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2l\&\ d)\ \{}
+\DoxyCodeLine{00946\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int32x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s32}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet4i>}}(a,\ b);}
+\DoxyCodeLine{00947\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int32x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s32}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet4i>}}(c,\ d);}
+\DoxyCodeLine{00948\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_s32}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_s32}}));}
+\DoxyCodeLine{00949\ \}}
+\DoxyCodeLine{00950\ }
+\DoxyCodeLine{00951\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00952\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{00953\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00954\ \};}
+\DoxyCodeLine{00955\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00956\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet2l\&\ a,\ \textcolor{keyword}{const}\ Packet2l\&\ b,\ \textcolor{keyword}{const}\ Packet2l\&\ c,}
+\DoxyCodeLine{00957\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2l\&\ d)\ \{}
+\DoxyCodeLine{00958\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint32x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u32}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet4ui>}}(a,\ b);}
+\DoxyCodeLine{00959\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint32x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u32}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet4ui>}}(c,\ d);}
+\DoxyCodeLine{00960\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u32}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u32}}));}
+\DoxyCodeLine{00961\ \}}
+\DoxyCodeLine{00962\ }
+\DoxyCodeLine{00963\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00964\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{00965\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 8,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00966\ \};}
+\DoxyCodeLine{00967\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00968\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet2l\&\ a,\ \textcolor{keyword}{const}\ Packet2l\&\ b,\ \textcolor{keyword}{const}\ Packet2l\&\ c,}
+\DoxyCodeLine{00969\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2l\&\ d,\ \textcolor{keyword}{const}\ Packet2l\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{e}},\ \textcolor{keyword}{const}\ Packet2l\&\ f,}
+\DoxyCodeLine{00970\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2l\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{g}},\ \textcolor{keyword}{const}\ Packet2l\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{}
+\DoxyCodeLine{00971\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{abcd\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet8s>}}(a,\ b,\ c,\ d);}
+\DoxyCodeLine{00972\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{efgh\_s16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet8s>}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{e}},\ f,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{g}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}});}
+\DoxyCodeLine{00973\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_s8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{abcd\_s16}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_s16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{efgh\_s16}}));}
+\DoxyCodeLine{00974\ \}}
+\DoxyCodeLine{00975\ }
+\DoxyCodeLine{00976\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00977\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::int64\_t,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{00978\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 8,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00979\ \};}
+\DoxyCodeLine{00980\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00981\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet2l\&\ a,\ \textcolor{keyword}{const}\ Packet2l\&\ b,\ \textcolor{keyword}{const}\ Packet2l\&\ c,}
+\DoxyCodeLine{00982\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2l\&\ d,\ \textcolor{keyword}{const}\ Packet2l\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{e}},\ \textcolor{keyword}{const}\ Packet2l\&\ f,}
+\DoxyCodeLine{00983\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2l\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{g}},\ \textcolor{keyword}{const}\ Packet2l\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{}
+\DoxyCodeLine{00984\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{abcd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet8us>}}(a,\ b,\ c,\ d);}
+\DoxyCodeLine{00985\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{efgh\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2l,\ Packet8us>}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{e}},\ f,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{g}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}});}
+\DoxyCodeLine{00986\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{abcd\_u16}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{efgh\_u16}}));}
+\DoxyCodeLine{00987\ \}}
+\DoxyCodeLine{00988\ }
+\DoxyCodeLine{00989\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00990\ \textcolor{comment}{//\ pcast,\ SrcType\ =\ uint64\_t}}
+\DoxyCodeLine{00991\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{00992\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00993\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00994\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{00995\ \};}
+\DoxyCodeLine{00996\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00997\ EIGEN\_STRONG\_INLINE\ Packet4f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet4f>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a,\ \textcolor{keyword}{const}\ Packet2ul\&\ b)\ \{}
+\DoxyCodeLine{00998\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcvtq\_f32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(b)));}
+\DoxyCodeLine{00999\ \}}
+\DoxyCodeLine{01000\ }
+\DoxyCodeLine{01001\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01002\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{01003\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01004\ \};}
+\DoxyCodeLine{01005\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01006\ EIGEN\_STRONG\_INLINE\ Packet2ul\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet2ul>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a)\ \{}
+\DoxyCodeLine{01007\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{01008\ \}}
+\DoxyCodeLine{01009\ }
+\DoxyCodeLine{01010\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{01012\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01013\ \};}
+\DoxyCodeLine{01014\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01015\ EIGEN\_STRONG\_INLINE\ Packet2l\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet2l>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a)\ \{}
+\DoxyCodeLine{01016\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s64\_u64}}(a);}
+\DoxyCodeLine{01017\ \}}
+\DoxyCodeLine{01018\ }
+\DoxyCodeLine{01019\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01020\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{01021\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01022\ \};}
+\DoxyCodeLine{01023\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01024\ EIGEN\_STRONG\_INLINE\ Packet4ui\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet4ui>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a,\ \textcolor{keyword}{const}\ Packet2ul\&\ b)\ \{}
+\DoxyCodeLine{01025\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(b));}
+\DoxyCodeLine{01026\ \}}
+\DoxyCodeLine{01027\ }
+\DoxyCodeLine{01028\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{01030\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01031\ \};}
+\DoxyCodeLine{01032\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01033\ EIGEN\_STRONG\_INLINE\ Packet4i\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet4i>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a,\ \textcolor{keyword}{const}\ Packet2ul\&\ b)\ \{}
+\DoxyCodeLine{01034\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s32\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet4ui>}}(a,\ b));}
+\DoxyCodeLine{01035\ \}}
+\DoxyCodeLine{01036\ }
+\DoxyCodeLine{01037\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01038\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{01039\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01040\ \};}
+\DoxyCodeLine{01041\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01042\ EIGEN\_STRONG\_INLINE\ Packet8us\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet8us>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a,\ \textcolor{keyword}{const}\ Packet2ul\&\ b,\ \textcolor{keyword}{const}\ Packet2ul\&\ c,}
+\DoxyCodeLine{01043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2ul\&\ d)\ \{}
+\DoxyCodeLine{01044\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(a),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(b)));}
+\DoxyCodeLine{01045\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x4\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u32}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(c),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u64}}(d)));}
+\DoxyCodeLine{01046\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ab\_u16}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{cd\_u16}});}
+\DoxyCodeLine{01047\ \}}
+\DoxyCodeLine{01048\ }
+\DoxyCodeLine{01049\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01050\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{01051\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01052\ \};}
+\DoxyCodeLine{01053\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01054\ EIGEN\_STRONG\_INLINE\ Packet8s\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet8s>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a,\ \textcolor{keyword}{const}\ Packet2ul\&\ b,\ \textcolor{keyword}{const}\ Packet2ul\&\ c,}
+\DoxyCodeLine{01055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2ul\&\ d)\ \{}
+\DoxyCodeLine{01056\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s16\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet8us>}}(a,\ b,\ c,\ d));}
+\DoxyCodeLine{01057\ \}}
+\DoxyCodeLine{01058\ }
+\DoxyCodeLine{01059\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01060\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{01061\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 8,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01062\ \};}
+\DoxyCodeLine{01063\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01064\ EIGEN\_STRONG\_INLINE\ Packet16uc\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet16uc>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a,\ \textcolor{keyword}{const}\ Packet2ul\&\ b,\ \textcolor{keyword}{const}\ Packet2ul\&\ c,}
+\DoxyCodeLine{01065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2ul\&\ d,\ \textcolor{keyword}{const}\ Packet2ul\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{e}},\ \textcolor{keyword}{const}\ Packet2ul\&\ f,}
+\DoxyCodeLine{01066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2ul\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{g}},\ \textcolor{keyword}{const}\ Packet2ul\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{}
+\DoxyCodeLine{01067\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{abcd\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet8us>}}(a,\ b,\ c,\ d);}
+\DoxyCodeLine{01068\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{uint16x8\_t}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{efgh\_u16}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet8us>}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{e}},\ f,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{g}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}});}
+\DoxyCodeLine{01069\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vcombine\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{abcd\_u16}}),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vmovn\_u16}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{efgh\_u16}}));}
+\DoxyCodeLine{01070\ \}}
+\DoxyCodeLine{01071\ }
+\DoxyCodeLine{01072\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01073\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1type__casting__traits}{type\_casting\_traits}}<numext::uint64\_t,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{01074\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 8,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01075\ \};}
+\DoxyCodeLine{01076\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01077\ EIGEN\_STRONG\_INLINE\ Packet16c\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet16c>}}(\textcolor{keyword}{const}\ Packet2ul\&\ a,\ \textcolor{keyword}{const}\ Packet2ul\&\ b,\ \textcolor{keyword}{const}\ Packet2ul\&\ c,}
+\DoxyCodeLine{01078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2ul\&\ d,\ \textcolor{keyword}{const}\ Packet2ul\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{e}},\ \textcolor{keyword}{const}\ Packet2ul\&\ f,}
+\DoxyCodeLine{01079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2ul\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{g}},\ \textcolor{keyword}{const}\ Packet2ul\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}})\ \{}
+\DoxyCodeLine{01080\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpretq\_s8\_u8}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{pcast<Packet2ul,\ Packet16uc>}}(a,\ b,\ c,\ d,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{e}},\ f,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{g}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{h}}));}
+\DoxyCodeLine{01081\ \}}
+\DoxyCodeLine{01082\ }
+\DoxyCodeLine{01083\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{01084\ \textcolor{comment}{//\ preinterpret}}
+\DoxyCodeLine{01085\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{01086\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01087\ EIGEN\_STRONG\_INLINE\ Packet2f\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{preinterpret<Packet2f,\ Packet2i>}}(\textcolor{keyword}{const}\ Packet2i\&\ a)\ \{}
+\DoxyCodeLine{01088\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{vreinterpret\_f32\_s32}}(a);}
+\DoxyCodeLine{01089\ \}}
+\DoxyCodeLine{01090\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01091\ EIGEN\_STRONG\_INLINE\ Packet2f\ preinterpret<Packet2f,\ Packet2ui>(\textcolor{keyword}{const}\ Packet2ui\&\ a)\ \{}
+\DoxyCodeLine{01092\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_f32\_u32(a);}
+\DoxyCodeLine{01093\ \}}
+\DoxyCodeLine{01094\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01095\ EIGEN\_STRONG\_INLINE\ Packet4f\ preinterpret<Packet4f,\ Packet4i>(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{01096\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_f32\_s32(a);}
+\DoxyCodeLine{01097\ \}}
+\DoxyCodeLine{01098\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01099\ EIGEN\_STRONG\_INLINE\ Packet4f\ preinterpret<Packet4f,\ Packet4ui>(\textcolor{keyword}{const}\ Packet4ui\&\ a)\ \{}
+\DoxyCodeLine{01100\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_f32\_u32(a);}
+\DoxyCodeLine{01101\ \}}
+\DoxyCodeLine{01102\ }
+\DoxyCodeLine{01103\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01104\ EIGEN\_STRONG\_INLINE\ Packet4c\ preinterpret<Packet4c,\ Packet4uc>(\textcolor{keyword}{const}\ Packet4uc\&\ a)\ \{}
+\DoxyCodeLine{01105\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Packet4c\textcolor{keyword}{>}(a);}
+\DoxyCodeLine{01106\ \}}
+\DoxyCodeLine{01107\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01108\ EIGEN\_STRONG\_INLINE\ Packet8c\ preinterpret<Packet8c,\ Packet8uc>(\textcolor{keyword}{const}\ Packet8uc\&\ a)\ \{}
+\DoxyCodeLine{01109\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_s8\_u8(a);}
+\DoxyCodeLine{01110\ \}}
+\DoxyCodeLine{01111\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01112\ EIGEN\_STRONG\_INLINE\ Packet16c\ preinterpret<Packet16c,\ Packet16uc>(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{01113\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_s8\_u8(a);}
+\DoxyCodeLine{01114\ \}}
+\DoxyCodeLine{01115\ }
+\DoxyCodeLine{01116\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01117\ EIGEN\_STRONG\_INLINE\ Packet4uc\ preinterpret<Packet4uc,\ Packet4c>(\textcolor{keyword}{const}\ Packet4c\&\ a)\ \{}
+\DoxyCodeLine{01118\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Packet4uc\textcolor{keyword}{>}(a);}
+\DoxyCodeLine{01119\ \}}
+\DoxyCodeLine{01120\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01121\ EIGEN\_STRONG\_INLINE\ Packet8uc\ preinterpret<Packet8uc,\ Packet8c>(\textcolor{keyword}{const}\ Packet8c\&\ a)\ \{}
+\DoxyCodeLine{01122\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_u8\_s8(a);}
+\DoxyCodeLine{01123\ \}}
+\DoxyCodeLine{01124\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01125\ EIGEN\_STRONG\_INLINE\ Packet16uc\ preinterpret<Packet16uc,\ Packet16c>(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{01126\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_u8\_s8(a);}
+\DoxyCodeLine{01127\ \}}
+\DoxyCodeLine{01128\ }
+\DoxyCodeLine{01129\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01130\ EIGEN\_STRONG\_INLINE\ Packet4s\ preinterpret<Packet4s,\ Packet4us>(\textcolor{keyword}{const}\ Packet4us\&\ a)\ \{}
+\DoxyCodeLine{01131\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_s16\_u16(a);}
+\DoxyCodeLine{01132\ \}}
+\DoxyCodeLine{01133\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01134\ EIGEN\_STRONG\_INLINE\ Packet8s\ preinterpret<Packet8s,\ Packet8us>(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{01135\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_s16\_u16(a);}
+\DoxyCodeLine{01136\ \}}
+\DoxyCodeLine{01137\ }
+\DoxyCodeLine{01138\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01139\ EIGEN\_STRONG\_INLINE\ Packet4us\ preinterpret<Packet4us,\ Packet4s>(\textcolor{keyword}{const}\ Packet4s\&\ a)\ \{}
+\DoxyCodeLine{01140\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_u16\_s16(a);}
+\DoxyCodeLine{01141\ \}}
+\DoxyCodeLine{01142\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01143\ EIGEN\_STRONG\_INLINE\ Packet8us\ preinterpret<Packet8us,\ Packet8s>(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{01144\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_u16\_s16(a);}
+\DoxyCodeLine{01145\ \}}
+\DoxyCodeLine{01146\ }
+\DoxyCodeLine{01147\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01148\ EIGEN\_STRONG\_INLINE\ Packet2i\ preinterpret<Packet2i,\ Packet2f>(\textcolor{keyword}{const}\ Packet2f\&\ a)\ \{}
+\DoxyCodeLine{01149\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_s32\_f32(a);}
+\DoxyCodeLine{01150\ \}}
+\DoxyCodeLine{01151\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01152\ EIGEN\_STRONG\_INLINE\ Packet2i\ preinterpret<Packet2i,\ Packet2ui>(\textcolor{keyword}{const}\ Packet2ui\&\ a)\ \{}
+\DoxyCodeLine{01153\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_s32\_u32(a);}
+\DoxyCodeLine{01154\ \}}
+\DoxyCodeLine{01155\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01156\ EIGEN\_STRONG\_INLINE\ Packet4i\ preinterpret<Packet4i,\ Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{01157\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_s32\_f32(a);}
+\DoxyCodeLine{01158\ \}}
+\DoxyCodeLine{01159\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01160\ EIGEN\_STRONG\_INLINE\ Packet4i\ preinterpret<Packet4i,\ Packet4ui>(\textcolor{keyword}{const}\ Packet4ui\&\ a)\ \{}
+\DoxyCodeLine{01161\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_s32\_u32(a);}
+\DoxyCodeLine{01162\ \}}
+\DoxyCodeLine{01163\ }
+\DoxyCodeLine{01164\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01165\ EIGEN\_STRONG\_INLINE\ Packet2ui\ preinterpret<Packet2ui,\ Packet2f>(\textcolor{keyword}{const}\ Packet2f\&\ a)\ \{}
+\DoxyCodeLine{01166\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_u32\_f32(a);}
+\DoxyCodeLine{01167\ \}}
+\DoxyCodeLine{01168\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01169\ EIGEN\_STRONG\_INLINE\ Packet2ui\ preinterpret<Packet2ui,\ Packet2i>(\textcolor{keyword}{const}\ Packet2i\&\ a)\ \{}
+\DoxyCodeLine{01170\ \ \ \textcolor{keywordflow}{return}\ vreinterpret\_u32\_s32(a);}
+\DoxyCodeLine{01171\ \}}
+\DoxyCodeLine{01172\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01173\ EIGEN\_STRONG\_INLINE\ Packet4ui\ preinterpret<Packet4ui,\ Packet4f>(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{01174\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_u32\_f32(a);}
+\DoxyCodeLine{01175\ \}}
+\DoxyCodeLine{01176\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01177\ EIGEN\_STRONG\_INLINE\ Packet4ui\ preinterpret<Packet4ui,\ Packet4i>(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{01178\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_u32\_s32(a);}
+\DoxyCodeLine{01179\ \}}
+\DoxyCodeLine{01180\ }
+\DoxyCodeLine{01181\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01182\ EIGEN\_STRONG\_INLINE\ Packet2l\ preinterpret<Packet2l,\ Packet2ul>(\textcolor{keyword}{const}\ Packet2ul\&\ a)\ \{}
+\DoxyCodeLine{01183\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_s64\_u64(a);}
+\DoxyCodeLine{01184\ \}}
+\DoxyCodeLine{01185\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01186\ EIGEN\_STRONG\_INLINE\ Packet2ul\ preinterpret<Packet2ul,\ Packet2l>(\textcolor{keyword}{const}\ Packet2l\&\ a)\ \{}
+\DoxyCodeLine{01187\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_u64\_s64(a);}
+\DoxyCodeLine{01188\ \}}
+\DoxyCodeLine{01189\ }
+\DoxyCodeLine{01190\ \textcolor{preprocessor}{\#if\ EIGEN\_ARCH\_ARM64}}
+\DoxyCodeLine{01191\ }
+\DoxyCodeLine{01192\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{01193\ \textcolor{comment}{//\ pcast/preinterpret,\ Double}}
+\DoxyCodeLine{01194\ \textcolor{comment}{//==============================================================================}}
+\DoxyCodeLine{01195\ }
+\DoxyCodeLine{01196\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01197\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ double>\ \{}
+\DoxyCodeLine{01198\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01199\ \};}
+\DoxyCodeLine{01200\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01201\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet2d,\ Packet2d>(\textcolor{keyword}{const}\ Packet2d\&\ a)\ \{}
+\DoxyCodeLine{01202\ \ \ \textcolor{keywordflow}{return}\ a;}
+\DoxyCodeLine{01203\ \}}
+\DoxyCodeLine{01204\ }
+\DoxyCodeLine{01205\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01206\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ float>\ \{}
+\DoxyCodeLine{01207\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01208\ \};}
+\DoxyCodeLine{01209\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01210\ EIGEN\_STRONG\_INLINE\ Packet4f\ pcast<Packet2d,\ Packet4f>(\textcolor{keyword}{const}\ Packet2d\&\ a,\ \textcolor{keyword}{const}\ Packet2d\&\ b)\ \{}
+\DoxyCodeLine{01211\ \ \ \textcolor{keywordflow}{return}\ vcombine\_f32(vcvt\_f32\_f64(a),\ vcvt\_f32\_f64(b));}
+\DoxyCodeLine{01212\ \}}
+\DoxyCodeLine{01213\ }
+\DoxyCodeLine{01214\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01215\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ numext::int64\_t>\ \{}
+\DoxyCodeLine{01216\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01217\ \};}
+\DoxyCodeLine{01218\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01219\ EIGEN\_STRONG\_INLINE\ Packet2l\ pcast<Packet2d,\ Packet2l>(\textcolor{keyword}{const}\ Packet2d\&\ a)\ \{}
+\DoxyCodeLine{01220\ \ \ \textcolor{keywordflow}{return}\ vcvtq\_s64\_f64(a);}
+\DoxyCodeLine{01221\ \}}
+\DoxyCodeLine{01222\ }
+\DoxyCodeLine{01223\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01224\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ numext::uint64\_t>\ \{}
+\DoxyCodeLine{01225\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01226\ \};}
+\DoxyCodeLine{01227\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01228\ EIGEN\_STRONG\_INLINE\ Packet2ul\ pcast<Packet2d,\ Packet2ul>(\textcolor{keyword}{const}\ Packet2d\&\ a)\ \{}
+\DoxyCodeLine{01229\ \ \ \textcolor{keywordflow}{return}\ vcvtq\_u64\_f64(a);}
+\DoxyCodeLine{01230\ \}}
+\DoxyCodeLine{01231\ }
+\DoxyCodeLine{01232\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01233\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ numext::int32\_t>\ \{}
+\DoxyCodeLine{01234\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01235\ \};}
+\DoxyCodeLine{01236\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01237\ EIGEN\_STRONG\_INLINE\ Packet4i\ pcast<Packet2d,\ Packet4i>(\textcolor{keyword}{const}\ Packet2d\&\ a,\ \textcolor{keyword}{const}\ Packet2d\&\ b)\ \{}
+\DoxyCodeLine{01238\ \ \ \textcolor{keywordflow}{return}\ vcombine\_s32(vmovn\_s64(vcvtq\_s64\_f64(a)),\ vmovn\_s64(vcvtq\_s64\_f64(b)));}
+\DoxyCodeLine{01239\ \}}
+\DoxyCodeLine{01240\ }
+\DoxyCodeLine{01241\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01242\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ numext::uint32\_t>\ \{}
+\DoxyCodeLine{01243\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 2,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01244\ \};}
+\DoxyCodeLine{01245\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01246\ EIGEN\_STRONG\_INLINE\ Packet4ui\ pcast<Packet2d,\ Packet4ui>(\textcolor{keyword}{const}\ Packet2d\&\ a,\ \textcolor{keyword}{const}\ Packet2d\&\ b)\ \{}
+\DoxyCodeLine{01247\ \ \ \textcolor{keywordflow}{return}\ vcombine\_u32(vmovn\_u64(vcvtq\_u64\_f64(a)),\ vmovn\_u64(vcvtq\_u64\_f64(b)));}
+\DoxyCodeLine{01248\ \}}
+\DoxyCodeLine{01249\ }
+\DoxyCodeLine{01250\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01251\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ numext::int16\_t>\ \{}
+\DoxyCodeLine{01252\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01253\ \};}
+\DoxyCodeLine{01254\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01255\ EIGEN\_STRONG\_INLINE\ Packet8s\ pcast<Packet2d,\ Packet8s>(\textcolor{keyword}{const}\ Packet2d\&\ a,\ \textcolor{keyword}{const}\ Packet2d\&\ b,\ \textcolor{keyword}{const}\ Packet2d\&\ c,}
+\DoxyCodeLine{01256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2d\&\ d)\ \{}
+\DoxyCodeLine{01257\ \ \ \textcolor{keyword}{const}\ int32x4\_t\ ab\_s32\ =\ pcast<Packet2d,\ Packet4i>(a,\ b);}
+\DoxyCodeLine{01258\ \ \ \textcolor{keyword}{const}\ int32x4\_t\ cd\_s32\ =\ pcast<Packet2d,\ Packet4i>(c,\ d);}
+\DoxyCodeLine{01259\ \ \ \textcolor{keywordflow}{return}\ vcombine\_s16(vmovn\_s32(ab\_s32),\ vmovn\_s32(cd\_s32));}
+\DoxyCodeLine{01260\ \}}
+\DoxyCodeLine{01261\ }
+\DoxyCodeLine{01262\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01263\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ numext::uint16\_t>\ \{}
+\DoxyCodeLine{01264\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 4,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01265\ \};}
+\DoxyCodeLine{01266\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01267\ EIGEN\_STRONG\_INLINE\ Packet8us\ pcast<Packet2d,\ Packet8us>(\textcolor{keyword}{const}\ Packet2d\&\ a,\ \textcolor{keyword}{const}\ Packet2d\&\ b,\ \textcolor{keyword}{const}\ Packet2d\&\ c,}
+\DoxyCodeLine{01268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2d\&\ d)\ \{}
+\DoxyCodeLine{01269\ \ \ \textcolor{keyword}{const}\ uint32x4\_t\ ab\_u32\ =\ pcast<Packet2d,\ Packet4ui>(a,\ b);}
+\DoxyCodeLine{01270\ \ \ \textcolor{keyword}{const}\ uint32x4\_t\ cd\_u32\ =\ pcast<Packet2d,\ Packet4ui>(c,\ d);}
+\DoxyCodeLine{01271\ \ \ \textcolor{keywordflow}{return}\ vcombine\_u16(vmovn\_u32(ab\_u32),\ vmovn\_u32(cd\_u32));}
+\DoxyCodeLine{01272\ \}}
+\DoxyCodeLine{01273\ }
+\DoxyCodeLine{01274\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01275\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ numext::int8\_t>\ \{}
+\DoxyCodeLine{01276\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 8,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01277\ \};}
+\DoxyCodeLine{01278\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01279\ EIGEN\_STRONG\_INLINE\ Packet16c\ pcast<Packet2d,\ Packet16c>(\textcolor{keyword}{const}\ Packet2d\&\ a,\ \textcolor{keyword}{const}\ Packet2d\&\ b,\ \textcolor{keyword}{const}\ Packet2d\&\ c,}
+\DoxyCodeLine{01280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2d\&\ d,\ \textcolor{keyword}{const}\ Packet2d\&\ e,\ \textcolor{keyword}{const}\ Packet2d\&\ f,}
+\DoxyCodeLine{01281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2d\&\ g,\ \textcolor{keyword}{const}\ Packet2d\&\ h)\ \{}
+\DoxyCodeLine{01282\ \ \ \textcolor{keyword}{const}\ int16x8\_t\ abcd\_s16\ =\ pcast<Packet2d,\ Packet8s>(a,\ b,\ c,\ d);}
+\DoxyCodeLine{01283\ \ \ \textcolor{keyword}{const}\ int16x8\_t\ efgh\_s16\ =\ pcast<Packet2d,\ Packet8s>(e,\ f,\ g,\ h);}
+\DoxyCodeLine{01284\ \ \ \textcolor{keywordflow}{return}\ vcombine\_s8(vmovn\_s16(abcd\_s16),\ vmovn\_s16(efgh\_s16));}
+\DoxyCodeLine{01285\ \}}
+\DoxyCodeLine{01286\ }
+\DoxyCodeLine{01287\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01288\ \textcolor{keyword}{struct\ }type\_casting\_traits<double,\ numext::uint8\_t>\ \{}
+\DoxyCodeLine{01289\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 8,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01290\ \};}
+\DoxyCodeLine{01291\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01292\ EIGEN\_STRONG\_INLINE\ Packet16uc\ pcast<Packet2d,\ Packet16uc>(\textcolor{keyword}{const}\ Packet2d\&\ a,\ \textcolor{keyword}{const}\ Packet2d\&\ b,\ \textcolor{keyword}{const}\ Packet2d\&\ c,}
+\DoxyCodeLine{01293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2d\&\ d,\ \textcolor{keyword}{const}\ Packet2d\&\ e,\ \textcolor{keyword}{const}\ Packet2d\&\ f,}
+\DoxyCodeLine{01294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Packet2d\&\ g,\ \textcolor{keyword}{const}\ Packet2d\&\ h)\ \{}
+\DoxyCodeLine{01295\ \ \ \textcolor{keyword}{const}\ uint16x8\_t\ abcd\_u16\ =\ pcast<Packet2d,\ Packet8us>(a,\ b,\ c,\ d);}
+\DoxyCodeLine{01296\ \ \ \textcolor{keyword}{const}\ uint16x8\_t\ efgh\_u16\ =\ pcast<Packet2d,\ Packet8us>(e,\ f,\ g,\ h);}
+\DoxyCodeLine{01297\ \ \ \textcolor{keywordflow}{return}\ vcombine\_u8(vmovn\_u16(abcd\_u16),\ vmovn\_u16(efgh\_u16));}
+\DoxyCodeLine{01298\ \}}
+\DoxyCodeLine{01299\ }
+\DoxyCodeLine{01300\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01301\ \textcolor{keyword}{struct\ }type\_casting\_traits<float,\ double>\ \{}
+\DoxyCodeLine{01302\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{01303\ \};}
+\DoxyCodeLine{01304\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01305\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet4f,\ Packet2d>(\textcolor{keyword}{const}\ Packet4f\&\ a)\ \{}
+\DoxyCodeLine{01306\ \ \ \textcolor{comment}{//\ Discard\ second-\/half\ of\ input.}}
+\DoxyCodeLine{01307\ \ \ \textcolor{keywordflow}{return}\ vcvt\_f64\_f32(vget\_low\_f32(a));}
+\DoxyCodeLine{01308\ \}}
+\DoxyCodeLine{01309\ }
+\DoxyCodeLine{01310\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01311\ \textcolor{keyword}{struct\ }type\_casting\_traits<numext::int8\_t,\ double>\ \{}
+\DoxyCodeLine{01312\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 8\ \};}
+\DoxyCodeLine{01313\ \};}
+\DoxyCodeLine{01314\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01315\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet16c,\ Packet2d>(\textcolor{keyword}{const}\ Packet16c\&\ a)\ \{}
+\DoxyCodeLine{01316\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ two\ values.}}
+\DoxyCodeLine{01317\ \ \ \textcolor{keywordflow}{return}\ vcvt\_f64\_f32(pcast<Packet8c,\ Packet2f>(vget\_low\_s8(a)));}
+\DoxyCodeLine{01318\ \}}
+\DoxyCodeLine{01319\ }
+\DoxyCodeLine{01320\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01321\ \textcolor{keyword}{struct\ }type\_casting\_traits<numext::uint8\_t,\ double>\ \{}
+\DoxyCodeLine{01322\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 8\ \};}
+\DoxyCodeLine{01323\ \};}
+\DoxyCodeLine{01324\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01325\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet16uc,\ Packet2d>(\textcolor{keyword}{const}\ Packet16uc\&\ a)\ \{}
+\DoxyCodeLine{01326\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ two\ values.}}
+\DoxyCodeLine{01327\ \ \ \textcolor{keywordflow}{return}\ vcvt\_f64\_f32(pcast<Packet8uc,\ Packet2f>(vget\_low\_u8(a)));}
+\DoxyCodeLine{01328\ \}}
+\DoxyCodeLine{01329\ }
+\DoxyCodeLine{01330\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01331\ \textcolor{keyword}{struct\ }type\_casting\_traits<numext::int16\_t,\ double>\ \{}
+\DoxyCodeLine{01332\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{01333\ \};}
+\DoxyCodeLine{01334\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01335\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet8s,\ Packet2d>(\textcolor{keyword}{const}\ Packet8s\&\ a)\ \{}
+\DoxyCodeLine{01336\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ two\ values.}}
+\DoxyCodeLine{01337\ \ \ \textcolor{keywordflow}{return}\ vcvt\_f64\_f32(pcast<Packet4s,\ Packet2f>(vget\_low\_s16(a)));}
+\DoxyCodeLine{01338\ \}}
+\DoxyCodeLine{01339\ }
+\DoxyCodeLine{01340\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01341\ \textcolor{keyword}{struct\ }type\_casting\_traits<numext::uint16\_t,\ double>\ \{}
+\DoxyCodeLine{01342\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 4\ \};}
+\DoxyCodeLine{01343\ \};}
+\DoxyCodeLine{01344\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01345\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet8us,\ Packet2d>(\textcolor{keyword}{const}\ Packet8us\&\ a)\ \{}
+\DoxyCodeLine{01346\ \ \ \textcolor{comment}{//\ Discard\ all\ but\ first\ two\ values.}}
+\DoxyCodeLine{01347\ \ \ \textcolor{keywordflow}{return}\ vcvt\_f64\_f32(pcast<Packet4us,\ Packet2f>(vget\_low\_u16(a)));}
+\DoxyCodeLine{01348\ \}}
+\DoxyCodeLine{01349\ }
+\DoxyCodeLine{01350\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01351\ \textcolor{keyword}{struct\ }type\_casting\_traits<numext::int32\_t,\ double>\ \{}
+\DoxyCodeLine{01352\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{01353\ \};}
+\DoxyCodeLine{01354\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01355\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet4i,\ Packet2d>(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{01356\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{01357\ \ \ \textcolor{keywordflow}{return}\ vcvtq\_f64\_s64(vmovl\_s32(vget\_low\_s32(a)));}
+\DoxyCodeLine{01358\ \}}
+\DoxyCodeLine{01359\ }
+\DoxyCodeLine{01360\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01361\ \textcolor{keyword}{struct\ }type\_casting\_traits<numext::uint32\_t,\ double>\ \{}
+\DoxyCodeLine{01362\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 2\ \};}
+\DoxyCodeLine{01363\ \};}
+\DoxyCodeLine{01364\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01365\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet4ui,\ Packet2d>(\textcolor{keyword}{const}\ Packet4ui\&\ a)\ \{}
+\DoxyCodeLine{01366\ \ \ \textcolor{comment}{//\ Discard\ second\ half\ of\ input.}}
+\DoxyCodeLine{01367\ \ \ \textcolor{keywordflow}{return}\ vcvtq\_f64\_u64(vmovl\_u32(vget\_low\_u32(a)));}
+\DoxyCodeLine{01368\ \}}
+\DoxyCodeLine{01369\ }
+\DoxyCodeLine{01370\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01371\ \textcolor{keyword}{struct\ }type\_casting\_traits<numext::int64\_t,\ double>\ \{}
+\DoxyCodeLine{01372\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01373\ \};}
+\DoxyCodeLine{01374\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01375\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet2l,\ Packet2d>(\textcolor{keyword}{const}\ Packet2l\&\ a)\ \{}
+\DoxyCodeLine{01376\ \ \ \textcolor{keywordflow}{return}\ vcvtq\_f64\_s64(a);}
+\DoxyCodeLine{01377\ \}}
+\DoxyCodeLine{01378\ }
+\DoxyCodeLine{01379\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01380\ \textcolor{keyword}{struct\ }type\_casting\_traits<numext::uint64\_t,\ double>\ \{}
+\DoxyCodeLine{01381\ \ \ \textcolor{keyword}{enum}\ \{\ VectorizedCast\ =\ 1,\ SrcCoeffRatio\ =\ 1,\ TgtCoeffRatio\ =\ 1\ \};}
+\DoxyCodeLine{01382\ \};}
+\DoxyCodeLine{01383\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01384\ EIGEN\_STRONG\_INLINE\ Packet2d\ pcast<Packet2ul,\ Packet2d>(\textcolor{keyword}{const}\ Packet2ul\&\ a)\ \{}
+\DoxyCodeLine{01385\ \ \ \textcolor{keywordflow}{return}\ vcvtq\_f64\_u64(a);}
+\DoxyCodeLine{01386\ \}}
+\DoxyCodeLine{01387\ }
+\DoxyCodeLine{01388\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01389\ EIGEN\_STRONG\_INLINE\ Packet2d\ preinterpret<Packet2d,\ Packet2l>(\textcolor{keyword}{const}\ Packet2l\&\ a)\ \{}
+\DoxyCodeLine{01390\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_f64\_s64(a);}
+\DoxyCodeLine{01391\ \}}
+\DoxyCodeLine{01392\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01393\ EIGEN\_STRONG\_INLINE\ Packet2d\ preinterpret<Packet2d,\ Packet2ul>(\textcolor{keyword}{const}\ Packet2ul\&\ a)\ \{}
+\DoxyCodeLine{01394\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_f64\_u64(a);}
+\DoxyCodeLine{01395\ \}}
+\DoxyCodeLine{01396\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01397\ EIGEN\_STRONG\_INLINE\ Packet2l\ preinterpret<Packet2l,\ Packet2d>(\textcolor{keyword}{const}\ Packet2d\&\ a)\ \{}
+\DoxyCodeLine{01398\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_s64\_f64(a);}
+\DoxyCodeLine{01399\ \}}
+\DoxyCodeLine{01400\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01401\ EIGEN\_STRONG\_INLINE\ Packet2ul\ preinterpret<Packet2ul,\ Packet2d>(\textcolor{keyword}{const}\ Packet2d\&\ a)\ \{}
+\DoxyCodeLine{01402\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_u64\_f64(a);}
+\DoxyCodeLine{01403\ \}}
+\DoxyCodeLine{01404\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01405\ EIGEN\_STRONG\_INLINE\ Packet2d\ preinterpret<Packet2d,\ Packet4i>(\textcolor{keyword}{const}\ Packet4i\&\ a)\ \{}
+\DoxyCodeLine{01406\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_f64\_s32(a);}
+\DoxyCodeLine{01407\ \}}
+\DoxyCodeLine{01408\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01409\ EIGEN\_STRONG\_INLINE\ Packet4i\ preinterpret<Packet4i,\ Packet2d>(\textcolor{keyword}{const}\ Packet2d\&\ a)\ \{}
+\DoxyCodeLine{01410\ \ \ \textcolor{keywordflow}{return}\ vreinterpretq\_s32\_f64(a);}
+\DoxyCodeLine{01411\ \}}
+\DoxyCodeLine{01412\ }
+\DoxyCodeLine{01413\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ EIGEN\_ARCH\_ARM64}}
+\DoxyCodeLine{01414\ }
+\DoxyCodeLine{01415\ \}\ \ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{01416\ }
+\DoxyCodeLine{01417\ \}\ \ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{01418\ }
+\DoxyCodeLine{01419\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ EIGEN\_TYPE\_CASTING\_NEON\_H}}
+
+\end{DoxyCode}

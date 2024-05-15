@@ -1,0 +1,2031 @@
+\doxysection{Math\+Functions.\+h}
+\hypertarget{_math_functions_8h_source}{}\label{_math_functions_8h_source}\index{Eigen/src/Core/MathFunctions.h@{Eigen/src/Core/MathFunctions.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2006-\/2010\ Benoit\ Jacob\ <jacob.benoit.1@gmail.com>}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Copyright\ (c)\ 2021,\ NVIDIA\ CORPORATION.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_MATHFUNCTIONS\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ EIGEN\_MATHFUNCTIONS\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ TODO\ this\ should\ better\ be\ moved\ to\ NumTraits}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Source:\ WolframAlpha}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ EIGEN\_PI\ \ \ \ 3.141592653589793238462643383279502884197169399375105820974944592307816406L}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ EIGEN\_LOG2E\ 1.442695040888963407359924681001892137426645954152985934135449406931109219L}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ EIGEN\_LN2\ \ \ 0.693147180559945309417232121458176568075500134360255254120680009493393621L}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ On\ WINCE,\ std::abs\ is\ defined\ for\ int\ only,\ so\ let's\ defined\ our\ own\ overloads:}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ This\ issue\ has\ been\ confirmed\ with\ MSVC\ 2008\ only,\ but\ the\ issue\ might\ exist\ for\ more\ recent\ versions\ too.}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#if\ EIGEN\_OS\_WINCE\ \&\&\ EIGEN\_COMP\_MSVC\ \&\&\ EIGEN\_COMP\_MSVC<=1500}}
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ \ abs(\textcolor{keywordtype}{long}\ \ \ \ \ \ \ \ x)\ \{\ \textcolor{keywordflow}{return}\ (labs(x));\ \ \}}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{double}\ \ \ \ \ \ abs(\textcolor{keywordtype}{double}\ \ \ \ \ \ x)\ \{\ \textcolor{keywordflow}{return}\ (fabs(x));\ \ \}}
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ abs(\textcolor{keywordtype}{float}\ \ \ \ \ \ \ x)\ \{\ \textcolor{keywordflow}{return}\ (fabsf(x));\ \}}
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ abs(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ x)\ \{\ \textcolor{keywordflow}{return}\ (fabsl(x));\ \}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ dummy\ =\ \textcolor{keywordtype}{void}>}
+\DoxyCodeLine{00054\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1global__math__functions__filtering__base}{global\_math\_functions\_filtering\_base}}}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00057\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1always__void}{always\_void}}\ \{\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00062\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1global__math__functions__filtering__base}{global\_math\_functions\_filtering\_base}}}
+\DoxyCodeLine{00063\ \ \ <\mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}},}
+\DoxyCodeLine{00064\ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{typename}}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1always__void}{always\_void}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{typename}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}::Eigen\_BaseClassForSpecializationOfGlobalMathFuncImpl>::type}
+\DoxyCodeLine{00065\ \ \ >}
+\DoxyCodeLine{00066\ \{}
+\DoxyCodeLine{00067\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ T::Eigen\_BaseClassForSpecializationOfGlobalMathFuncImpl\ type;}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ EIGEN\_MATHFUNC\_IMPL(func,\ scalar)\ Eigen::internal::func\#\#\_impl<typename\ Eigen::internal::global\_math\_functions\_filtering\_base<scalar>::type>}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ EIGEN\_MATHFUNC\_RETVAL(func,\ scalar)\ typename\ Eigen::internal::func\#\#\_retval<typename\ Eigen::internal::global\_math\_functions\_filtering\_base<scalar>::type>::type}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00074\ \textcolor{comment}{*\ Implementation\ of\ real\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00075\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{template<typename\ Scalar,\ bool\ IsComplex\ =\ NumTraits<Scalar>::IsComplex}}>}
+\DoxyCodeLine{00078\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1real__default__impl}{real\_default\_impl}}}
+\DoxyCodeLine{00079\ \{}
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00081\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00083\ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00085\ \ \ \}}
+\DoxyCodeLine{00086\ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00089\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1real__default__impl}{real\_default\_impl}}<Scalar,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00092\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00094\ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{using\ }std::real;}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{return}\ real(x);}
+\DoxyCodeLine{00097\ \ \ \}}
+\DoxyCodeLine{00098\ \};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1real__impl}{real\_impl}}\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1real__default__impl}{real\_default\_impl}}<Scalar>\ \{\};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{00103\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00104\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1real__impl}{real\_impl}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<T>\ >}
+\DoxyCodeLine{00105\ \{}
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}\ RealScalar;}
+\DoxyCodeLine{00107\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}\ run(\textcolor{keyword}{const}\ std::complex<T>\&\ x)}
+\DoxyCodeLine{00109\ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}\ x.real();}
+\DoxyCodeLine{00111\ \ \ \}}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00116\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1real__retval}{real\_retval}}}
+\DoxyCodeLine{00117\ \{}
+\DoxyCodeLine{00118\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00119\ \};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00122\ \textcolor{comment}{*\ Implementation\ of\ imag\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00123\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{template<typename\ Scalar,\ bool\ IsComplex\ =\ NumTraits<Scalar>::IsComplex}}>}
+\DoxyCodeLine{00126\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__default__impl}{imag\_default\_impl}}}
+\DoxyCodeLine{00127\ \{}
+\DoxyCodeLine{00128\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00129\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00130\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&)}
+\DoxyCodeLine{00131\ \ \ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}(0);}
+\DoxyCodeLine{00133\ \ \ \}}
+\DoxyCodeLine{00134\ \};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00137\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__default__impl}{imag\_default\_impl}}<Scalar,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{00138\ \{}
+\DoxyCodeLine{00139\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00140\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00141\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00142\ \ \ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{using\ }std::imag;}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{return}\ imag(x);}
+\DoxyCodeLine{00145\ \ \ \}}
+\DoxyCodeLine{00146\ \};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__impl}{imag\_impl}}\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__default__impl}{imag\_default\_impl}}<Scalar>\ \{\};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{00151\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00152\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__impl}{imag\_impl}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<T>\ >}
+\DoxyCodeLine{00153\ \{}
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}\ RealScalar;}
+\DoxyCodeLine{00155\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00156\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}\ run(\textcolor{keyword}{const}\ std::complex<T>\&\ x)}
+\DoxyCodeLine{00157\ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{return}\ x.imag();}
+\DoxyCodeLine{00159\ \ \ \}}
+\DoxyCodeLine{00160\ \};}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00164\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__retval}{imag\_retval}}}
+\DoxyCodeLine{00165\ \{}
+\DoxyCodeLine{00166\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00167\ \};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00170\ \textcolor{comment}{*\ Implementation\ of\ real\_ref\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00171\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00174\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1real__ref__impl}{real\_ref\_impl}}}
+\DoxyCodeLine{00175\ \{}
+\DoxyCodeLine{00176\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00177\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00178\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ run(Scalar\&\ x)}
+\DoxyCodeLine{00179\ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}*\textcolor{keyword}{>}(\&x)[0];}
+\DoxyCodeLine{00181\ \ \ \}}
+\DoxyCodeLine{00182\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00183\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00184\ \ \ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const\ }\mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}*\textcolor{keyword}{>}(\&x)[0];}
+\DoxyCodeLine{00186\ \ \ \}}
+\DoxyCodeLine{00187\ \};}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00190\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1real__ref__retval}{real\_ref\_retval}}}
+\DoxyCodeLine{00191\ \{}
+\DoxyCodeLine{00192\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00193\ \};}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00196\ \textcolor{comment}{*\ Implementation\ of\ imag\_ref\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00197\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keywordtype}{bool}\ IsComplex>}
+\DoxyCodeLine{00200\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__ref__default__impl}{imag\_ref\_default\_impl}}}
+\DoxyCodeLine{00201\ \{}
+\DoxyCodeLine{00202\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00203\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00204\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ run(Scalar\&\ x)}
+\DoxyCodeLine{00205\ \ \ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}*\textcolor{keyword}{>}(\&x)[1];}
+\DoxyCodeLine{00207\ \ \ \}}
+\DoxyCodeLine{00208\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00209\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00210\ \ \ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}*\textcolor{keyword}{>}(\&x)[1];}
+\DoxyCodeLine{00212\ \ \ \}}
+\DoxyCodeLine{00213\ \};}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00216\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__ref__default__impl}{imag\_ref\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}>}
+\DoxyCodeLine{00217\ \{}
+\DoxyCodeLine{00218\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR}
+\DoxyCodeLine{00219\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(Scalar\&)}
+\DoxyCodeLine{00220\ \ \ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordflow}{return}\ Scalar(0);}
+\DoxyCodeLine{00222\ \ \ \}}
+\DoxyCodeLine{00223\ \ \ EIGEN\_DEVICE\_FUNC\ EIGEN\_CONSTEXPR}
+\DoxyCodeLine{00224\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&)}
+\DoxyCodeLine{00225\ \ \ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordflow}{return}\ Scalar(0);}
+\DoxyCodeLine{00227\ \ \ \}}
+\DoxyCodeLine{00228\ \};}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00231\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__ref__impl}{imag\_ref\_impl}}\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__ref__default__impl}{imag\_ref\_default\_impl}}<Scalar,\ NumTraits<Scalar>::IsComplex>\ \{\};}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00234\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1imag__ref__retval}{imag\_ref\_retval}}}
+\DoxyCodeLine{00235\ \{}
+\DoxyCodeLine{00236\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00237\ \};}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00240\ \textcolor{comment}{*\ Implementation\ of\ conj\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00241\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{template<typename\ Scalar,\ bool\ IsComplex\ =\ NumTraits<Scalar>::IsComplex}}>}
+\DoxyCodeLine{00244\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1conj__default__impl}{conj\_default\_impl}}}
+\DoxyCodeLine{00245\ \{}
+\DoxyCodeLine{00246\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00247\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00248\ \ \ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00250\ \ \ \}}
+\DoxyCodeLine{00251\ \};}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00254\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1conj__default__impl}{conj\_default\_impl}}<Scalar,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{00255\ \{}
+\DoxyCodeLine{00256\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00257\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00258\ \ \ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keyword}{using\ }std::conj;}
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{conj}}(x);}
+\DoxyCodeLine{00261\ \ \ \}}
+\DoxyCodeLine{00262\ \};}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{template<typename\ Scalar,\ bool\ IsComplex\ =\ NumTraits<Scalar>::IsComplex}}>}
+\DoxyCodeLine{00265\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1conj__impl}{conj\_impl}}\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1conj__default__impl}{conj\_default\_impl}}<Scalar,\ IsComplex>\ \{\};}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00268\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1conj__retval}{conj\_retval}}}
+\DoxyCodeLine{00269\ \{}
+\DoxyCodeLine{00270\ \ \ \textcolor{keyword}{typedef}\ Scalar\ type;}
+\DoxyCodeLine{00271\ \};}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00274\ \textcolor{comment}{*\ Implementation\ of\ abs2\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00275\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\textcolor{keywordtype}{bool}\ IsComplex>}
+\DoxyCodeLine{00278\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1abs2__impl__default}{abs2\_impl\_default}}}
+\DoxyCodeLine{00279\ \{}
+\DoxyCodeLine{00280\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00281\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00282\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00283\ \ \ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordflow}{return}\ x*x;}
+\DoxyCodeLine{00285\ \ \ \}}
+\DoxyCodeLine{00286\ \};}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00289\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1abs2__impl__default}{abs2\_impl\_default}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>\ \textcolor{comment}{//\ IsComplex}}
+\DoxyCodeLine{00290\ \{}
+\DoxyCodeLine{00291\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00292\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00293\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00294\ \ \ \{}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordflow}{return}\ x.real()*x.real()\ +\ x.imag()*x.imag();}
+\DoxyCodeLine{00296\ \ \ \}}
+\DoxyCodeLine{00297\ \};}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00300\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1abs2__impl}{abs2\_impl}}}
+\DoxyCodeLine{00301\ \{}
+\DoxyCodeLine{00302\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00303\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00304\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00305\ \ \ \{}
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{abs2\_impl\_default<Scalar,NumTraits<Scalar>::IsComplex}}>::run(x);}
+\DoxyCodeLine{00307\ \ \ \}}
+\DoxyCodeLine{00308\ \};}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00311\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1abs2__retval}{abs2\_retval}}}
+\DoxyCodeLine{00312\ \{}
+\DoxyCodeLine{00313\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00314\ \};}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00317\ \textcolor{comment}{*\ Implementation\ of\ sqrt/rsqrt\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00318\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00321\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1sqrt__impl}{sqrt\_impl}}}
+\DoxyCodeLine{00322\ \{}
+\DoxyCodeLine{00323\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00324\ \ \ \textcolor{keyword}{static}\ EIGEN\_ALWAYS\_INLINE\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00325\ \ \ \{}
+\DoxyCodeLine{00326\ \ \ \ \ EIGEN\_USING\_STD(sqrt);}
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keywordflow}{return}\ sqrt(x);}
+\DoxyCodeLine{00328\ \ \ \}}
+\DoxyCodeLine{00329\ \};}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \textcolor{comment}{//\ Complex\ sqrt\ defined\ in\ MathFunctionsImpl.h.}}
+\DoxyCodeLine{00332\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ std::complex<T>\ complex\_sqrt(\textcolor{keyword}{const}\ std::complex<T>\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{a\_x}});}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \textcolor{comment}{//\ Custom\ implementation\ is\ faster\ than\ \`{}std::sqrt`,\ works\ on}}
+\DoxyCodeLine{00335\ \textcolor{comment}{//\ GPU,\ and\ correctly\ handles\ special\ cases\ (unlike\ MSVC).}}
+\DoxyCodeLine{00336\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00337\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1sqrt__impl}{sqrt\_impl}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<T>\ >}
+\DoxyCodeLine{00338\ \{}
+\DoxyCodeLine{00339\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00340\ \ \ \textcolor{keyword}{static}\ EIGEN\_ALWAYS\_INLINE\ std::complex<T>\ run(\textcolor{keyword}{const}\ std::complex<T>\&\ x)}
+\DoxyCodeLine{00341\ \ \ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex\_sqrt<T>}}(x);}
+\DoxyCodeLine{00343\ \ \ \}}
+\DoxyCodeLine{00344\ \};}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00346\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00347\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1sqrt__retval}{sqrt\_retval}}}
+\DoxyCodeLine{00348\ \{}
+\DoxyCodeLine{00349\ \ \ \textcolor{keyword}{typedef}\ Scalar\ type;}
+\DoxyCodeLine{00350\ \};}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \textcolor{comment}{//\ Default\ implementation\ relies\ on\ numext::sqrt,\ at\ bottom\ of\ file.}}
+\DoxyCodeLine{00353\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00354\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1rsqrt__impl}{rsqrt\_impl}};}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \textcolor{comment}{//\ Complex\ rsqrt\ defined\ in\ MathFunctionsImpl.h.}}
+\DoxyCodeLine{00357\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ std::complex<T>\ complex\_rsqrt(\textcolor{keyword}{const}\ std::complex<T>\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{a\_x}});}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00360\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1rsqrt__impl}{rsqrt\_impl}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<T>\ >}
+\DoxyCodeLine{00361\ \{}
+\DoxyCodeLine{00362\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00363\ \ \ \textcolor{keyword}{static}\ EIGEN\_ALWAYS\_INLINE\ std::complex<T>\ run(\textcolor{keyword}{const}\ std::complex<T>\&\ x)}
+\DoxyCodeLine{00364\ \ \ \{}
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex\_rsqrt<T>}}(x);}
+\DoxyCodeLine{00366\ \ \ \}}
+\DoxyCodeLine{00367\ \};}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00370\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1rsqrt__retval}{rsqrt\_retval}}}
+\DoxyCodeLine{00371\ \{}
+\DoxyCodeLine{00372\ \ \ \textcolor{keyword}{typedef}\ Scalar\ type;}
+\DoxyCodeLine{00373\ \};}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00376\ \textcolor{comment}{*\ Implementation\ of\ norm1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00377\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keywordtype}{bool}\ IsComplex>}
+\DoxyCodeLine{00380\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1norm1__default__impl}{norm1\_default\_impl}};}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00383\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1norm1__default__impl}{norm1\_default\_impl}}<Scalar,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{00384\ \{}
+\DoxyCodeLine{00385\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00386\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00387\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00388\ \ \ \{}
+\DoxyCodeLine{00389\ \ \ \ \ EIGEN\_USING\_STD(abs);}
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{keywordflow}{return}\ abs(x.real())\ +\ abs(x.imag());}
+\DoxyCodeLine{00391\ \ \ \}}
+\DoxyCodeLine{00392\ \};}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00395\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1norm1__default__impl}{norm1\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}>}
+\DoxyCodeLine{00396\ \{}
+\DoxyCodeLine{00397\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00398\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00399\ \ \ \{}
+\DoxyCodeLine{00400\ \ \ \ \ EIGEN\_USING\_STD(abs);}
+\DoxyCodeLine{00401\ \ \ \ \ \textcolor{keywordflow}{return}\ abs(x);}
+\DoxyCodeLine{00402\ \ \ \}}
+\DoxyCodeLine{00403\ \};}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00406\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1norm1__impl}{norm1\_impl}}\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1norm1__default__impl}{norm1\_default\_impl}}<Scalar,\ NumTraits<Scalar>::IsComplex>\ \{\};}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00409\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1norm1__retval}{norm1\_retval}}}
+\DoxyCodeLine{00410\ \{}
+\DoxyCodeLine{00411\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00412\ \};}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00415\ \textcolor{comment}{*\ Implementation\ of\ hypot\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00416\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1hypot__impl}{hypot\_impl}};}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00421\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1hypot__retval}{hypot\_retval}}}
+\DoxyCodeLine{00422\ \{}
+\DoxyCodeLine{00423\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00424\ \};}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00427\ \textcolor{comment}{*\ Implementation\ of\ cast\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00428\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00430\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OldType,\ \textcolor{keyword}{typename}\ NewType,\ \textcolor{keyword}{typename}\ EnableIf\ =\ \textcolor{keywordtype}{void}>}
+\DoxyCodeLine{00431\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1cast__impl}{cast\_impl}}}
+\DoxyCodeLine{00432\ \{}
+\DoxyCodeLine{00433\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00434\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NewType}}\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{OldType}}\&\ x)}
+\DoxyCodeLine{00435\ \ \ \{}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_eigen_1_1_matrix_base}{NewType}}\textcolor{keyword}{>}(x);}
+\DoxyCodeLine{00437\ \ \ \}}
+\DoxyCodeLine{00438\ \};}
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \textcolor{comment}{//\ Casting\ from\ S\ -\/>\ Complex<T>\ leads\ to\ an\ implicit\ conversion\ from\ S\ to\ T,}}
+\DoxyCodeLine{00441\ \textcolor{comment}{//\ generating\ warnings\ on\ clang.\ \ Here\ we\ explicitly\ cast\ the\ real\ component.}}
+\DoxyCodeLine{00442\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OldType,\ \textcolor{keyword}{typename}\ NewType>}
+\DoxyCodeLine{00443\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1cast__impl}{cast\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{OldType}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NewType}},}
+\DoxyCodeLine{00444\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{typename}}\ internal::\mbox{\hyperlink{struct_eigen_1_1internal_1_1enable__if}{enable\_if}}<}
+\DoxyCodeLine{00445\ \ \ \ \ !NumTraits<OldType>::IsComplex\ \&\&\ NumTraits<NewType>::IsComplex}
+\DoxyCodeLine{00446\ \ \ >::type>}
+\DoxyCodeLine{00447\ \{}
+\DoxyCodeLine{00448\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00449\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NewType}}\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{OldType}}\&\ x)}
+\DoxyCodeLine{00450\ \ \ \{}
+\DoxyCodeLine{00451\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<NewType>::Real}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NewReal}};}
+\DoxyCodeLine{00452\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_eigen_1_1_matrix_base}{NewType}}\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{class_eigen_1_1_matrix_base}{NewReal}}\textcolor{keyword}{>}(x));}
+\DoxyCodeLine{00453\ \ \ \}}
+\DoxyCodeLine{00454\ \};}
+\DoxyCodeLine{00455\ }
+\DoxyCodeLine{00456\ \textcolor{comment}{//\ here,\ for\ once,\ we're\ plainly\ returning\ NewType:\ we\ don't\ want\ cast\ to\ do\ weird\ things.}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OldType,\ \textcolor{keyword}{typename}\ NewType>}
+\DoxyCodeLine{00459\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00460\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NewType}}\ cast(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{OldType}}\&\ x)}
+\DoxyCodeLine{00461\ \{}
+\DoxyCodeLine{00462\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1cast__impl}{cast\_impl<OldType,\ NewType>::run}}(x);}
+\DoxyCodeLine{00463\ \}}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00466\ \textcolor{comment}{*\ Implementation\ of\ round\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00467\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00470\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1round__impl}{round\_impl}}}
+\DoxyCodeLine{00471\ \{}
+\DoxyCodeLine{00472\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00473\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00474\ \ \ \{}
+\DoxyCodeLine{00475\ \ \ \ \ EIGEN\_STATIC\_ASSERT((!\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::IsComplex}}),\ NUMERIC\_TYPE\_MUST\_BE\_REAL)}
+\DoxyCodeLine{00476\ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{00477\ \ \ \ \ EIGEN\_USING\_STD(round);}
+\DoxyCodeLine{00478\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00479\ \ \ \ \ \textcolor{keywordflow}{return}\ Scalar(round(x));}
+\DoxyCodeLine{00480\ \ \ \}}
+\DoxyCodeLine{00481\ \};}
+\DoxyCodeLine{00482\ }
+\DoxyCodeLine{00483\ \textcolor{preprocessor}{\#if\ !EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{00484\ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_C99\_MATH}}
+\DoxyCodeLine{00485\ \textcolor{comment}{//\ Use\ ::roundf\ for\ float.}}
+\DoxyCodeLine{00486\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00487\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1round__impl}{round\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00488\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00489\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ run(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x)}
+\DoxyCodeLine{00490\ \ \ \{}
+\DoxyCodeLine{00491\ \ \ \ \ return\ ::roundf(x);}
+\DoxyCodeLine{00492\ \ \ \}}
+\DoxyCodeLine{00493\ \};}
+\DoxyCodeLine{00494\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00495\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00496\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1round__using__floor__ceil__impl}{round\_using\_floor\_ceil\_impl}}}
+\DoxyCodeLine{00497\ \{}
+\DoxyCodeLine{00498\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00499\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00500\ \ \ \{}
+\DoxyCodeLine{00501\ \ \ \ \ EIGEN\_STATIC\_ASSERT((!\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::IsComplex}}),\ NUMERIC\_TYPE\_MUST\_BE\_REAL)}
+\DoxyCodeLine{00502\ \ \ \ \ \textcolor{comment}{//\ Without\ C99\ round/roundf,\ resort\ to\ floor/ceil.}}
+\DoxyCodeLine{00503\ \ \ \ \ EIGEN\_USING\_STD(floor);}
+\DoxyCodeLine{00504\ \ \ \ \ EIGEN\_USING\_STD(ceil);}
+\DoxyCodeLine{00505\ \ \ \ \ \textcolor{comment}{//\ If\ not\ enough\ precision\ to\ resolve\ a\ decimal\ at\ all,\ return\ the\ input.}}
+\DoxyCodeLine{00506\ \ \ \ \ \textcolor{comment}{//\ Otherwise,\ adding\ 0.5\ can\ trigger\ an\ increment\ by\ 1.}}
+\DoxyCodeLine{00507\ \ \ \ \ \textcolor{keyword}{const}\ Scalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{limit}}\ =\ Scalar(1ull\ <<\ (\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::digits}}()\ -\/\ 1));}
+\DoxyCodeLine{00508\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ >=\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{limit}}\ ||\ x\ <=\ -\/\mbox{\hyperlink{class_eigen_1_1_matrix_base}{limit}})\ \{}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00510\ \ \ \ \ \}}
+\DoxyCodeLine{00511\ \ \ \ \ \textcolor{keywordflow}{return}\ (x\ >\ Scalar(0))\ ?\ Scalar(floor(x\ +\ Scalar(0.5)))\ :\ Scalar(ceil(x\ -\/\ Scalar(0.5)));}
+\DoxyCodeLine{00512\ \ \ \}}
+\DoxyCodeLine{00513\ \};}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00516\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1round__impl}{round\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1round__using__floor__ceil__impl}{round\_using\_floor\_ceil\_impl}}<float>\ \{\};}
+\DoxyCodeLine{00517\ }
+\DoxyCodeLine{00518\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00519\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1round__impl}{round\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{double}}>\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1round__using__floor__ceil__impl}{round\_using\_floor\_ceil\_impl}}<double>\ \{\};}
+\DoxyCodeLine{00520\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EIGEN\_HAS\_C99\_MATH}}
+\DoxyCodeLine{00521\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ !EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{00522\ }
+\DoxyCodeLine{00523\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00524\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1round__retval}{round\_retval}}}
+\DoxyCodeLine{00525\ \{}
+\DoxyCodeLine{00526\ \ \ \textcolor{keyword}{typedef}\ Scalar\ type;}
+\DoxyCodeLine{00527\ \};}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00529\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00530\ \textcolor{comment}{*\ Implementation\ of\ rint\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00531\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00532\ }
+\DoxyCodeLine{00533\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00534\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1rint__impl}{rint\_impl}}\ \{}
+\DoxyCodeLine{00535\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00536\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00537\ \ \ \{}
+\DoxyCodeLine{00538\ \ \ \ \ EIGEN\_STATIC\_ASSERT((!\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::IsComplex}}),\ NUMERIC\_TYPE\_MUST\_BE\_REAL)}
+\DoxyCodeLine{00539\ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ EIGEN\_USING\_STD(rint);}
+\DoxyCodeLine{00541\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00542\ \ \ \ \ \textcolor{keywordflow}{return}\ rint(x);}
+\DoxyCodeLine{00543\ \ \ \}}
+\DoxyCodeLine{00544\ \};}
+\DoxyCodeLine{00545\ }
+\DoxyCodeLine{00546\ \textcolor{preprocessor}{\#if\ !EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{00547\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00548\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1rint__impl}{rint\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{double}}>\ \{}
+\DoxyCodeLine{00549\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00550\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ run(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ x)}
+\DoxyCodeLine{00551\ \ \ \{}
+\DoxyCodeLine{00552\ \ \ \ \ return\ ::rint(x);}
+\DoxyCodeLine{00553\ \ \ \}}
+\DoxyCodeLine{00554\ \};}
+\DoxyCodeLine{00555\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00556\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1rint__impl}{rint\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{float}}>\ \{}
+\DoxyCodeLine{00557\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00558\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ run(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x)}
+\DoxyCodeLine{00559\ \ \ \{}
+\DoxyCodeLine{00560\ \ \ \ \ return\ ::rintf(x);}
+\DoxyCodeLine{00561\ \ \ \}}
+\DoxyCodeLine{00562\ \};}
+\DoxyCodeLine{00563\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00564\ }
+\DoxyCodeLine{00565\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00566\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1rint__retval}{rint\_retval}}}
+\DoxyCodeLine{00567\ \{}
+\DoxyCodeLine{00568\ \ \ \textcolor{keyword}{typedef}\ Scalar\ type;}
+\DoxyCodeLine{00569\ \};}
+\DoxyCodeLine{00570\ }
+\DoxyCodeLine{00571\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00572\ \textcolor{comment}{*\ Implementation\ of\ arg\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00573\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00574\ }
+\DoxyCodeLine{00575\ \textcolor{comment}{//\ Visual\ Studio\ 2017\ has\ a\ bug\ where\ arg(float)\ returns\ 0\ for\ negative\ inputs.}}
+\DoxyCodeLine{00576\ \textcolor{comment}{//\ This\ seems\ to\ be\ fixed\ in\ VS\ 2019.}}
+\DoxyCodeLine{00577\ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_CXX11\_MATH\ \&\&\ (!EIGEN\_COMP\_MSVC\ ||\ EIGEN\_COMP\_MSVC\ >=\ 1920)}}
+\DoxyCodeLine{00578\ \textcolor{comment}{//\ std::arg\ is\ only\ defined\ for\ types\ of\ std::complex,\ or\ integer\ types\ or\ float/double/long\ double}}
+\DoxyCodeLine{00579\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{HasStdImpl}}\ =\ \mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::IsComplex}}\ ||\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1is__integral}{is\_integral<Scalar>::value}}}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1is__same}{is\_same<Scalar,\ float>::value}}\ ||\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1is__same}{is\_same<Scalar,\ double>::value}}}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1is__same}{is\_same<Scalar,\ long\ double>::value}}\ >}
+\DoxyCodeLine{00583\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1arg__default__impl}{arg\_default\_impl}};}
+\DoxyCodeLine{00584\ }
+\DoxyCodeLine{00585\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00586\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1arg__default__impl}{arg\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>\ \{}
+\DoxyCodeLine{00587\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ RealScalar;}
+\DoxyCodeLine{00588\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00589\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ RealScalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00590\ \ \ \{}
+\DoxyCodeLine{00591\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(EIGEN\_HIP\_DEVICE\_COMPILE)}}
+\DoxyCodeLine{00592\ \ \ \ \ \textcolor{comment}{//\ HIP\ does\ not\ seem\ to\ have\ a\ native\ device\ side\ implementation\ for\ the\ math\ routine\ "{}arg"{}}}
+\DoxyCodeLine{00593\ \ \ \ \ \textcolor{keyword}{using\ }std::arg;}
+\DoxyCodeLine{00594\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00595\ \ \ \ \ EIGEN\_USING\_STD(arg);}
+\DoxyCodeLine{00596\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00597\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}RealScalar\textcolor{keyword}{>}(arg(x));}
+\DoxyCodeLine{00598\ \ \ \}}
+\DoxyCodeLine{00599\ \};}
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00601\ \textcolor{comment}{//\ Must\ be\ non-\/complex\ floating-\/point\ type\ (e.g.\ half/bfloat16).}}
+\DoxyCodeLine{00602\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00603\ \textcolor{keyword}{struct\ }arg\_default\_impl<Scalar,\ false>\ \{}
+\DoxyCodeLine{00604\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ RealScalar;}
+\DoxyCodeLine{00605\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00606\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ RealScalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00607\ \ \ \{}
+\DoxyCodeLine{00608\ \ \ \ \ \textcolor{keywordflow}{return}\ (x\ <\ Scalar(0))\ ?\ RealScalar(EIGEN\_PI)\ :\ RealScalar(0);}
+\DoxyCodeLine{00609\ \ \ \}}
+\DoxyCodeLine{00610\ \};}
+\DoxyCodeLine{00611\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00612\ template<typename\ Scalar,\ bool\ IsComplex\ =\ NumTraits<Scalar>::IsComplex>}
+\DoxyCodeLine{00613\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1arg__default__impl}{arg\_default\_impl}}}
+\DoxyCodeLine{00614\ \{}
+\DoxyCodeLine{00615\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00616\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00617\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00618\ \ \ \{}
+\DoxyCodeLine{00619\ \ \ \ \ \textcolor{keywordflow}{return}\ (x\ <\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}(0))\ ?\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}(EIGEN\_PI)\ :\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}(0);}
+\DoxyCodeLine{00620\ \ \ \}}
+\DoxyCodeLine{00621\ \};}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00623\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00624\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1arg__default__impl}{arg\_default\_impl}}<Scalar,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{00625\ \{}
+\DoxyCodeLine{00626\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00627\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00628\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00629\ \ \ \{}
+\DoxyCodeLine{00630\ \ \ \ \ EIGEN\_USING\_STD(arg);}
+\DoxyCodeLine{00631\ \ \ \ \ \textcolor{keywordflow}{return}\ arg(x);}
+\DoxyCodeLine{00632\ \ \ \}}
+\DoxyCodeLine{00633\ \};}
+\DoxyCodeLine{00634\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00635\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1arg__impl}{arg\_impl}}\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1arg__default__impl}{arg\_default\_impl}}<Scalar>\ \{\};}
+\DoxyCodeLine{00636\ }
+\DoxyCodeLine{00637\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00638\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1arg__retval}{arg\_retval}}}
+\DoxyCodeLine{00639\ \{}
+\DoxyCodeLine{00640\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{type}};}
+\DoxyCodeLine{00641\ \};}
+\DoxyCodeLine{00642\ }
+\DoxyCodeLine{00643\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00644\ \textcolor{comment}{*\ Implementation\ of\ expm1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00645\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00646\ }
+\DoxyCodeLine{00647\ \textcolor{comment}{//\ This\ implementation\ is\ based\ on\ GSL\ Math's\ expm1.}}
+\DoxyCodeLine{00648\ \textcolor{keyword}{namespace\ }std\_fallback\ \{}
+\DoxyCodeLine{00649\ \ \ \textcolor{comment}{//\ fallback\ expm1\ implementation\ in\ case\ there\ is\ no\ expm1(Scalar)\ function\ in\ namespace\ of\ Scalar,}}
+\DoxyCodeLine{00650\ \ \ \textcolor{comment}{//\ or\ that\ there\ is\ no\ suitable\ std::expm1\ function\ available.\ Implementation}}
+\DoxyCodeLine{00651\ \ \ \textcolor{comment}{//\ attributed\ to\ Kahan.\ See:\ http://www.plunk.org/\string~hatch/rightway.php.}}
+\DoxyCodeLine{00652\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00653\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ Scalar\ expm1(\textcolor{keyword}{const}\ Scalar\&\ x)\ \{}
+\DoxyCodeLine{00654\ \ \ \ \ EIGEN\_STATIC\_ASSERT\_NON\_INTEGER(Scalar)}
+\DoxyCodeLine{00655\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ RealScalar;}
+\DoxyCodeLine{00656\ }
+\DoxyCodeLine{00657\ \ \ \ \ EIGEN\_USING\_STD(exp);}
+\DoxyCodeLine{00658\ \ \ \ \ Scalar\ u\ =\ exp(x);}
+\DoxyCodeLine{00659\ \ \ \ \ \textcolor{keywordflow}{if}\ (numext::equal\_strict(u,\ Scalar(1)))\ \{}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00661\ \ \ \ \ \}}
+\DoxyCodeLine{00662\ \ \ \ \ Scalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{um1}}\ =\ u\ -\/\ RealScalar(1);}
+\DoxyCodeLine{00663\ \ \ \ \ \textcolor{keywordflow}{if}\ (numext::equal\_strict(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{um1}},\ Scalar(-\/1)))\ \{}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ RealScalar(-\/1);}
+\DoxyCodeLine{00665\ \ \ \ \ \}}
+\DoxyCodeLine{00666\ }
+\DoxyCodeLine{00667\ \ \ \ \ EIGEN\_USING\_STD(log);}
+\DoxyCodeLine{00668\ \ \ \ \ Scalar\ logu\ =\ log(u);}
+\DoxyCodeLine{00669\ \ \ \ \ \textcolor{keywordflow}{return}\ numext::equal\_strict(u,\ logu)\ ?\ u\ :\ (u\ -\/\ RealScalar(1))\ *\ x\ /\ logu;}
+\DoxyCodeLine{00670\ \ \ \}}
+\DoxyCodeLine{00671\ \}}
+\DoxyCodeLine{00672\ }
+\DoxyCodeLine{00673\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00674\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1expm1__impl}{expm1\_impl}}\ \{}
+\DoxyCodeLine{00675\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00676\ \ \ \{}
+\DoxyCodeLine{00677\ \ \ \ \ EIGEN\_STATIC\_ASSERT\_NON\_INTEGER(Scalar)}
+\DoxyCodeLine{00678\ \ \ \ \ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{00679\ \ \ \ \ \textcolor{keyword}{using\ }std::expm1;}
+\DoxyCodeLine{00680\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00681\ \ \ \ \ \textcolor{keyword}{using\ }std\_fallback::expm1;}
+\DoxyCodeLine{00682\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00683\ \ \ \ \ \textcolor{keywordflow}{return}\ expm1(x);}
+\DoxyCodeLine{00684\ \ \ \}}
+\DoxyCodeLine{00685\ \};}
+\DoxyCodeLine{00686\ }
+\DoxyCodeLine{00687\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00688\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1expm1__retval}{expm1\_retval}}}
+\DoxyCodeLine{00689\ \{}
+\DoxyCodeLine{00690\ \ \ \textcolor{keyword}{typedef}\ Scalar\ type;}
+\DoxyCodeLine{00691\ \};}
+\DoxyCodeLine{00692\ }
+\DoxyCodeLine{00693\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00694\ \textcolor{comment}{*\ Implementation\ of\ log\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00695\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00696\ }
+\DoxyCodeLine{00697\ \textcolor{comment}{//\ Complex\ log\ defined\ in\ MathFunctionsImpl.h.}}
+\DoxyCodeLine{00698\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ std::complex<T>\ complex\_log(\textcolor{keyword}{const}\ std::complex<T>\&\ z);}
+\DoxyCodeLine{00699\ }
+\DoxyCodeLine{00700\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00701\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1log__impl}{log\_impl}}\ \{}
+\DoxyCodeLine{00702\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00703\ \ \ \{}
+\DoxyCodeLine{00704\ \ \ \ \ EIGEN\_USING\_STD(log);}
+\DoxyCodeLine{00705\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Scalar\textcolor{keyword}{>}(log(x));}
+\DoxyCodeLine{00706\ \ \ \}}
+\DoxyCodeLine{00707\ \};}
+\DoxyCodeLine{00708\ }
+\DoxyCodeLine{00709\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00710\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1log__impl}{log\_impl}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<Scalar>\ >\ \{}
+\DoxyCodeLine{00711\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::complex<Scalar>\ run(\textcolor{keyword}{const}\ std::complex<Scalar>\&\ z)}
+\DoxyCodeLine{00712\ \ \ \{}
+\DoxyCodeLine{00713\ \ \ \ \ \textcolor{keywordflow}{return}\ complex\_log(z);}
+\DoxyCodeLine{00714\ \ \ \}}
+\DoxyCodeLine{00715\ \};}
+\DoxyCodeLine{00716\ }
+\DoxyCodeLine{00717\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00718\ \textcolor{comment}{*\ Implementation\ of\ log1p\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00719\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00720\ }
+\DoxyCodeLine{00721\ \textcolor{keyword}{namespace\ }std\_fallback\ \{}
+\DoxyCodeLine{00722\ \ \ \textcolor{comment}{//\ fallback\ log1p\ implementation\ in\ case\ there\ is\ no\ log1p(Scalar)\ function\ in\ namespace\ of\ Scalar,}}
+\DoxyCodeLine{00723\ \ \ \textcolor{comment}{//\ or\ that\ there\ is\ no\ suitable\ std::log1p\ function\ available}}
+\DoxyCodeLine{00724\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00725\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ Scalar\ log1p(\textcolor{keyword}{const}\ Scalar\&\ x)\ \{}
+\DoxyCodeLine{00726\ \ \ \ \ EIGEN\_STATIC\_ASSERT\_NON\_INTEGER(Scalar)}
+\DoxyCodeLine{00727\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ RealScalar;}
+\DoxyCodeLine{00728\ \ \ \ \ EIGEN\_USING\_STD(log);}
+\DoxyCodeLine{00729\ \ \ \ \ Scalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{x1p}}\ =\ RealScalar(1)\ +\ x;}
+\DoxyCodeLine{00730\ \ \ \ \ Scalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{log\_1p}}\ =\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1log__impl}{log\_impl<Scalar>::run}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{x1p}});}
+\DoxyCodeLine{00731\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{is\_small}}\ =\ numext::equal\_strict(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{x1p}},\ Scalar(1));}
+\DoxyCodeLine{00732\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{is\_inf}}\ =\ numext::equal\_strict(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{x1p}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{log\_1p}});}
+\DoxyCodeLine{00733\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{is\_small}}\ ||\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{is\_inf}})\ ?\ x\ :\ x\ *\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{log\_1p}}\ /\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{x1p}}\ -\/\ RealScalar(1)));}
+\DoxyCodeLine{00734\ \ \ \}}
+\DoxyCodeLine{00735\ \}}
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00737\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00738\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1log1p__impl}{log1p\_impl}}\ \{}
+\DoxyCodeLine{00739\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{00740\ \ \ \{}
+\DoxyCodeLine{00741\ \ \ \ \ EIGEN\_STATIC\_ASSERT\_NON\_INTEGER(Scalar)}
+\DoxyCodeLine{00742\ \ \ \ \ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{00743\ \ \ \ \ \textcolor{keyword}{using\ }std::log1p;}
+\DoxyCodeLine{00744\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00745\ \ \ \ \ \textcolor{keyword}{using\ }std\_fallback::log1p;}
+\DoxyCodeLine{00746\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00747\ \ \ \ \ \textcolor{keywordflow}{return}\ log1p(x);}
+\DoxyCodeLine{00748\ \ \ \}}
+\DoxyCodeLine{00749\ \};}
+\DoxyCodeLine{00750\ }
+\DoxyCodeLine{00751\ \textcolor{comment}{//\ Specialization\ for\ complex\ types\ that\ are\ not\ supported\ by\ std::log1p.}}
+\DoxyCodeLine{00752\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ RealScalar>}
+\DoxyCodeLine{00753\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1log1p__impl}{log1p\_impl}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<RealScalar>\ >\ \{}
+\DoxyCodeLine{00754\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::complex<RealScalar>\ run(}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::complex<RealScalar>\&\ x)\ \{}
+\DoxyCodeLine{00756\ \ \ \ \ EIGEN\_STATIC\_ASSERT\_NON\_INTEGER(RealScalar)}
+\DoxyCodeLine{00757\ \ \ \ \ \textcolor{keywordflow}{return}\ std\_fallback::log1p(x);}
+\DoxyCodeLine{00758\ \ \ \}}
+\DoxyCodeLine{00759\ \};}
+\DoxyCodeLine{00760\ }
+\DoxyCodeLine{00761\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00762\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1log1p__retval}{log1p\_retval}}}
+\DoxyCodeLine{00763\ \{}
+\DoxyCodeLine{00764\ \ \ \textcolor{keyword}{typedef}\ Scalar\ type;}
+\DoxyCodeLine{00765\ \};}
+\DoxyCodeLine{00766\ }
+\DoxyCodeLine{00767\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00768\ \textcolor{comment}{*\ Implementation\ of\ pow\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00769\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00770\ }
+\DoxyCodeLine{00771\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{template<typename\ ScalarX,typename\ ScalarY,\ bool\ IsInteger\ =\ NumTraits<ScalarX>::IsInteger}}\&\&\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<ScalarY>::IsInteger}}>}
+\DoxyCodeLine{00772\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1pow__impl}{pow\_impl}}}
+\DoxyCodeLine{00773\ \{}
+\DoxyCodeLine{00774\ \ \ \textcolor{comment}{//typedef\ Scalar\ retval;}}
+\DoxyCodeLine{00775\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarBinaryOpTraits<ScalarX,ScalarY,internal::scalar\_pow\_op<ScalarX,ScalarY>}}\ >::ReturnType\ result\_type;}
+\DoxyCodeLine{00776\ \ \ \textcolor{keyword}{static}\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ result\_type\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\&\ x,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarY}}\&\ y)}
+\DoxyCodeLine{00777\ \ \ \{}
+\DoxyCodeLine{00778\ \ \ \ \ EIGEN\_USING\_STD(pow);}
+\DoxyCodeLine{00779\ \ \ \ \ \textcolor{keywordflow}{return}\ pow(x,\ y);}
+\DoxyCodeLine{00780\ \ \ \}}
+\DoxyCodeLine{00781\ \};}
+\DoxyCodeLine{00782\ }
+\DoxyCodeLine{00783\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ ScalarX,\textcolor{keyword}{typename}\ ScalarY>}
+\DoxyCodeLine{00784\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1pow__impl}{pow\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}},\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarY}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{00785\ \{}
+\DoxyCodeLine{00786\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{result\_type}};}
+\DoxyCodeLine{00787\ \ \ \textcolor{keyword}{static}\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\ run(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\ x,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarY}}\ y)}
+\DoxyCodeLine{00788\ \ \ \{}
+\DoxyCodeLine{00789\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\ res(1);}
+\DoxyCodeLine{00790\ \ \ \ \ eigen\_assert(!\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<ScalarY>::IsSigned}}\ ||\ y\ >=\ 0);}
+\DoxyCodeLine{00791\ \ \ \ \ \textcolor{keywordflow}{if}(y\ \&\ 1)\ res\ *=\ x;}
+\DoxyCodeLine{00792\ \ \ \ \ y\ >>=\ 1;}
+\DoxyCodeLine{00793\ \ \ \ \ \textcolor{keywordflow}{while}(y)}
+\DoxyCodeLine{00794\ \ \ \ \ \{}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ x\ *=\ x;}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(y\&1)\ res\ *=\ x;}
+\DoxyCodeLine{00797\ \ \ \ \ \ \ y\ >>=\ 1;}
+\DoxyCodeLine{00798\ \ \ \ \ \}}
+\DoxyCodeLine{00799\ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00800\ \ \ \}}
+\DoxyCodeLine{00801\ \};}
+\DoxyCodeLine{00802\ }
+\DoxyCodeLine{00803\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{00804\ \textcolor{comment}{*\ Implementation\ of\ random\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00805\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{00806\ }
+\DoxyCodeLine{00807\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,}
+\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsComplex,}
+\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsInteger>}
+\DoxyCodeLine{00810\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1random__default__impl}{random\_default\_impl}}\ \{\};}
+\DoxyCodeLine{00811\ }
+\DoxyCodeLine{00812\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00813\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1random__impl}{random\_impl}}\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1random__default__impl}{random\_default\_impl}}<Scalar,\ NumTraits<Scalar>::IsComplex,\ NumTraits<Scalar>::IsInteger>\ \{\};}
+\DoxyCodeLine{00814\ }
+\DoxyCodeLine{00815\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00816\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1random__retval}{random\_retval}}}
+\DoxyCodeLine{00817\ \{}
+\DoxyCodeLine{00818\ \ \ \textcolor{keyword}{typedef}\ Scalar\ type;}
+\DoxyCodeLine{00819\ \};}
+\DoxyCodeLine{00820\ }
+\DoxyCodeLine{00821\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}},\ Scalar)\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}}(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y);}
+\DoxyCodeLine{00822\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}},\ Scalar)\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}}();}
+\DoxyCodeLine{00823\ }
+\DoxyCodeLine{00824\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00825\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1random__default__impl}{random\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}>}
+\DoxyCodeLine{00826\ \{}
+\DoxyCodeLine{00827\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y)}
+\DoxyCodeLine{00828\ \ \ \{}
+\DoxyCodeLine{00829\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ +\ (y-\/x)\ *\ Scalar(std::rand())\ /\ Scalar(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{RAND\_MAX}});}
+\DoxyCodeLine{00830\ \ \ \}}
+\DoxyCodeLine{00831\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run()}
+\DoxyCodeLine{00832\ \ \ \{}
+\DoxyCodeLine{00833\ \ \ \ \ \textcolor{keywordflow}{return}\ run(Scalar(\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::IsSigned}}\ ?\ -\/1\ :\ 0),\ Scalar(1));}
+\DoxyCodeLine{00834\ \ \ \}}
+\DoxyCodeLine{00835\ \};}
+\DoxyCodeLine{00836\ }
+\DoxyCodeLine{00837\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00838\ \ \ meta\_floor\_log2\_terminate,}
+\DoxyCodeLine{00839\ \ \ meta\_floor\_log2\_move\_up,}
+\DoxyCodeLine{00840\ \ \ meta\_floor\_log2\_move\_down,}
+\DoxyCodeLine{00841\ \ \ meta\_floor\_log2\_bogus}
+\DoxyCodeLine{00842\ \};}
+\DoxyCodeLine{00843\ }
+\DoxyCodeLine{00844\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{int}\ lower,\ \textcolor{keywordtype}{int}\ upper>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1meta__floor__log2__selector}{meta\_floor\_log2\_selector}}}
+\DoxyCodeLine{00845\ \{}
+\DoxyCodeLine{00846\ \ \ \textcolor{keyword}{enum}\ \{\ middle\ =\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}}\ +\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{upper}})\ /\ 2,}
+\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \ value\ =\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{upper}}\ <=\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}}\ +\ 1)\ ?\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(meta\_floor\_log2\_terminate)}
+\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (n\ <\ (1\ <<\ middle))\ ?\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(meta\_floor\_log2\_move\_down)}
+\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (n==0)\ ?\ \textcolor{keywordtype}{int}(meta\_floor\_log2\_bogus)}
+\DoxyCodeLine{00850\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(meta\_floor\_log2\_move\_up)}
+\DoxyCodeLine{00851\ \ \ \};}
+\DoxyCodeLine{00852\ \};}
+\DoxyCodeLine{00853\ }
+\DoxyCodeLine{00854\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n,}
+\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}}\ =\ 0,}
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{upper}}\ =\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}})\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{CHAR\_BIT}}\ -\/\ 1,}
+\DoxyCodeLine{00857\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ selector\ =\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1meta__floor__log2__selector}{meta\_floor\_log2\_selector<n,\ lower,\ upper>::value}}>}
+\DoxyCodeLine{00858\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1meta__floor__log2}{meta\_floor\_log2}}\ \{\};}
+\DoxyCodeLine{00859\ }
+\DoxyCodeLine{00860\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{int}\ lower,\ \textcolor{keywordtype}{int}\ upper>}
+\DoxyCodeLine{00861\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{class_eigen_1_1_matrix_base}{meta\_floor\_log2<n,\ lower,\ upper,\ meta\_floor\_log2\_move\_down>}}}
+\DoxyCodeLine{00862\ \{}
+\DoxyCodeLine{00863\ \ \ \textcolor{keyword}{enum}\ \{\ value\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{meta\_floor\_log2<n,\ lower,\ meta\_floor\_log2\_selector<n,\ lower,\ upper>::middle}}>::value\ \};}
+\DoxyCodeLine{00864\ \};}
+\DoxyCodeLine{00865\ }
+\DoxyCodeLine{00866\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{int}\ lower,\ \textcolor{keywordtype}{int}\ upper>}
+\DoxyCodeLine{00867\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1meta__floor__log2}{meta\_floor\_log2}}<n,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{upper}},\ meta\_floor\_log2\_move\_up>}
+\DoxyCodeLine{00868\ \{}
+\DoxyCodeLine{00869\ \ \ \textcolor{keyword}{enum}\ \{\ value\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{meta\_floor\_log2<n,\ meta\_floor\_log2\_selector<n,\ lower,\ upper>::middle}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{upper}}>::value\ \};}
+\DoxyCodeLine{00870\ \};}
+\DoxyCodeLine{00871\ }
+\DoxyCodeLine{00872\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{int}\ lower,\ \textcolor{keywordtype}{int}\ upper>}
+\DoxyCodeLine{00873\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1meta__floor__log2}{meta\_floor\_log2}}<n,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{upper}},\ meta\_floor\_log2\_terminate>}
+\DoxyCodeLine{00874\ \{}
+\DoxyCodeLine{00875\ \ \ \textcolor{keyword}{enum}\ \{\ value\ =\ (n\ >=\ ((\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}})(1)\ <<\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}}+1)))\ ?\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}}+1\ :\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}}\ \};}
+\DoxyCodeLine{00876\ \};}
+\DoxyCodeLine{00877\ }
+\DoxyCodeLine{00878\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{int}\ lower,\ \textcolor{keywordtype}{int}\ upper>}
+\DoxyCodeLine{00879\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1meta__floor__log2}{meta\_floor\_log2}}<n,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{lower}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{upper}},\ meta\_floor\_log2\_bogus>}
+\DoxyCodeLine{00880\ \{}
+\DoxyCodeLine{00881\ \ \ \textcolor{comment}{//\ no\ value,\ error\ at\ compile\ time}}
+\DoxyCodeLine{00882\ \};}
+\DoxyCodeLine{00883\ }
+\DoxyCodeLine{00884\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00885\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1random__default__impl}{random\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{00886\ \{}
+\DoxyCodeLine{00887\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y)}
+\DoxyCodeLine{00888\ \ \ \{}
+\DoxyCodeLine{00889\ \ \ \ \ \textcolor{keywordflow}{if}\ (y\ <=\ x)}
+\DoxyCodeLine{00890\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00891\ \ \ \ \ \textcolor{comment}{//\ ScalarU\ is\ the\ unsigned\ counterpart\ of\ Scalar,\ possibly\ Scalar\ itself.}}
+\DoxyCodeLine{00892\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1make__unsigned}{make\_unsigned<Scalar>::type}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarU}};}
+\DoxyCodeLine{00893\ \ \ \ \ \textcolor{comment}{//\ ScalarX\ is\ the\ widest\ of\ ScalarU\ and\ unsigned\ int.}}
+\DoxyCodeLine{00894\ \ \ \ \ \textcolor{comment}{//\ We'll\ deal\ only\ with\ ScalarX\ and\ unsigned\ int\ below\ thus\ avoiding\ signed}}
+\DoxyCodeLine{00895\ \ \ \ \ \textcolor{comment}{//\ types\ and\ arithmetic\ and\ signed\ overflows\ (which\ are\ undefined\ behavior).}}
+\DoxyCodeLine{00896\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1conditional}{conditional}}<(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarU}}(-\/1)\ >\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{unsigned}}(-\/1)),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarU}},\ \textcolor{keywordtype}{unsigned}>::type\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}};}
+\DoxyCodeLine{00897\ \ \ \ \ \textcolor{comment}{//\ The\ following\ difference\ doesn't\ overflow,\ provided\ our\ integer\ types\ are\ two's}}
+\DoxyCodeLine{00898\ \ \ \ \ \textcolor{comment}{//\ complement\ and\ have\ the\ same\ number\ of\ padding\ bits\ in\ signed\ and\ unsigned\ variants.}}
+\DoxyCodeLine{00899\ \ \ \ \ \textcolor{comment}{//\ This\ is\ the\ case\ in\ most\ modern\ implementations\ of\ C++.}}
+\DoxyCodeLine{00900\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{range}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}(y)\ -\/\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}(x);}
+\DoxyCodeLine{00901\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\ offset\ =\ 0;}
+\DoxyCodeLine{00902\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{divisor}}\ =\ 1;}
+\DoxyCodeLine{00903\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{multiplier}}\ =\ 1;}
+\DoxyCodeLine{00904\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{rand\_max}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RAND\_MAX}};}
+\DoxyCodeLine{00905\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{range}}\ <=\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{rand\_max}})\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{divisor}}\ =\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{rand\_max}}\ +\ 1)\ /\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{range}}\ +\ 1);}
+\DoxyCodeLine{00906\ \ \ \ \ \textcolor{keywordflow}{else}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{multiplier}}\ =\ 1\ +\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{range}}\ /\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{rand\_max}}\ +\ 1);}
+\DoxyCodeLine{00907\ \ \ \ \ \textcolor{comment}{//\ Rejection\ sampling.}}
+\DoxyCodeLine{00908\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00909\ \ \ \ \ \ \ offset\ =\ (\mbox{\hyperlink{class_eigen_1_1_matrix_base}{unsigned}}(std::rand())\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{multiplier}})\ /\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{divisor}};}
+\DoxyCodeLine{00910\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (offset\ >\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{range}});}
+\DoxyCodeLine{00911\ \ \ \ \ \textcolor{keywordflow}{return}\ Scalar(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarX}}(x)\ +\ offset);}
+\DoxyCodeLine{00912\ \ \ \}}
+\DoxyCodeLine{00913\ }
+\DoxyCodeLine{00914\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run()}
+\DoxyCodeLine{00915\ \ \ \{}
+\DoxyCodeLine{00916\ \textcolor{preprocessor}{\#ifdef\ EIGEN\_MAKING\_DOCS}}
+\DoxyCodeLine{00917\ \ \ \ \ \textcolor{keywordflow}{return}\ run(Scalar(\mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::IsSigned}}\ ?\ -\/10\ :\ 0),\ Scalar(10));}
+\DoxyCodeLine{00918\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00919\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{rand\_bits}}\ =\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1meta__floor__log2}{meta\_floor\_log2}}<(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}})(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{RAND\_MAX}})+1>::value,}
+\DoxyCodeLine{00920\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar\_bits}}\ =\ \textcolor{keyword}{sizeof}(Scalar)\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{CHAR\_BIT}},}
+\DoxyCodeLine{00921\ \ \ \ \ \ \ \ \ \ \ \ shift\ =\ EIGEN\_PLAIN\_ENUM\_MAX(0,\ \textcolor{keywordtype}{int}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{rand\_bits}})\ -\/\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{int}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar\_bits}})),}
+\DoxyCodeLine{00922\ \ \ \ \ \ \ \ \ \ \ \ offset\ =\ \mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::IsSigned}}\ ?\ (1\ <<\ (EIGEN\_PLAIN\_ENUM\_MIN(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{rand\_bits}},\mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar\_bits}})-\/1))\ :\ 0}
+\DoxyCodeLine{00923\ \ \ \ \ \};}
+\DoxyCodeLine{00924\ \ \ \ \ \textcolor{keywordflow}{return}\ Scalar((std::rand()\ >>\ shift)\ -\/\ offset);}
+\DoxyCodeLine{00925\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00926\ \ \ \}}
+\DoxyCodeLine{00927\ \};}
+\DoxyCodeLine{00928\ }
+\DoxyCodeLine{00929\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00930\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1random__default__impl}{random\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}>}
+\DoxyCodeLine{00931\ \{}
+\DoxyCodeLine{00932\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y)}
+\DoxyCodeLine{00933\ \ \ \{}
+\DoxyCodeLine{00934\ \ \ \ \ \textcolor{keywordflow}{return}\ Scalar(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}}(x.real(),\ y.real()),}
+\DoxyCodeLine{00935\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}}(x.imag(),\ y.imag()));}
+\DoxyCodeLine{00936\ \ \ \}}
+\DoxyCodeLine{00937\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Scalar\ run()}
+\DoxyCodeLine{00938\ \ \ \{}
+\DoxyCodeLine{00939\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ RealScalar;}
+\DoxyCodeLine{00940\ \ \ \ \ \textcolor{keywordflow}{return}\ Scalar(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{random<RealScalar>}}(),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{random<RealScalar>}}());}
+\DoxyCodeLine{00941\ \ \ \}}
+\DoxyCodeLine{00942\ \};}
+\DoxyCodeLine{00943\ }
+\DoxyCodeLine{00944\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00945\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}},\ Scalar)\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}}(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y)}
+\DoxyCodeLine{00946\ \{}
+\DoxyCodeLine{00947\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}},\ Scalar)::run(x,\ y);}
+\DoxyCodeLine{00948\ \}}
+\DoxyCodeLine{00949\ }
+\DoxyCodeLine{00950\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{00951\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}},\ Scalar)\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}}()}
+\DoxyCodeLine{00952\ \{}
+\DoxyCodeLine{00953\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{random}},\ Scalar)::run();}
+\DoxyCodeLine{00954\ \}}
+\DoxyCodeLine{00955\ }
+\DoxyCodeLine{00956\ \textcolor{comment}{//\ Implementation\ of\ is*\ functions}}
+\DoxyCodeLine{00957\ }
+\DoxyCodeLine{00958\ \textcolor{comment}{//\ std::is*\ do\ not\ work\ with\ fast-\/math\ and\ gcc,\ std::is*\ are\ available\ on\ MSVC\ 2013\ and\ newer,\ as\ well\ as\ in\ clang.}}
+\DoxyCodeLine{00959\ \textcolor{preprocessor}{\#if\ (EIGEN\_HAS\_CXX11\_MATH\ \&\&\ !(EIGEN\_COMP\_GNUC\_STRICT\ \&\&\ \_\_FINITE\_MATH\_ONLY\_\_))\ ||\ (EIGEN\_COMP\_MSVC>=1800)\ ||\ (EIGEN\_COMP\_CLANG)}}
+\DoxyCodeLine{00960\ \textcolor{preprocessor}{\#define\ EIGEN\_USE\_STD\_FPCLASSIFY\ 1}}
+\DoxyCodeLine{00961\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00962\ \textcolor{preprocessor}{\#define\ EIGEN\_USE\_STD\_FPCLASSIFY\ 0}}
+\DoxyCodeLine{00963\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00964\ }
+\DoxyCodeLine{00965\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00966\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00967\ \textcolor{keyword}{typename}\ internal::enable\_if<internal::is\_integral<T>::value,\textcolor{keywordtype}{bool}>::type}
+\DoxyCodeLine{00968\ isnan\_impl(\textcolor{keyword}{const}\ T\&)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00969\ }
+\DoxyCodeLine{00970\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00971\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00972\ \textcolor{keyword}{typename}\ internal::enable\_if<internal::is\_integral<T>::value,\textcolor{keywordtype}{bool}>::type}
+\DoxyCodeLine{00973\ isinf\_impl(\textcolor{keyword}{const}\ T\&)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00974\ }
+\DoxyCodeLine{00975\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00976\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00977\ \textcolor{keyword}{typename}\ internal::enable\_if<internal::is\_integral<T>::value,\textcolor{keywordtype}{bool}>::type}
+\DoxyCodeLine{00978\ isfinite\_impl(\textcolor{keyword}{const}\ T\&)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00979\ }
+\DoxyCodeLine{00980\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00981\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00982\ \textcolor{keyword}{typename}\ internal::enable\_if<(!internal::is\_integral<T>::value)\&\&(!NumTraits<T>::IsComplex),\textcolor{keywordtype}{bool}>::type}
+\DoxyCodeLine{00983\ isfinite\_impl(\textcolor{keyword}{const}\ T\&\ x)}
+\DoxyCodeLine{00984\ \{}
+\DoxyCodeLine{00985\ \textcolor{preprocessor}{\ \ \#if\ defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{00986\ \ \ \ \ \textcolor{keywordflow}{return}\ (::isfinite)(x);}
+\DoxyCodeLine{00987\ \textcolor{preprocessor}{\ \ \#elif\ EIGEN\_USE\_STD\_FPCLASSIFY}}
+\DoxyCodeLine{00988\ \ \ \ \ \textcolor{keyword}{using\ }std::isfinite;}
+\DoxyCodeLine{00989\ \ \ \ \ \textcolor{keywordflow}{return}\ isfinite\ EIGEN\_NOT\_A\_MACRO\ (x);}
+\DoxyCodeLine{00990\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00991\ \ \ \ \ \textcolor{keywordflow}{return}\ x<=NumTraits<T>::highest()\ \&\&\ x>=NumTraits<T>::lowest();}
+\DoxyCodeLine{00992\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00993\ \}}
+\DoxyCodeLine{00994\ }
+\DoxyCodeLine{00995\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00996\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00997\ \textcolor{keyword}{typename}\ internal::enable\_if<(!internal::is\_integral<T>::value)\&\&(!NumTraits<T>::IsComplex),\textcolor{keywordtype}{bool}>::type}
+\DoxyCodeLine{00998\ isinf\_impl(\textcolor{keyword}{const}\ T\&\ x)}
+\DoxyCodeLine{00999\ \{}
+\DoxyCodeLine{01000\ \textcolor{preprocessor}{\ \ \#if\ defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{01001\ \ \ \ \ \textcolor{keywordflow}{return}\ (::isinf)(x);}
+\DoxyCodeLine{01002\ \textcolor{preprocessor}{\ \ \#elif\ EIGEN\_USE\_STD\_FPCLASSIFY}}
+\DoxyCodeLine{01003\ \ \ \ \ \textcolor{keyword}{using\ }std::isinf;}
+\DoxyCodeLine{01004\ \ \ \ \ \textcolor{keywordflow}{return}\ isinf\ EIGEN\_NOT\_A\_MACRO\ (x);}
+\DoxyCodeLine{01005\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{01006\ \ \ \ \ \textcolor{keywordflow}{return}\ x>NumTraits<T>::highest()\ ||\ x<NumTraits<T>::lowest();}
+\DoxyCodeLine{01007\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{01008\ \}}
+\DoxyCodeLine{01009\ }
+\DoxyCodeLine{01010\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01011\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01012\ \textcolor{keyword}{typename}\ internal::enable\_if<(!internal::is\_integral<T>::value)\&\&(!NumTraits<T>::IsComplex),\textcolor{keywordtype}{bool}>::type}
+\DoxyCodeLine{01013\ isnan\_impl(\textcolor{keyword}{const}\ T\&\ x)}
+\DoxyCodeLine{01014\ \{}
+\DoxyCodeLine{01015\ \textcolor{preprocessor}{\ \ \#if\ defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{01016\ \ \ \ \ \textcolor{keywordflow}{return}\ (::isnan)(x);}
+\DoxyCodeLine{01017\ \textcolor{preprocessor}{\ \ \#elif\ EIGEN\_USE\_STD\_FPCLASSIFY}}
+\DoxyCodeLine{01018\ \ \ \ \ \textcolor{keyword}{using\ }std::isnan;}
+\DoxyCodeLine{01019\ \ \ \ \ \textcolor{keywordflow}{return}\ isnan\ EIGEN\_NOT\_A\_MACRO\ (x);}
+\DoxyCodeLine{01020\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{01021\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ !=\ x;}
+\DoxyCodeLine{01022\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{01023\ \}}
+\DoxyCodeLine{01024\ }
+\DoxyCodeLine{01025\ \textcolor{preprocessor}{\#if\ (!EIGEN\_USE\_STD\_FPCLASSIFY)}}
+\DoxyCodeLine{01026\ }
+\DoxyCodeLine{01027\ \textcolor{preprocessor}{\#if\ EIGEN\_COMP\_MSVC}}
+\DoxyCodeLine{01028\ }
+\DoxyCodeLine{01029\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ isinf\_msvc\_helper(T\ x)}
+\DoxyCodeLine{01030\ \{}
+\DoxyCodeLine{01031\ \ \ \textcolor{keywordflow}{return}\ \_fpclass(x)==\_FPCLASS\_NINF\ ||\ \_fpclass(x)==\_FPCLASS\_PINF;}
+\DoxyCodeLine{01032\ \}}
+\DoxyCodeLine{01033\ }
+\DoxyCodeLine{01034\ \textcolor{comment}{//MSVC\ defines\ a\ \_isnan\ builtin\ function,\ but\ for\ double\ only}}
+\DoxyCodeLine{01035\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isnan\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ x)\ \{\ \textcolor{keywordflow}{return}\ \_isnan(x)!=0;\ \}}
+\DoxyCodeLine{01036\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isnan\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ x)\ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ \_isnan(x)!=0;\ \}}
+\DoxyCodeLine{01037\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isnan\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ \_isnan(x)!=0;\ \}}
+\DoxyCodeLine{01038\ }
+\DoxyCodeLine{01039\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isinf\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ x)\ \{\ \textcolor{keywordflow}{return}\ isinf\_msvc\_helper(x);\ \}}
+\DoxyCodeLine{01040\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isinf\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ x)\ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ isinf\_msvc\_helper(x);\ \}}
+\DoxyCodeLine{01041\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isinf\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ isinf\_msvc\_helper(x);\ \}}
+\DoxyCodeLine{01042\ }
+\DoxyCodeLine{01043\ \textcolor{preprocessor}{\#elif\ (defined\ \_\_FINITE\_MATH\_ONLY\_\_\ \&\&\ \_\_FINITE\_MATH\_ONLY\_\_\ \&\&\ EIGEN\_COMP\_GNUC)}}
+\DoxyCodeLine{01044\ }
+\DoxyCodeLine{01045\ \textcolor{preprocessor}{\#if\ EIGEN\_GNUC\_AT\_LEAST(5,0)}}
+\DoxyCodeLine{01046\ \textcolor{preprocessor}{\ \ \#define\ EIGEN\_TMP\_NOOPT\_ATTRIB\ EIGEN\_DEVICE\_FUNC\ inline\ \_\_attribute\_\_((optimize("{}no-\/finite-\/math-\/only"{})))}}
+\DoxyCodeLine{01047\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01048\ \ \ \textcolor{comment}{//\ NOTE\ the\ inline\ qualifier\ and\ noinline\ attribute\ are\ both\ needed:\ the\ former\ is\ to\ avoid\ linking\ issue\ (duplicate\ symbol),}}
+\DoxyCodeLine{01049\ \ \ \textcolor{comment}{//\ \ \ \ \ \ while\ the\ second\ prevent\ too\ aggressive\ optimizations\ in\ fast-\/math\ mode:}}
+\DoxyCodeLine{01050\ \textcolor{preprocessor}{\ \ \#define\ EIGEN\_TMP\_NOOPT\_ATTRIB\ EIGEN\_DEVICE\_FUNC\ inline\ \_\_attribute\_\_((noinline,optimize("{}no-\/finite-\/math-\/only"{})))}}
+\DoxyCodeLine{01051\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01052\ }
+\DoxyCodeLine{01053\ \textcolor{keyword}{template}<>\ EIGEN\_TMP\_NOOPT\_ATTRIB\ \textcolor{keywordtype}{bool}\ isnan\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ x)\ \{\ \textcolor{keywordflow}{return}\ \_\_builtin\_isnan(x);\ \}}
+\DoxyCodeLine{01054\ \textcolor{keyword}{template}<>\ EIGEN\_TMP\_NOOPT\_ATTRIB\ \textcolor{keywordtype}{bool}\ isnan\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ x)\ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ \_\_builtin\_isnan(x);\ \}}
+\DoxyCodeLine{01055\ \textcolor{keyword}{template}<>\ EIGEN\_TMP\_NOOPT\_ATTRIB\ \textcolor{keywordtype}{bool}\ isnan\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ \_\_builtin\_isnan(x);\ \}}
+\DoxyCodeLine{01056\ \textcolor{keyword}{template}<>\ EIGEN\_TMP\_NOOPT\_ATTRIB\ \textcolor{keywordtype}{bool}\ isinf\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ x)\ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ \_\_builtin\_isinf(x);\ \}}
+\DoxyCodeLine{01057\ \textcolor{keyword}{template}<>\ EIGEN\_TMP\_NOOPT\_ATTRIB\ \textcolor{keywordtype}{bool}\ isinf\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ \_\_builtin\_isinf(x);\ \}}
+\DoxyCodeLine{01058\ \textcolor{keyword}{template}<>\ EIGEN\_TMP\_NOOPT\_ATTRIB\ \textcolor{keywordtype}{bool}\ isinf\_impl(\textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ x)\ \{\ \textcolor{keywordflow}{return}\ \_\_builtin\_isinf(x);\ \}}
+\DoxyCodeLine{01059\ }
+\DoxyCodeLine{01060\ \textcolor{preprocessor}{\#undef\ EIGEN\_TMP\_NOOPT\_ATTRIB}}
+\DoxyCodeLine{01061\ }
+\DoxyCodeLine{01062\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01063\ }
+\DoxyCodeLine{01064\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01065\ }
+\DoxyCodeLine{01066\ \textcolor{comment}{//\ The\ following\ overload\ are\ defined\ at\ the\ end\ of\ this\ file}}
+\DoxyCodeLine{01067\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ isfinite\_impl(\textcolor{keyword}{const}\ std::complex<T>\&\ x);}
+\DoxyCodeLine{01068\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ isnan\_impl(\textcolor{keyword}{const}\ std::complex<T>\&\ x);}
+\DoxyCodeLine{01069\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ isinf\_impl(\textcolor{keyword}{const}\ std::complex<T>\&\ x);}
+\DoxyCodeLine{01070\ }
+\DoxyCodeLine{01071\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ T\ generic\_fast\_tanh\_float(\textcolor{keyword}{const}\ T\&\ a\_x);}
+\DoxyCodeLine{01072\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{01073\ }
+\DoxyCodeLine{01074\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{01075\ \textcolor{comment}{*\ Generic\ math\ functions\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{01076\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{01077\ }
+\DoxyCodeLine{01078\ \textcolor{keyword}{namespace\ }numext\ \{}
+\DoxyCodeLine{01079\ }
+\DoxyCodeLine{01080\ \textcolor{preprocessor}{\#if\ (!defined(EIGEN\_GPUCC)\ ||\ defined(EIGEN\_CONSTEXPR\_ARE\_DEVICE\_FUNC))}}
+\DoxyCodeLine{01081\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01082\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01083\ EIGEN\_ALWAYS\_INLINE\ T\ mini(\textcolor{keyword}{const}\ T\&\ x,\ \textcolor{keyword}{const}\ T\&\ y)}
+\DoxyCodeLine{01084\ \{}
+\DoxyCodeLine{01085\ \ \ EIGEN\_USING\_STD(min)}
+\DoxyCodeLine{01086\ \ \ \textcolor{keywordflow}{return}\ min\ EIGEN\_NOT\_A\_MACRO\ (x,y);}
+\DoxyCodeLine{01087\ \}}
+\DoxyCodeLine{01088\ }
+\DoxyCodeLine{01089\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01090\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01091\ EIGEN\_ALWAYS\_INLINE\ T\ maxi(\textcolor{keyword}{const}\ T\&\ x,\ \textcolor{keyword}{const}\ T\&\ y)}
+\DoxyCodeLine{01092\ \{}
+\DoxyCodeLine{01093\ \ \ EIGEN\_USING\_STD(max)}
+\DoxyCodeLine{01094\ \ \ \textcolor{keywordflow}{return}\ max\ EIGEN\_NOT\_A\_MACRO\ (x,y);}
+\DoxyCodeLine{01095\ \}}
+\DoxyCodeLine{01096\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01097\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01098\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01099\ EIGEN\_ALWAYS\_INLINE\ T\ mini(\textcolor{keyword}{const}\ T\&\ x,\ \textcolor{keyword}{const}\ T\&\ y)}
+\DoxyCodeLine{01100\ \{}
+\DoxyCodeLine{01101\ \ \ \textcolor{keywordflow}{return}\ y\ <\ x\ ?\ y\ :\ x;}
+\DoxyCodeLine{01102\ \}}
+\DoxyCodeLine{01103\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01104\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01105\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{float}\ mini(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ y)}
+\DoxyCodeLine{01106\ \{}
+\DoxyCodeLine{01107\ \ \ \textcolor{keywordflow}{return}\ fminf(x,\ y);}
+\DoxyCodeLine{01108\ \}}
+\DoxyCodeLine{01109\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01110\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01111\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{double}\ mini(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ y)}
+\DoxyCodeLine{01112\ \{}
+\DoxyCodeLine{01113\ \ \ \textcolor{keywordflow}{return}\ fmin(x,\ y);}
+\DoxyCodeLine{01114\ \}}
+\DoxyCodeLine{01115\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01116\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01117\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ mini(\textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ y)}
+\DoxyCodeLine{01118\ \{}
+\DoxyCodeLine{01119\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HIPCC)}}
+\DoxyCodeLine{01120\ \ \ \textcolor{comment}{//\ no\ "{}fminl"{}\ on\ HIP\ yet}}
+\DoxyCodeLine{01121\ \ \ \textcolor{keywordflow}{return}\ (x\ <\ y)\ ?\ x\ :\ y;}
+\DoxyCodeLine{01122\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01123\ \ \ \textcolor{keywordflow}{return}\ fminl(x,\ y);}
+\DoxyCodeLine{01124\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01125\ \}}
+\DoxyCodeLine{01126\ }
+\DoxyCodeLine{01127\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01128\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01129\ EIGEN\_ALWAYS\_INLINE\ T\ maxi(\textcolor{keyword}{const}\ T\&\ x,\ \textcolor{keyword}{const}\ T\&\ y)}
+\DoxyCodeLine{01130\ \{}
+\DoxyCodeLine{01131\ \ \ \textcolor{keywordflow}{return}\ x\ <\ y\ ?\ y\ :\ x;}
+\DoxyCodeLine{01132\ \}}
+\DoxyCodeLine{01133\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01134\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01135\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{float}\ maxi(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ y)}
+\DoxyCodeLine{01136\ \{}
+\DoxyCodeLine{01137\ \ \ \textcolor{keywordflow}{return}\ fmaxf(x,\ y);}
+\DoxyCodeLine{01138\ \}}
+\DoxyCodeLine{01139\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01140\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01141\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{double}\ maxi(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ y)}
+\DoxyCodeLine{01142\ \{}
+\DoxyCodeLine{01143\ \ \ \textcolor{keywordflow}{return}\ fmax(x,\ y);}
+\DoxyCodeLine{01144\ \}}
+\DoxyCodeLine{01145\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01146\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01147\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ maxi(\textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ y)}
+\DoxyCodeLine{01148\ \{}
+\DoxyCodeLine{01149\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HIPCC)}}
+\DoxyCodeLine{01150\ \ \ \textcolor{comment}{//\ no\ "{}fmaxl"{}\ on\ HIP\ yet}}
+\DoxyCodeLine{01151\ \ \ \textcolor{keywordflow}{return}\ (x\ >\ y)\ ?\ x\ :\ y;}
+\DoxyCodeLine{01152\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01153\ \ \ \textcolor{keywordflow}{return}\ fmaxl(x,\ y);}
+\DoxyCodeLine{01154\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01155\ \}}
+\DoxyCodeLine{01156\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01157\ }
+\DoxyCodeLine{01158\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01159\ }
+\DoxyCodeLine{01160\ }
+\DoxyCodeLine{01161\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_SIGNED\_INTEGER\_TYPES\_BINARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01162\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_char)\ \ \ \(\backslash\)}}
+\DoxyCodeLine{01163\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_short)\ \ \(\backslash\)}}
+\DoxyCodeLine{01164\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_int)\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01165\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_long)}}
+\DoxyCodeLine{01166\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_SIGNED\_INTEGER\_TYPES\_UNARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01167\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_char)\ \ \ \(\backslash\)}}
+\DoxyCodeLine{01168\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_short)\ \ \(\backslash\)}}
+\DoxyCodeLine{01169\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_int)\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01170\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_long)}}
+\DoxyCodeLine{01171\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_UNSIGNED\_INTEGER\_TYPES\_BINARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01172\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_uchar)\ \ \(\backslash\)}}
+\DoxyCodeLine{01173\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_ushort)\ \(\backslash\)}}
+\DoxyCodeLine{01174\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_uint)\ \ \ \(\backslash\)}}
+\DoxyCodeLine{01175\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_ulong)}}
+\DoxyCodeLine{01176\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_UNSIGNED\_INTEGER\_TYPES\_UNARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01177\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_uchar)\ \ \(\backslash\)}}
+\DoxyCodeLine{01178\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_ushort)\ \(\backslash\)}}
+\DoxyCodeLine{01179\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_uint)\ \ \ \(\backslash\)}}
+\DoxyCodeLine{01180\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_ulong)}}
+\DoxyCodeLine{01181\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_INTEGER\_TYPES\_BINARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01182\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_SIGNED\_INTEGER\_TYPES\_BINARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01183\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNSIGNED\_INTEGER\_TYPES\_BINARY(NAME,\ FUNC)}}
+\DoxyCodeLine{01184\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_INTEGER\_TYPES\_UNARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01185\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_SIGNED\_INTEGER\_TYPES\_UNARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01186\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNSIGNED\_INTEGER\_TYPES\_UNARY(NAME,\ FUNC)}}
+\DoxyCodeLine{01187\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_BINARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01188\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_float)\ \(\backslash\)}}
+\DoxyCodeLine{01189\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,cl::sycl::cl\_double)}}
+\DoxyCodeLine{01190\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(NAME,\ FUNC)\ \(\backslash\)}}
+\DoxyCodeLine{01191\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ cl::sycl::cl\_float)\ \(\backslash\)}}
+\DoxyCodeLine{01192\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,cl::sycl::cl\_double)}}
+\DoxyCodeLine{01193\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY\_FUNC\_RET\_TYPE(NAME,\ FUNC,\ RET\_TYPE)\ \(\backslash\)}}
+\DoxyCodeLine{01194\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_GEN\_UNARY\_FUNC(NAME,\ FUNC,\ RET\_TYPE,\ cl::sycl::cl\_float)\ \(\backslash\)}}
+\DoxyCodeLine{01195\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_GEN\_UNARY\_FUNC(NAME,\ FUNC,\ RET\_TYPE,\ cl::sycl::cl\_double)}}
+\DoxyCodeLine{01196\ }
+\DoxyCodeLine{01197\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_GEN\_UNARY\_FUNC(NAME,\ FUNC,\ RET\_TYPE,\ ARG\_TYPE)\ \(\backslash\)}}
+\DoxyCodeLine{01198\ \textcolor{preprocessor}{template<>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01199\ \textcolor{preprocessor}{\ \ EIGEN\_DEVICE\_FUNC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01200\ \textcolor{preprocessor}{\ \ EIGEN\_ALWAYS\_INLINE\ RET\_TYPE\ NAME(const\ ARG\_TYPE\&\ x)\ \{\ \(\backslash\)}}
+\DoxyCodeLine{01201\ \textcolor{preprocessor}{\ \ \ \ return\ cl::sycl::FUNC(x);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01202\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{01203\ }
+\DoxyCodeLine{01204\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_UNARY\_FUNC(NAME,\ FUNC,\ TYPE)\ \(\backslash\)}}
+\DoxyCodeLine{01205\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_GEN\_UNARY\_FUNC(NAME,\ FUNC,\ TYPE,\ TYPE)}}
+\DoxyCodeLine{01206\ }
+\DoxyCodeLine{01207\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_GEN1\_BINARY\_FUNC(NAME,\ FUNC,\ RET\_TYPE,\ ARG\_TYPE1,\ ARG\_TYPE2)\ \(\backslash\)}}
+\DoxyCodeLine{01208\ \textcolor{preprocessor}{\ \ template<>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01209\ \textcolor{preprocessor}{\ \ EIGEN\_DEVICE\_FUNC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01210\ \textcolor{preprocessor}{\ \ EIGEN\_ALWAYS\_INLINE\ RET\_TYPE\ NAME(const\ ARG\_TYPE1\&\ x,\ const\ ARG\_TYPE2\&\ y)\ \{\ \(\backslash\)}}
+\DoxyCodeLine{01211\ \textcolor{preprocessor}{\ \ \ \ return\ cl::sycl::FUNC(x,\ y);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01212\ \textcolor{preprocessor}{\ \ \}}}
+\DoxyCodeLine{01213\ }
+\DoxyCodeLine{01214\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_GEN2\_BINARY\_FUNC(NAME,\ FUNC,\ RET\_TYPE,\ ARG\_TYPE)\ \(\backslash\)}}
+\DoxyCodeLine{01215\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_GEN1\_BINARY\_FUNC(NAME,\ FUNC,\ RET\_TYPE,\ ARG\_TYPE,\ ARG\_TYPE)}}
+\DoxyCodeLine{01216\ }
+\DoxyCodeLine{01217\ \textcolor{preprocessor}{\#define\ SYCL\_SPECIALIZE\_BINARY\_FUNC(NAME,\ FUNC,\ TYPE)\ \(\backslash\)}}
+\DoxyCodeLine{01218\ \textcolor{preprocessor}{\ \ SYCL\_SPECIALIZE\_GEN2\_BINARY\_FUNC(NAME,\ FUNC,\ TYPE,\ TYPE)}}
+\DoxyCodeLine{01219\ }
+\DoxyCodeLine{01220\ SYCL\_SPECIALIZE\_INTEGER\_TYPES\_BINARY(mini,\ min)}
+\DoxyCodeLine{01221\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_BINARY(mini,\ fmin)}
+\DoxyCodeLine{01222\ SYCL\_SPECIALIZE\_INTEGER\_TYPES\_BINARY(maxi,\ max)}
+\DoxyCodeLine{01223\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_BINARY(maxi,\ fmax)}
+\DoxyCodeLine{01224\ }
+\DoxyCodeLine{01225\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01226\ }
+\DoxyCodeLine{01227\ }
+\DoxyCodeLine{01228\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01229\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01230\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(real,\ Scalar)\ real(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01231\ \{}
+\DoxyCodeLine{01232\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(real,\ Scalar)::run(x);}
+\DoxyCodeLine{01233\ \}}
+\DoxyCodeLine{01234\ }
+\DoxyCodeLine{01235\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01236\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01237\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ internal::add\_const\_on\_value\_type<\ EIGEN\_MATHFUNC\_RETVAL(real\_ref,\ Scalar)\ >::type\ real\_ref(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01238\ \{}
+\DoxyCodeLine{01239\ \ \ \textcolor{keywordflow}{return}\ internal::real\_ref\_impl<Scalar>::run(x);}
+\DoxyCodeLine{01240\ \}}
+\DoxyCodeLine{01241\ }
+\DoxyCodeLine{01242\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01243\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01244\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(real\_ref,\ Scalar)\ real\_ref(Scalar\&\ x)}
+\DoxyCodeLine{01245\ \{}
+\DoxyCodeLine{01246\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(real\_ref,\ Scalar)::run(x);}
+\DoxyCodeLine{01247\ \}}
+\DoxyCodeLine{01248\ }
+\DoxyCodeLine{01249\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01250\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01251\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(imag,\ Scalar)\ imag(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01252\ \{}
+\DoxyCodeLine{01253\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(imag,\ Scalar)::run(x);}
+\DoxyCodeLine{01254\ \}}
+\DoxyCodeLine{01255\ }
+\DoxyCodeLine{01256\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01257\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01258\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(arg,\ Scalar)\ arg(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01259\ \{}
+\DoxyCodeLine{01260\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(arg,\ Scalar)::run(x);}
+\DoxyCodeLine{01261\ \}}
+\DoxyCodeLine{01262\ }
+\DoxyCodeLine{01263\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01264\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01265\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ internal::add\_const\_on\_value\_type<\ EIGEN\_MATHFUNC\_RETVAL(imag\_ref,\ Scalar)\ >::type\ imag\_ref(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01266\ \{}
+\DoxyCodeLine{01267\ \ \ \textcolor{keywordflow}{return}\ internal::imag\_ref\_impl<Scalar>::run(x);}
+\DoxyCodeLine{01268\ \}}
+\DoxyCodeLine{01269\ }
+\DoxyCodeLine{01270\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01271\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01272\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(imag\_ref,\ Scalar)\ imag\_ref(Scalar\&\ x)}
+\DoxyCodeLine{01273\ \{}
+\DoxyCodeLine{01274\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(imag\_ref,\ Scalar)::run(x);}
+\DoxyCodeLine{01275\ \}}
+\DoxyCodeLine{01276\ }
+\DoxyCodeLine{01277\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01278\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01279\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(conj,\ Scalar)\ conj(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01280\ \{}
+\DoxyCodeLine{01281\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(conj,\ Scalar)::run(x);}
+\DoxyCodeLine{01282\ \}}
+\DoxyCodeLine{01283\ }
+\DoxyCodeLine{01284\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01285\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01286\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(abs2,\ Scalar)\ abs2(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01287\ \{}
+\DoxyCodeLine{01288\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(abs2,\ Scalar)::run(x);}
+\DoxyCodeLine{01289\ \}}
+\DoxyCodeLine{01290\ }
+\DoxyCodeLine{01291\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01292\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ abs2(\textcolor{keywordtype}{bool}\ x)\ \{\ \textcolor{keywordflow}{return}\ x;\ \}}
+\DoxyCodeLine{01293\ }
+\DoxyCodeLine{01294\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01295\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01296\ EIGEN\_ALWAYS\_INLINE\ T\ absdiff(\textcolor{keyword}{const}\ T\&\ x,\ \textcolor{keyword}{const}\ T\&\ y)}
+\DoxyCodeLine{01297\ \{}
+\DoxyCodeLine{01298\ \ \ \textcolor{keywordflow}{return}\ x\ >\ y\ ?\ x\ -\/\ y\ :\ y\ -\/\ x;}
+\DoxyCodeLine{01299\ \}}
+\DoxyCodeLine{01300\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01301\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01302\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{float}\ absdiff(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ y)}
+\DoxyCodeLine{01303\ \{}
+\DoxyCodeLine{01304\ \ \ \textcolor{keywordflow}{return}\ fabsf(x\ -\/\ y);}
+\DoxyCodeLine{01305\ \}}
+\DoxyCodeLine{01306\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01307\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01308\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{double}\ absdiff(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ y)}
+\DoxyCodeLine{01309\ \{}
+\DoxyCodeLine{01310\ \ \ \textcolor{keywordflow}{return}\ fabs(x\ -\/\ y);}
+\DoxyCodeLine{01311\ \}}
+\DoxyCodeLine{01312\ }
+\DoxyCodeLine{01313\ \textcolor{preprocessor}{\#if\ !defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01314\ \textcolor{comment}{//\ HIP\ and\ CUDA\ do\ not\ support\ long\ double.}}
+\DoxyCodeLine{01315\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01316\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01317\ EIGEN\_ALWAYS\_INLINE\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ absdiff(\textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\&\ y)\ \{}
+\DoxyCodeLine{01318\ \ \ \textcolor{keywordflow}{return}\ fabsl(x\ -\/\ y);}
+\DoxyCodeLine{01319\ \}}
+\DoxyCodeLine{01320\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01321\ }
+\DoxyCodeLine{01322\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01323\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01324\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(norm1,\ Scalar)\ norm1(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01325\ \{}
+\DoxyCodeLine{01326\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(norm1,\ Scalar)::run(x);}
+\DoxyCodeLine{01327\ \}}
+\DoxyCodeLine{01328\ }
+\DoxyCodeLine{01329\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01330\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01331\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(hypot,\ Scalar)\ hypot(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y)}
+\DoxyCodeLine{01332\ \{}
+\DoxyCodeLine{01333\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(hypot,\ Scalar)::run(x,\ y);}
+\DoxyCodeLine{01334\ \}}
+\DoxyCodeLine{01335\ }
+\DoxyCodeLine{01336\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01337\ \ \ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_BINARY(hypot,\ hypot)}
+\DoxyCodeLine{01338\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01339\ }
+\DoxyCodeLine{01340\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01341\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01342\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(log1p,\ Scalar)\ log1p(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01343\ \{}
+\DoxyCodeLine{01344\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(log1p,\ Scalar)::run(x);}
+\DoxyCodeLine{01345\ \}}
+\DoxyCodeLine{01346\ }
+\DoxyCodeLine{01347\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01348\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(log1p,\ log1p)}
+\DoxyCodeLine{01349\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01350\ }
+\DoxyCodeLine{01351\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01352\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01353\ \textcolor{keywordtype}{float}\ log1p(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::log1pf(x);\ \}}
+\DoxyCodeLine{01354\ }
+\DoxyCodeLine{01355\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01356\ \textcolor{keywordtype}{double}\ log1p(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::log1p(x);\ \}}
+\DoxyCodeLine{01357\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01358\ }
+\DoxyCodeLine{01359\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ ScalarX,\textcolor{keyword}{typename}\ ScalarY>}
+\DoxyCodeLine{01360\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01361\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ internal::pow\_impl<ScalarX,ScalarY>::result\_type\ pow(\textcolor{keyword}{const}\ ScalarX\&\ x,\ \textcolor{keyword}{const}\ ScalarY\&\ y)}
+\DoxyCodeLine{01362\ \{}
+\DoxyCodeLine{01363\ \ \ \textcolor{keywordflow}{return}\ internal::pow\_impl<ScalarX,ScalarY>::run(x,\ y);}
+\DoxyCodeLine{01364\ \}}
+\DoxyCodeLine{01365\ }
+\DoxyCodeLine{01366\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01367\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_BINARY(pow,\ pow)}
+\DoxyCodeLine{01368\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01369\ }
+\DoxyCodeLine{01370\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ bool\ (isnan)\ \ \ (\textcolor{keyword}{const}\ T\ \&x)\ \{\ \textcolor{keywordflow}{return}\ internal::isnan\_impl(x);\ \}}
+\DoxyCodeLine{01371\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ bool\ (isinf)\ \ \ (\textcolor{keyword}{const}\ T\ \&x)\ \{\ \textcolor{keywordflow}{return}\ internal::isinf\_impl(x);\ \}}
+\DoxyCodeLine{01372\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>\ EIGEN\_DEVICE\_FUNC\ bool\ (isfinite)(\textcolor{keyword}{const}\ T\ \&x)\ \{\ \textcolor{keywordflow}{return}\ internal::isfinite\_impl(x);\ \}}
+\DoxyCodeLine{01373\ }
+\DoxyCodeLine{01374\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01375\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY\_FUNC\_RET\_TYPE(isnan,\ isnan,\ \textcolor{keywordtype}{bool})}
+\DoxyCodeLine{01376\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY\_FUNC\_RET\_TYPE(isinf,\ isinf,\ \textcolor{keywordtype}{bool})}
+\DoxyCodeLine{01377\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY\_FUNC\_RET\_TYPE(isfinite,\ isfinite,\ \textcolor{keywordtype}{bool})}
+\DoxyCodeLine{01378\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01379\ }
+\DoxyCodeLine{01380\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01381\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01382\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(rint,\ Scalar)\ rint(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01383\ \{}
+\DoxyCodeLine{01384\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(rint,\ Scalar)::run(x);}
+\DoxyCodeLine{01385\ \}}
+\DoxyCodeLine{01386\ }
+\DoxyCodeLine{01387\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01388\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01389\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(round,\ Scalar)\ round(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01390\ \{}
+\DoxyCodeLine{01391\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(round,\ Scalar)::run(x);}
+\DoxyCodeLine{01392\ \}}
+\DoxyCodeLine{01393\ }
+\DoxyCodeLine{01394\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01395\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(round,\ round)}
+\DoxyCodeLine{01396\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01397\ }
+\DoxyCodeLine{01398\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01399\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01400\ T\ (floor)(\textcolor{keyword}{const}\ T\&\ x)}
+\DoxyCodeLine{01401\ \{}
+\DoxyCodeLine{01402\ \ \ EIGEN\_USING\_STD(floor)}
+\DoxyCodeLine{01403\ \ \ \textcolor{keywordflow}{return}\ floor(x);}
+\DoxyCodeLine{01404\ \}}
+\DoxyCodeLine{01405\ }
+\DoxyCodeLine{01406\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01407\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(floor,\ floor)}
+\DoxyCodeLine{01408\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01409\ }
+\DoxyCodeLine{01410\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01411\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01412\ \textcolor{keywordtype}{float}\ floor(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::floorf(x);\ \}}
+\DoxyCodeLine{01413\ }
+\DoxyCodeLine{01414\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01415\ \textcolor{keywordtype}{double}\ floor(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::floor(x);\ \}}
+\DoxyCodeLine{01416\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01417\ }
+\DoxyCodeLine{01418\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01419\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01420\ T\ (ceil)(\textcolor{keyword}{const}\ T\&\ x)}
+\DoxyCodeLine{01421\ \{}
+\DoxyCodeLine{01422\ \ \ EIGEN\_USING\_STD(ceil);}
+\DoxyCodeLine{01423\ \ \ \textcolor{keywordflow}{return}\ ceil(x);}
+\DoxyCodeLine{01424\ \}}
+\DoxyCodeLine{01425\ }
+\DoxyCodeLine{01426\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01427\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(ceil,\ ceil)}
+\DoxyCodeLine{01428\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01429\ }
+\DoxyCodeLine{01430\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01431\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01432\ \textcolor{keywordtype}{float}\ ceil(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::ceilf(x);\ \}}
+\DoxyCodeLine{01433\ }
+\DoxyCodeLine{01434\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01435\ \textcolor{keywordtype}{double}\ ceil(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::ceil(x);\ \}}
+\DoxyCodeLine{01436\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01437\ }
+\DoxyCodeLine{01438\ }
+\DoxyCodeLine{01441\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ log2(\textcolor{keywordtype}{int}\ x)}
+\DoxyCodeLine{01442\ \{}
+\DoxyCodeLine{01443\ \ \ eigen\_assert(x>=0);}
+\DoxyCodeLine{01444\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ v(x);}
+\DoxyCodeLine{01445\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ table[32]\ =\ \{\ 0,\ 9,\ 1,\ 10,\ 13,\ 21,\ 2,\ 29,\ 11,\ 14,\ 16,\ 18,\ 22,\ 25,\ 3,\ 30,\ 8,\ 12,\ 20,\ 28,\ 15,\ 17,\ 24,\ 7,\ 19,\ 27,\ 23,\ 6,\ 26,\ 5,\ 4,\ 31\ \};}
+\DoxyCodeLine{01446\ \ \ v\ |=\ v\ >>\ 1;}
+\DoxyCodeLine{01447\ \ \ v\ |=\ v\ >>\ 2;}
+\DoxyCodeLine{01448\ \ \ v\ |=\ v\ >>\ 4;}
+\DoxyCodeLine{01449\ \ \ v\ |=\ v\ >>\ 8;}
+\DoxyCodeLine{01450\ \ \ v\ |=\ v\ >>\ 16;}
+\DoxyCodeLine{01451\ \ \ \textcolor{keywordflow}{return}\ table[(v\ *\ 0x07C4ACDDU)\ >>\ 27];}
+\DoxyCodeLine{01452\ \}}
+\DoxyCodeLine{01453\ }
+\DoxyCodeLine{01463\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01464\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01465\ EIGEN\_ALWAYS\_INLINE\ EIGEN\_MATHFUNC\_RETVAL(sqrt,\ Scalar)\ sqrt(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01466\ \{}
+\DoxyCodeLine{01467\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(sqrt,\ Scalar)::run(x);}
+\DoxyCodeLine{01468\ \}}
+\DoxyCodeLine{01469\ }
+\DoxyCodeLine{01470\ \textcolor{comment}{//\ Boolean\ specialization,\ avoids\ implicit\ float\ to\ bool\ conversion\ (-\/Wimplicit-\/conversion-\/floating-\/point-\/to-\/bool).}}
+\DoxyCodeLine{01471\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{01472\ EIGEN\_DEFINE\_FUNCTION\_ALLOWING\_MULTIPLE\_DEFINITIONS\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01473\ \textcolor{keywordtype}{bool}\ sqrt<bool>(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&x)\ \{\ \textcolor{keywordflow}{return}\ x;\ \}}
+\DoxyCodeLine{01474\ }
+\DoxyCodeLine{01475\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01476\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(sqrt,\ sqrt)}
+\DoxyCodeLine{01477\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01478\ }
+\DoxyCodeLine{01480\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01481\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01482\ T\ rsqrt(\textcolor{keyword}{const}\ T\&\ x)}
+\DoxyCodeLine{01483\ \{}
+\DoxyCodeLine{01484\ \ \ \textcolor{keywordflow}{return}\ internal::rsqrt\_impl<T>::run(x);}
+\DoxyCodeLine{01485\ \}}
+\DoxyCodeLine{01486\ }
+\DoxyCodeLine{01487\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01488\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01489\ T\ log(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01490\ \ \ \textcolor{keywordflow}{return}\ internal::log\_impl<T>::run(x);}
+\DoxyCodeLine{01491\ \}}
+\DoxyCodeLine{01492\ }
+\DoxyCodeLine{01493\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01494\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(log,\ log)}
+\DoxyCodeLine{01495\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01496\ }
+\DoxyCodeLine{01497\ }
+\DoxyCodeLine{01498\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01499\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01500\ \textcolor{keywordtype}{float}\ log(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::logf(x);\ \}}
+\DoxyCodeLine{01501\ }
+\DoxyCodeLine{01502\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01503\ \textcolor{keywordtype}{double}\ log(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::log(x);\ \}}
+\DoxyCodeLine{01504\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01505\ }
+\DoxyCodeLine{01506\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01507\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01508\ \textcolor{keyword}{typename}\ internal::enable\_if<NumTraits<T>::IsSigned\ ||\ NumTraits<T>::IsComplex,\textcolor{keyword}{typename}\ NumTraits<T>::Real>::type}
+\DoxyCodeLine{01509\ abs(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01510\ \ \ EIGEN\_USING\_STD(abs);}
+\DoxyCodeLine{01511\ \ \ \textcolor{keywordflow}{return}\ abs(x);}
+\DoxyCodeLine{01512\ \}}
+\DoxyCodeLine{01513\ }
+\DoxyCodeLine{01514\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01515\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01516\ \textcolor{keyword}{typename}\ internal::enable\_if<!(NumTraits<T>::IsSigned\ ||\ NumTraits<T>::IsComplex),\textcolor{keyword}{typename}\ NumTraits<T>::Real>::type}
+\DoxyCodeLine{01517\ abs(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01518\ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{01519\ \}}
+\DoxyCodeLine{01520\ }
+\DoxyCodeLine{01521\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01522\ SYCL\_SPECIALIZE\_INTEGER\_TYPES\_UNARY(abs,\ abs)}
+\DoxyCodeLine{01523\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(abs,\ fabs)}
+\DoxyCodeLine{01524\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01525\ }
+\DoxyCodeLine{01526\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01527\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01528\ \textcolor{keywordtype}{float}\ abs(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::fabsf(x);\ \}}
+\DoxyCodeLine{01529\ }
+\DoxyCodeLine{01530\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01531\ \textcolor{keywordtype}{double}\ abs(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::fabs(x);\ \}}
+\DoxyCodeLine{01532\ }
+\DoxyCodeLine{01533\ \textcolor{keyword}{template}\ <>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01534\ \textcolor{keywordtype}{float}\ abs(\textcolor{keyword}{const}\ std::complex<float>\&\ x)\ \{}
+\DoxyCodeLine{01535\ \ \ return\ ::hypotf(x.real(),\ x.imag());}
+\DoxyCodeLine{01536\ \}}
+\DoxyCodeLine{01537\ }
+\DoxyCodeLine{01538\ \textcolor{keyword}{template}\ <>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01539\ \textcolor{keywordtype}{double}\ abs(\textcolor{keyword}{const}\ std::complex<double>\&\ x)\ \{}
+\DoxyCodeLine{01540\ \ \ return\ ::hypot(x.real(),\ x.imag());}
+\DoxyCodeLine{01541\ \}}
+\DoxyCodeLine{01542\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01543\ }
+\DoxyCodeLine{01544\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01545\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01546\ T\ exp(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01547\ \ \ EIGEN\_USING\_STD(exp);}
+\DoxyCodeLine{01548\ \ \ \textcolor{keywordflow}{return}\ exp(x);}
+\DoxyCodeLine{01549\ \}}
+\DoxyCodeLine{01550\ }
+\DoxyCodeLine{01551\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01552\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(exp,\ exp)}
+\DoxyCodeLine{01553\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01554\ }
+\DoxyCodeLine{01555\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01556\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01557\ \textcolor{keywordtype}{float}\ exp(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::expf(x);\ \}}
+\DoxyCodeLine{01558\ }
+\DoxyCodeLine{01559\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01560\ \textcolor{keywordtype}{double}\ exp(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::exp(x);\ \}}
+\DoxyCodeLine{01561\ }
+\DoxyCodeLine{01562\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01563\ std::complex<float>\ exp(\textcolor{keyword}{const}\ std::complex<float>\&\ x)\ \{}
+\DoxyCodeLine{01564\ \ \ \textcolor{keywordtype}{float}\ com\ =\ ::expf(x.real());}
+\DoxyCodeLine{01565\ \ \ \textcolor{keywordtype}{float}\ res\_real\ =\ com\ *\ ::cosf(x.imag());}
+\DoxyCodeLine{01566\ \ \ \textcolor{keywordtype}{float}\ res\_imag\ =\ com\ *\ ::sinf(x.imag());}
+\DoxyCodeLine{01567\ \ \ \textcolor{keywordflow}{return}\ std::complex<float>(res\_real,\ res\_imag);}
+\DoxyCodeLine{01568\ \}}
+\DoxyCodeLine{01569\ }
+\DoxyCodeLine{01570\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01571\ std::complex<double>\ exp(\textcolor{keyword}{const}\ std::complex<double>\&\ x)\ \{}
+\DoxyCodeLine{01572\ \ \ \textcolor{keywordtype}{double}\ com\ =\ ::exp(x.real());}
+\DoxyCodeLine{01573\ \ \ \textcolor{keywordtype}{double}\ res\_real\ =\ com\ *\ ::cos(x.imag());}
+\DoxyCodeLine{01574\ \ \ \textcolor{keywordtype}{double}\ res\_imag\ =\ com\ *\ ::sin(x.imag());}
+\DoxyCodeLine{01575\ \ \ \textcolor{keywordflow}{return}\ std::complex<double>(res\_real,\ res\_imag);}
+\DoxyCodeLine{01576\ \}}
+\DoxyCodeLine{01577\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01578\ }
+\DoxyCodeLine{01579\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01580\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01581\ \textcolor{keyword}{inline}\ EIGEN\_MATHFUNC\_RETVAL(expm1,\ Scalar)\ expm1(\textcolor{keyword}{const}\ Scalar\&\ x)}
+\DoxyCodeLine{01582\ \{}
+\DoxyCodeLine{01583\ \ \ \textcolor{keywordflow}{return}\ EIGEN\_MATHFUNC\_IMPL(expm1,\ Scalar)::run(x);}
+\DoxyCodeLine{01584\ \}}
+\DoxyCodeLine{01585\ }
+\DoxyCodeLine{01586\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01587\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(expm1,\ expm1)}
+\DoxyCodeLine{01588\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01589\ }
+\DoxyCodeLine{01590\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01591\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01592\ \textcolor{keywordtype}{float}\ expm1(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::expm1f(x);\ \}}
+\DoxyCodeLine{01593\ }
+\DoxyCodeLine{01594\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01595\ \textcolor{keywordtype}{double}\ expm1(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::expm1(x);\ \}}
+\DoxyCodeLine{01596\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01597\ }
+\DoxyCodeLine{01598\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01599\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01600\ T\ cos(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01601\ \ \ EIGEN\_USING\_STD(cos);}
+\DoxyCodeLine{01602\ \ \ \textcolor{keywordflow}{return}\ cos(x);}
+\DoxyCodeLine{01603\ \}}
+\DoxyCodeLine{01604\ }
+\DoxyCodeLine{01605\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01606\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(cos,cos)}
+\DoxyCodeLine{01607\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01608\ }
+\DoxyCodeLine{01609\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01610\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01611\ \textcolor{keywordtype}{float}\ cos(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::cosf(x);\ \}}
+\DoxyCodeLine{01612\ }
+\DoxyCodeLine{01613\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01614\ \textcolor{keywordtype}{double}\ cos(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::cos(x);\ \}}
+\DoxyCodeLine{01615\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01616\ }
+\DoxyCodeLine{01617\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01618\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01619\ T\ sin(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01620\ \ \ EIGEN\_USING\_STD(sin);}
+\DoxyCodeLine{01621\ \ \ \textcolor{keywordflow}{return}\ sin(x);}
+\DoxyCodeLine{01622\ \}}
+\DoxyCodeLine{01623\ }
+\DoxyCodeLine{01624\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01625\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(sin,\ sin)}
+\DoxyCodeLine{01626\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01627\ }
+\DoxyCodeLine{01628\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01629\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01630\ \textcolor{keywordtype}{float}\ sin(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::sinf(x);\ \}}
+\DoxyCodeLine{01631\ }
+\DoxyCodeLine{01632\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01633\ \textcolor{keywordtype}{double}\ sin(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::sin(x);\ \}}
+\DoxyCodeLine{01634\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01635\ }
+\DoxyCodeLine{01636\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01637\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01638\ T\ tan(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01639\ \ \ EIGEN\_USING\_STD(tan);}
+\DoxyCodeLine{01640\ \ \ \textcolor{keywordflow}{return}\ tan(x);}
+\DoxyCodeLine{01641\ \}}
+\DoxyCodeLine{01642\ }
+\DoxyCodeLine{01643\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01644\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(tan,\ tan)}
+\DoxyCodeLine{01645\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01646\ }
+\DoxyCodeLine{01647\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01648\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01649\ \textcolor{keywordtype}{float}\ tan(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::tanf(x);\ \}}
+\DoxyCodeLine{01650\ }
+\DoxyCodeLine{01651\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01652\ \textcolor{keywordtype}{double}\ tan(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::tan(x);\ \}}
+\DoxyCodeLine{01653\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01654\ }
+\DoxyCodeLine{01655\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01656\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01657\ T\ acos(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01658\ \ \ EIGEN\_USING\_STD(acos);}
+\DoxyCodeLine{01659\ \ \ \textcolor{keywordflow}{return}\ acos(x);}
+\DoxyCodeLine{01660\ \}}
+\DoxyCodeLine{01661\ }
+\DoxyCodeLine{01662\ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{01663\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01664\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01665\ T\ acosh(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01666\ \ \ EIGEN\_USING\_STD(acosh);}
+\DoxyCodeLine{01667\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(acosh(x));}
+\DoxyCodeLine{01668\ \}}
+\DoxyCodeLine{01669\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01670\ }
+\DoxyCodeLine{01671\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01672\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(acos,\ acos)}
+\DoxyCodeLine{01673\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(acosh,\ acosh)}
+\DoxyCodeLine{01674\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01675\ }
+\DoxyCodeLine{01676\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01677\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01678\ \textcolor{keywordtype}{float}\ acos(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::acosf(x);\ \}}
+\DoxyCodeLine{01679\ }
+\DoxyCodeLine{01680\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01681\ \textcolor{keywordtype}{double}\ acos(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::acos(x);\ \}}
+\DoxyCodeLine{01682\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01683\ }
+\DoxyCodeLine{01684\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01685\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01686\ T\ asin(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01687\ \ \ EIGEN\_USING\_STD(asin);}
+\DoxyCodeLine{01688\ \ \ \textcolor{keywordflow}{return}\ asin(x);}
+\DoxyCodeLine{01689\ \}}
+\DoxyCodeLine{01690\ }
+\DoxyCodeLine{01691\ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{01692\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01693\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01694\ T\ asinh(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01695\ \ \ EIGEN\_USING\_STD(asinh);}
+\DoxyCodeLine{01696\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(asinh(x));}
+\DoxyCodeLine{01697\ \}}
+\DoxyCodeLine{01698\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01699\ }
+\DoxyCodeLine{01700\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01701\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(asin,\ asin)}
+\DoxyCodeLine{01702\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(asinh,\ asinh)}
+\DoxyCodeLine{01703\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01704\ }
+\DoxyCodeLine{01705\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01706\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01707\ \textcolor{keywordtype}{float}\ asin(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::asinf(x);\ \}}
+\DoxyCodeLine{01708\ }
+\DoxyCodeLine{01709\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01710\ \textcolor{keywordtype}{double}\ asin(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::asin(x);\ \}}
+\DoxyCodeLine{01711\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01712\ }
+\DoxyCodeLine{01713\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01714\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01715\ T\ atan(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01716\ \ \ EIGEN\_USING\_STD(atan);}
+\DoxyCodeLine{01717\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(atan(x));}
+\DoxyCodeLine{01718\ \}}
+\DoxyCodeLine{01719\ }
+\DoxyCodeLine{01720\ \textcolor{preprocessor}{\#if\ EIGEN\_HAS\_CXX11\_MATH}}
+\DoxyCodeLine{01721\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01722\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01723\ T\ atanh(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01724\ \ \ EIGEN\_USING\_STD(atanh);}
+\DoxyCodeLine{01725\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(atanh(x));}
+\DoxyCodeLine{01726\ \}}
+\DoxyCodeLine{01727\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01728\ }
+\DoxyCodeLine{01729\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01730\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(atan,\ atan)}
+\DoxyCodeLine{01731\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(atanh,\ atanh)}
+\DoxyCodeLine{01732\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01733\ }
+\DoxyCodeLine{01734\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01735\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01736\ \textcolor{keywordtype}{float}\ atan(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::atanf(x);\ \}}
+\DoxyCodeLine{01737\ }
+\DoxyCodeLine{01738\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01739\ \textcolor{keywordtype}{double}\ atan(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::atan(x);\ \}}
+\DoxyCodeLine{01740\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01741\ }
+\DoxyCodeLine{01742\ }
+\DoxyCodeLine{01743\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01744\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01745\ T\ cosh(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01746\ \ \ EIGEN\_USING\_STD(cosh);}
+\DoxyCodeLine{01747\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(cosh(x));}
+\DoxyCodeLine{01748\ \}}
+\DoxyCodeLine{01749\ }
+\DoxyCodeLine{01750\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01751\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(cosh,\ cosh)}
+\DoxyCodeLine{01752\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01753\ }
+\DoxyCodeLine{01754\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01755\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01756\ \textcolor{keywordtype}{float}\ cosh(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::coshf(x);\ \}}
+\DoxyCodeLine{01757\ }
+\DoxyCodeLine{01758\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01759\ \textcolor{keywordtype}{double}\ cosh(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::cosh(x);\ \}}
+\DoxyCodeLine{01760\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01761\ }
+\DoxyCodeLine{01762\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01763\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01764\ T\ sinh(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01765\ \ \ EIGEN\_USING\_STD(sinh);}
+\DoxyCodeLine{01766\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(sinh(x));}
+\DoxyCodeLine{01767\ \}}
+\DoxyCodeLine{01768\ }
+\DoxyCodeLine{01769\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01770\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(sinh,\ sinh)}
+\DoxyCodeLine{01771\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01772\ }
+\DoxyCodeLine{01773\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01774\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01775\ \textcolor{keywordtype}{float}\ sinh(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::sinhf(x);\ \}}
+\DoxyCodeLine{01776\ }
+\DoxyCodeLine{01777\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01778\ \textcolor{keywordtype}{double}\ sinh(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::sinh(x);\ \}}
+\DoxyCodeLine{01779\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01780\ }
+\DoxyCodeLine{01781\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01782\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01783\ T\ tanh(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{01784\ \ \ EIGEN\_USING\_STD(tanh);}
+\DoxyCodeLine{01785\ \ \ \textcolor{keywordflow}{return}\ tanh(x);}
+\DoxyCodeLine{01786\ \}}
+\DoxyCodeLine{01787\ }
+\DoxyCodeLine{01788\ \textcolor{preprocessor}{\#if\ (!defined(EIGEN\_GPUCC))\ \&\&\ EIGEN\_FAST\_MATH\ \&\&\ !defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01789\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01790\ \textcolor{keywordtype}{float}\ tanh(\textcolor{keywordtype}{float}\ x)\ \{\ \textcolor{keywordflow}{return}\ internal::generic\_fast\_tanh\_float(x);\ \}}
+\DoxyCodeLine{01791\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01792\ }
+\DoxyCodeLine{01793\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01794\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY(tanh,\ tanh)}
+\DoxyCodeLine{01795\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01796\ }
+\DoxyCodeLine{01797\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01798\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01799\ \textcolor{keywordtype}{float}\ tanh(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&x)\ \{\ return\ ::tanhf(x);\ \}}
+\DoxyCodeLine{01800\ }
+\DoxyCodeLine{01801\ \textcolor{keyword}{template}<>\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01802\ \textcolor{keywordtype}{double}\ tanh(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&x)\ \{\ return\ ::tanh(x);\ \}}
+\DoxyCodeLine{01803\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01804\ }
+\DoxyCodeLine{01805\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01806\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01807\ T\ fmod(\textcolor{keyword}{const}\ T\&\ a,\ \textcolor{keyword}{const}\ T\&\ b)\ \{}
+\DoxyCodeLine{01808\ \ \ EIGEN\_USING\_STD(fmod);}
+\DoxyCodeLine{01809\ \ \ \textcolor{keywordflow}{return}\ fmod(a,\ b);}
+\DoxyCodeLine{01810\ \}}
+\DoxyCodeLine{01811\ }
+\DoxyCodeLine{01812\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01813\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_BINARY(fmod,\ fmod)}
+\DoxyCodeLine{01814\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01815\ }
+\DoxyCodeLine{01816\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPUCC)}}
+\DoxyCodeLine{01817\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01818\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01819\ \textcolor{keywordtype}{float}\ fmod(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\&\ b)\ \{}
+\DoxyCodeLine{01820\ \ \ return\ ::fmodf(a,\ b);}
+\DoxyCodeLine{01821\ \}}
+\DoxyCodeLine{01822\ }
+\DoxyCodeLine{01823\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{01824\ EIGEN\_DEVICE\_FUNC\ EIGEN\_ALWAYS\_INLINE}
+\DoxyCodeLine{01825\ \textcolor{keywordtype}{double}\ fmod(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ b)\ \{}
+\DoxyCodeLine{01826\ \ \ return\ ::fmod(a,\ b);}
+\DoxyCodeLine{01827\ \}}
+\DoxyCodeLine{01828\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01829\ }
+\DoxyCodeLine{01830\ \textcolor{preprocessor}{\#if\ defined(SYCL\_DEVICE\_ONLY)}}
+\DoxyCodeLine{01831\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_SIGNED\_INTEGER\_TYPES\_BINARY}}
+\DoxyCodeLine{01832\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_SIGNED\_INTEGER\_TYPES\_UNARY}}
+\DoxyCodeLine{01833\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_UNSIGNED\_INTEGER\_TYPES\_BINARY}}
+\DoxyCodeLine{01834\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_UNSIGNED\_INTEGER\_TYPES\_UNARY}}
+\DoxyCodeLine{01835\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_INTEGER\_TYPES\_BINARY}}
+\DoxyCodeLine{01836\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_UNSIGNED\_INTEGER\_TYPES\_UNARY}}
+\DoxyCodeLine{01837\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_BINARY}}
+\DoxyCodeLine{01838\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY}}
+\DoxyCodeLine{01839\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_FLOATING\_TYPES\_UNARY\_FUNC\_RET\_TYPE}}
+\DoxyCodeLine{01840\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_GEN\_UNARY\_FUNC}}
+\DoxyCodeLine{01841\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_UNARY\_FUNC}}
+\DoxyCodeLine{01842\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_GEN1\_BINARY\_FUNC}}
+\DoxyCodeLine{01843\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_GEN2\_BINARY\_FUNC}}
+\DoxyCodeLine{01844\ \textcolor{preprocessor}{\#undef\ SYCL\_SPECIALIZE\_BINARY\_FUNC}}
+\DoxyCodeLine{01845\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01846\ }
+\DoxyCodeLine{01847\ \}\ \textcolor{comment}{//\ end\ namespace\ numext}}
+\DoxyCodeLine{01848\ }
+\DoxyCodeLine{01849\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{01850\ }
+\DoxyCodeLine{01851\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01852\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ isfinite\_impl(\textcolor{keyword}{const}\ std::complex<T>\&\ x)}
+\DoxyCodeLine{01853\ \{}
+\DoxyCodeLine{01854\ \ \ \textcolor{keywordflow}{return}\ (numext::isfinite)(numext::real(x))\ \&\&\ (numext::isfinite)(numext::imag(x));}
+\DoxyCodeLine{01855\ \}}
+\DoxyCodeLine{01856\ }
+\DoxyCodeLine{01857\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01858\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ isnan\_impl(\textcolor{keyword}{const}\ std::complex<T>\&\ x)}
+\DoxyCodeLine{01859\ \{}
+\DoxyCodeLine{01860\ \ \ \textcolor{keywordflow}{return}\ (numext::isnan)(numext::real(x))\ ||\ (numext::isnan)(numext::imag(x));}
+\DoxyCodeLine{01861\ \}}
+\DoxyCodeLine{01862\ }
+\DoxyCodeLine{01863\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{01864\ EIGEN\_DEVICE\_FUNC\ \textcolor{keywordtype}{bool}\ isinf\_impl(\textcolor{keyword}{const}\ std::complex<T>\&\ x)}
+\DoxyCodeLine{01865\ \{}
+\DoxyCodeLine{01866\ \ \ \textcolor{keywordflow}{return}\ ((numext::isinf)(numext::real(x))\ ||\ (numext::isinf)(numext::imag(x)))\ \&\&\ (!(numext::isnan)(x));}
+\DoxyCodeLine{01867\ \}}
+\DoxyCodeLine{01868\ }
+\DoxyCodeLine{01869\ \textcolor{comment}{/****************************************************************************}}
+\DoxyCodeLine{01870\ \textcolor{comment}{*\ Implementation\ of\ fuzzy\ comparisons\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{01871\ \textcolor{comment}{****************************************************************************/}}
+\DoxyCodeLine{01872\ }
+\DoxyCodeLine{01873\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,}
+\DoxyCodeLine{01874\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsComplex,}
+\DoxyCodeLine{01875\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsInteger>}
+\DoxyCodeLine{01876\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__fuzzy__default__impl}{scalar\_fuzzy\_default\_impl}}\ \{\};}
+\DoxyCodeLine{01877\ }
+\DoxyCodeLine{01878\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01879\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__fuzzy__default__impl}{scalar\_fuzzy\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}>}
+\DoxyCodeLine{01880\ \{}
+\DoxyCodeLine{01881\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{01882\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherScalar>\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01883\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isMuchSmallerThan(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{OtherScalar}}\&\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}})}
+\DoxyCodeLine{01884\ \ \ \{}
+\DoxyCodeLine{01885\ \ \ \ \ \textcolor{keywordflow}{return}\ numext::abs(x)\ <=\ numext::abs(y)\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}};}
+\DoxyCodeLine{01886\ \ \ \}}
+\DoxyCodeLine{01887\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01888\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApprox(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}})}
+\DoxyCodeLine{01889\ \ \ \{}
+\DoxyCodeLine{01890\ \ \ \ \ \textcolor{keywordflow}{return}\ numext::abs(x\ -\/\ y)\ <=\ numext::mini(numext::abs(x),\ numext::abs(y))\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}};}
+\DoxyCodeLine{01891\ \ \ \}}
+\DoxyCodeLine{01892\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01893\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApproxOrLessThan(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}})}
+\DoxyCodeLine{01894\ \ \ \{}
+\DoxyCodeLine{01895\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ <=\ y\ ||\ isApprox(x,\ y,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}});}
+\DoxyCodeLine{01896\ \ \ \}}
+\DoxyCodeLine{01897\ \};}
+\DoxyCodeLine{01898\ }
+\DoxyCodeLine{01899\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01900\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__fuzzy__default__impl}{scalar\_fuzzy\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{01901\ \{}
+\DoxyCodeLine{01902\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{01903\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherScalar>\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01904\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isMuchSmallerThan(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&)}
+\DoxyCodeLine{01905\ \ \ \{}
+\DoxyCodeLine{01906\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ ==\ Scalar(0);}
+\DoxyCodeLine{01907\ \ \ \}}
+\DoxyCodeLine{01908\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01909\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApprox(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&)}
+\DoxyCodeLine{01910\ \ \ \{}
+\DoxyCodeLine{01911\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ ==\ y;}
+\DoxyCodeLine{01912\ \ \ \}}
+\DoxyCodeLine{01913\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01914\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApproxOrLessThan(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&)}
+\DoxyCodeLine{01915\ \ \ \{}
+\DoxyCodeLine{01916\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ <=\ y;}
+\DoxyCodeLine{01917\ \ \ \}}
+\DoxyCodeLine{01918\ \};}
+\DoxyCodeLine{01919\ }
+\DoxyCodeLine{01920\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01921\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__fuzzy__default__impl}{scalar\_fuzzy\_default\_impl}}<Scalar,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}>}
+\DoxyCodeLine{01922\ \{}
+\DoxyCodeLine{01923\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{01924\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherScalar>\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01925\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isMuchSmallerThan(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{OtherScalar}}\&\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}})}
+\DoxyCodeLine{01926\ \ \ \{}
+\DoxyCodeLine{01927\ \ \ \ \ \textcolor{keywordflow}{return}\ numext::abs2(x)\ <=\ numext::abs2(y)\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}}\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}};}
+\DoxyCodeLine{01928\ \ \ \}}
+\DoxyCodeLine{01929\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01930\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApprox(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}})}
+\DoxyCodeLine{01931\ \ \ \{}
+\DoxyCodeLine{01932\ \ \ \ \ \textcolor{keywordflow}{return}\ numext::abs2(x\ -\/\ y)\ <=\ numext::mini(numext::abs2(x),\ numext::abs2(y))\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}}\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}};}
+\DoxyCodeLine{01933\ \ \ \}}
+\DoxyCodeLine{01934\ \};}
+\DoxyCodeLine{01935\ }
+\DoxyCodeLine{01936\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{01937\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__fuzzy__impl}{scalar\_fuzzy\_impl}}\ :\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__fuzzy__default__impl}{scalar\_fuzzy\_default\_impl}}<Scalar,\ NumTraits<Scalar>::IsComplex,\ NumTraits<Scalar>::IsInteger>\ \{\};}
+\DoxyCodeLine{01938\ }
+\DoxyCodeLine{01939\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keyword}{typename}\ OtherScalar>\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01940\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isMuchSmallerThan(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{OtherScalar}}\&\ y,}
+\DoxyCodeLine{01941\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ \&precision\ =\ \mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::dummy\_precision}}())}
+\DoxyCodeLine{01942\ \{}
+\DoxyCodeLine{01943\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__fuzzy__impl}{scalar\_fuzzy\_impl<Scalar>::template}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{isMuchSmallerThan<OtherScalar>}}(x,\ y,\ precision);}
+\DoxyCodeLine{01944\ \}}
+\DoxyCodeLine{01945\ }
+\DoxyCodeLine{01946\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01947\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApprox(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y,}
+\DoxyCodeLine{01948\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<Scalar>::Real}}\ \&precision\ =\ \mbox{\hyperlink{struct_eigen_1_1_num_traits}{NumTraits<Scalar>::dummy\_precision}}())}
+\DoxyCodeLine{01949\ \{}
+\DoxyCodeLine{01950\ \ \ \textcolor{keywordflow}{return}\ scalar\_fuzzy\_impl<Scalar>::isApprox(x,\ y,\ precision);}
+\DoxyCodeLine{01951\ \}}
+\DoxyCodeLine{01952\ }
+\DoxyCodeLine{01953\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Scalar>\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01954\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApproxOrLessThan(\textcolor{keyword}{const}\ Scalar\&\ x,\ \textcolor{keyword}{const}\ Scalar\&\ y,}
+\DoxyCodeLine{01955\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ NumTraits<Scalar>::Real\ \&precision\ =\ NumTraits<Scalar>::dummy\_precision())}
+\DoxyCodeLine{01956\ \{}
+\DoxyCodeLine{01957\ \ \ \textcolor{keywordflow}{return}\ scalar\_fuzzy\_impl<Scalar>::isApproxOrLessThan(x,\ y,\ precision);}
+\DoxyCodeLine{01958\ \}}
+\DoxyCodeLine{01959\ }
+\DoxyCodeLine{01960\ \textcolor{comment}{/******************************************}}
+\DoxyCodeLine{01961\ \textcolor{comment}{***\ \ The\ special\ case\ of\ the\ \ bool\ type\ ***}}
+\DoxyCodeLine{01962\ \textcolor{comment}{******************************************/}}
+\DoxyCodeLine{01963\ }
+\DoxyCodeLine{01964\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1random__impl}{random\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{bool}}>}
+\DoxyCodeLine{01965\ \{}
+\DoxyCodeLine{01966\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ run()}
+\DoxyCodeLine{01967\ \ \ \{}
+\DoxyCodeLine{01968\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{random<int>}}(0,1)==0\ ?\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}\ :\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01969\ \ \ \}}
+\DoxyCodeLine{01970\ }
+\DoxyCodeLine{01971\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ run(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ b)}
+\DoxyCodeLine{01972\ \ \ \{}
+\DoxyCodeLine{01973\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{random<int>}}(a,\ b)==0\ ?\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{false}}\ :\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01974\ \ \ \}}
+\DoxyCodeLine{01975\ \};}
+\DoxyCodeLine{01976\ }
+\DoxyCodeLine{01977\ \textcolor{keyword}{template}<>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__fuzzy__impl}{scalar\_fuzzy\_impl}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{bool}}>}
+\DoxyCodeLine{01978\ \{}
+\DoxyCodeLine{01979\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{01980\ }
+\DoxyCodeLine{01981\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherScalar>\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01982\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isMuchSmallerThan(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&)}
+\DoxyCodeLine{01983\ \ \ \{}
+\DoxyCodeLine{01984\ \ \ \ \ \textcolor{keywordflow}{return}\ !x;}
+\DoxyCodeLine{01985\ \ \ \}}
+\DoxyCodeLine{01986\ }
+\DoxyCodeLine{01987\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01988\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApprox(\textcolor{keywordtype}{bool}\ x,\ \textcolor{keywordtype}{bool}\ y,\ \textcolor{keywordtype}{bool})}
+\DoxyCodeLine{01989\ \ \ \{}
+\DoxyCodeLine{01990\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ ==\ y;}
+\DoxyCodeLine{01991\ \ \ \}}
+\DoxyCodeLine{01992\ }
+\DoxyCodeLine{01993\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{01994\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ isApproxOrLessThan(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&\ y,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\&)}
+\DoxyCodeLine{01995\ \ \ \{}
+\DoxyCodeLine{01996\ \ \ \ \ \textcolor{keywordflow}{return}\ (!x)\ ||\ y;}
+\DoxyCodeLine{01997\ \ \ \}}
+\DoxyCodeLine{01998\ }
+\DoxyCodeLine{01999\ \};}
+\DoxyCodeLine{02000\ }
+\DoxyCodeLine{02001\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{02002\ }
+\DoxyCodeLine{02003\ \textcolor{comment}{//\ Default\ implementations\ that\ rely\ on\ other\ numext\ implementations}}
+\DoxyCodeLine{02004\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{02005\ }
+\DoxyCodeLine{02006\ \textcolor{comment}{//\ Specialization\ for\ complex\ types\ that\ are\ not\ supported\ by\ std::expm1.}}
+\DoxyCodeLine{02007\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ RealScalar>}
+\DoxyCodeLine{02008\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1expm1__impl}{expm1\_impl}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<RealScalar>\ >\ \{}
+\DoxyCodeLine{02009\ \ \ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::complex<RealScalar>\ run(}
+\DoxyCodeLine{02010\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::complex<RealScalar>\&\ x)\ \{}
+\DoxyCodeLine{02011\ \ \ \ \ EIGEN\_STATIC\_ASSERT\_NON\_INTEGER(RealScalar)}
+\DoxyCodeLine{02012\ \ \ \ \ RealScalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{xr}}\ =\ x.real();}
+\DoxyCodeLine{02013\ \ \ \ \ RealScalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{xi}}\ =\ x.imag();}
+\DoxyCodeLine{02014\ \ \ \ \ \textcolor{comment}{//\ expm1(z)\ =\ exp(z)\ -\/\ 1}}
+\DoxyCodeLine{02015\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ =\ exp(x\ +\ \ i\ *\ y)\ -\/\ 1}}
+\DoxyCodeLine{02016\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ =\ exp(x)\ *\ (cos(y)\ +\ i\ *\ sin(y))\ -\/\ 1}}
+\DoxyCodeLine{02017\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ =\ exp(x)\ *\ cos(y)\ -\/\ 1\ +\ i\ *\ exp(x)\ *\ sin(y)}}
+\DoxyCodeLine{02018\ \ \ \ \ \textcolor{comment}{//\ Imag(expm1(z))\ =\ exp(x)\ *\ sin(y)}}
+\DoxyCodeLine{02019\ \ \ \ \ \textcolor{comment}{//\ Real(expm1(z))\ =\ exp(x)\ *\ cos(y)\ -\/\ 1}}
+\DoxyCodeLine{02020\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ =\ exp(x)\ *\ cos(y)\ -\/\ 1.}}
+\DoxyCodeLine{02021\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ =\ expm1(x)\ +\ exp(x)\ *\ (cos(y)\ -\/\ 1)}}
+\DoxyCodeLine{02022\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ =\ expm1(x)\ +\ exp(x)\ *\ (2\ *\ sin(y\ /\ 2)\ **\ 2)}}
+\DoxyCodeLine{02023\ \ \ \ \ RealScalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{erm1}}\ =\ numext::expm1<RealScalar>(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{xr}});}
+\DoxyCodeLine{02024\ \ \ \ \ RealScalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{er}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{erm1}}\ +\ RealScalar(1.);}
+\DoxyCodeLine{02025\ \ \ \ \ RealScalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{sin2}}\ =\ numext::sin(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{xi}}\ /\ RealScalar(2.));}
+\DoxyCodeLine{02026\ \ \ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{sin2}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{sin2}}\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{sin2}};}
+\DoxyCodeLine{02027\ \ \ \ \ RealScalar\ s\ =\ numext::sin(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{xi}});}
+\DoxyCodeLine{02028\ \ \ \ \ RealScalar\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{real\_part}}\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{erm1}}\ -\/\ RealScalar(2.)\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{er}}\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{sin2}};}
+\DoxyCodeLine{02029\ \ \ \ \ \textcolor{keywordflow}{return}\ std::complex<RealScalar>(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{real\_part}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{er}}\ *\ s);}
+\DoxyCodeLine{02030\ \ \ \}}
+\DoxyCodeLine{02031\ \};}
+\DoxyCodeLine{02032\ }
+\DoxyCodeLine{02033\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{02034\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1rsqrt__impl}{rsqrt\_impl}}\ \{}
+\DoxyCodeLine{02035\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{02036\ \ \ \textcolor{keyword}{static}\ EIGEN\_ALWAYS\_INLINE\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}\&\ x)\ \{}
+\DoxyCodeLine{02037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}}(1)/numext::sqrt(x);}
+\DoxyCodeLine{02038\ \ \ \}}
+\DoxyCodeLine{02039\ \};}
+\DoxyCodeLine{02040\ }
+\DoxyCodeLine{02041\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_GPU\_COMPILE\_PHASE)}}
+\DoxyCodeLine{02042\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{02043\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1conj__impl}{conj\_impl}}<std::\mbox{\hyperlink{class_eigen_1_1_matrix_base}{complex}}<T>,\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{02044\ \{}
+\DoxyCodeLine{02045\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{02046\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ std::complex<T>\ run(\textcolor{keyword}{const}\ std::complex<T>\&\ x)}
+\DoxyCodeLine{02047\ \ \ \{}
+\DoxyCodeLine{02048\ \ \ \ \ \textcolor{keywordflow}{return}\ std::complex<T>(numext::real(x),\ -\/numext::imag(x));}
+\DoxyCodeLine{02049\ \ \ \}}
+\DoxyCodeLine{02050\ \};}
+\DoxyCodeLine{02051\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{02052\ }
+\DoxyCodeLine{02053\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{02054\ }
+\DoxyCodeLine{02055\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{02056\ }
+\DoxyCodeLine{02057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EIGEN\_MATHFUNCTIONS\_H}}
+
+\end{DoxyCode}

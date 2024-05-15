@@ -1,0 +1,11 @@
+<map id="Road" name="Road">
+<area shape="rect" id="Node000001" title=" " alt="" coords="152,203,203,229"/>
+<area shape="rect" id="Node000002" href="$class_configuration.html" title=" " alt="" coords="5,96,102,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,131,164,200,161,204,78,135"/>
+<area shape="rect" id="Node000003" href="$class_driver_profile.html" title=" " alt="" coords="9,5,98,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="56,48,56,95,51,95,51,48"/>
+<area shape="rect" id="Node000004" href="$class_road_segment.html" title=" " alt="" coords="126,96,229,123"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="180,138,180,202,175,202,175,138"/>
+<area shape="rect" id="Node000005" href="$struct_road_1_1_c_a_r_s___s_t_a_t_s___t.html" title=" " alt="" coords="254,96,411,123"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="319,137,302,160,279,181,241,201,204,212,203,207,239,196,276,176,298,156,315,134"/>
+</map>

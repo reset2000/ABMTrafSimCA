@@ -1,0 +1,7 @@
+<map id="ChangeLaneConfig" name="ChangeLaneConfig">
+<area shape="rect" id="Node000001" title=" " alt="" coords="38,235,168,261"/>
+<area shape="rect" id="Node000002" href="$struct_change_lane_config_1_1_car_status.html" title=" " alt="" coords="5,96,201,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,138,106,234,100,234,100,138"/>
+<area shape="rect" id="Node000003" href="$class_car.html" title=" " alt="" coords="82,5,124,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,48,106,95,100,95,100,48"/>
+</map>

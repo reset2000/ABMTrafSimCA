@@ -1,0 +1,77 @@
+\doxysection{Db\+Manager Class Reference}
+\hypertarget{class_db_manager}{}\label{class_db_manager}\index{DbManager@{DbManager}}
+
+
+Inheritance diagram for Db\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{class_db_manager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Db\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{class_db_manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_db_manager_a443a6024735bd78041da461e55038fd9}\label{class_db_manager_a443a6024735bd78041da461e55038fd9} 
+{\bfseries Db\+Manager} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+\Hypertarget{class_db_manager_a212075d7d81c67fd9bc4b9e7b1580061}\label{class_db_manager_a212075d7d81c67fd9bc4b9e7b1580061} 
+void {\bfseries create\+Tables} ()
+\item 
+\Hypertarget{class_db_manager_a991e632ae2a7913268a00062b369f4f2}\label{class_db_manager_a991e632ae2a7913268a00062b369f4f2} 
+void {\bfseries save\+Db} (\mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \&qF)
+\item 
+\Hypertarget{class_db_manager_a35b50ca08cccb1079cd11860d44abcf2}\label{class_db_manager_a35b50ca08cccb1079cd11860d44abcf2} 
+void {\bfseries save\+Db} (\mbox{\hyperlink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}} \&q\+ST)
+\item 
+\Hypertarget{class_db_manager_afff6656aab53762d8c91a9def0c61356}\label{class_db_manager_afff6656aab53762d8c91a9def0c61356} 
+void {\bfseries read\+Db} (QList$<$ \mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \texorpdfstring{$\ast$}{*} $>$ \&q\+FList)
+\item 
+\Hypertarget{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1}\label{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1} 
+void {\bfseries delete\+Db} (\mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \&qF)
+\item 
+\Hypertarget{class_db_manager_aa0ecc77c75117c8aefcb5614be1808bf}\label{class_db_manager_aa0ecc77c75117c8aefcb5614be1808bf} 
+void {\bfseries delete\+Db} (\mbox{\hyperlink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}} \&q\+ST)
+\item 
+\Hypertarget{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181}\label{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181} 
+void {\bfseries read\+Snapshot} (\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \&snapshot)
+\item 
+\Hypertarget{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead}\label{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead} 
+void {\bfseries update\+Snapshot} (\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \&snapshot)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_db_manager_aef7a40f0a6fe870f53c6c8a0539930ba}\label{class_db_manager_aef7a40f0a6fe870f53c6c8a0539930ba} 
+void {\bfseries open\+Db} ()
+\item 
+\Hypertarget{class_db_manager_a9e26ac4e30fd6f8258835cb5a1c41072}\label{class_db_manager_a9e26ac4e30fd6f8258835cb5a1c41072} 
+void {\bfseries close\+Db} ()
+\item 
+\Hypertarget{class_db_manager_a5905248461fc77d70531bf8eadad6961}\label{class_db_manager_a5905248461fc77d70531bf8eadad6961} 
+int {\bfseries count\+Snapshot\+Rows} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_db_manager_a9bbc0ad3003674b8e5e71783e5067f7f}\label{class_db_manager_a9bbc0ad3003674b8e5e71783e5067f7f} 
+QSql\+Database {\bfseries db}
+\item 
+\Hypertarget{class_db_manager_ab2dc2fec27272f6fc779c63f227b7fcd}\label{class_db_manager_ab2dc2fec27272f6fc779c63f227b7fcd} 
+const QString {\bfseries DB\+\_\+\+NAME} = "{}traffic.\+sqlite"{}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+dbmanager.\+h\item 
+dbmanager.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,125 @@
+\doxysection{Road Class Reference}
+\hypertarget{class_road}{}\label{class_road}\index{Road@{Road}}
+
+
+Collaboration diagram for Road\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_road__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_road_1_1_c_a_r_s___s_t_a_t_s___t}{CARS\+\_\+\+STATS\+\_\+T}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_road_ac1eefc1e96b2b00f26d55524c2e586f1}\label{class_road_ac1eefc1e96b2b00f26d55524c2e586f1} 
+{\bfseries Road} (\mbox{\hyperlink{class_configuration}{Configuration}} \&config)
+\item 
+\Hypertarget{class_road_a58c1510d87a853400901912593aa1ed8}\label{class_road_a58c1510d87a853400901912593aa1ed8} 
+void {\bfseries Generate\+Cycles} ()
+\item 
+\Hypertarget{class_road_a280cfffacc4a57818b95aa7853d52eca}\label{class_road_a280cfffacc4a57818b95aa7853d52eca} 
+void {\bfseries Generate\+Densities\+Qt} (\mbox{\hyperlink{class_configuration}{Configuration}} \&config)
+\item 
+\Hypertarget{class_road_ab9974bf657e9cdeffb6ed246900f6825}\label{class_road_ab9974bf657e9cdeffb6ed246900f6825} 
+int {\bfseries Get\+Vanished\+Cars} (int lane, int car\+Length)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_road_a7937925d8ca8f35fcbda5cf67b2be215}\label{class_road_a7937925d8ca8f35fcbda5cf67b2be215} 
+static void {\bfseries Generate\+Densities} (\mbox{\hyperlink{class_configuration}{Configuration}} \&config)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_road_a8cd3e5493672e68dc4583e0e31a35b95}\label{class_road_a8cd3e5493672e68dc4583e0e31a35b95} 
+void {\bfseries Set\+Cars\+Set} ()
+\item 
+\Hypertarget{class_road_a8ee0c51b19a437b4eea175241f37ee38}\label{class_road_a8ee0c51b19a437b4eea175241f37ee38} 
+void {\bfseries Set\+Starting\+State} (bool densities)
+\item 
+\Hypertarget{class_road_aeb792f88741118d3bafdfc1318e6b195}\label{class_road_aeb792f88741118d3bafdfc1318e6b195} 
+int {\bfseries Calculate\+Cars\+After} (int all\+Cars)
+\item 
+\Hypertarget{class_road_a2c61bef04889834385fd6b40d5d6ef65}\label{class_road_a2c61bef04889834385fd6b40d5d6ef65} 
+int {\bfseries Generate\+Random\+Driver\+Type\+Index} ()
+\item 
+\Hypertarget{class_road_aa1b08fc34c7916ef825501b8ad460b27}\label{class_road_aa1b08fc34c7916ef825501b8ad460b27} 
+int {\bfseries Generate\+Random\+Starting\+Car} ()
+\item 
+\Hypertarget{class_road_ac362e1817347b9779afe5adbe922b661}\label{class_road_ac362e1817347b9779afe5adbe922b661} 
+void {\bfseries Set\+Tails} ()
+\item 
+\Hypertarget{class_road_adfdd08e959cf3942869eae15b8d92114}\label{class_road_adfdd08e959cf3942869eae15b8d92114} 
+void {\bfseries Set\+Accelerate\+By\+Formula} ()
+\item 
+\Hypertarget{class_road_ab1036d2ae3f35896281f01ef3dae04f7}\label{class_road_ab1036d2ae3f35896281f01ef3dae04f7} 
+void {\bfseries Set\+Change\+Lane\+By\+Formula} ()
+\item 
+\Hypertarget{class_road_a5c098189a67c4f04bf752643eb810567}\label{class_road_a5c098189a67c4f04bf752643eb810567} 
+int {\bfseries Check\+Front\+Same\+Lane} (int lane, int segment)
+\item 
+\Hypertarget{class_road_aa199c3c6e0676c8f8bdf33c69eea43fd}\label{class_road_aa199c3c6e0676c8f8bdf33c69eea43fd} 
+int {\bfseries Check\+Front\+Alt\+Lane} (int lane, int segment)
+\item 
+\Hypertarget{class_road_ad64d2b162f9debad13c1190a00dee8ee}\label{class_road_ad64d2b162f9debad13c1190a00dee8ee} 
+int {\bfseries Check\+Back\+Alt\+Lane} (int lane, int segment)
+\item 
+\Hypertarget{class_road_a210f6a1bdc9796afe892c7f64bf7eaf8}\label{class_road_a210f6a1bdc9796afe892c7f64bf7eaf8} 
+int {\bfseries Calculate\+Distance\+Between\+Cars} (int segment1, int segment2, int tail2)
+\item 
+\Hypertarget{class_road_a5bb8c758c93f77f6e52e6e9bef6636e8}\label{class_road_a5bb8c758c93f77f6e52e6e9bef6636e8} 
+void {\bfseries Move\+Single\+Car\+Change\+Lane} (int old\+Lane, int lane\+To\+Change, int segment)
+\item 
+\Hypertarget{class_road_a2fc593e668e5adfb3370504c8dcd8b99}\label{class_road_a2fc593e668e5adfb3370504c8dcd8b99} 
+void {\bfseries Clear\+Stop\+Changing\+Lane} ()
+\item 
+\Hypertarget{class_road_a2c2cea92f9c5980ec2be4e6ecf89f613}\label{class_road_a2c2cea92f9c5980ec2be4e6ecf89f613} 
+void {\bfseries Move\+Cars} ()
+\item 
+\Hypertarget{class_road_a66f15924436326a8096b34e22170c36d}\label{class_road_a66f15924436326a8096b34e22170c36d} 
+string \texorpdfstring{$\ast$}{*} {\bfseries Prepare\+To\+Show} (int cycles\+Num)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_road_a359fa09581fa98d548280e727b12a24e}\label{class_road_a359fa09581fa98d548280e727b12a24e} 
+\mbox{\hyperlink{class_configuration}{Configuration}} \texorpdfstring{$\ast$}{*} {\bfseries cfg}
+\item 
+\Hypertarget{class_road_a10dda1fbec092c86ca72d8e1b4a45020}\label{class_road_a10dda1fbec092c86ca72d8e1b4a45020} 
+\mbox{\hyperlink{class_road_segment}{Road\+Segment}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries start\+Segments}
+\item 
+\Hypertarget{class_road_a330c47c153ed354a914b3026b71a36fe}\label{class_road_a330c47c153ed354a914b3026b71a36fe} 
+\mbox{\hyperlink{class_road_segment}{Road\+Segment}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries cycle\+Segments}
+\item 
+\Hypertarget{class_road_a675b5028c0b67511ee7eef6443ffca19}\label{class_road_a675b5028c0b67511ee7eef6443ffca19} 
+map$<$ long, \mbox{\hyperlink{class_car}{Car}} $>$ {\bfseries cars}
+\item 
+\Hypertarget{class_road_a849399933b12eb0a6aeacb9c6c9a2bc2}\label{class_road_a849399933b12eb0a6aeacb9c6c9a2bc2} 
+int {\bfseries cars\+Set} \mbox{[}MAX\+\_\+\+ROAD\+\_\+\+LANES\mbox{]}\mbox{[}MAX\+\_\+\+CARS\+\_\+\+SET\mbox{]} = \{0\}
+\item 
+\Hypertarget{class_road_a42a13d93d7641c7c4f98b361055d30bd}\label{class_road_a42a13d93d7641c7c4f98b361055d30bd} 
+int {\bfseries segments\+Num}
+\item 
+\Hypertarget{class_road_aa31a778efa5d008838c9aad284c76e40}\label{class_road_aa31a778efa5d008838c9aad284c76e40} 
+int {\bfseries cars\+Num} \mbox{[}MAX\+\_\+\+ROAD\+\_\+\+LANES\mbox{]} = \{0\}
+\item 
+\Hypertarget{class_road_aedaa19ffd4c27705c6fcaa07a63e4163}\label{class_road_aedaa19ffd4c27705c6fcaa07a63e4163} 
+\mbox{\hyperlink{struct_road_1_1_c_a_r_s___s_t_a_t_s___t}{CARS\+\_\+\+STATS\+\_\+T}} {\bfseries vanished\+Cars} \mbox{[}MAX\+\_\+\+ROAD\+\_\+\+LANES\mbox{]}\mbox{[}MAX\+\_\+\+CARS\+\_\+\+SET\mbox{]} = \{0\}
+\item 
+\Hypertarget{class_road_a15bb28389a848d3e6e87402f36fa8079}\label{class_road_a15bb28389a848d3e6e87402f36fa8079} 
+int {\bfseries sum\+Changed\+Lanes}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Traffic\+Core/Road.\+h\item 
+Traffic\+Core/Road.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,234 @@
+\doxysection{Dot.\+h}
+\hypertarget{_dot_8h_source}{}\label{_dot_8h_source}\index{Eigen/src/Core/Dot.h@{Eigen/src/Core/Dot.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2006-\/2008,\ 2010\ Benoit\ Jacob\ <jacob.benoit.1@gmail.com>}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_DOT\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ EIGEN\_DOT\_H}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ helper\ function\ for\ dot().\ The\ problem\ is\ that\ if\ we\ put\ that\ in\ the\ body\ of\ dot(),\ then\ upon\ calling\ dot}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ with\ mismatched\ types,\ the\ compiler\ emits\ errors\ about\ failing\ to\ instantiate\ cwiseProduct\ BEFORE}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ looking\ at\ the\ static\ assertions.\ Thus\ this\ is\ a\ trick\ to\ get\ better\ compile\ errors.}}
+\DoxyCodeLine{00020\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ U,}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ the\ NeedToTranspose\ condition\ here\ is\ taken\ straight\ from\ Assign.h}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ NeedToTranspose\ =\ T::IsVectorAtCompileTime}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ U::IsVectorAtCompileTime}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ ((int(T::RowsAtCompileTime)\ ==\ 1\ \&\&\ int(U::ColsAtCompileTime)\ ==\ 1)}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \textcolor{comment}{//\ FIXME\ |\ instead\ of\ ||\ to\ please\ GCC\ 4.4.0\ stupid\ warning\ "{}suggest\ parentheses\ around\ \&\&"{}.}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ revert\ to\ ||\ as\ soon\ as\ not\ needed\ anymore.}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{int}(T::ColsAtCompileTime)\ ==\ 1\ \&\&\ int(U::RowsAtCompileTime)\ ==\ 1))}
+\DoxyCodeLine{00028\ >}
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1dot__nocheck}{dot\_nocheck}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar\_conj\_product\_op<typename\ traits<T>::Scalar}},\textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{traits<U>::Scalar}}>\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{conj\_prod}};}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ conj\_prod::result\_type\ ResScalar;}
+\DoxyCodeLine{00033\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00034\ \ \ EIGEN\_STRONG\_INLINE}
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{static}\ ResScalar\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<T>}}\&\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<U>}}\&\ b)}
+\DoxyCodeLine{00036\ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ a.template\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{binaryExpr<conj\_prod>}}(b).\mbox{\hyperlink{class_eigen_1_1_dense_base_ac7b6e2d5e05f37b6cd3f213d28fdac24}{sum}}();}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00042\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1dot__nocheck}{dot\_nocheck}}<\mbox{\hyperlink{class_eigen_1_1_matrix_base}{T}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{U}},\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{true}}>}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{scalar\_conj\_product\_op<typename\ traits<T>::Scalar}},\textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{traits<U>::Scalar}}>\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{conj\_prod}};}
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ conj\_prod::result\_type\ ResScalar;}
+\DoxyCodeLine{00046\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00047\ \ \ EIGEN\_STRONG\_INLINE}
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{static}\ ResScalar\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<T>}}\&\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<U>}}\&\ b)}
+\DoxyCodeLine{00049\ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ a.\mbox{\hyperlink{class_eigen_1_1_dense_base_af891b9782f712151a471b3d7cfaaa2e8}{transpose}}().template\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{binaryExpr<conj\_prod>}}(b).\mbox{\hyperlink{class_eigen_1_1_dense_base_ac7b6e2d5e05f37b6cd3f213d28fdac24}{sum}}();}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ \};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00068\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{00069\ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00070\ EIGEN\_STRONG\_INLINE}
+\DoxyCodeLine{00071\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{ScalarBinaryOpTraits<typename\ internal::traits<Derived>::Scalar}},\textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1traits}{internal::traits<OtherDerived>::Scalar}}>::ReturnType}
+\DoxyCodeLine{00072\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a2c84258ecc93fc1a0a2d4fa22b99dd99}{MatrixBase<Derived>::dot}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<OtherDerived>}}\&\ other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00073\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00074\ \ \ EIGEN\_STATIC\_ASSERT\_VECTOR\_ONLY(Derived)}
+\DoxyCodeLine{00075\ \ \ EIGEN\_STATIC\_ASSERT\_VECTOR\_ONLY(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{OtherDerived}})}
+\DoxyCodeLine{00076\ \ \ EIGEN\_STATIC\_ASSERT\_SAME\_VECTOR\_SIZE(Derived,\mbox{\hyperlink{class_eigen_1_1_matrix_base}{OtherDerived}})}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#if\ !(defined(EIGEN\_NO\_STATIC\_ASSERT)\ \&\&\ defined(EIGEN\_NO\_DEBUG))}}
+\DoxyCodeLine{00078\ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1scalar__conj__product__op}{internal::scalar\_conj\_product\_op<Scalar,typename\ OtherDerived::Scalar>}}\ func;}
+\DoxyCodeLine{00079\ \ \ EIGEN\_CHECK\_BINARY\_COMPATIBILIY(func,Scalar,\textcolor{keyword}{typename}\ OtherDerived::Scalar);}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00081\ \ \ }
+\DoxyCodeLine{00082\ \ \ eigen\_assert(size()\ ==\ other.size());}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1dot__nocheck}{internal::dot\_nocheck<Derived,OtherDerived>::run}}(*\textcolor{keyword}{this},\ other);}
+\DoxyCodeLine{00085\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ implementation\ of\ L2\ norm\ and\ related\ functions\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00095\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00096\ EIGEN\_DEVICE\_FUNC\ EIGEN\_STRONG\_INLINE\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<typename\ internal::traits<Derived>::Scalar}}>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{MatrixBase<Derived>::squaredNorm}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00097\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordflow}{return}\ numext::real((*this).cwiseAbs2().sum());}
+\DoxyCodeLine{00099\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00108\ EIGEN\_DEVICE\_FUNC\ EIGEN\_STRONG\_INLINE\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<typename\ internal::traits<Derived>::Scalar}}>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_ace03acc2885d22588472ae898a689093}{MatrixBase<Derived>::norm}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00109\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00110\ \ \ \textcolor{keywordflow}{return}\ numext::sqrt(\mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{squaredNorm}}());}
+\DoxyCodeLine{00111\ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00122\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00123\ EIGEN\_DEVICE\_FUNC\ EIGEN\_STRONG\_INLINE\ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1true__type}{MatrixBase<Derived>::PlainObject}}}
+\DoxyCodeLine{00124\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_ab0b6f60e35452acd779e340856fde121}{MatrixBase<Derived>::normalized}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00125\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1true__type}{internal::nested\_eval<Derived,2>::type}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_Nested}};}
+\DoxyCodeLine{00127\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_Nested}}\ n(derived());}
+\DoxyCodeLine{00128\ \ \ RealScalar\ z\ =\ n.\mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{squaredNorm}}();}
+\DoxyCodeLine{00129\ \ \ \textcolor{comment}{//\ NOTE:\ after\ extensive\ benchmarking,\ this\ conditional\ does\ not\ impact\ performance,\ at\ least\ on\ recent\ x86\ CPU}}
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordflow}{if}(z>RealScalar(0))}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordflow}{return}\ n\ /\ numext::sqrt(z);}
+\DoxyCodeLine{00132\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{return}\ n;}
+\DoxyCodeLine{00134\ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00144\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00145\ EIGEN\_DEVICE\_FUNC\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a82aab8b1e4a00beea9d8be19eb2f9f6d}{MatrixBase<Derived>::normalize}}()}
+\DoxyCodeLine{00146\ \{}
+\DoxyCodeLine{00147\ \ \ RealScalar\ z\ =\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{squaredNorm}}();}
+\DoxyCodeLine{00148\ \ \ \textcolor{comment}{//\ NOTE:\ after\ extensive\ benchmarking,\ this\ conditional\ does\ not\ impact\ performance,\ at\ least\ on\ recent\ x86\ CPU}}
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordflow}{if}(z>RealScalar(0))}
+\DoxyCodeLine{00150\ \ \ \ \ derived()\ /=\ numext::sqrt(z);}
+\DoxyCodeLine{00151\ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00165\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00166\ EIGEN\_DEVICE\_FUNC\ EIGEN\_STRONG\_INLINE\ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1true__type}{MatrixBase<Derived>::PlainObject}}}
+\DoxyCodeLine{00167\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_ab2e41fc6c7ba747ed91ba29a81272c67}{MatrixBase<Derived>::stableNormalized}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00168\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00169\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1true__type}{internal::nested\_eval<Derived,3>::type}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_Nested}};}
+\DoxyCodeLine{00170\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{\_Nested}}\ n(derived());}
+\DoxyCodeLine{00171\ \ \ RealScalar\ w\ =\ n.cwiseAbs().maxCoeff();}
+\DoxyCodeLine{00172\ \ \ RealScalar\ z\ =\ (n/w).\mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{squaredNorm}}();}
+\DoxyCodeLine{00173\ \ \ \textcolor{keywordflow}{if}(z>RealScalar(0))}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{return}\ n\ /\ (numext::sqrt(z)*w);}
+\DoxyCodeLine{00175\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordflow}{return}\ n;}
+\DoxyCodeLine{00177\ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00190\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00191\ EIGEN\_DEVICE\_FUNC\ EIGEN\_STRONG\_INLINE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a4c5e4f21e24a98f0fbb0a0ea18f81add}{MatrixBase<Derived>::stableNormalize}}()}
+\DoxyCodeLine{00192\ \{}
+\DoxyCodeLine{00193\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ w\ =\ cwiseAbs().maxCoeff();}
+\DoxyCodeLine{00194\ \ \ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ z\ =\ (derived()/w).\mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{squaredNorm}}();}
+\DoxyCodeLine{00195\ \ \ \textcolor{keywordflow}{if}(z>\mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}(0))}
+\DoxyCodeLine{00196\ \ \ \ \ derived()\ /=\ numext::sqrt(z)*w;}
+\DoxyCodeLine{00197\ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ implementation\ of\ other\ norms\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived,\ \textcolor{keywordtype}{int}\ p>}
+\DoxyCodeLine{00204\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1lp_norm__selector}{lpNorm\_selector}}}
+\DoxyCodeLine{00205\ \{}
+\DoxyCodeLine{00206\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<typename\ traits<Derived>::Scalar}}>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00207\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00208\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<Derived>}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}})}
+\DoxyCodeLine{00209\ \ \ \{}
+\DoxyCodeLine{00210\ \ \ \ \ EIGEN\_USING\_STD(pow)}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{return}\ pow(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}}.cwiseAbs().\mbox{\hyperlink{class_eigen_1_1_matrix_base_a6bd01a3c94daf864579f14510aa320f8}{array}}().pow(p).\mbox{\hyperlink{class_eigen_1_1_dense_base_ac7b6e2d5e05f37b6cd3f213d28fdac24}{sum}}(),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}(1)/p);}
+\DoxyCodeLine{00212\ \ \ \}}
+\DoxyCodeLine{00213\ \};}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00216\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1lp_norm__selector}{lpNorm\_selector}}<Derived,\ 1>}
+\DoxyCodeLine{00217\ \{}
+\DoxyCodeLine{00218\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00219\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<typename\ traits<Derived>::Scalar}}>::Real\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<Derived>}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}})}
+\DoxyCodeLine{00220\ \ \ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}}.cwiseAbs().\mbox{\hyperlink{class_eigen_1_1_dense_base_ac7b6e2d5e05f37b6cd3f213d28fdac24}{sum}}();}
+\DoxyCodeLine{00222\ \ \ \}}
+\DoxyCodeLine{00223\ \};}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00226\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1lp_norm__selector}{lpNorm\_selector}}<Derived,\ 2>}
+\DoxyCodeLine{00227\ \{}
+\DoxyCodeLine{00228\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00229\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<typename\ traits<Derived>::Scalar}}>::Real\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<Derived>}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}})}
+\DoxyCodeLine{00230\ \ \ \{}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_ace03acc2885d22588472ae898a689093}{norm}}();}
+\DoxyCodeLine{00232\ \ \ \}}
+\DoxyCodeLine{00233\ \};}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00236\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1internal_1_1lp_norm__selector}{lpNorm\_selector}}<Derived,\ \mbox{\hyperlink{namespace_eigen_a7951593b031e13d90223c83d022ce99e}{Infinity}}>}
+\DoxyCodeLine{00237\ \{}
+\DoxyCodeLine{00238\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<typename\ traits<Derived>::Scalar}}>::Real\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}};}
+\DoxyCodeLine{00239\ \ \ EIGEN\_DEVICE\_FUNC}
+\DoxyCodeLine{00240\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\ run(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<Derived>}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}})}
+\DoxyCodeLine{00241\ \ \ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordflow}{if}(Derived::SizeAtCompileTime==0\ ||\ (Derived::SizeAtCompileTime==\mbox{\hyperlink{namespace_eigen_ad81fa7195215a0ce30017dfac309f0b2}{Dynamic}}\ \&\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}}.size()==0))}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}(0);}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{m}}.cwiseAbs().maxCoeff();}
+\DoxyCodeLine{00245\ \ \ \}}
+\DoxyCodeLine{00246\ \};}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \}\ \textcolor{comment}{//\ end\ namespace\ internal}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00260\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00261\ \textcolor{keyword}{template}<\textcolor{keywordtype}{int}\ p>}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_PARSED\_BY\_DOXYGEN}}
+\DoxyCodeLine{00263\ EIGEN\_DEVICE\_FUNC\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{NumTraits<typename\ internal::traits<Derived>::Scalar}}>::Real}
+\DoxyCodeLine{00264\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00265\ EIGEN\_DEVICE\_FUNC\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<Derived>::RealScalar}}}
+\DoxyCodeLine{00266\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00267\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<Derived>::lpNorm}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00268\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00269\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1lp_norm__selector}{internal::lpNorm\_selector<Derived,\ p>::run}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00270\ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ implementation\ of\ isOrthogonal\ /\ isUnitary\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00280\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00281\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{00282\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_aefdc8e4e4c156fdd79a21479e75dcd8a}{MatrixBase<Derived>::isOrthogonal}}}
+\DoxyCodeLine{00283\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{MatrixBase<OtherDerived>}}\&\ other,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{RealScalar}}\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}})\ \textcolor{keyword}{const}}
+\DoxyCodeLine{00284\ \{}
+\DoxyCodeLine{00285\ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1true__type}{internal::nested\_eval<Derived,2>::type}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{nested}}(derived());}
+\DoxyCodeLine{00286\ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1true__type}{internal::nested\_eval<OtherDerived,2>::type}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{otherNested}}(other.derived());}
+\DoxyCodeLine{00287\ \ \ \textcolor{keywordflow}{return}\ numext::abs2(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{nested}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_a2c84258ecc93fc1a0a2d4fa22b99dd99}{dot}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{otherNested}}))\ <=\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}}\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}}\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{nested}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{squaredNorm}}()\ *\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{otherNested}}.\mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{squaredNorm}}();}
+\DoxyCodeLine{00288\ \}}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00301\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{00302\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base_a8a7ee34ce202cac3eeea9cf20c9e4833}{MatrixBase<Derived>::isUnitary}}(\textcolor{keyword}{const}\ RealScalar\&\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00303\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00304\ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{struct_eigen_1_1internal_1_1true__type}{internal::nested\_eval<Derived,1>::type}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{self}}(derived());}
+\DoxyCodeLine{00305\ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ i\ =\ 0;\ i\ <\ cols();\ ++i)}
+\DoxyCodeLine{00306\ \ \ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordflow}{if}(!internal::isApprox(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{self}}.col(i).\mbox{\hyperlink{class_eigen_1_1_matrix_base_a0afd613885f8d3a66978b1255b5887c1}{squaredNorm}}(),\ \textcolor{keyword}{static\_cast<}RealScalar\textcolor{keyword}{>}(1),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}}))}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keywordflow}{for}(\mbox{\hyperlink{namespace_eigen_a62e77e0933482dafde8fe197d9a2cfde}{Index}}\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ =\ 0;\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}}\ <\ i;\ ++\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}})}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!internal::isMuchSmallerThan(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{self}}.col(i).\mbox{\hyperlink{class_eigen_1_1_matrix_base_a2c84258ecc93fc1a0a2d4fa22b99dd99}{dot}}(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{self}}.col(\mbox{\hyperlink{class_eigen_1_1_matrix_base}{j}})),\ \textcolor{keyword}{static\_cast<}Scalar\textcolor{keyword}{>}(1),\ \mbox{\hyperlink{class_eigen_1_1_matrix_base}{prec}}))}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00312\ \ \ \}}
+\DoxyCodeLine{00313\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00314\ \}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EIGEN\_DOT\_H}}
+
+\end{DoxyCode}

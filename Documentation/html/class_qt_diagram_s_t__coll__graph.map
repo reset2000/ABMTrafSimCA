@@ -1,0 +1,8 @@
+<map id="QtDiagramST" name="QtDiagramST">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,172,105,199"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="20,5,90,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="53,48,50,81,51,131,55,171,50,172,45,131,44,81,48,47"/>
+<area shape="rect" id="Node000003" href="$class_qt_diagram_config.html" title=" " alt="" coords="58,81,177,108"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="77,42,109,79,105,83,73,45"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="102,122,66,173,62,170,98,119"/>
+</map>

@@ -141,7 +141,7 @@
     <item row="4" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabConfig">
        <attribute name="title">
@@ -231,7 +231,7 @@
               <number>100</number>
              </property>
              <property name="maximum">
-              <number>10000</number>
+              <number>99999</number>
              </property>
              <property name="value">
               <number>200</number>
@@ -580,7 +580,7 @@
      <x>0</x>
      <y>0</y>
      <width>1664</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

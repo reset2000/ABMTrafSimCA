@@ -23,8 +23,10 @@ gp46518@zut.edu.pl
 
 Krzysztof Małecki<br>
 krzysztof.malecki@zut.edu.pl
-# License
+# Licenses
 ABMTrafSimCA was created using GPL v.3.0 license (see <a href="./LICENSE">LICENSE.TXT</a>).
+Qt library is also avaliable under the same <a href="https://doc.qt.io/qt-6/gpl.html">GPL version 3</a> license. 
+Eigen package, which was used in this application, is avaliable under <a href="https://www.mozilla.org/en-US/MPL/2.0/">MPL2</a> license.
 # Version history
 - 1.0.0 – implementation of console-based traffic simulator
   - 2.0.0 – first version of basic UI created in Qt
@@ -35,4 +37,3 @@ ABMTrafSimCA was created using GPL v.3.0 license (see <a href="./LICENSE">LICENS
   - 2.4.0 – saving and loading driver types using database
   - 2.5.0 – added different diagram styles and fonts
     - 2.5.1 – fixed colour being displayed incorrectly depending on the motive
-

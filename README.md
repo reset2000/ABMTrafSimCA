@@ -16,16 +16,18 @@ ABMTrafSimCA is a desktop application written in C++ with a user interface imple
 - Qt 6.5.0+
 - Qt Creator 10.0.0+
 # How to run the application
-The application should be run through Qt Creator (version 10.0.0+). The software can be downloaded from the official Qt Group website avaliable under <a href="[https://doc.qt.io/qt-6/gpl.html](https://www.qt.io/download)">THIS</a> adress.
+The application should be run through Qt Creator (version 10.0.0+). The software can be downloaded from the official Qt Group website avaliable under <a href="https://doc.qt.io/qt-6/gpl.html" target="_blank">THIS</a> adress.
 
 ![image](https://github.com/reset2000/ABMTrafSimCA/assets/59997339/5a3ba80c-5eac-41c4-93a2-35362a20230a)
 
 The installation process should be followed as intructed by the Qt Creator installer directions.
+
 Before you can launch the application, you need to download this repository from Github:
 
 ![image](https://github.com/reset2000/ABMTrafSimCA/assets/59997339/ffca1f9d-c7c8-43f1-8694-b258903970dd)
 
 After this, it is necessary to unpack the .zip file.
+
 To launch the application, the user should click “Open Project” button in Qt Creator.
 
 ![image](https://github.com/reset2000/ABMTrafSimCA/assets/59997339/edf78059-cfa1-464a-a5b7-66afeb59aa6b)
@@ -38,6 +40,10 @@ After opening the project, the user should run the application using “Run” b
 
 ![image](https://github.com/reset2000/ABMTrafSimCA/assets/59997339/a8b0a613-5826-48dc-9242-d8e7bc136692)
 
+After running the programm through Qt Creator, the main window of the application should appear.
+
+![image](https://github.com/reset2000/ABMTrafSimCA/assets/59997339/f2adbac3-7b39-4620-a642-e77944db47c0)
+
 # Authors
 Patryk Górka<br>
 gp46518@zut.edu.pl
@@ -45,9 +51,9 @@ gp46518@zut.edu.pl
 Krzysztof Małecki<br>
 krzysztof.malecki@zut.edu.pl
 # Licenses
-ABMTrafSimCA was created using GPL v.3.0 license (see <a href="./LICENSE">LICENSE.TXT</a>).
-Qt library is also avaliable under the same <a href="https://doc.qt.io/qt-6/gpl.html">GPL version 3</a> license. 
-Eigen package, which was used in this application, is avaliable under <a href="https://www.mozilla.org/en-US/MPL/2.0/">MPL2</a> license.
+ABMTrafSimCA was created using GPL v.3.0 license (see <a href="./LICENSE" target="_blank">LICENSE.TXT</a>).
+Qt library is also avaliable under the same <a href="https://doc.qt.io/qt-6/gpl.html" target="_blank">GPL version 3</a> license. 
+Eigen package, which was used in this application, is avaliable under <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank">MPL2</a> license.
 # Version history
 - 1.0.0 – implementation of console-based traffic simulator
   - 2.0.0 – first version of basic UI created in Qt

@@ -53,8 +53,9 @@ MainTrafficSimulator::MainTrafficSimulator(QWidget *parent)
     ui->lblDPFromArchive->hide();
     ui->tbwDPFromArchive->hide();
 
-    ui->qcvSTDiagramLeft->setRenderHint(QPainter::Antialiasing, true);
-    ui->qcvSTDiagramRight->setRenderHint(QPainter::Antialiasing, true);
+    ui->qcvSTDiagramLeft->setRenderHint(QPainter::Antialiasing, false);
+    ui->qcvSTDiagramRight->setRenderHint(QPainter::Antialiasing, false);
+
     ui->qcvFDiagramLeft->setRenderHint(QPainter::Antialiasing, true);
     ui->qcvFDiagramRight->setRenderHint(QPainter::Antialiasing, true);
     ui->qcvFDiagramSum->setRenderHint(QPainter::Antialiasing, true);
@@ -120,14 +121,19 @@ void InitializeCarLengthTable(Ui::MainTrafficSimulator &ui) {
 
         QSpinBox *sb = new QSpinBox();
         sb->setRange(0, 100);
-        sb->setValue(0);
+        sb->setValue(100);
+
+//        if(r == 5) {
+//            sb->setValue(100);
+//        }
+
         sb->setSuffix("%");
 
         sb->setFrame(false);
         sb->setAlignment(Qt::AlignCenter);
 
         ui.tbwCarLengthProb->setCellWidget(r, 1, sb);
-    }
+    }    
 }
 
 void MainTrafficSimulator::InitializeDriverProfilesTable() {
@@ -549,8 +555,8 @@ void MainTrafficSimulator::InitializeArchiveTable() {
     QStringList headers = {
         "Date",
         "Road length",
-        "Number of cycles",
-        "Start-up cycles",
+        "Number of iterations",
+        "Start-up iterations",
         "Lane change",
         "Density points",
         "Tests per point",
@@ -1521,30 +1527,31 @@ void MainTrafficSimulator::paintSTDiagram(string data) {
     for (int i = 0; i < MAX_ROAD_LANES; i++) {
         for (int j = 0; j < MAX_SERIES; j++) {
             series[i][j] = new QScatterSeries;
+            series[i][j]->setUseOpenGL(true);
 
-            switch(j) {
-            case SERIES_HEADS:
-                    series[i][j]->setMarkerSize(2);
-                    series[i][j]->setMarkerShape( QScatterSeries::MarkerShapeCircle );
-                    series[i][j]->setBorderColor( QColor::fromString("#1f77b4") );
-                    series[i][j]->setColor( QColor::fromString("#1f77b4") );
+//            switch(j) {
+//            case SERIES_HEADS:
+//                    series[i][j]->setMarkerSize(2);
+//                    series[i][j]->setMarkerShape( QScatterSeries::MarkerShapePentagon );
+//                    series[i][j]->setBorderColor( QColor::fromString("#1f77b4") );
+//                    series[i][j]->setColor( QColor::fromString("#1f77b4") );
 
-                    break;
-            case SERIES_TAILS:
-                    series[i][j]->setMarkerSize(1);
-                    series[i][j]->setMarkerShape( QScatterSeries::MarkerShapeCircle );
-                    series[i][j]->setBorderColor( QColor::fromString("#1f77b4") ) ;
-                    series[i][j]->setColor( QColor::fromString("#1f77b4") ) ;
+//                    break;
+//            case SERIES_TAILS:
+//                    series[i][j]->setMarkerSize(1);
+//                    series[i][j]->setMarkerShape( QScatterSeries::MarkerShapeCircle );
+//                    series[i][j]->setBorderColor( QColor::fromString("#1f77b4") ) ;
+//                    series[i][j]->setColor( QColor::fromString("#1f77b4") ) ;
 
-                    break;
-            case SERIES_TAILS_CHANGE_LANE:
-                    series[i][j]->setMarkerSize(1);
-                    series[i][j]->setMarkerShape( QScatterSeries::MarkerShapeCircle );
-                    series[i][j]->setBorderColor( QColor::fromString("#1f77b4") ) ;
-                    series[i][j]->setColor( QColor::fromString("#1f77b4") ) ;
+//                    break;
+//            case SERIES_TAILS_CHANGE_LANE:
+//                    series[i][j]->setMarkerSize(1);
+//                    series[i][j]->setMarkerShape( QScatterSeries::MarkerShapeCircle );
+//                    series[i][j]->setBorderColor( QColor::fromString("#1f77b4") ) ;
+//                    series[i][j]->setColor( QColor::fromString("#1f77b4") ) ;
 
-                    break;
-            }
+//                    break;
+//            }
         }
     }
 
@@ -1635,7 +1642,7 @@ void MainTrafficSimulator::paintSTDiagram(string data) {
 
         QValueAxis *axisY = qobject_cast<QValueAxis*>(chart[i].axes(Qt::Vertical).first());
         axisY->setRange(0, cyclesNum);
-        axisY->setTitleText("Cycles");
+        axisY->setTitleText("Iterations");
         axisY->setLabelFormat("%.0d");
         axisY->setTickType(QValueAxis::TicksDynamic);
         axisY->setTickAnchor(0.0);
@@ -1665,8 +1672,11 @@ void MainTrafficSimulator::paintFDiagram() {
         colorCnt = 0;
         for (int j = 1; j < MAX_CARS_SET; j++) {
             qF.scatterSeries[l][j] = new QScatterSeries;
+//            qF.scatterSeries[l][j]->setUseOpenGL(true);
             qF.splineSeries[l][j] = new QSplineSeries;
+//            qF.splineSeries[l][j]->setUseOpenGL(true);
             qF.splineSeriesApprox[l][j] = new QSplineSeries;
+//            qF.splineSeriesApprox[l][j]->setUseOpenGL(true);
 
             densityPointsY[l][j].clear();
 
@@ -1828,7 +1838,7 @@ void MainTrafficSimulator::paintFDiagram() {
     changeTheme();
 }
 
-void MainTrafficSimulator::on_cbApproximate_stateChanged(int arg1)
+void MainTrafficSimulator::on_cbApproximate_stateChanged()
 {
     QString qData = qF.cfg.data;
     QStringList qSplit = qData.split(";");
@@ -1909,7 +1919,7 @@ void MainTrafficSimulator::changeLegend() {
     }
 }
 
-void MainTrafficSimulator::on_cbLegend_currentIndexChanged(int index)
+void MainTrafficSimulator::on_cbLegend_currentIndexChanged()
 {
     changeLegend();
 }
@@ -1946,13 +1956,13 @@ void MainTrafficSimulator::changeFont() {
     }
 }
 
-void MainTrafficSimulator::on_cbFont_currentFontChanged(const QFont &f)
+void MainTrafficSimulator::on_cbFont_currentFontChanged()
 {
     changeFont();
 }
 
 
-void MainTrafficSimulator::on_sbFontSize_valueChanged(int arg1)
+void MainTrafficSimulator::on_sbFontSize_valueChanged()
 {
     changeFont();
 }
@@ -1987,7 +1997,7 @@ void MainTrafficSimulator::changeTheme() {
     }
 }
 
-void MainTrafficSimulator::on_cbTheme_currentIndexChanged(int index)
+void MainTrafficSimulator::on_cbTheme_currentIndexChanged()
 {
     changeTheme();
 }

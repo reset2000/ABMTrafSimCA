@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ABMTraffSimCA: qtdiagramconfig.h Source File</title>
+<title>ABMTraffSimCA: ABMTrafSimCA/qtdiagramconfig.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -54,7 +54,6 @@ $(function() {
 $(function() { codefold.init(0); });
 /* @license-end */
 </script>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -76,6 +75,11 @@ $(function() { codefold.init(0); });
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b13fec2d90174f0e873c1217df90a106.html">ABMTrafSimCA</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">qtdiagramconfig.h</div></div>
 </div><!--header-->
@@ -88,40 +92,56 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;qdatetime.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;QObject&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="class_qt_diagram_config.html">QtDiagramConfig</a> : <span class="keyword">public</span> QObject</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    Q_OBJECT</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">int</span> id;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    QDateTime date;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    QString data;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">int</span> roadLength;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">int</span> cyclesNum;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">int</span> cyclesToSkip;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">bool</span> changeLane;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">int</span> currentDensity;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">int</span> densityPoints;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">int</span> densityTests;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    QString carsProbability;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    QString driverProfiles;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">int</span> legend;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    QString font;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">int</span> fontSize;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">int</span> theme;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="class_qt_diagram_config.html">QtDiagramConfig</a>(QObject *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>};</div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="class_qt_diagram_config.html">QtDiagramConfig</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    Q_OBJECT</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#ad126c92c4c66129be7b08cea937e886b">   19</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#ad126c92c4c66129be7b08cea937e886b">id</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#aaee252871bad53ff14757d6ec14c03c0">   24</a></span>    QDateTime <a class="code hl_variable" href="class_qt_diagram_config.html#aaee252871bad53ff14757d6ec14c03c0">date</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a1b3cb3adecd9f68494793784a4372e25">   28</a></span>    QString <a class="code hl_variable" href="class_qt_diagram_config.html#a1b3cb3adecd9f68494793784a4372e25">data</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a7279c67e9dd45ce0ebd45fc35384cde5">   33</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#a7279c67e9dd45ce0ebd45fc35384cde5">roadLength</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a5b294bb513feba088994ea2cd07c4d78">   37</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#a5b294bb513feba088994ea2cd07c4d78">cyclesNum</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#ad9654750eb8778e4a00f13a693c453e6">   42</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#ad9654750eb8778e4a00f13a693c453e6">cyclesToSkip</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#ae2e7e7d460a90081854d15361c5ef57e">   46</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_qt_diagram_config.html#ae2e7e7d460a90081854d15361c5ef57e">changeLane</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a651aed6c590b30c27459ce00fff32a20">   52</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#a651aed6c590b30c27459ce00fff32a20">currentDensity</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a605fc31b85707e20979526013eea1082">   56</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#a605fc31b85707e20979526013eea1082">densityPoints</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a46227500e16e0ea4919e844a60189cc1">   60</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#a46227500e16e0ea4919e844a60189cc1">densityTests</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a652442730735a8ddcf42d8be158fdb0b">   65</a></span>    QString <a class="code hl_variable" href="class_qt_diagram_config.html#a652442730735a8ddcf42d8be158fdb0b">carsProbability</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a1dd5ad045d4d8e67b998caac09401892">   69</a></span>    QString <a class="code hl_variable" href="class_qt_diagram_config.html#a1dd5ad045d4d8e67b998caac09401892">driverProfiles</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a048ff21ee77db6fb9f2bcfd53c63dc6a">   74</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#a048ff21ee77db6fb9f2bcfd53c63dc6a">legend</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#af005325e4a00f2448bc60b7080d54b11">   78</a></span>    QString <a class="code hl_variable" href="class_qt_diagram_config.html#af005325e4a00f2448bc60b7080d54b11">font</a>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#a6f400aec5a9a9824d1c8cebcfd25e581">   82</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#a6f400aec5a9a9824d1c8cebcfd25e581">fontSize</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="class_qt_diagram_config.html#ae3659eb369d0725b71118c61967587eb">   86</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_qt_diagram_config.html#ae3659eb369d0725b71118c61967587eb">theme</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="class_qt_diagram_config.html#ab55b89c6e40c87796506aad4978eb6d2">QtDiagramConfig</a>(QObject *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>};</div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#endif </span><span class="comment">// QTDIAGRAMCONFIG_H</span></div>
-<div class="ttc" id="aclass_qt_diagram_config_html"><div class="ttname"><a href="class_qt_diagram_config.html">QtDiagramConfig</a></div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:11</div></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#endif </span><span class="comment">// QTDIAGRAMCONFIG_H</span></div>
+<div class="ttc" id="aclass_qt_diagram_config_html"><div class="ttname"><a href="class_qt_diagram_config.html">QtDiagramConfig</a></div><div class="ttdoc">The QtDiagramConfig class is responsible for saving configuration snapshots after the application is ...</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:13</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a048ff21ee77db6fb9f2bcfd53c63dc6a"><div class="ttname"><a href="class_qt_diagram_config.html#a048ff21ee77db6fb9f2bcfd53c63dc6a">QtDiagramConfig::legend</a></div><div class="ttdeci">int legend</div><div class="ttdoc">This variable contains saved legend display position.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:74</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a1b3cb3adecd9f68494793784a4372e25"><div class="ttname"><a href="class_qt_diagram_config.html#a1b3cb3adecd9f68494793784a4372e25">QtDiagramConfig::data</a></div><div class="ttdeci">QString data</div><div class="ttdoc">The saved configuration data in the form of a string.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:28</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a1dd5ad045d4d8e67b998caac09401892"><div class="ttname"><a href="class_qt_diagram_config.html#a1dd5ad045d4d8e67b998caac09401892">QtDiagramConfig::driverProfiles</a></div><div class="ttdeci">QString driverProfiles</div><div class="ttdoc">The saves string representing the probabilities of generation of cars with different characteristics ...</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:69</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a46227500e16e0ea4919e844a60189cc1"><div class="ttname"><a href="class_qt_diagram_config.html#a46227500e16e0ea4919e844a60189cc1">QtDiagramConfig::densityTests</a></div><div class="ttdeci">int densityTests</div><div class="ttdoc">The saved number of simulations that are averaged for a single density point on the fundamental diagr...</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:60</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a5b294bb513feba088994ea2cd07c4d78"><div class="ttname"><a href="class_qt_diagram_config.html#a5b294bb513feba088994ea2cd07c4d78">QtDiagramConfig::cyclesNum</a></div><div class="ttdeci">int cyclesNum</div><div class="ttdoc">The saved number of iterations of the simulation.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:37</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a605fc31b85707e20979526013eea1082"><div class="ttname"><a href="class_qt_diagram_config.html#a605fc31b85707e20979526013eea1082">QtDiagramConfig::densityPoints</a></div><div class="ttdeci">int densityPoints</div><div class="ttdoc">The saved number of points of displayed on fundamental diagram.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:56</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a651aed6c590b30c27459ce00fff32a20"><div class="ttname"><a href="class_qt_diagram_config.html#a651aed6c590b30c27459ce00fff32a20">QtDiagramConfig::currentDensity</a></div><div class="ttdeci">int currentDensity</div><div class="ttdoc">The saved road density percentage.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:52</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a652442730735a8ddcf42d8be158fdb0b"><div class="ttname"><a href="class_qt_diagram_config.html#a652442730735a8ddcf42d8be158fdb0b">QtDiagramConfig::carsProbability</a></div><div class="ttdeci">QString carsProbability</div><div class="ttdoc">The saved string representing the probabilities of generation of different sized cars (from 1 to 24 s...</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:65</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a6f400aec5a9a9824d1c8cebcfd25e581"><div class="ttname"><a href="class_qt_diagram_config.html#a6f400aec5a9a9824d1c8cebcfd25e581">QtDiagramConfig::fontSize</a></div><div class="ttdeci">int fontSize</div><div class="ttdoc">This variable contains saved font size.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:82</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_a7279c67e9dd45ce0ebd45fc35384cde5"><div class="ttname"><a href="class_qt_diagram_config.html#a7279c67e9dd45ce0ebd45fc35384cde5">QtDiagramConfig::roadLength</a></div><div class="ttdeci">int roadLength</div><div class="ttdoc">The saved length of the road in segments.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:33</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_aaee252871bad53ff14757d6ec14c03c0"><div class="ttname"><a href="class_qt_diagram_config.html#aaee252871bad53ff14757d6ec14c03c0">QtDiagramConfig::date</a></div><div class="ttdeci">QDateTime date</div><div class="ttdoc">Date and time the configuration was saved on.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:24</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_ab55b89c6e40c87796506aad4978eb6d2"><div class="ttname"><a href="class_qt_diagram_config.html#ab55b89c6e40c87796506aad4978eb6d2">QtDiagramConfig::QtDiagramConfig</a></div><div class="ttdeci">QtDiagramConfig(QObject *parent=nullptr)</div><div class="ttdoc">The constructor of the QtDiagramConfig class.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.cpp:4</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_ad126c92c4c66129be7b08cea937e886b"><div class="ttname"><a href="class_qt_diagram_config.html#ad126c92c4c66129be7b08cea937e886b">QtDiagramConfig::id</a></div><div class="ttdeci">int id</div><div class="ttdoc">Database identifier of the configuration snapshot.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:19</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_ad9654750eb8778e4a00f13a693c453e6"><div class="ttname"><a href="class_qt_diagram_config.html#ad9654750eb8778e4a00f13a693c453e6">QtDiagramConfig::cyclesToSkip</a></div><div class="ttdeci">int cyclesToSkip</div><div class="ttdoc">The saved number of iterations that will not be displayed.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:42</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_ae2e7e7d460a90081854d15361c5ef57e"><div class="ttname"><a href="class_qt_diagram_config.html#ae2e7e7d460a90081854d15361c5ef57e">QtDiagramConfig::changeLane</a></div><div class="ttdeci">bool changeLane</div><div class="ttdoc">The saved value defining if the lange changes will occur during the simulation.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:46</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_ae3659eb369d0725b71118c61967587eb"><div class="ttname"><a href="class_qt_diagram_config.html#ae3659eb369d0725b71118c61967587eb">QtDiagramConfig::theme</a></div><div class="ttdeci">int theme</div><div class="ttdoc">This variable contains saved diagram theme.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:86</div></div>
+<div class="ttc" id="aclass_qt_diagram_config_html_af005325e4a00f2448bc60b7080d54b11"><div class="ttname"><a href="class_qt_diagram_config.html#af005325e4a00f2448bc60b7080d54b11">QtDiagramConfig::font</a></div><div class="ttdeci">QString font</div><div class="ttdoc">This variable contains saved font type.</div><div class="ttdef"><b>Definition</b> qtdiagramconfig.h:78</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

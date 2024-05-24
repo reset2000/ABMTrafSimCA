@@ -1,5 +1,5 @@
 <map id="Configuration" name="Configuration">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,96,102,123"/>
-<area shape="rect" id="Node000002" href="$class_driver_profile.html" title=" " alt="" coords="9,5,98,32"/>
+<area shape="rect" id="Node000001" title="The Configuration class describes configuration parameters of the core simulation module." alt="" coords="5,96,102,123"/>
+<area shape="rect" id="Node000002" href="$class_driver_profile.html" title="The DriverProfile class describes all the parameters that driver profiles consist of." alt="" coords="9,5,98,32"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,48,56,95,51,95,51,48"/>
 </map>

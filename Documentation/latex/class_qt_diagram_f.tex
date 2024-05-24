@@ -2,6 +2,15 @@
 \hypertarget{class_qt_diagram_f}{}\label{class_qt_diagram_f}\index{QtDiagramF@{QtDiagramF}}
 
 
+The \doxylink{class_qt_diagram_f}{Qt\+DiagramF} class is responsible for saving data necessary to create and display fundamental diagrams.  
+
+
+
+
+{\ttfamily \#include $<$qtdiagramf.\+h$>$}
+
+
+
 Inheritance diagram for Qt\+DiagramF\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -18,53 +27,87 @@ Collaboration diagram for Qt\+DiagramF\+:\nopagebreak
 \includegraphics[width=206pt]{class_qt_diagram_f__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsubsection*{Signals}
-\begin{DoxyCompactItemize}
-\item 
-\Hypertarget{class_qt_diagram_f_aca287d9adc6cd19c309b5dbc059c03f4}\label{class_qt_diagram_f_aca287d9adc6cd19c309b5dbc059c03f4} 
-void {\bfseries progress\+Bar\+Value\+Changed} (int value)
-\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_qt_diagram_f_a8b24945c4d02b70342f882d38278ab0e}\label{class_qt_diagram_f_a8b24945c4d02b70342f882d38278ab0e} 
-{\bfseries Qt\+DiagramF} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_qt_diagram_f_a8b24945c4d02b70342f882d38278ab0e}{Qt\+DiagramF}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em The constructor of the \doxylink{class_qt_diagram_f}{Qt\+DiagramF} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_qt_diagram_f_a1401a3a490547544e10c6089d813e4e8}\label{class_qt_diagram_f_a1401a3a490547544e10c6089d813e4e8} 
-static void {\bfseries Show\+Densities\+Qt\+Approx} (\mbox{\hyperlink{class_configuration}{Configuration}} \&cfg, string \texorpdfstring{$\ast$}{*}flows\+Str, Show\+Section section)
-\end{DoxyCompactItemize}
+static void \mbox{\hyperlink{class_qt_diagram_f_a1401a3a490547544e10c6089d813e4e8}{Show\+Densities\+Qt\+Approx}} (\mbox{\hyperlink{class_configuration}{Configuration}} \&\mbox{\hyperlink{class_qt_diagram_f_adfd907acc5d50d63112c589599ff6dfb}{cfg}}, string \texorpdfstring{$\ast$}{*}flows\+Str, Show\+Section section)
+\begin{DoxyCompactList}\small\item\em Class responsible for saving data necessary to create and display fundamental diagram. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_qt_diagram_f_adfd907acc5d50d63112c589599ff6dfb}\label{class_qt_diagram_f_adfd907acc5d50d63112c589599ff6dfb} 
-\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} {\bfseries cfg}
-\item 
+\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \mbox{\hyperlink{class_qt_diagram_f_adfd907acc5d50d63112c589599ff6dfb}{cfg}}
+\begin{DoxyCompactList}\small\item\em Parameter storing the base fundamental diagram configuration. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_f_aa7a58818e7679e025bca67c1004b224e}\label{class_qt_diagram_f_aa7a58818e7679e025bca67c1004b224e} 
 QChart {\bfseries chart} \mbox{[}MAX\+\_\+\+ROAD\+\_\+\+LANES+1\mbox{]}
-\item 
+\begin{DoxyCompactList}\small\item\em Qt chart data. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_f_a2090f4859d0cfaf83960366832ea3299}\label{class_qt_diagram_f_a2090f4859d0cfaf83960366832ea3299} 
 QScatter\+Series \texorpdfstring{$\ast$}{*} {\bfseries scatter\+Series} \mbox{[}MAX\+\_\+\+ROAD\+\_\+\+LANES+1\mbox{]}\mbox{[}MAX\+\_\+\+CARS\+\_\+\+SET\mbox{]}
-\item 
+\begin{DoxyCompactList}\small\item\em The series that stores scatter data that will be displayed on fundamental diagram. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_f_a96e725d1503678e5b335b12c61050da0}\label{class_qt_diagram_f_a96e725d1503678e5b335b12c61050da0} 
 QSpline\+Series \texorpdfstring{$\ast$}{*} {\bfseries spline\+Series} \mbox{[}MAX\+\_\+\+ROAD\+\_\+\+LANES+1\mbox{]}\mbox{[}MAX\+\_\+\+CARS\+\_\+\+SET\mbox{]}
-\item 
+\begin{DoxyCompactList}\small\item\em The series that stores spline data that will be displayed on fundamental diagram. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_f_a2e63e5b12e392d689aa1ddf0e5eae9ff}\label{class_qt_diagram_f_a2e63e5b12e392d689aa1ddf0e5eae9ff} 
 QSpline\+Series \texorpdfstring{$\ast$}{*} {\bfseries spline\+Series\+Approx} \mbox{[}MAX\+\_\+\+ROAD\+\_\+\+LANES+1\mbox{]}\mbox{[}MAX\+\_\+\+CARS\+\_\+\+SET\mbox{]}
-\item 
+\begin{DoxyCompactList}\small\item\em The series that stores spline data (approximated with Eigen) that will be displayed on fundamental diagram. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_f_ab881cf165f08e38de99902cc38ed1afe}\label{class_qt_diagram_f_ab881cf165f08e38de99902cc38ed1afe} 
 QString\+List {\bfseries lane\+Names} = \{ "{}Left Lane"{}, "{}Right Lane"{}, "{}Both Lanes"{} \}
-\item 
+\begin{DoxyCompactList}\small\item\em A Qt list with diagram titles. \end{DoxyCompactList}\item 
 QColor \mbox{\hyperlink{class_qt_diagram_f_a5f6b7abe3e5a5581aff58a281353fa9f}{cars\+Colors}} \mbox{[}MAX\+\_\+\+CARS\+\_\+\+SET\mbox{]}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The array of car colors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_qt_diagram_f_af8a37348d01410155f7ac4f9de3be087}\label{class_qt_diagram_f_af8a37348d01410155f7ac4f9de3be087} 
 static const int {\bfseries SUM\+\_\+\+LANES} = 2
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The constant that determines maximal number of road lanes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_qt_diagram_f}{Qt\+DiagramF} class is responsible for saving data necessary to create and display fundamental diagrams. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_qt_diagram_f_a8b24945c4d02b70342f882d38278ab0e}\label{class_qt_diagram_f_a8b24945c4d02b70342f882d38278ab0e} 
+\index{QtDiagramF@{QtDiagramF}!QtDiagramF@{QtDiagramF}}
+\index{QtDiagramF@{QtDiagramF}!QtDiagramF@{QtDiagramF}}
+\doxysubsubsection{\texorpdfstring{QtDiagramF()}{QtDiagramF()}}
+{\footnotesize\ttfamily Qt\+Diagram\+F\+::\+Qt\+DiagramF (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+The constructor of the \doxylink{class_qt_diagram_f}{Qt\+DiagramF} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & -\/ parent object of \doxylink{class_qt_diagram_f}{Qt\+DiagramF}, null by default \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_qt_diagram_f_a1401a3a490547544e10c6089d813e4e8}\label{class_qt_diagram_f_a1401a3a490547544e10c6089d813e4e8} 
+\index{QtDiagramF@{QtDiagramF}!ShowDensitiesQtApprox@{ShowDensitiesQtApprox}}
+\index{ShowDensitiesQtApprox@{ShowDensitiesQtApprox}!QtDiagramF@{QtDiagramF}}
+\doxysubsubsection{\texorpdfstring{ShowDensitiesQtApprox()}{ShowDensitiesQtApprox()}}
+{\footnotesize\ttfamily void Qt\+Diagram\+F\+::\+Show\+Densities\+Qt\+Approx (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_configuration}{Configuration}} \&}]{cfg,  }\item[{string \texorpdfstring{$\ast$}{*}}]{flows\+Str,  }\item[{Show\+Section}]{section }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Class responsible for saving data necessary to create and display fundamental diagram. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cfg} & -\/ the configuration of current simulation \\
+\hline
+{\em flows\+Str} & -\/ the current simulation data that will be analyzed \\
+\hline
+{\em section} & -\/ the correct section of the fundamental diagram string (SHOW\+\_\+\+INIT, SHOW\+\_\+\+MID, SHOW\+\_\+\+FINAL) \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Data Documentation}
@@ -92,7 +135,24 @@ static const int {\bfseries SUM\+\_\+\+LANES} = 2
 \end{DoxyCode}
 
 
+The array of car colors. 
+
+\Hypertarget{class_qt_diagram_f_adfd907acc5d50d63112c589599ff6dfb}\label{class_qt_diagram_f_adfd907acc5d50d63112c589599ff6dfb} 
+\index{QtDiagramF@{QtDiagramF}!cfg@{cfg}}
+\index{cfg@{cfg}!QtDiagramF@{QtDiagramF}}
+\doxysubsubsection{\texorpdfstring{cfg}{cfg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} Qt\+Diagram\+F\+::cfg}
+
+
+
+Parameter storing the base fundamental diagram configuration. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_qt_diagram_config}{Qt\+Diagram\+Config} 
+\end{DoxySeeAlso}
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-qtdiagramf.\+h\item 
-qtdiagramf.\+cpp\end{DoxyCompactItemize}
+ABMTraf\+Sim\+CA/qtdiagramf.\+h\item 
+ABMTraf\+Sim\+CA/qtdiagramf.\+cpp\end{DoxyCompactItemize}

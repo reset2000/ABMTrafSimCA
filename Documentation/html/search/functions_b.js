@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['kernel_0',['kernel',['../class_eigen_1_1_full_piv_l_u.html#a2eaff4717bc6e5727cb809fe4c407035',1,'Eigen::FullPivLU']]],
-  ['klu_5fsolve_1',['klu_solve',['../namespace_eigen.html#ad6d0ed07a6ee97fcef4fe3bce6a674d4',1,'Eigen']]],
-  ['klucommon_2',['kluCommon',['../class_eigen_1_1_k_l_u.html#aea88000799a110281f408f95a3212587',1,'Eigen::KLU::kluCommon() const'],['../class_eigen_1_1_k_l_u.html#a2bbcba08151f46990d50616d3049f047',1,'Eigen::KLU::kluCommon()']]]
+  ['updateconfig_0',['updateConfig',['../class_main_traffic_simulator.html#a16a33a7af0e8bca673cfe2dd937a446c',1,'MainTrafficSimulator']]],
+  ['updatediagramstylefromsnapshot_1',['updateDiagramStyleFromSnapshot',['../class_main_traffic_simulator.html#a7234a06469d92fcb51c6bf823e9afe43',1,'MainTrafficSimulator']]],
+  ['updateqtdiagramconfigdata_2',['updateQtDiagramConfigData',['../class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd',1,'MainTrafficSimulator::updateQtDiagramConfigData(QtDiagramConfig &amp;qtCfg, Configuration &amp;cfg)'],['../class_main_traffic_simulator.html#a6fa334ca0584bb7123cc4caa412719f1',1,'MainTrafficSimulator::updateQtDiagramConfigData(QtDiagramConfig &amp;qtCfg, QtDiagramConfig &amp;cfg)']]],
+  ['updatesnapshot_3',['updateSnapshot',['../class_db_manager.html#aaefb755042bf99ab2643ec88bf0ccead',1,'DbManager']]],
+  ['updatesnapshotfromui_4',['updateSnapshotFromUi',['../class_main_traffic_simulator.html#ada101fbdc68c16e6eced635c98744b56',1,'MainTrafficSimulator']]],
+  ['updateuifromsnapshot_5',['updateUiFromSnapshot',['../class_main_traffic_simulator.html#abd862bdcdf471e715d052988575f5bea',1,'MainTrafficSimulator']]]
 ];

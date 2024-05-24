@@ -64,3 +64,4 @@ Eigen package, which was used in this application, is avaliable under <a href="h
   - 2.4.0 – saving and loading driver types using database
   - 2.5.0 – added different diagram styles and fonts
     - 2.5.1 – fixed colour being displayed incorrectly depending on the motive
+  - 2.6.0 – updated project with the addition of the documentation in the "Documentation" folder

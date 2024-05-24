@@ -80,12 +80,17 @@ $(function() {
   <div class="headertitle"><div class="title">DbManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="class_db_manager.html" title="The DbManager class is responsible for managing database interactions, such as saving and reading dia...">DbManager</a> class is responsible for managing database interactions, such as saving and reading diagram data and configuration snapshots.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="dbmanager_8h_source.html">dbmanager.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for DbManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_db_manager__inherit__graph.png" border="0" usemap="#a_db_manager_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_db_manager_inherit__map" id="a_db_manager_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,93,107"/>
+<area shape="rect" title="The DbManager class is responsible for managing database interactions, such as saving and reading dia..." alt="" coords="5,80,93,107"/>
 <area shape="rect" title=" " alt="" coords="14,5,84,32"/>
 <area shape="poly" title=" " alt="" coords="52,48,52,80,46,80,46,48"/>
 </map>
@@ -95,7 +100,7 @@ Collaboration diagram for DbManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_db_manager__coll__graph.png" border="0" usemap="#a_db_manager_coll__map" alt="Collaboration graph"/></div>
 <map name="a_db_manager_coll__map" id="a_db_manager_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,93,107"/>
+<area shape="rect" title="The DbManager class is responsible for managing database interactions, such as saving and reading dia..." alt="" coords="5,80,93,107"/>
 <area shape="rect" title=" " alt="" coords="14,5,84,32"/>
 <area shape="poly" title=" " alt="" coords="52,48,52,80,46,80,46,48"/>
 </map>
@@ -103,58 +108,466 @@ Collaboration diagram for DbManager:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a443a6024735bd78041da461e55038fd9" id="r_a443a6024735bd78041da461e55038fd9"><td class="memItemLeft" align="right" valign="top"><a id="a443a6024735bd78041da461e55038fd9" name="a443a6024735bd78041da461e55038fd9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>DbManager</b> (QObject *parent=nullptr)</td></tr>
+<tr class="memitem:a443a6024735bd78041da461e55038fd9" id="r_a443a6024735bd78041da461e55038fd9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a443a6024735bd78041da461e55038fd9">DbManager</a> (QObject *parent=nullptr)</td></tr>
+<tr class="memdesc:a443a6024735bd78041da461e55038fd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of DBManager class.  <br /></td></tr>
 <tr class="separator:a443a6024735bd78041da461e55038fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a212075d7d81c67fd9bc4b9e7b1580061" id="r_a212075d7d81c67fd9bc4b9e7b1580061"><td class="memItemLeft" align="right" valign="top"><a id="a212075d7d81c67fd9bc4b9e7b1580061" name="a212075d7d81c67fd9bc4b9e7b1580061"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>createTables</b> ()</td></tr>
+<tr class="memdesc:a212075d7d81c67fd9bc4b9e7b1580061"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is responsible for initializing all tables necessary to archive the data generated through simulations and save configuration snapshots. <br /></td></tr>
 <tr class="separator:a212075d7d81c67fd9bc4b9e7b1580061"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a991e632ae2a7913268a00062b369f4f2" id="r_a991e632ae2a7913268a00062b369f4f2"><td class="memItemLeft" align="right" valign="top"><a id="a991e632ae2a7913268a00062b369f4f2" name="a991e632ae2a7913268a00062b369f4f2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>saveDb</b> (<a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> &amp;qF)</td></tr>
+<tr class="memitem:a991e632ae2a7913268a00062b369f4f2" id="r_a991e632ae2a7913268a00062b369f4f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a991e632ae2a7913268a00062b369f4f2">saveDb</a> (<a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> &amp;qF)</td></tr>
+<tr class="memdesc:a991e632ae2a7913268a00062b369f4f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for saving fundamental diagrams to the database.  <br /></td></tr>
 <tr class="separator:a991e632ae2a7913268a00062b369f4f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35b50ca08cccb1079cd11860d44abcf2" id="r_a35b50ca08cccb1079cd11860d44abcf2"><td class="memItemLeft" align="right" valign="top"><a id="a35b50ca08cccb1079cd11860d44abcf2" name="a35b50ca08cccb1079cd11860d44abcf2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>saveDb</b> (<a class="el" href="class_qt_diagram_s_t.html">QtDiagramST</a> &amp;qST)</td></tr>
+<tr class="memitem:a35b50ca08cccb1079cd11860d44abcf2" id="r_a35b50ca08cccb1079cd11860d44abcf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35b50ca08cccb1079cd11860d44abcf2">saveDb</a> (<a class="el" href="class_qt_diagram_s_t.html">QtDiagramST</a> &amp;qST)</td></tr>
+<tr class="memdesc:a35b50ca08cccb1079cd11860d44abcf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for saving space-time diagrams to the database.  <br /></td></tr>
 <tr class="separator:a35b50ca08cccb1079cd11860d44abcf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afff6656aab53762d8c91a9def0c61356" id="r_afff6656aab53762d8c91a9def0c61356"><td class="memItemLeft" align="right" valign="top"><a id="afff6656aab53762d8c91a9def0c61356" name="afff6656aab53762d8c91a9def0c61356"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>readDb</b> (QList&lt; <a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> * &gt; &amp;qFList)</td></tr>
+<tr class="memitem:afff6656aab53762d8c91a9def0c61356" id="r_afff6656aab53762d8c91a9def0c61356"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afff6656aab53762d8c91a9def0c61356">readDb</a> (QList&lt; <a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> * &gt; &amp;qFList)</td></tr>
+<tr class="memdesc:afff6656aab53762d8c91a9def0c61356"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for reading fundamental diagrams from the database.  <br /></td></tr>
 <tr class="separator:afff6656aab53762d8c91a9def0c61356"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1171b572f33b03013d8d81cf11ca7b1" id="r_aa1171b572f33b03013d8d81cf11ca7b1"><td class="memItemLeft" align="right" valign="top"><a id="aa1171b572f33b03013d8d81cf11ca7b1" name="aa1171b572f33b03013d8d81cf11ca7b1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteDb</b> (<a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> &amp;qF)</td></tr>
+<tr class="memitem:aa1171b572f33b03013d8d81cf11ca7b1" id="r_aa1171b572f33b03013d8d81cf11ca7b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1171b572f33b03013d8d81cf11ca7b1">deleteDb</a> (<a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> &amp;qF)</td></tr>
+<tr class="memdesc:aa1171b572f33b03013d8d81cf11ca7b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for deleting saved fundamaental diagram records from the database.  <br /></td></tr>
 <tr class="separator:aa1171b572f33b03013d8d81cf11ca7b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0ecc77c75117c8aefcb5614be1808bf" id="r_aa0ecc77c75117c8aefcb5614be1808bf"><td class="memItemLeft" align="right" valign="top"><a id="aa0ecc77c75117c8aefcb5614be1808bf" name="aa0ecc77c75117c8aefcb5614be1808bf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteDb</b> (<a class="el" href="class_qt_diagram_s_t.html">QtDiagramST</a> &amp;qST)</td></tr>
+<tr class="memitem:aa0ecc77c75117c8aefcb5614be1808bf" id="r_aa0ecc77c75117c8aefcb5614be1808bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0ecc77c75117c8aefcb5614be1808bf">deleteDb</a> (<a class="el" href="class_qt_diagram_s_t.html">QtDiagramST</a> &amp;qST)</td></tr>
+<tr class="memdesc:aa0ecc77c75117c8aefcb5614be1808bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for deleting space-time diagrams from the database.  <br /></td></tr>
 <tr class="separator:aa0ecc77c75117c8aefcb5614be1808bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a037c9c39ffb291d5c53e0fcb32757181" id="r_a037c9c39ffb291d5c53e0fcb32757181"><td class="memItemLeft" align="right" valign="top"><a id="a037c9c39ffb291d5c53e0fcb32757181" name="a037c9c39ffb291d5c53e0fcb32757181"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>readSnapshot</b> (<a class="el" href="class_qt_diagram_config.html">QtDiagramConfig</a> &amp;snapshot)</td></tr>
+<tr class="memitem:a037c9c39ffb291d5c53e0fcb32757181" id="r_a037c9c39ffb291d5c53e0fcb32757181"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a037c9c39ffb291d5c53e0fcb32757181">readSnapshot</a> (<a class="el" href="class_qt_diagram_config.html">QtDiagramConfig</a> &amp;snapshot)</td></tr>
+<tr class="memdesc:a037c9c39ffb291d5c53e0fcb32757181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for reading saved snapshot with configuration saved during the previous application session.  <br /></td></tr>
 <tr class="separator:a037c9c39ffb291d5c53e0fcb32757181"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaefb755042bf99ab2643ec88bf0ccead" id="r_aaefb755042bf99ab2643ec88bf0ccead"><td class="memItemLeft" align="right" valign="top"><a id="aaefb755042bf99ab2643ec88bf0ccead" name="aaefb755042bf99ab2643ec88bf0ccead"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateSnapshot</b> (<a class="el" href="class_qt_diagram_config.html">QtDiagramConfig</a> &amp;snapshot)</td></tr>
+<tr class="memitem:aaefb755042bf99ab2643ec88bf0ccead" id="r_aaefb755042bf99ab2643ec88bf0ccead"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaefb755042bf99ab2643ec88bf0ccead">updateSnapshot</a> (<a class="el" href="class_qt_diagram_config.html">QtDiagramConfig</a> &amp;snapshot)</td></tr>
+<tr class="memdesc:aaefb755042bf99ab2643ec88bf0ccead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for updating snapshots with configuration.  <br /></td></tr>
 <tr class="separator:aaefb755042bf99ab2643ec88bf0ccead"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:aef7a40f0a6fe870f53c6c8a0539930ba" id="r_aef7a40f0a6fe870f53c6c8a0539930ba"><td class="memItemLeft" align="right" valign="top"><a id="aef7a40f0a6fe870f53c6c8a0539930ba" name="aef7a40f0a6fe870f53c6c8a0539930ba"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>openDb</b> ()</td></tr>
+<tr class="memdesc:aef7a40f0a6fe870f53c6c8a0539930ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for opening database. <br /></td></tr>
 <tr class="separator:aef7a40f0a6fe870f53c6c8a0539930ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e26ac4e30fd6f8258835cb5a1c41072" id="r_a9e26ac4e30fd6f8258835cb5a1c41072"><td class="memItemLeft" align="right" valign="top"><a id="a9e26ac4e30fd6f8258835cb5a1c41072" name="a9e26ac4e30fd6f8258835cb5a1c41072"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>closeDb</b> ()</td></tr>
+<tr class="memdesc:a9e26ac4e30fd6f8258835cb5a1c41072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for closing database. <br /></td></tr>
 <tr class="separator:a9e26ac4e30fd6f8258835cb5a1c41072"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5905248461fc77d70531bf8eadad6961" id="r_a5905248461fc77d70531bf8eadad6961"><td class="memItemLeft" align="right" valign="top"><a id="a5905248461fc77d70531bf8eadad6961" name="a5905248461fc77d70531bf8eadad6961"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>countSnapshotRows</b> ()</td></tr>
+<tr class="memitem:a5905248461fc77d70531bf8eadad6961" id="r_a5905248461fc77d70531bf8eadad6961"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5905248461fc77d70531bf8eadad6961">countSnapshotRows</a> ()</td></tr>
+<tr class="memdesc:a5905248461fc77d70531bf8eadad6961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that returns the index of the most recent snapshot.  <br /></td></tr>
 <tr class="separator:a5905248461fc77d70531bf8eadad6961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a9bbc0ad3003674b8e5e71783e5067f7f" id="r_a9bbc0ad3003674b8e5e71783e5067f7f"><td class="memItemLeft" align="right" valign="top"><a id="a9bbc0ad3003674b8e5e71783e5067f7f" name="a9bbc0ad3003674b8e5e71783e5067f7f"></a>
 QSqlDatabase&#160;</td><td class="memItemRight" valign="bottom"><b>db</b></td></tr>
+<tr class="memdesc:a9bbc0ad3003674b8e5e71783e5067f7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">QSqlDatabase object necessary for storing data. <br /></td></tr>
 <tr class="separator:a9bbc0ad3003674b8e5e71783e5067f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2dc2fec27272f6fc779c63f227b7fcd" id="r_ab2dc2fec27272f6fc779c63f227b7fcd"><td class="memItemLeft" align="right" valign="top"><a id="ab2dc2fec27272f6fc779c63f227b7fcd" name="ab2dc2fec27272f6fc779c63f227b7fcd"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>DB_NAME</b> = &quot;traffic.sqlite&quot;</td></tr>
+<tr class="memdesc:ab2dc2fec27272f6fc779c63f227b7fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant that stores the name of database file. <br /></td></tr>
 <tr class="separator:ab2dc2fec27272f6fc779c63f227b7fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="class_db_manager.html" title="The DbManager class is responsible for managing database interactions, such as saving and reading dia...">DbManager</a> class is responsible for managing database interactions, such as saving and reading diagram data and configuration snapshots. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a443a6024735bd78041da461e55038fd9" name="a443a6024735bd78041da461e55038fd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a443a6024735bd78041da461e55038fd9">&#9670;&#160;</a></span>DbManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DbManager::DbManager </td>
+          <td>(</td>
+          <td class="paramtype">QObject *</td>          <td class="paramname"><span class="paramname"><em>parent</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The constructor of DBManager class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>- parent object of <a class="el" href="class_db_manager.html" title="The DbManager class is responsible for managing database interactions, such as saving and reading dia...">DbManager</a>, null by default </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_a443a6024735bd78041da461e55038fd9_cgraph.png" border="0" usemap="#aclass_db_manager_a443a6024735bd78041da461e55038fd9_cgraph" alt=""/></div>
+<map name="aclass_db_manager_a443a6024735bd78041da461e55038fd9_cgraph" id="aclass_db_manager_a443a6024735bd78041da461e55038fd9_cgraph">
+<area shape="rect" title="The constructor of DBManager class." alt="" coords="5,56,167,83"/>
+<area shape="rect" href="class_db_manager.html#a212075d7d81c67fd9bc4b9e7b1580061" title="This method is responsible for initializing all tables necessary to archive the data generated throug..." alt="" coords="215,56,384,83"/>
+<area shape="poly" title=" " alt="" coords="167,67,199,67,199,72,167,72"/>
+<area shape="rect" href="class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="468,5,610,32"/>
+<area shape="poly" title=" " alt="" coords="366,53,457,33,458,38,367,58"/>
+<area shape="rect" href="class_db_manager.html#a5905248461fc77d70531bf8eadad6961" title="Method that returns the index of the most recent snapshot." alt="" coords="432,56,646,83"/>
+<area shape="poly" title=" " alt="" coords="385,67,416,67,416,72,385,72"/>
+<area shape="rect" href="class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="470,107,609,133"/>
+<area shape="poly" title=" " alt="" coords="367,81,458,100,457,106,366,86"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5905248461fc77d70531bf8eadad6961" name="a5905248461fc77d70531bf8eadad6961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5905248461fc77d70531bf8eadad6961">&#9670;&#160;</a></span>countSnapshotRows()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int DbManager::countSnapshotRows </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method that returns the index of the most recent snapshot. </p>
+<dl class="section return"><dt>Returns</dt><dd>The most recent snapshot </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_a5905248461fc77d70531bf8eadad6961_icgraph.png" border="0" usemap="#aclass_db_manager_a5905248461fc77d70531bf8eadad6961_icgraph" alt=""/></div>
+<map name="aclass_db_manager_a5905248461fc77d70531bf8eadad6961_icgraph" id="aclass_db_manager_a5905248461fc77d70531bf8eadad6961_icgraph">
+<area shape="rect" title="Method that returns the index of the most recent snapshot." alt="" coords="432,5,646,32"/>
+<area shape="rect" href="class_db_manager.html#a212075d7d81c67fd9bc4b9e7b1580061" title="This method is responsible for initializing all tables necessary to archive the data generated throug..." alt="" coords="215,5,384,32"/>
+<area shape="poly" title=" " alt="" coords="416,21,384,21,384,16,416,16"/>
+<area shape="rect" href="class_db_manager.html#a443a6024735bd78041da461e55038fd9" title="The constructor of DBManager class." alt="" coords="5,5,167,32"/>
+<area shape="poly" title=" " alt="" coords="199,21,167,21,167,16,199,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa1171b572f33b03013d8d81cf11ca7b1" name="aa1171b572f33b03013d8d81cf11ca7b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1171b572f33b03013d8d81cf11ca7b1">&#9670;&#160;</a></span>deleteDb() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::deleteDb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>qF</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for deleting saved fundamaental diagram records from the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qF</td><td>- fundamental diagram to be deleted </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_cgraph.png" border="0" usemap="#aclass_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_cgraph" alt=""/></div>
+<map name="aclass_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_cgraph" id="aclass_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_cgraph">
+<area shape="rect" title="Method for deleting saved fundamaental diagram records from the database." alt="" coords="5,31,152,57"/>
+<area shape="rect" href="class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="200,5,342,32"/>
+<area shape="poly" title=" " alt="" coords="152,32,184,27,185,33,152,37"/>
+<area shape="rect" href="class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="201,56,341,83"/>
+<area shape="poly" title=" " alt="" coords="152,51,186,55,185,61,152,56"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_icgraph.png" border="0" usemap="#aclass_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_icgraph" alt=""/></div>
+<map name="aclass_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_icgraph" id="aclass_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_icgraph">
+<area shape="rect" title="Method for deleting saved fundamaental diagram records from the database." alt="" coords="672,113,819,140"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="458,105,624,148"/>
+<area shape="poly" title=" " alt="" coords="657,129,625,129,625,124,657,124"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,105,410,148"/>
+<area shape="poly" title=" " alt="" coords="443,138,410,138,411,133,443,133"/>
+<area shape="poly" title=" " alt="" coords="426,115,458,115,458,120,425,120"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,5,196,48"/>
+<area shape="poly" title=" " alt="" coords="284,100,212,62,182,51,184,46,214,58,287,95"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,72,213,115"/>
+<area shape="poly" title=" " alt="" coords="245,116,213,111,214,106,245,111"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="38,139,180,181"/>
+<area shape="poly" title=" " alt="" coords="246,151,181,161,180,155,245,146"/>
+<area shape="poly" title=" " alt="" coords="195,136,260,127,261,132,196,141"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa0ecc77c75117c8aefcb5614be1808bf" name="aa0ecc77c75117c8aefcb5614be1808bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0ecc77c75117c8aefcb5614be1808bf">&#9670;&#160;</a></span>deleteDb() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::deleteDb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_qt_diagram_s_t.html">QtDiagramST</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>qST</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for deleting space-time diagrams from the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qST</td><td>- space-time diagram to be deleted </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afff6656aab53762d8c91a9def0c61356" name="afff6656aab53762d8c91a9def0c61356"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afff6656aab53762d8c91a9def0c61356">&#9670;&#160;</a></span>readDb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::readDb </td>
+          <td>(</td>
+          <td class="paramtype">QList&lt; <a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> * &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>qFList</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for reading fundamental diagrams from the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qFList</td><td>- pointer to the list of fundamental diagrams, to which <a class="el" href="class_qt_diagram_f.html" title="The QtDiagramF class is responsible for saving data necessary to create and display fundamental diagr...">QtDiagramF</a> objects from database will be read </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_afff6656aab53762d8c91a9def0c61356_cgraph.png" border="0" usemap="#aclass_db_manager_afff6656aab53762d8c91a9def0c61356_cgraph" alt=""/></div>
+<map name="aclass_db_manager_afff6656aab53762d8c91a9def0c61356_cgraph" id="aclass_db_manager_afff6656aab53762d8c91a9def0c61356_cgraph">
+<area shape="rect" title="Method for reading fundamental diagrams from the database." alt="" coords="5,31,142,57"/>
+<area shape="rect" href="class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="190,5,332,32"/>
+<area shape="poly" title=" " alt="" coords="142,32,174,28,175,33,142,37"/>
+<area shape="rect" href="class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="191,56,331,83"/>
+<area shape="poly" title=" " alt="" coords="142,51,176,55,175,60,142,56"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_afff6656aab53762d8c91a9def0c61356_icgraph.png" border="0" usemap="#aclass_db_manager_afff6656aab53762d8c91a9def0c61356_icgraph" alt=""/></div>
+<map name="aclass_db_manager_afff6656aab53762d8c91a9def0c61356_icgraph" id="aclass_db_manager_afff6656aab53762d8c91a9def0c61356_icgraph">
+<area shape="rect" title="Method for reading fundamental diagrams from the database." alt="" coords="672,101,809,128"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="458,64,624,107"/>
+<area shape="poly" title=" " alt="" coords="657,105,625,100,625,95,658,100"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,5,196,48"/>
+<area shape="poly" title=" " alt="" coords="707,95,668,72,624,55,568,41,510,31,394,21,286,19,196,22,196,17,286,13,394,15,511,26,569,36,625,49,670,68,709,90"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,156,213,199"/>
+<area shape="poly" title=" " alt="" coords="657,130,625,135,404,157,213,173,213,168,404,152,624,129,657,125"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="38,72,180,115"/>
+<area shape="poly" title=" " alt="" coords="657,123,475,128,368,127,260,121,180,110,181,105,261,116,368,122,475,123,657,117"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,64,410,107"/>
+<area shape="poly" title=" " alt="" coords="443,97,410,97,411,91,443,92"/>
+<area shape="poly" title=" " alt="" coords="426,74,458,74,458,79,425,79"/>
+<area shape="poly" title=" " alt="" coords="245,65,193,51,195,46,246,60"/>
+<area shape="poly" title=" " alt="" coords="268,115,165,158,163,153,266,111"/>
+<area shape="poly" title=" " alt="" coords="245,100,181,102,181,97,245,95"/>
+<area shape="poly" title=" " alt="" coords="196,79,260,77,260,82,196,84"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a037c9c39ffb291d5c53e0fcb32757181" name="a037c9c39ffb291d5c53e0fcb32757181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a037c9c39ffb291d5c53e0fcb32757181">&#9670;&#160;</a></span>readSnapshot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::readSnapshot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_qt_diagram_config.html">QtDiagramConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>snapshot</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for reading saved snapshot with configuration saved during the previous application session. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">snapshot</td><td>- object, to which the snapshot will be read </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_a037c9c39ffb291d5c53e0fcb32757181_cgraph.png" border="0" usemap="#aclass_db_manager_a037c9c39ffb291d5c53e0fcb32757181_cgraph" alt=""/></div>
+<map name="aclass_db_manager_a037c9c39ffb291d5c53e0fcb32757181_cgraph" id="aclass_db_manager_a037c9c39ffb291d5c53e0fcb32757181_cgraph">
+<area shape="rect" title="Method for reading saved snapshot with configuration saved during the previous application session." alt="" coords="5,31,181,57"/>
+<area shape="rect" href="class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="229,5,371,32"/>
+<area shape="poly" title=" " alt="" coords="181,31,213,27,214,32,181,36"/>
+<area shape="rect" href="class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="230,56,370,83"/>
+<area shape="poly" title=" " alt="" coords="181,52,215,56,214,62,181,57"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_a037c9c39ffb291d5c53e0fcb32757181_icgraph.png" border="0" usemap="#aclass_db_manager_a037c9c39ffb291d5c53e0fcb32757181_icgraph" alt=""/></div>
+<map name="aclass_db_manager_a037c9c39ffb291d5c53e0fcb32757181_icgraph" id="aclass_db_manager_a037c9c39ffb291d5c53e0fcb32757181_icgraph">
+<area shape="rect" title="Method for reading saved snapshot with configuration saved during the previous application session." alt="" coords="200,13,375,40"/>
+<area shape="rect" href="class_main_traffic_simulator.html#aaf4683faf19e8814550590ce1a5fa73a" title="The constructor of the MainTrafficSimulator class." alt="" coords="5,5,152,48"/>
+<area shape="poly" title=" " alt="" coords="184,29,152,29,152,24,184,24"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a991e632ae2a7913268a00062b369f4f2" name="a991e632ae2a7913268a00062b369f4f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a991e632ae2a7913268a00062b369f4f2">&#9670;&#160;</a></span>saveDb() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::saveDb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_qt_diagram_f.html">QtDiagramF</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>qF</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for saving fundamental diagrams to the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qF</td><td>- fundamental diagarm that is going to be saved </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_a991e632ae2a7913268a00062b369f4f2_cgraph.png" border="0" usemap="#aclass_db_manager_a991e632ae2a7913268a00062b369f4f2_cgraph" alt=""/></div>
+<map name="aclass_db_manager_a991e632ae2a7913268a00062b369f4f2_cgraph" id="aclass_db_manager_a991e632ae2a7913268a00062b369f4f2_cgraph">
+<area shape="rect" title="Method for saving fundamental diagrams to the database." alt="" coords="5,31,143,57"/>
+<area shape="rect" href="class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="191,5,333,32"/>
+<area shape="poly" title=" " alt="" coords="143,32,175,28,176,33,144,37"/>
+<area shape="rect" href="class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="192,56,332,83"/>
+<area shape="poly" title=" " alt="" coords="144,51,177,55,176,61,143,56"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_a991e632ae2a7913268a00062b369f4f2_icgraph.png" border="0" usemap="#aclass_db_manager_a991e632ae2a7913268a00062b369f4f2_icgraph" alt=""/></div>
+<map name="aclass_db_manager_a991e632ae2a7913268a00062b369f4f2_icgraph" id="aclass_db_manager_a991e632ae2a7913268a00062b369f4f2_icgraph">
+<area shape="rect" title="Method for saving fundamental diagrams to the database." alt="" coords="226,51,363,77"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="5,5,178,48"/>
+<area shape="poly" title=" " alt="" coords="210,51,178,45,179,40,211,46"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="11,72,172,131"/>
+<area shape="poly" title=" " alt="" coords="211,82,173,89,172,84,210,77"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a35b50ca08cccb1079cd11860d44abcf2" name="a35b50ca08cccb1079cd11860d44abcf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b50ca08cccb1079cd11860d44abcf2">&#9670;&#160;</a></span>saveDb() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::saveDb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_qt_diagram_s_t.html">QtDiagramST</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>qST</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for saving space-time diagrams to the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qST</td><td>- space-time diagram that is going to be saved </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaefb755042bf99ab2643ec88bf0ccead" name="aaefb755042bf99ab2643ec88bf0ccead"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaefb755042bf99ab2643ec88bf0ccead">&#9670;&#160;</a></span>updateSnapshot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::updateSnapshot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_qt_diagram_config.html">QtDiagramConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>snapshot</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for updating snapshots with configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">snapshot</td><td>- object containing snapshot that will be updated </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_aaefb755042bf99ab2643ec88bf0ccead_cgraph.png" border="0" usemap="#aclass_db_manager_aaefb755042bf99ab2643ec88bf0ccead_cgraph" alt=""/></div>
+<map name="aclass_db_manager_aaefb755042bf99ab2643ec88bf0ccead_cgraph" id="aclass_db_manager_aaefb755042bf99ab2643ec88bf0ccead_cgraph">
+<area shape="rect" title="Method for updating snapshots with configuration." alt="" coords="5,31,195,57"/>
+<area shape="rect" href="class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="243,5,385,32"/>
+<area shape="poly" title=" " alt="" coords="195,30,227,26,228,32,196,35"/>
+<area shape="rect" href="class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="244,56,384,83"/>
+<area shape="poly" title=" " alt="" coords="196,53,229,57,228,62,195,58"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager_aaefb755042bf99ab2643ec88bf0ccead_icgraph.png" border="0" usemap="#aclass_db_manager_aaefb755042bf99ab2643ec88bf0ccead_icgraph" alt=""/></div>
+<map name="aclass_db_manager_aaefb755042bf99ab2643ec88bf0ccead_icgraph" id="aclass_db_manager_aaefb755042bf99ab2643ec88bf0ccead_icgraph">
+<area shape="rect" title="Method for updating snapshots with configuration." alt="" coords="192,13,381,40"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a94a23a6ee5fb715020cfd3c1ee2e9570" title="Method that closes ongoing Qt events." alt="" coords="5,5,144,48"/>
+<area shape="poly" title=" " alt="" coords="176,29,144,29,144,24,176,24"/>
+</map>
+</div>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="dbmanager_8h_source.html">dbmanager.h</a></li>
-<li><b>dbmanager.cpp</b></li>
+<li>ABMTrafSimCA/<a class="el" href="dbmanager_8h_source.html">dbmanager.h</a></li>
+<li>ABMTrafSimCA/<b>dbmanager.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

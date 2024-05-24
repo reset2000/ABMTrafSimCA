@@ -80,158 +80,1315 @@ $(function() {
   <div class="headertitle"><div class="title">Configuration Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="class_configuration.html" title="The Configuration class describes configuration parameters of the core simulation module.">Configuration</a> class describes configuration parameters of the core simulation module.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_configuration_8h_source.html">Configuration.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Configuration:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_configuration__coll__graph.png" border="0" usemap="#a_configuration_coll__map" alt="Collaboration graph"/></div>
 <map name="a_configuration_coll__map" id="a_configuration_coll__map">
-<area shape="rect" title=" " alt="" coords="5,96,102,123"/>
-<area shape="rect" href="class_driver_profile.html" title=" " alt="" coords="9,5,98,32"/>
+<area shape="rect" title="The Configuration class describes configuration parameters of the core simulation module." alt="" coords="5,96,102,123"/>
+<area shape="rect" href="class_driver_profile.html" title="The DriverProfile class describes all the parameters that driver profiles consist of." alt="" coords="9,5,98,32"/>
 <area shape="poly" title=" " alt="" coords="56,48,56,95,51,95,51,48"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a739e4e5868aabb5a9a0d7e80698ebe80" id="r_a739e4e5868aabb5a9a0d7e80698ebe80"><td class="memItemLeft" align="right" valign="top"><a id="a739e4e5868aabb5a9a0d7e80698ebe80" name="a739e4e5868aabb5a9a0d7e80698ebe80"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Configuration</b> (bool calculateDensities=false)</td></tr>
+<tr class="memitem:a739e4e5868aabb5a9a0d7e80698ebe80" id="r_a739e4e5868aabb5a9a0d7e80698ebe80"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a739e4e5868aabb5a9a0d7e80698ebe80">Configuration</a> (bool <a class="el" href="#a94cce8d9fc8d05b9f9dadfb368b89a5b">calculateDensities</a>=false)</td></tr>
+<tr class="memdesc:a739e4e5868aabb5a9a0d7e80698ebe80"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of the <a class="el" href="class_configuration.html" title="The Configuration class describes configuration parameters of the core simulation module.">Configuration</a> class.  <br /></td></tr>
 <tr class="separator:a739e4e5868aabb5a9a0d7e80698ebe80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6510e64a8c07ef8f2c8e44657fbb9fc6" id="r_a6510e64a8c07ef8f2c8e44657fbb9fc6"><td class="memItemLeft" align="right" valign="top"><a id="a6510e64a8c07ef8f2c8e44657fbb9fc6" name="a6510e64a8c07ef8f2c8e44657fbb9fc6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddShowFunction</b> (SHOW_FUNCTION_PTR showFunctionPtr)</td></tr>
+<tr class="memitem:a0dd0fa189e239f4c9a036303f641441e" id="r_a0dd0fa189e239f4c9a036303f641441e"><td class="memItemLeft" align="right" valign="top"><a id="a0dd0fa189e239f4c9a036303f641441e" name="a0dd0fa189e239f4c9a036303f641441e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~Configuration</b> ()</td></tr>
+<tr class="memdesc:a0dd0fa189e239f4c9a036303f641441e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The destructor of the <a class="el" href="class_configuration.html" title="The Configuration class describes configuration parameters of the core simulation module.">Configuration</a> class. <br /></td></tr>
+<tr class="separator:a0dd0fa189e239f4c9a036303f641441e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6510e64a8c07ef8f2c8e44657fbb9fc6" id="r_a6510e64a8c07ef8f2c8e44657fbb9fc6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6510e64a8c07ef8f2c8e44657fbb9fc6">AddShowFunction</a> (SHOW_FUNCTION_PTR showFunctionPtr)</td></tr>
+<tr class="memdesc:a6510e64a8c07ef8f2c8e44657fbb9fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that adds another function preparing display data (show function) to the array.  <br /></td></tr>
 <tr class="separator:a6510e64a8c07ef8f2c8e44657fbb9fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18dbc1a570cedaa70e7330bfcc94eaf0" id="r_a18dbc1a570cedaa70e7330bfcc94eaf0"><td class="memItemLeft" align="right" valign="top"><a id="a18dbc1a570cedaa70e7330bfcc94eaf0" name="a18dbc1a570cedaa70e7330bfcc94eaf0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearShowFunctions</b> ()</td></tr>
+<tr class="memitem:a18dbc1a570cedaa70e7330bfcc94eaf0" id="r_a18dbc1a570cedaa70e7330bfcc94eaf0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18dbc1a570cedaa70e7330bfcc94eaf0">ClearShowFunctions</a> ()</td></tr>
+<tr class="memdesc:a18dbc1a570cedaa70e7330bfcc94eaf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that clears showFunctions vector.  <br /></td></tr>
 <tr class="separator:a18dbc1a570cedaa70e7330bfcc94eaf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3aa075168273417cf9a8f28259ecf3d3" id="r_a3aa075168273417cf9a8f28259ecf3d3"><td class="memItemLeft" align="right" valign="top"><a id="a3aa075168273417cf9a8f28259ecf3d3" name="a3aa075168273417cf9a8f28259ecf3d3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetShowFunctionsSize</b> ()</td></tr>
+<tr class="memitem:a3aa075168273417cf9a8f28259ecf3d3" id="r_a3aa075168273417cf9a8f28259ecf3d3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3aa075168273417cf9a8f28259ecf3d3">GetShowFunctionsSize</a> ()</td></tr>
+<tr class="memdesc:a3aa075168273417cf9a8f28259ecf3d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods that calculates the size of showFunctions vector.  <br /></td></tr>
 <tr class="separator:a3aa075168273417cf9a8f28259ecf3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6373a2872a03b10a5bea81779eb75490" id="r_a6373a2872a03b10a5bea81779eb75490"><td class="memItemLeft" align="right" valign="top"><a id="a6373a2872a03b10a5bea81779eb75490" name="a6373a2872a03b10a5bea81779eb75490"></a>
-SHOW_FUNCTION_PTR&#160;</td><td class="memItemRight" valign="bottom"><b>GetShowFunctionsElement</b> (int idx)</td></tr>
+<tr class="memitem:a6373a2872a03b10a5bea81779eb75490" id="r_a6373a2872a03b10a5bea81779eb75490"><td class="memItemLeft" align="right" valign="top">SHOW_FUNCTION_PTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6373a2872a03b10a5bea81779eb75490">GetShowFunctionsElement</a> (int idx)</td></tr>
+<tr class="memdesc:a6373a2872a03b10a5bea81779eb75490"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that gets chosen showFunctions vector element by index.  <br /></td></tr>
 <tr class="separator:a6373a2872a03b10a5bea81779eb75490"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58b703fedf731c46d6662054b522af0b" id="r_a58b703fedf731c46d6662054b522af0b"><td class="memItemLeft" align="right" valign="top"><a id="a58b703fedf731c46d6662054b522af0b" name="a58b703fedf731c46d6662054b522af0b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetSegmentsNum</b> (int segmentsNum)</td></tr>
+<tr class="memitem:a58b703fedf731c46d6662054b522af0b" id="r_a58b703fedf731c46d6662054b522af0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58b703fedf731c46d6662054b522af0b">SetSegmentsNum</a> (int <a class="el" href="#a645f0761f039228dc9353a262df23e75">segmentsNum</a>)</td></tr>
+<tr class="memdesc:a58b703fedf731c46d6662054b522af0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The setter of the segmentsNum field.  <br /></td></tr>
 <tr class="separator:a58b703fedf731c46d6662054b522af0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cc3cefdde53c13b0796dbdefde231c6" id="r_a0cc3cefdde53c13b0796dbdefde231c6"><td class="memItemLeft" align="right" valign="top"><a id="a0cc3cefdde53c13b0796dbdefde231c6" name="a0cc3cefdde53c13b0796dbdefde231c6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetSegmentsNum</b> ()</td></tr>
+<tr class="memitem:a0cc3cefdde53c13b0796dbdefde231c6" id="r_a0cc3cefdde53c13b0796dbdefde231c6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0cc3cefdde53c13b0796dbdefde231c6">GetSegmentsNum</a> ()</td></tr>
+<tr class="memdesc:a0cc3cefdde53c13b0796dbdefde231c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the segmentsNum field.  <br /></td></tr>
 <tr class="separator:a0cc3cefdde53c13b0796dbdefde231c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a270e714be48abe9d813cb43112b10390" id="r_a270e714be48abe9d813cb43112b10390"><td class="memItemLeft" align="right" valign="top"><a id="a270e714be48abe9d813cb43112b10390" name="a270e714be48abe9d813cb43112b10390"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCurrentDensity</b> (int startingCars)</td></tr>
-<tr class="separator:a270e714be48abe9d813cb43112b10390"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabd72705d996304b8c3887f333072bdd" id="r_aabd72705d996304b8c3887f333072bdd"><td class="memItemLeft" align="right" valign="top"><a id="aabd72705d996304b8c3887f333072bdd" name="aabd72705d996304b8c3887f333072bdd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetCurrentDensity</b> ()</td></tr>
+<tr class="memitem:af062050fb6a3aa099d41d44ca37b2783" id="r_af062050fb6a3aa099d41d44ca37b2783"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af062050fb6a3aa099d41d44ca37b2783">SetCurrentDensity</a> (int <a class="el" href="#a3b998d6b7ed3bc20ab5d45376e464af4">currentDensity</a>)</td></tr>
+<tr class="memdesc:af062050fb6a3aa099d41d44ca37b2783"><td class="mdescLeft">&#160;</td><td class="mdescRight">The setter of the currentDensity field.  <br /></td></tr>
+<tr class="separator:af062050fb6a3aa099d41d44ca37b2783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd72705d996304b8c3887f333072bdd" id="r_aabd72705d996304b8c3887f333072bdd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabd72705d996304b8c3887f333072bdd">GetCurrentDensity</a> ()</td></tr>
+<tr class="memdesc:aabd72705d996304b8c3887f333072bdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the currentDensity field.  <br /></td></tr>
 <tr class="separator:aabd72705d996304b8c3887f333072bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9436cfea3f610fa0ac59d4542e5df6a5" id="r_a9436cfea3f610fa0ac59d4542e5df6a5"><td class="memItemLeft" align="right" valign="top"><a id="a9436cfea3f610fa0ac59d4542e5df6a5" name="a9436cfea3f610fa0ac59d4542e5df6a5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCalculateDensities</b> (bool calculateDensities)</td></tr>
+<tr class="memitem:a9436cfea3f610fa0ac59d4542e5df6a5" id="r_a9436cfea3f610fa0ac59d4542e5df6a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9436cfea3f610fa0ac59d4542e5df6a5">SetCalculateDensities</a> (bool <a class="el" href="#a94cce8d9fc8d05b9f9dadfb368b89a5b">calculateDensities</a>)</td></tr>
+<tr class="memdesc:a9436cfea3f610fa0ac59d4542e5df6a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The setter of the calculateDensities field.  <br /></td></tr>
 <tr class="separator:a9436cfea3f610fa0ac59d4542e5df6a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0eed82091f6f46856e00abacef051836" id="r_a0eed82091f6f46856e00abacef051836"><td class="memItemLeft" align="right" valign="top"><a id="a0eed82091f6f46856e00abacef051836" name="a0eed82091f6f46856e00abacef051836"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>GetCalculateDensities</b> ()</td></tr>
+<tr class="memitem:a0eed82091f6f46856e00abacef051836" id="r_a0eed82091f6f46856e00abacef051836"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0eed82091f6f46856e00abacef051836">GetCalculateDensities</a> ()</td></tr>
+<tr class="memdesc:a0eed82091f6f46856e00abacef051836"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the calculateDensities field.  <br /></td></tr>
 <tr class="separator:a0eed82091f6f46856e00abacef051836"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad329c9c901c0ababe58cb1b1152eaebe" id="r_ad329c9c901c0ababe58cb1b1152eaebe"><td class="memItemLeft" align="right" valign="top"><a id="ad329c9c901c0ababe58cb1b1152eaebe" name="ad329c9c901c0ababe58cb1b1152eaebe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetUseChangeLane</b> (bool useChangeLane)</td></tr>
+<tr class="memitem:ad329c9c901c0ababe58cb1b1152eaebe" id="r_ad329c9c901c0ababe58cb1b1152eaebe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad329c9c901c0ababe58cb1b1152eaebe">SetUseChangeLane</a> (bool <a class="el" href="#a1533587ccccb0ccc4be4eb31123425c2">useChangeLane</a>)</td></tr>
+<tr class="memdesc:ad329c9c901c0ababe58cb1b1152eaebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The setter of the useChangeLane field.  <br /></td></tr>
 <tr class="separator:ad329c9c901c0ababe58cb1b1152eaebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a215a9b6814065e9ed9be98afbc2a5f99" id="r_a215a9b6814065e9ed9be98afbc2a5f99"><td class="memItemLeft" align="right" valign="top"><a id="a215a9b6814065e9ed9be98afbc2a5f99" name="a215a9b6814065e9ed9be98afbc2a5f99"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>GetUseChangeLane</b> ()</td></tr>
+<tr class="memitem:a215a9b6814065e9ed9be98afbc2a5f99" id="r_a215a9b6814065e9ed9be98afbc2a5f99"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a215a9b6814065e9ed9be98afbc2a5f99">GetUseChangeLane</a> ()</td></tr>
+<tr class="memdesc:a215a9b6814065e9ed9be98afbc2a5f99"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the useChangeLane field.  <br /></td></tr>
 <tr class="separator:a215a9b6814065e9ed9be98afbc2a5f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb6810ddc1019e15100e39f094e5d374" id="r_afb6810ddc1019e15100e39f094e5d374"><td class="memItemLeft" align="right" valign="top"><a id="afb6810ddc1019e15100e39f094e5d374" name="afb6810ddc1019e15100e39f094e5d374"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>AddCarProbability</b> (int carLength, float probabilty)</td></tr>
+<tr class="memitem:afb6810ddc1019e15100e39f094e5d374" id="r_afb6810ddc1019e15100e39f094e5d374"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb6810ddc1019e15100e39f094e5d374">AddCarProbability</a> (int carLength, float probabilty)</td></tr>
+<tr class="memdesc:afb6810ddc1019e15100e39f094e5d374"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that adds new car probability for a specified length to the carProbability array.  <br /></td></tr>
 <tr class="separator:afb6810ddc1019e15100e39f094e5d374"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa790f00031e09a557cbdc7a7a17c5e9b" id="r_aa790f00031e09a557cbdc7a7a17c5e9b"><td class="memItemLeft" align="right" valign="top"><a id="aa790f00031e09a557cbdc7a7a17c5e9b" name="aa790f00031e09a557cbdc7a7a17c5e9b"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>GetCarProbability</b> (int carLength)</td></tr>
+<tr class="memitem:aa790f00031e09a557cbdc7a7a17c5e9b" id="r_aa790f00031e09a557cbdc7a7a17c5e9b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa790f00031e09a557cbdc7a7a17c5e9b">GetCarProbability</a> (int carLength)</td></tr>
+<tr class="memdesc:aa790f00031e09a557cbdc7a7a17c5e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the carProbability field of the specified length.  <br /></td></tr>
 <tr class="separator:aa790f00031e09a557cbdc7a7a17c5e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ca37a7360073508cbad82d2c2998192" id="r_a6ca37a7360073508cbad82d2c2998192"><td class="memItemLeft" align="right" valign="top"><a id="a6ca37a7360073508cbad82d2c2998192" name="a6ca37a7360073508cbad82d2c2998192"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearProbabilities</b> ()</td></tr>
+<tr class="memitem:a6ca37a7360073508cbad82d2c2998192" id="r_a6ca37a7360073508cbad82d2c2998192"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ca37a7360073508cbad82d2c2998192">ClearProbabilities</a> ()</td></tr>
+<tr class="memdesc:a6ca37a7360073508cbad82d2c2998192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that clears all car probabilities from carProbability array.  <br /></td></tr>
 <tr class="separator:a6ca37a7360073508cbad82d2c2998192"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41235c89934e1d2b5c2e69bb4628cc1d" id="r_a41235c89934e1d2b5c2e69bb4628cc1d"><td class="memItemLeft" align="right" valign="top"><a id="a41235c89934e1d2b5c2e69bb4628cc1d" name="a41235c89934e1d2b5c2e69bb4628cc1d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCyclesToSkip</b> (int cyclesToSkip)</td></tr>
+<tr class="memitem:a41235c89934e1d2b5c2e69bb4628cc1d" id="r_a41235c89934e1d2b5c2e69bb4628cc1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41235c89934e1d2b5c2e69bb4628cc1d">SetCyclesToSkip</a> (int <a class="el" href="#acb3d4025b935f6a69d480e91a8f16fed">cyclesToSkip</a>)</td></tr>
+<tr class="memdesc:a41235c89934e1d2b5c2e69bb4628cc1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The setter of the cyclesToSkip field.  <br /></td></tr>
 <tr class="separator:a41235c89934e1d2b5c2e69bb4628cc1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a276568f2c64b90d6c70fdd3197706418" id="r_a276568f2c64b90d6c70fdd3197706418"><td class="memItemLeft" align="right" valign="top"><a id="a276568f2c64b90d6c70fdd3197706418" name="a276568f2c64b90d6c70fdd3197706418"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetCyclesToSkip</b> ()</td></tr>
+<tr class="memitem:a276568f2c64b90d6c70fdd3197706418" id="r_a276568f2c64b90d6c70fdd3197706418"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a276568f2c64b90d6c70fdd3197706418">GetCyclesToSkip</a> ()</td></tr>
+<tr class="memdesc:a276568f2c64b90d6c70fdd3197706418"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the cyclesToSkip field.  <br /></td></tr>
 <tr class="separator:a276568f2c64b90d6c70fdd3197706418"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafa638196229c9ab58910ec1ea57e5ed" id="r_aafa638196229c9ab58910ec1ea57e5ed"><td class="memItemLeft" align="right" valign="top"><a id="aafa638196229c9ab58910ec1ea57e5ed" name="aafa638196229c9ab58910ec1ea57e5ed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetCyclesNum</b> (int cyclesNum)</td></tr>
+<tr class="memitem:aafa638196229c9ab58910ec1ea57e5ed" id="r_aafa638196229c9ab58910ec1ea57e5ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aafa638196229c9ab58910ec1ea57e5ed">SetCyclesNum</a> (int <a class="el" href="#a5e29f30d5dbae4ed3fb67e12f14a3b52">cyclesNum</a>)</td></tr>
+<tr class="memdesc:aafa638196229c9ab58910ec1ea57e5ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">The setter of the cyclesNum field.  <br /></td></tr>
 <tr class="separator:aafa638196229c9ab58910ec1ea57e5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2fa15d0d0d6a8a7afc5b1a4d0082a51" id="r_ab2fa15d0d0d6a8a7afc5b1a4d0082a51"><td class="memItemLeft" align="right" valign="top"><a id="ab2fa15d0d0d6a8a7afc5b1a4d0082a51" name="ab2fa15d0d0d6a8a7afc5b1a4d0082a51"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetCyclesNum</b> ()</td></tr>
+<tr class="memitem:ab2fa15d0d0d6a8a7afc5b1a4d0082a51" id="r_ab2fa15d0d0d6a8a7afc5b1a4d0082a51"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2fa15d0d0d6a8a7afc5b1a4d0082a51">GetCyclesNum</a> ()</td></tr>
+<tr class="memdesc:ab2fa15d0d0d6a8a7afc5b1a4d0082a51"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the cyclesNum field.  <br /></td></tr>
 <tr class="separator:ab2fa15d0d0d6a8a7afc5b1a4d0082a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9460843b6bd10843cbc2c4417b4fe425" id="r_a9460843b6bd10843cbc2c4417b4fe425"><td class="memItemLeft" align="right" valign="top"><a id="a9460843b6bd10843cbc2c4417b4fe425" name="a9460843b6bd10843cbc2c4417b4fe425"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddDensity</b> (int density)</td></tr>
+<tr class="memitem:a9460843b6bd10843cbc2c4417b4fe425" id="r_a9460843b6bd10843cbc2c4417b4fe425"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9460843b6bd10843cbc2c4417b4fe425">AddDensity</a> (int density)</td></tr>
+<tr class="memdesc:a9460843b6bd10843cbc2c4417b4fe425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods that add new density to the densities array.  <br /></td></tr>
 <tr class="separator:a9460843b6bd10843cbc2c4417b4fe425"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acaa8c145805e6cfcc73f6bebc31f1f89" id="r_acaa8c145805e6cfcc73f6bebc31f1f89"><td class="memItemLeft" align="right" valign="top"><a id="acaa8c145805e6cfcc73f6bebc31f1f89" name="acaa8c145805e6cfcc73f6bebc31f1f89"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearDensities</b> ()</td></tr>
+<tr class="memitem:acaa8c145805e6cfcc73f6bebc31f1f89" id="r_acaa8c145805e6cfcc73f6bebc31f1f89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acaa8c145805e6cfcc73f6bebc31f1f89">ClearDensities</a> ()</td></tr>
+<tr class="memdesc:acaa8c145805e6cfcc73f6bebc31f1f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that clears all densities from from densities array.  <br /></td></tr>
 <tr class="separator:acaa8c145805e6cfcc73f6bebc31f1f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6b18cc20fec5c18bd6b4cb788e3a22b" id="r_af6b18cc20fec5c18bd6b4cb788e3a22b"><td class="memItemLeft" align="right" valign="top"><a id="af6b18cc20fec5c18bd6b4cb788e3a22b" name="af6b18cc20fec5c18bd6b4cb788e3a22b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetDensitiesElement</b> (int idx)</td></tr>
+<tr class="memitem:af6b18cc20fec5c18bd6b4cb788e3a22b" id="r_af6b18cc20fec5c18bd6b4cb788e3a22b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af6b18cc20fec5c18bd6b4cb788e3a22b">GetDensitiesElement</a> (int idx)</td></tr>
+<tr class="memdesc:af6b18cc20fec5c18bd6b4cb788e3a22b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the isTail field.  <br /></td></tr>
 <tr class="separator:af6b18cc20fec5c18bd6b4cb788e3a22b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37e4fee49efe2ad0dff9c6a660ae9ed6" id="r_a37e4fee49efe2ad0dff9c6a660ae9ed6"><td class="memItemLeft" align="right" valign="top"><a id="a37e4fee49efe2ad0dff9c6a660ae9ed6" name="a37e4fee49efe2ad0dff9c6a660ae9ed6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetDensitiesSize</b> ()</td></tr>
+<tr class="memitem:a37e4fee49efe2ad0dff9c6a660ae9ed6" id="r_a37e4fee49efe2ad0dff9c6a660ae9ed6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37e4fee49efe2ad0dff9c6a660ae9ed6">GetDensitiesSize</a> ()</td></tr>
+<tr class="memdesc:a37e4fee49efe2ad0dff9c6a660ae9ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that calculates number of densities in densities array.  <br /></td></tr>
 <tr class="separator:a37e4fee49efe2ad0dff9c6a660ae9ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7c3fc038e41d08fb8cf61faf3a93164" id="r_ad7c3fc038e41d08fb8cf61faf3a93164"><td class="memItemLeft" align="right" valign="top"><a id="ad7c3fc038e41d08fb8cf61faf3a93164" name="ad7c3fc038e41d08fb8cf61faf3a93164"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetTestsNumber</b> (int testsNumber)</td></tr>
+<tr class="memitem:ad7c3fc038e41d08fb8cf61faf3a93164" id="r_ad7c3fc038e41d08fb8cf61faf3a93164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7c3fc038e41d08fb8cf61faf3a93164">SetTestsNumber</a> (int <a class="el" href="#ad33c77693907f1b1b4fc0cffc8c47f40">testsNumber</a>)</td></tr>
+<tr class="memdesc:ad7c3fc038e41d08fb8cf61faf3a93164"><td class="mdescLeft">&#160;</td><td class="mdescRight">The setter of the testsNumber field.  <br /></td></tr>
 <tr class="separator:ad7c3fc038e41d08fb8cf61faf3a93164"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7c49ca371344c753a57287604c09511" id="r_ae7c49ca371344c753a57287604c09511"><td class="memItemLeft" align="right" valign="top"><a id="ae7c49ca371344c753a57287604c09511" name="ae7c49ca371344c753a57287604c09511"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>GetTestsNumber</b> ()</td></tr>
+<tr class="memitem:ae7c49ca371344c753a57287604c09511" id="r_ae7c49ca371344c753a57287604c09511"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7c49ca371344c753a57287604c09511">GetTestsNumber</a> ()</td></tr>
+<tr class="memdesc:ae7c49ca371344c753a57287604c09511"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the testsNumber field.  <br /></td></tr>
 <tr class="separator:ae7c49ca371344c753a57287604c09511"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad409978c164fdc0825ee75c336282ce9" id="r_ad409978c164fdc0825ee75c336282ce9"><td class="memItemLeft" align="right" valign="top"><a id="ad409978c164fdc0825ee75c336282ce9" name="ad409978c164fdc0825ee75c336282ce9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetVDriverType</b> (<a class="el" href="class_driver_profile.html">DriverProfile</a> *profile)</td></tr>
+<tr class="memitem:ad409978c164fdc0825ee75c336282ce9" id="r_ad409978c164fdc0825ee75c336282ce9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad409978c164fdc0825ee75c336282ce9">SetVDriverType</a> (<a class="el" href="class_driver_profile.html">DriverProfile</a> *profile)</td></tr>
+<tr class="memdesc:ad409978c164fdc0825ee75c336282ce9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The setter of the vDriverProfiles field.  <br /></td></tr>
 <tr class="separator:ad409978c164fdc0825ee75c336282ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5676b7c36b3053d2420162cf9c033717" id="r_a5676b7c36b3053d2420162cf9c033717"><td class="memItemLeft" align="right" valign="top"><a id="a5676b7c36b3053d2420162cf9c033717" name="a5676b7c36b3053d2420162cf9c033717"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>GetDriverTypeProbability</b> (int driverType)</td></tr>
+<tr class="memitem:a5676b7c36b3053d2420162cf9c033717" id="r_a5676b7c36b3053d2420162cf9c033717"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5676b7c36b3053d2420162cf9c033717">GetDriverTypeProbability</a> (int driverType)</td></tr>
+<tr class="memdesc:a5676b7c36b3053d2420162cf9c033717"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the vDriverProfiles probability by a specified index.  <br /></td></tr>
 <tr class="separator:a5676b7c36b3053d2420162cf9c033717"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90bac9684aa87e58b6811bcd207144e7" id="r_a90bac9684aa87e58b6811bcd207144e7"><td class="memItemLeft" align="right" valign="top"><a id="a90bac9684aa87e58b6811bcd207144e7" name="a90bac9684aa87e58b6811bcd207144e7"></a>
-<a class="el" href="class_driver_profile.html">DriverProfile</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetDriverProfile</b> (int driverType)</td></tr>
+<tr class="memitem:a90bac9684aa87e58b6811bcd207144e7" id="r_a90bac9684aa87e58b6811bcd207144e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_driver_profile.html">DriverProfile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90bac9684aa87e58b6811bcd207144e7">GetDriverProfile</a> (int driverType)</td></tr>
+<tr class="memdesc:a90bac9684aa87e58b6811bcd207144e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The getter of the vDriverProfiles driver type by a specified index.  <br /></td></tr>
 <tr class="separator:a90bac9684aa87e58b6811bcd207144e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:abcfd2b1fa149406ff3a5fe8fd3613eea" id="r_abcfd2b1fa149406ff3a5fe8fd3613eea"><td class="memItemLeft" align="right" valign="top"><a id="abcfd2b1fa149406ff3a5fe8fd3613eea" name="abcfd2b1fa149406ff3a5fe8fd3613eea"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
+<tr class="memdesc:abcfd2b1fa149406ff3a5fe8fd3613eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulation data in the form of a string. <br /></td></tr>
 <tr class="separator:abcfd2b1fa149406ff3a5fe8fd3613eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6953efa479161b2cdf8336f0d71574d2" id="r_a6953efa479161b2cdf8336f0d71574d2"><td class="memItemLeft" align="right" valign="top"><a id="a6953efa479161b2cdf8336f0d71574d2" name="a6953efa479161b2cdf8336f0d71574d2"></a>
-vector&lt; <a class="el" href="class_driver_profile.html">DriverProfile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>vDriverProfiles</b></td></tr>
+<tr class="memitem:a6953efa479161b2cdf8336f0d71574d2" id="r_a6953efa479161b2cdf8336f0d71574d2"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_driver_profile.html">DriverProfile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6953efa479161b2cdf8336f0d71574d2">vDriverProfiles</a></td></tr>
+<tr class="memdesc:a6953efa479161b2cdf8336f0d71574d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector containing driver profiles.  <br /></td></tr>
 <tr class="separator:a6953efa479161b2cdf8336f0d71574d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a1ee4fcdfeb6d6698b75265b2b46fd65d" id="r_a1ee4fcdfeb6d6698b75265b2b46fd65d"><td class="memItemLeft" align="right" valign="top"><a id="a1ee4fcdfeb6d6698b75265b2b46fd65d" name="a1ee4fcdfeb6d6698b75265b2b46fd65d"></a>
 vector&lt; SHOW_FUNCTION_PTR &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>showFunctions</b></td></tr>
+<tr class="memdesc:a1ee4fcdfeb6d6698b75265b2b46fd65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector with all the functions that are responsible for gathering data necessary to display diagrams. <br /></td></tr>
 <tr class="separator:a1ee4fcdfeb6d6698b75265b2b46fd65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90925c5b9673eefb81c679cc2cf34153" id="r_a90925c5b9673eefb81c679cc2cf34153"><td class="memItemLeft" align="right" valign="top"><a id="a90925c5b9673eefb81c679cc2cf34153" name="a90925c5b9673eefb81c679cc2cf34153"></a>
 vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>densities</b></td></tr>
+<tr class="memdesc:a90925c5b9673eefb81c679cc2cf34153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector with all avaliable density points. <br /></td></tr>
 <tr class="separator:a90925c5b9673eefb81c679cc2cf34153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e29f30d5dbae4ed3fb67e12f14a3b52" id="r_a5e29f30d5dbae4ed3fb67e12f14a3b52"><td class="memItemLeft" align="right" valign="top"><a id="a5e29f30d5dbae4ed3fb67e12f14a3b52" name="a5e29f30d5dbae4ed3fb67e12f14a3b52"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>cyclesNum</b></td></tr>
+<tr class="memdesc:a5e29f30d5dbae4ed3fb67e12f14a3b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of iterations of the simulation. <br /></td></tr>
 <tr class="separator:a5e29f30d5dbae4ed3fb67e12f14a3b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb3d4025b935f6a69d480e91a8f16fed" id="r_acb3d4025b935f6a69d480e91a8f16fed"><td class="memItemLeft" align="right" valign="top"><a id="acb3d4025b935f6a69d480e91a8f16fed" name="acb3d4025b935f6a69d480e91a8f16fed"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>cyclesToSkip</b></td></tr>
+<tr class="memitem:acb3d4025b935f6a69d480e91a8f16fed" id="r_acb3d4025b935f6a69d480e91a8f16fed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb3d4025b935f6a69d480e91a8f16fed">cyclesToSkip</a></td></tr>
+<tr class="memdesc:acb3d4025b935f6a69d480e91a8f16fed"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of iterations that will not be displayed.  <br /></td></tr>
 <tr class="separator:acb3d4025b935f6a69d480e91a8f16fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a645f0761f039228dc9353a262df23e75" id="r_a645f0761f039228dc9353a262df23e75"><td class="memItemLeft" align="right" valign="top"><a id="a645f0761f039228dc9353a262df23e75" name="a645f0761f039228dc9353a262df23e75"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>segmentsNum</b></td></tr>
+<tr class="memdesc:a645f0761f039228dc9353a262df23e75"><td class="mdescLeft">&#160;</td><td class="mdescRight">The length of the road in segments. <br /></td></tr>
 <tr class="separator:a645f0761f039228dc9353a262df23e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b998d6b7ed3bc20ab5d45376e464af4" id="r_a3b998d6b7ed3bc20ab5d45376e464af4"><td class="memItemLeft" align="right" valign="top"><a id="a3b998d6b7ed3bc20ab5d45376e464af4" name="a3b998d6b7ed3bc20ab5d45376e464af4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>currentDensity</b></td></tr>
+<tr class="memitem:a3b998d6b7ed3bc20ab5d45376e464af4" id="r_a3b998d6b7ed3bc20ab5d45376e464af4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b998d6b7ed3bc20ab5d45376e464af4">currentDensity</a></td></tr>
+<tr class="memdesc:a3b998d6b7ed3bc20ab5d45376e464af4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The road density percentage.  <br /></td></tr>
 <tr class="separator:a3b998d6b7ed3bc20ab5d45376e464af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94cce8d9fc8d05b9f9dadfb368b89a5b" id="r_a94cce8d9fc8d05b9f9dadfb368b89a5b"><td class="memItemLeft" align="right" valign="top"><a id="a94cce8d9fc8d05b9f9dadfb368b89a5b" name="a94cce8d9fc8d05b9f9dadfb368b89a5b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>calculateDensities</b></td></tr>
+<tr class="memdesc:a94cce8d9fc8d05b9f9dadfb368b89a5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The value determining if the result of the simulation will be space-time or fundamental diagram. <br /></td></tr>
 <tr class="separator:a94cce8d9fc8d05b9f9dadfb368b89a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad33c77693907f1b1b4fc0cffc8c47f40" id="r_ad33c77693907f1b1b4fc0cffc8c47f40"><td class="memItemLeft" align="right" valign="top"><a id="ad33c77693907f1b1b4fc0cffc8c47f40" name="ad33c77693907f1b1b4fc0cffc8c47f40"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>testsNumber</b></td></tr>
+<tr class="memdesc:ad33c77693907f1b1b4fc0cffc8c47f40"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of simulations that are averaged for a single density point on the fundamental diagram. <br /></td></tr>
 <tr class="separator:ad33c77693907f1b1b4fc0cffc8c47f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1533587ccccb0ccc4be4eb31123425c2" id="r_a1533587ccccb0ccc4be4eb31123425c2"><td class="memItemLeft" align="right" valign="top"><a id="a1533587ccccb0ccc4be4eb31123425c2" name="a1533587ccccb0ccc4be4eb31123425c2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>useChangeLane</b></td></tr>
+<tr class="memdesc:a1533587ccccb0ccc4be4eb31123425c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The saved value defining if the lane changes will occur during the simulation. <br /></td></tr>
 <tr class="separator:a1533587ccccb0ccc4be4eb31123425c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b5e53554349f1085d67112e47e9bbc3" id="r_a9b5e53554349f1085d67112e47e9bbc3"><td class="memItemLeft" align="right" valign="top"><a id="a9b5e53554349f1085d67112e47e9bbc3" name="a9b5e53554349f1085d67112e47e9bbc3"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>carProbability</b> [MAX_CARS_SET] = {0}</td></tr>
+<tr class="memdesc:a9b5e53554349f1085d67112e47e9bbc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array with probabilites for generating car with random lengths. <br /></td></tr>
 <tr class="separator:a9b5e53554349f1085d67112e47e9bbc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a961b65130cc45dc3984c4244de338073" id="r_a961b65130cc45dc3984c4244de338073"><td class="memItemLeft" align="right" valign="top"><a id="a961b65130cc45dc3984c4244de338073" name="a961b65130cc45dc3984c4244de338073"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>driverTypeProbabiltities</b> [MAX_NUMBER_OF_DRIVER_TYPES] = {0.0}</td></tr>
+<tr class="memdesc:a961b65130cc45dc3984c4244de338073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array with probabilites for assigning random driver types to cars. <br /></td></tr>
 <tr class="separator:a961b65130cc45dc3984c4244de338073"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1695591cf80f696fef5248d2e07a8154" id="r_a1695591cf80f696fef5248d2e07a8154"><td class="memItemLeft" align="right" valign="top"><a id="a1695591cf80f696fef5248d2e07a8154" name="a1695591cf80f696fef5248d2e07a8154"></a>
-<a class="el" href="class_driver_profile.html">DriverProfile</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>driverProfiles</b> [MAX_NUMBER_OF_DRIVER_TYPES] = {NULL}</td></tr>
+<tr class="memitem:a1695591cf80f696fef5248d2e07a8154" id="r_a1695591cf80f696fef5248d2e07a8154"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_driver_profile.html">DriverProfile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1695591cf80f696fef5248d2e07a8154">driverProfiles</a> [MAX_NUMBER_OF_DRIVER_TYPES] = {NULL}</td></tr>
+<tr class="memdesc:a1695591cf80f696fef5248d2e07a8154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array with all avaliable driver types (depricated)  <br /></td></tr>
 <tr class="separator:a1695591cf80f696fef5248d2e07a8154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="class_configuration.html" title="The Configuration class describes configuration parameters of the core simulation module.">Configuration</a> class describes configuration parameters of the core simulation module. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a739e4e5868aabb5a9a0d7e80698ebe80" name="a739e4e5868aabb5a9a0d7e80698ebe80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a739e4e5868aabb5a9a0d7e80698ebe80">&#9670;&#160;</a></span>Configuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Configuration::Configuration </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>calculateDensities</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The constructor of the <a class="el" href="class_configuration.html" title="The Configuration class describes configuration parameters of the core simulation module.">Configuration</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">calculateDensities</td><td>- parameter determining if the space-time or fundamental diagram will be generated </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a739e4e5868aabb5a9a0d7e80698ebe80_cgraph.png" border="0" usemap="#aclass_configuration_a739e4e5868aabb5a9a0d7e80698ebe80_cgraph" alt=""/></div>
+<map name="aclass_configuration_a739e4e5868aabb5a9a0d7e80698ebe80_cgraph" id="aclass_configuration_a739e4e5868aabb5a9a0d7e80698ebe80_cgraph">
+<area shape="rect" title="The constructor of the Configuration class." alt="" coords="5,5,185,32"/>
+<area shape="rect" href="class_configuration.html#a9460843b6bd10843cbc2c4417b4fe425" title="Methods that add new density to the densities array." alt="" coords="233,5,404,32"/>
+<area shape="poly" title=" " alt="" coords="185,16,217,16,217,21,185,21"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afb6810ddc1019e15100e39f094e5d374" name="afb6810ddc1019e15100e39f094e5d374"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb6810ddc1019e15100e39f094e5d374">&#9670;&#160;</a></span>AddCarProbability()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Configuration::AddCarProbability </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>carLength</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>probabilty</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that adds new car probability for a specified length to the carProbability array. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a9b5e53554349f1085d67112e47e9bbc3" title="Array with probabilites for generating car with random lengths.">carProbability</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">carLength</td><td>- length of a car in segments </td></tr>
+    <tr><td class="paramname">probabilty</td><td>- probability of choosing car of a specified length </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Flag that indicates if the operation was successful or not </dd></dl>
+
+</div>
+</div>
+<a id="a9460843b6bd10843cbc2c4417b4fe425" name="a9460843b6bd10843cbc2c4417b4fe425"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9460843b6bd10843cbc2c4417b4fe425">&#9670;&#160;</a></span>AddDensity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::AddDensity </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>density</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Methods that add new density to the densities array. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a90925c5b9673eefb81c679cc2cf34153" title="Vector with all avaliable density points.">densities</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">densities</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a9460843b6bd10843cbc2c4417b4fe425_icgraph.png" border="0" usemap="#aclass_configuration_a9460843b6bd10843cbc2c4417b4fe425_icgraph" alt=""/></div>
+<map name="aclass_configuration_a9460843b6bd10843cbc2c4417b4fe425_icgraph" id="aclass_configuration_a9460843b6bd10843cbc2c4417b4fe425_icgraph">
+<area shape="rect" title="Methods that add new density to the densities array." alt="" coords="233,5,404,32"/>
+<area shape="rect" href="class_configuration.html#a739e4e5868aabb5a9a0d7e80698ebe80" title="The constructor of the Configuration class." alt="" coords="5,5,185,32"/>
+<area shape="poly" title=" " alt="" coords="217,21,185,21,185,16,217,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6510e64a8c07ef8f2c8e44657fbb9fc6" name="a6510e64a8c07ef8f2c8e44657fbb9fc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6510e64a8c07ef8f2c8e44657fbb9fc6">&#9670;&#160;</a></span>AddShowFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::AddShowFunction </td>
+          <td>(</td>
+          <td class="paramtype">SHOW_FUNCTION_PTR</td>          <td class="paramname"><span class="paramname"><em>showFunctionPtr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that adds another function preparing display data (show function) to the array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">showFunctionPtr</td><td>- pointer to the show function </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a1ee4fcdfeb6d6698b75265b2b46fd65d" title="Vector with all the functions that are responsible for gathering data necessary to display diagrams.">showFunctions</a> </dd></dl>
+
+</div>
+</div>
+<a id="acaa8c145805e6cfcc73f6bebc31f1f89" name="acaa8c145805e6cfcc73f6bebc31f1f89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaa8c145805e6cfcc73f6bebc31f1f89">&#9670;&#160;</a></span>ClearDensities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::ClearDensities </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that clears all densities from from densities array. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a90925c5b9673eefb81c679cc2cf34153" title="Vector with all avaliable density points.">densities</a> </dd></dl>
+
+</div>
+</div>
+<a id="a6ca37a7360073508cbad82d2c2998192" name="a6ca37a7360073508cbad82d2c2998192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ca37a7360073508cbad82d2c2998192">&#9670;&#160;</a></span>ClearProbabilities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::ClearProbabilities </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that clears all car probabilities from carProbability array. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a9b5e53554349f1085d67112e47e9bbc3" title="Array with probabilites for generating car with random lengths.">carProbability</a> </dd></dl>
+
+</div>
+</div>
+<a id="a18dbc1a570cedaa70e7330bfcc94eaf0" name="a18dbc1a570cedaa70e7330bfcc94eaf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18dbc1a570cedaa70e7330bfcc94eaf0">&#9670;&#160;</a></span>ClearShowFunctions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::ClearShowFunctions </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that clears showFunctions vector. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a1ee4fcdfeb6d6698b75265b2b46fd65d" title="Vector with all the functions that are responsible for gathering data necessary to display diagrams.">showFunctions</a> </dd></dl>
+
+</div>
+</div>
+<a id="a0eed82091f6f46856e00abacef051836" name="a0eed82091f6f46856e00abacef051836"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eed82091f6f46856e00abacef051836">&#9670;&#160;</a></span>GetCalculateDensities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Configuration::GetCalculateDensities </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the calculateDensities field. </p>
+<dl class="section return"><dt>Returns</dt><dd>calculateDensities </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a94cce8d9fc8d05b9f9dadfb368b89a5b" title="The value determining if the result of the simulation will be space-time or fundamental diagram.">calculateDensities</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a0eed82091f6f46856e00abacef051836_icgraph.png" border="0" usemap="#aclass_configuration_a0eed82091f6f46856e00abacef051836_icgraph" alt=""/></div>
+<map name="aclass_configuration_a0eed82091f6f46856e00abacef051836_icgraph" id="aclass_configuration_a0eed82091f6f46856e00abacef051836_icgraph">
+<area shape="rect" title="The getter of the calculateDensities field." alt="" coords="420,23,599,65"/>
+<area shape="rect" href="class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="220,5,372,32"/>
+<area shape="poly" title=" " alt="" coords="404,34,372,30,373,25,405,29"/>
+<area shape="rect" href="class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="251,56,341,83"/>
+<area shape="poly" title=" " alt="" coords="405,59,341,67,341,61,404,54"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,31,172,57"/>
+<area shape="poly" title=" " alt="" coords="205,32,172,36,172,31,204,27"/>
+<area shape="poly" title=" " alt="" coords="235,65,172,57,172,52,236,59"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa790f00031e09a557cbdc7a7a17c5e9b" name="aa790f00031e09a557cbdc7a7a17c5e9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa790f00031e09a557cbdc7a7a17c5e9b">&#9670;&#160;</a></span>GetCarProbability()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Configuration::GetCarProbability </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>carLength</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the carProbability field of the specified length. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">carLength</td><td>- length of a car in segments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a9b5e53554349f1085d67112e47e9bbc3" title="Array with probabilites for generating car with random lengths.">carProbability</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_aa790f00031e09a557cbdc7a7a17c5e9b_icgraph.png" border="0" usemap="#aclass_configuration_aa790f00031e09a557cbdc7a7a17c5e9b_icgraph" alt=""/></div>
+<map name="aclass_configuration_aa790f00031e09a557cbdc7a7a17c5e9b_icgraph" id="aclass_configuration_aa790f00031e09a557cbdc7a7a17c5e9b_icgraph">
+<area shape="rect" title="The getter of the carProbability field of the specified length." alt="" coords="834,31,1040,57"/>
+<area shape="rect" href="class_road.html#aa1b08fc34c7916ef825501b8ad460b27" title="Method that randomly generates car lengths based on constraints from the configuration." alt="" coords="560,56,786,83"/>
+<area shape="poly" title=" " alt="" coords="818,58,786,61,786,56,818,53"/>
+<area shape="rect" href="class_road.html#a8cd3e5493672e68dc4583e0e31a35b95" title="Method that sets up the initial car array." alt="" coords="372,5,498,32"/>
+<area shape="poly" title=" " alt="" coords="818,41,498,24,498,19,818,35"/>
+<area shape="poly" title=" " alt="" coords="591,55,498,35,499,29,593,50"/>
+<area shape="rect" href="class_road.html#a8ee0c51b19a437b4eea175241f37ee38" title="Method that sets up the initial state of the road." alt="" coords="357,56,512,83"/>
+<area shape="poly" title=" " alt="" coords="544,72,513,72,513,67,544,67"/>
+<area shape="rect" href="class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="220,31,309,57"/>
+<area shape="poly" title=" " alt="" coords="356,33,310,40,309,35,355,28"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,31,172,57"/>
+<area shape="poly" title=" " alt="" coords="204,47,172,47,172,41,204,41"/>
+<area shape="poly" title=" " alt="" coords="341,58,309,53,310,48,342,53"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aabd72705d996304b8c3887f333072bdd" name="aabd72705d996304b8c3887f333072bdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabd72705d996304b8c3887f333072bdd">&#9670;&#160;</a></span>GetCurrentDensity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::GetCurrentDensity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the currentDensity field. </p>
+<dl class="section return"><dt>Returns</dt><dd>currentDensity </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a3b998d6b7ed3bc20ab5d45376e464af4" title="The road density percentage.">currentDensity</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_aabd72705d996304b8c3887f333072bdd_icgraph.png" border="0" usemap="#aclass_configuration_aabd72705d996304b8c3887f333072bdd_icgraph" alt=""/></div>
+<map name="aclass_configuration_aabd72705d996304b8c3887f333072bdd_icgraph" id="aclass_configuration_aabd72705d996304b8c3887f333072bdd_icgraph">
+<area shape="rect" title="The getter of the currentDensity field." alt="" coords="937,48,1104,91"/>
+<area shape="rect" href="class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="517,5,606,32"/>
+<area shape="poly" title=" " alt="" coords="921,52,888,47,733,31,606,23,607,18,734,26,889,41,922,46"/>
+<area shape="rect" href="class_road.html#a8cd3e5493672e68dc4583e0e31a35b95" title="Method that sets up the initial car array." alt="" coords="729,56,855,83"/>
+<area shape="poly" title=" " alt="" coords="921,72,856,72,856,67,921,67"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="695,119,889,161"/>
+<area shape="poly" title=" " alt="" coords="935,98,864,121,863,115,934,93"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="261,5,427,32"/>
+<area shape="poly" title=" " alt="" coords="501,21,427,21,427,16,501,16"/>
+<area shape="poly" title=" " alt="" coords="713,55,606,31,607,26,714,50"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="475,56,647,99"/>
+<area shape="poly" title=" " alt="" coords="696,117,642,102,643,97,697,112"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="481,123,641,181"/>
+<area shape="poly" title=" " alt="" coords="680,148,642,150,642,145,680,143"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="490,205,632,248"/>
+<area shape="poly" title=" " alt="" coords="720,170,621,207,619,202,718,165"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="269,205,419,248"/>
+<area shape="poly" title=" " alt="" coords="474,238,419,238,419,233,474,233"/>
+<area shape="poly" title=" " alt="" coords="434,215,490,215,490,221,434,220"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,172,192,215"/>
+<area shape="poly" title=" " alt="" coords="254,225,192,216,193,211,254,220"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,239,196,281"/>
+<area shape="poly" title=" " alt="" coords="254,242,197,250,196,245,254,237"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,305,213,348"/>
+<area shape="poly" title=" " alt="" coords="292,258,214,296,183,307,181,302,212,291,290,253"/>
+<area shape="poly" title=" " alt="" coords="208,196,269,205,269,210,207,201"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab2fa15d0d0d6a8a7afc5b1a4d0082a51" name="ab2fa15d0d0d6a8a7afc5b1a4d0082a51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2fa15d0d0d6a8a7afc5b1a4d0082a51">&#9670;&#160;</a></span>GetCyclesNum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::GetCyclesNum </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the cyclesNum field. </p>
+<dl class="section return"><dt>Returns</dt><dd>cyclesNum </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a5e29f30d5dbae4ed3fb67e12f14a3b52" title="The number of iterations of the simulation.">cyclesNum</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51_icgraph.png" border="0" usemap="#aclass_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51_icgraph" alt=""/></div>
+<map name="aclass_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51_icgraph" id="aclass_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51_icgraph">
+<area shape="rect" title="The getter of the cyclesNum field." alt="" coords="920,72,1112,99"/>
+<area shape="rect" href="class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="699,24,851,51"/>
+<area shape="poly" title=" " alt="" coords="930,71,845,54,846,49,931,66"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="678,93,872,136"/>
+<area shape="poly" title=" " alt="" coords="904,102,873,106,872,100,904,96"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="461,5,627,32"/>
+<area shape="poly" title=" " alt="" coords="683,33,628,28,628,23,683,27"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="458,56,630,99"/>
+<area shape="poly" title=" " alt="" coords="663,99,630,94,631,89,664,94"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="464,123,624,181"/>
+<area shape="poly" title=" " alt="" coords="664,135,625,142,624,136,663,130"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="473,205,615,248"/>
+<area shape="poly" title=" " alt="" coords="725,146,631,196,605,207,603,202,629,191,723,142"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,205,410,248"/>
+<area shape="poly" title=" " alt="" coords="457,238,411,238,411,233,457,233"/>
+<area shape="poly" title=" " alt="" coords="425,215,472,215,472,221,425,220"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,172,192,215"/>
+<area shape="poly" title=" " alt="" coords="245,225,192,217,193,212,246,220"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,239,196,281"/>
+<area shape="poly" title=" " alt="" coords="245,243,197,250,196,245,245,237"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,305,213,348"/>
+<area shape="poly" title=" " alt="" coords="287,259,214,296,184,307,182,302,212,291,284,254"/>
+<area shape="poly" title=" " alt="" coords="208,196,261,205,260,210,207,201"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a276568f2c64b90d6c70fdd3197706418" name="a276568f2c64b90d6c70fdd3197706418"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a276568f2c64b90d6c70fdd3197706418">&#9670;&#160;</a></span>GetCyclesToSkip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::GetCyclesToSkip </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the cyclesToSkip field. </p>
+<dl class="section return"><dt>Returns</dt><dd>cyclesToSkip </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#acb3d4025b935f6a69d480e91a8f16fed" title="The number of iterations that will not be displayed.">cyclesToSkip</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a276568f2c64b90d6c70fdd3197706418_icgraph.png" border="0" usemap="#aclass_configuration_a276568f2c64b90d6c70fdd3197706418_icgraph" alt=""/></div>
+<map name="aclass_configuration_a276568f2c64b90d6c70fdd3197706418_icgraph" id="aclass_configuration_a276568f2c64b90d6c70fdd3197706418_icgraph">
+<area shape="rect" title="The getter of the cyclesToSkip field." alt="" coords="920,64,1085,107"/>
+<area shape="rect" href="class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="699,24,851,51"/>
+<area shape="poly" title=" " alt="" coords="904,67,841,54,842,49,905,62"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="678,93,872,136"/>
+<area shape="poly" title=" " alt="" coords="905,101,872,105,872,100,904,95"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="461,5,627,32"/>
+<area shape="poly" title=" " alt="" coords="683,33,628,28,628,23,683,27"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="458,56,630,99"/>
+<area shape="poly" title=" " alt="" coords="663,99,630,94,631,89,664,94"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="464,123,624,181"/>
+<area shape="poly" title=" " alt="" coords="664,135,625,142,624,136,663,130"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="473,205,615,248"/>
+<area shape="poly" title=" " alt="" coords="725,146,631,196,605,207,603,202,629,191,723,142"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,205,410,248"/>
+<area shape="poly" title=" " alt="" coords="457,238,411,238,411,233,457,233"/>
+<area shape="poly" title=" " alt="" coords="425,215,472,215,472,221,425,220"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,172,192,215"/>
+<area shape="poly" title=" " alt="" coords="245,225,192,217,193,212,246,220"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,239,196,281"/>
+<area shape="poly" title=" " alt="" coords="245,243,197,250,196,245,245,237"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,305,213,348"/>
+<area shape="poly" title=" " alt="" coords="287,259,214,296,184,307,182,302,212,291,284,254"/>
+<area shape="poly" title=" " alt="" coords="208,196,261,205,260,210,207,201"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af6b18cc20fec5c18bd6b4cb788e3a22b" name="af6b18cc20fec5c18bd6b4cb788e3a22b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6b18cc20fec5c18bd6b4cb788e3a22b">&#9670;&#160;</a></span>GetDensitiesElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::GetDensitiesElement </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the isTail field. </p>
+<dl class="section return"><dt>Returns</dt><dd>isTail </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>isTail </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b_icgraph.png" border="0" usemap="#aclass_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b_icgraph" alt=""/></div>
+<map name="aclass_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b_icgraph" id="aclass_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b_icgraph">
+<area shape="rect" title="The getter of the isTail field." alt="" coords="220,5,399,48"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,13,172,40"/>
+<area shape="poly" title=" " alt="" coords="204,29,172,29,172,24,204,24"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a37e4fee49efe2ad0dff9c6a660ae9ed6" name="a37e4fee49efe2ad0dff9c6a660ae9ed6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37e4fee49efe2ad0dff9c6a660ae9ed6">&#9670;&#160;</a></span>GetDensitiesSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::GetDensitiesSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that calculates number of densities in densities array. </p>
+<dl class="section return"><dt>Returns</dt><dd>Number of densities in densities array </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a90925c5b9673eefb81c679cc2cf34153" title="Vector with all avaliable density points.">densities</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6_icgraph.png" border="0" usemap="#aclass_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6_icgraph" alt=""/></div>
+<map name="aclass_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6_icgraph" id="aclass_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6_icgraph">
+<area shape="rect" title="Method that calculates number of densities in densities array." alt="" coords="920,59,1125,85"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="692,29,858,56"/>
+<area shape="poly" title=" " alt="" coords="904,61,858,55,859,50,904,55"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="678,80,872,123"/>
+<area shape="poly" title=" " alt="" coords="904,89,873,92,872,87,904,83"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="458,5,630,48"/>
+<area shape="poly" title=" " alt="" coords="691,77,612,51,613,46,693,72"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="464,72,624,131"/>
+<area shape="poly" title=" " alt="" coords="663,104,625,104,625,99,663,99"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="473,155,615,197"/>
+<area shape="poly" title=" " alt="" coords="693,131,613,157,612,151,691,126"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,155,410,197"/>
+<area shape="poly" title=" " alt="" coords="457,188,411,187,411,182,457,182"/>
+<area shape="poly" title=" " alt="" coords="425,164,472,165,472,170,425,170"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,121,192,164"/>
+<area shape="poly" title=" " alt="" coords="245,174,192,166,193,161,246,169"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,188,196,231"/>
+<area shape="poly" title=" " alt="" coords="245,192,197,199,196,194,245,187"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,255,213,297"/>
+<area shape="poly" title=" " alt="" coords="287,208,214,245,184,257,182,252,212,240,284,203"/>
+<area shape="poly" title=" " alt="" coords="208,146,261,154,260,159,207,151"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a90bac9684aa87e58b6811bcd207144e7" name="a90bac9684aa87e58b6811bcd207144e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90bac9684aa87e58b6811bcd207144e7">&#9670;&#160;</a></span>GetDriverProfile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_driver_profile.html">DriverProfile</a> * Configuration::GetDriverProfile </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>driverType</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the vDriverProfiles driver type by a specified index. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a6953efa479161b2cdf8336f0d71574d2" title="Vector containing driver profiles.">vDriverProfiles</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">driverType</td><td>- index of the specified driver type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Specified driver type object </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_driver_profile.html" title="The DriverProfile class describes all the parameters that driver profiles consist of.">DriverProfile</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a90bac9684aa87e58b6811bcd207144e7_icgraph.png" border="0" usemap="#aclass_configuration_a90bac9684aa87e58b6811bcd207144e7_icgraph" alt=""/></div>
+<map name="aclass_configuration_a90bac9684aa87e58b6811bcd207144e7_icgraph" id="aclass_configuration_a90bac9684aa87e58b6811bcd207144e7_icgraph">
+<area shape="rect" title="The getter of the vDriverProfiles driver type by a specified index." alt="" coords="682,23,840,65"/>
+<area shape="rect" href="class_road.html#adfdd08e959cf3942869eae15b8d92114" title="Method that accelerates cars based on LAI model formula." alt="" coords="425,5,629,32"/>
+<area shape="poly" title=" " alt="" coords="667,36,629,32,630,27,667,31"/>
+<area shape="rect" href="class_road.html#ab1036d2ae3f35896281f01ef3dae04f7" title="Method that checks for potential car lane changes based on LAI model formulas." alt="" coords="420,56,634,83"/>
+<area shape="poly" title=" " alt="" coords="667,57,635,60,634,55,667,52"/>
+<area shape="rect" href="class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="220,31,372,57"/>
+<area shape="poly" title=" " alt="" coords="410,34,373,38,372,33,410,29"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,31,172,57"/>
+<area shape="poly" title=" " alt="" coords="204,47,172,47,172,41,204,41"/>
+<area shape="poly" title=" " alt="" coords="404,59,372,55,373,50,405,53"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5676b7c36b3053d2420162cf9c033717" name="a5676b7c36b3053d2420162cf9c033717"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5676b7c36b3053d2420162cf9c033717">&#9670;&#160;</a></span>GetDriverTypeProbability()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Configuration::GetDriverTypeProbability </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>driverType</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the vDriverProfiles probability by a specified index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">driverType</td><td>- index of the specified driver type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Probability from vDriverProfiles vector </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a6953efa479161b2cdf8336f0d71574d2" title="Vector containing driver profiles.">vDriverProfiles</a> </dd></dl>
+
+</div>
+</div>
+<a id="a0cc3cefdde53c13b0796dbdefde231c6" name="a0cc3cefdde53c13b0796dbdefde231c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cc3cefdde53c13b0796dbdefde231c6">&#9670;&#160;</a></span>GetSegmentsNum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::GetSegmentsNum </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the segmentsNum field. </p>
+<dl class="section return"><dt>Returns</dt><dd>segmentsNum </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a645f0761f039228dc9353a262df23e75" title="The length of the road in segments.">segmentsNum</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a0cc3cefdde53c13b0796dbdefde231c6_icgraph.png" border="0" usemap="#aclass_configuration_a0cc3cefdde53c13b0796dbdefde231c6_icgraph" alt=""/></div>
+<map name="aclass_configuration_a0cc3cefdde53c13b0796dbdefde231c6_icgraph" id="aclass_configuration_a0cc3cefdde53c13b0796dbdefde231c6_icgraph">
+<area shape="rect" title="The getter of the segmentsNum field." alt="" coords="1013,157,1224,184"/>
+<area shape="rect" href="class_road.html#a210f6a1bdc9796afe892c7f64bf7eaf8" title="Method that calculates distance between two cars." alt="" coords="723,5,965,32"/>
+<area shape="poly" title=" " alt="" coords="1093,148,1037,96,1002,69,964,46,933,35,935,30,966,42,1005,64,1041,92,1096,144"/>
+<area shape="rect" href="class_road.html#ad64d2b162f9debad13c1190a00dee8ee" title="Method that checks LAI model constraits for changing lanes (looking for succeeding cars on the other ..." alt="" coords="759,56,929,83"/>
+<area shape="poly" title=" " alt="" coords="1080,152,1026,123,964,97,924,86,926,81,966,92,1028,119,1082,147"/>
+<area shape="rect" href="class_road.html#aa199c3c6e0676c8f8bdf33c69eea43fd" title="Method that checks LAI model constraits for changing lanes (looking for preceding cars on the other l..." alt="" coords="759,107,929,133"/>
+<area shape="poly" title=" " alt="" coords="1026,156,920,137,921,131,1027,151"/>
+<area shape="rect" href="class_road.html#a5c098189a67c4f04bf752643eb810567" title="Method that checks LAI model constraits for changing lanes (looking for preceding cars on the same la..." alt="" coords="750,157,938,184"/>
+<area shape="poly" title=" " alt="" coords="997,173,939,173,939,168,997,168"/>
+<area shape="rect" href="class_road.html#a5bb8c758c93f77f6e52e6e9bef6636e8" title="Method that moves the car who was marked as one that needs to change lane during the previous step." alt="" coords="735,208,953,235"/>
+<area shape="poly" title=" " alt="" coords="1027,190,921,210,920,205,1026,185"/>
+<area shape="rect" href="class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="292,221,382,248"/>
+<area shape="poly" title=" " alt="" coords="1085,195,1031,225,999,239,965,249,883,264,798,272,714,275,632,273,486,261,381,245,382,240,487,255,632,268,714,270,798,267,882,259,964,244,997,234,1029,220,1083,190"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="747,347,941,389"/>
+<area shape="poly" title=" " alt="" coords="1090,196,966,293,882,348,879,344,963,289,1087,192"/>
+<area shape="rect" href="class_road.html#ab1036d2ae3f35896281f01ef3dae04f7" title="Method that checks for potential car lane changes based on LAI model formulas." alt="" coords="461,132,675,159"/>
+<area shape="poly" title=" " alt="" coords="745,39,724,46,684,67,646,90,587,134,584,129,643,86,681,62,722,42,743,34"/>
+<area shape="rect" href="class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="261,152,413,179"/>
+<area shape="poly" title=" " alt="" coords="445,159,414,161,413,156,445,153"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="26,187,192,213"/>
+<area shape="poly" title=" " alt="" coords="246,182,193,190,192,185,245,177"/>
+<area shape="poly" title=" " alt="" coords="757,89,724,97,609,134,607,129,723,92,755,84"/>
+<area shape="poly" title=" " alt="" coords="744,132,676,138,675,133,743,127"/>
+<area shape="poly" title=" " alt="" coords="734,163,676,158,676,153,734,158"/>
+<area shape="poly" title=" " alt="" coords="755,207,723,199,607,162,609,157,724,193,757,202"/>
+<area shape="poly" title=" " alt="" coords="276,228,192,215,193,210,277,223"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="482,309,654,352"/>
+<area shape="poly" title=" " alt="" coords="731,355,654,345,655,340,732,350"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="488,376,648,435"/>
+<area shape="poly" title=" " alt="" coords="732,386,649,397,649,392,731,381"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="497,459,639,501"/>
+<area shape="poly" title=" " alt="" coords="788,399,676,449,641,462,639,457,674,444,785,394"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="262,459,412,501"/>
+<area shape="poly" title=" " alt="" coords="482,491,412,491,412,486,482,486"/>
+<area shape="poly" title=" " alt="" coords="427,469,496,469,496,474,427,474"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,425,192,468"/>
+<area shape="poly" title=" " alt="" coords="247,478,192,470,193,465,247,473"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,492,196,535"/>
+<area shape="poly" title=" " alt="" coords="247,496,196,503,196,498,246,491"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,559,213,601"/>
+<area shape="poly" title=" " alt="" coords="287,512,214,549,184,561,182,556,212,544,285,507"/>
+<area shape="poly" title=" " alt="" coords="208,450,262,458,261,463,207,455"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6373a2872a03b10a5bea81779eb75490" name="a6373a2872a03b10a5bea81779eb75490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6373a2872a03b10a5bea81779eb75490">&#9670;&#160;</a></span>GetShowFunctionsElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SHOW_FUNCTION_PTR Configuration::GetShowFunctionsElement </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that gets chosen showFunctions vector element by index. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a1ee4fcdfeb6d6698b75265b2b46fd65d" title="Vector with all the functions that are responsible for gathering data necessary to display diagrams.">showFunctions</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>- index of chosen show function </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Chosen show function </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a6373a2872a03b10a5bea81779eb75490_icgraph.png" border="0" usemap="#aclass_configuration_a6373a2872a03b10a5bea81779eb75490_icgraph" alt=""/></div>
+<map name="aclass_configuration_a6373a2872a03b10a5bea81779eb75490_icgraph" id="aclass_configuration_a6373a2872a03b10a5bea81779eb75490_icgraph">
+<area shape="rect" title="Method that gets chosen showFunctions vector element by index." alt="" coords="420,23,634,65"/>
+<area shape="rect" href="class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="220,5,372,32"/>
+<area shape="poly" title=" " alt="" coords="404,33,372,30,373,24,405,28"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,31,172,57"/>
+<area shape="poly" title=" " alt="" coords="405,47,172,47,172,41,405,41"/>
+<area shape="poly" title=" " alt="" coords="205,32,172,36,172,31,204,27"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3aa075168273417cf9a8f28259ecf3d3" name="a3aa075168273417cf9a8f28259ecf3d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aa075168273417cf9a8f28259ecf3d3">&#9670;&#160;</a></span>GetShowFunctionsSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::GetShowFunctionsSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Methods that calculates the size of showFunctions vector. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a1ee4fcdfeb6d6698b75265b2b46fd65d" title="Vector with all the functions that are responsible for gathering data necessary to display diagrams.">showFunctions</a> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of elements in showFunctions vector </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a3aa075168273417cf9a8f28259ecf3d3_icgraph.png" border="0" usemap="#aclass_configuration_a3aa075168273417cf9a8f28259ecf3d3_icgraph" alt=""/></div>
+<map name="aclass_configuration_a3aa075168273417cf9a8f28259ecf3d3_icgraph" id="aclass_configuration_a3aa075168273417cf9a8f28259ecf3d3_icgraph">
+<area shape="rect" title="Methods that calculates the size of showFunctions vector." alt="" coords="420,31,660,57"/>
+<area shape="rect" href="class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="220,5,372,32"/>
+<area shape="poly" title=" " alt="" coords="404,33,372,29,373,24,405,27"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,31,172,57"/>
+<area shape="poly" title=" " alt="" coords="405,47,172,47,172,41,405,41"/>
+<area shape="poly" title=" " alt="" coords="205,32,172,36,172,31,204,27"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae7c49ca371344c753a57287604c09511" name="ae7c49ca371344c753a57287604c09511"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c49ca371344c753a57287604c09511">&#9670;&#160;</a></span>GetTestsNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::GetTestsNumber </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the testsNumber field. </p>
+<dl class="section return"><dt>Returns</dt><dd>testsNumber </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ad33c77693907f1b1b4fc0cffc8c47f40" title="The number of simulations that are averaged for a single density point on the fundamental diagram.">testsNumber</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_ae7c49ca371344c753a57287604c09511_icgraph.png" border="0" usemap="#aclass_configuration_ae7c49ca371344c753a57287604c09511_icgraph" alt=""/></div>
+<map name="aclass_configuration_ae7c49ca371344c753a57287604c09511_icgraph" id="aclass_configuration_ae7c49ca371344c753a57287604c09511_icgraph">
+<area shape="rect" title="The getter of the testsNumber field." alt="" coords="920,59,1122,85"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="692,29,858,56"/>
+<area shape="poly" title=" " alt="" coords="904,61,858,55,859,50,904,55"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="678,80,872,123"/>
+<area shape="poly" title=" " alt="" coords="904,89,872,92,872,87,904,83"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="458,5,630,48"/>
+<area shape="poly" title=" " alt="" coords="691,77,612,51,613,46,693,72"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="464,72,624,131"/>
+<area shape="poly" title=" " alt="" coords="663,104,625,104,625,99,663,99"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="473,155,615,197"/>
+<area shape="poly" title=" " alt="" coords="693,131,613,157,612,151,691,126"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,155,410,197"/>
+<area shape="poly" title=" " alt="" coords="457,188,411,187,411,182,457,182"/>
+<area shape="poly" title=" " alt="" coords="425,164,472,165,472,170,425,170"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,121,192,164"/>
+<area shape="poly" title=" " alt="" coords="245,174,192,166,193,161,246,169"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,188,196,231"/>
+<area shape="poly" title=" " alt="" coords="245,192,197,199,196,194,245,187"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,255,213,297"/>
+<area shape="poly" title=" " alt="" coords="287,208,214,245,184,257,182,252,212,240,284,203"/>
+<area shape="poly" title=" " alt="" coords="208,146,261,154,260,159,207,151"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a215a9b6814065e9ed9be98afbc2a5f99" name="a215a9b6814065e9ed9be98afbc2a5f99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a215a9b6814065e9ed9be98afbc2a5f99">&#9670;&#160;</a></span>GetUseChangeLane()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Configuration::GetUseChangeLane </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The getter of the useChangeLane field. </p>
+<dl class="section return"><dt>Returns</dt><dd>useChangeLane </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a1533587ccccb0ccc4be4eb31123425c2" title="The saved value defining if the lane changes will occur during the simulation.">useChangeLane</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_a215a9b6814065e9ed9be98afbc2a5f99_icgraph.png" border="0" usemap="#aclass_configuration_a215a9b6814065e9ed9be98afbc2a5f99_icgraph" alt=""/></div>
+<map name="aclass_configuration_a215a9b6814065e9ed9be98afbc2a5f99_icgraph" id="aclass_configuration_a215a9b6814065e9ed9be98afbc2a5f99_icgraph">
+<area shape="rect" title="The getter of the useChangeLane field." alt="" coords="920,72,1140,99"/>
+<area shape="rect" href="class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="699,24,851,51"/>
+<area shape="poly" title=" " alt="" coords="940,71,849,54,850,49,941,66"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="678,93,872,136"/>
+<area shape="poly" title=" " alt="" coords="905,102,872,106,872,101,904,97"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="461,5,627,32"/>
+<area shape="poly" title=" " alt="" coords="683,33,628,28,628,23,683,27"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="458,56,630,99"/>
+<area shape="poly" title=" " alt="" coords="663,99,630,94,631,89,664,94"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="464,123,624,181"/>
+<area shape="poly" title=" " alt="" coords="664,135,625,142,624,136,663,130"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="473,205,615,248"/>
+<area shape="poly" title=" " alt="" coords="725,146,631,196,605,207,603,202,629,191,723,142"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,205,410,248"/>
+<area shape="poly" title=" " alt="" coords="457,238,411,238,411,233,457,233"/>
+<area shape="poly" title=" " alt="" coords="425,215,472,215,472,221,425,220"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,172,192,215"/>
+<area shape="poly" title=" " alt="" coords="245,225,192,217,193,212,246,220"/>
+<area shape="rect" href="class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,239,196,281"/>
+<area shape="poly" title=" " alt="" coords="245,243,197,250,196,245,245,237"/>
+<area shape="rect" href="class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,305,213,348"/>
+<area shape="poly" title=" " alt="" coords="287,259,214,296,184,307,182,302,212,291,284,254"/>
+<area shape="poly" title=" " alt="" coords="208,196,261,205,260,210,207,201"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9436cfea3f610fa0ac59d4542e5df6a5" name="a9436cfea3f610fa0ac59d4542e5df6a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9436cfea3f610fa0ac59d4542e5df6a5">&#9670;&#160;</a></span>SetCalculateDensities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::SetCalculateDensities </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>calculateDensities</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The setter of the calculateDensities field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">calculateDensities</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a94cce8d9fc8d05b9f9dadfb368b89a5b" title="The value determining if the result of the simulation will be space-time or fundamental diagram.">calculateDensities</a> </dd></dl>
+
+</div>
+</div>
+<a id="af062050fb6a3aa099d41d44ca37b2783" name="af062050fb6a3aa099d41d44ca37b2783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af062050fb6a3aa099d41d44ca37b2783">&#9670;&#160;</a></span>SetCurrentDensity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::SetCurrentDensity </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>currentDensity</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The setter of the currentDensity field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">currentDensity</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a3b998d6b7ed3bc20ab5d45376e464af4" title="The road density percentage.">currentDensity</a> </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_configuration_af062050fb6a3aa099d41d44ca37b2783_icgraph.png" border="0" usemap="#aclass_configuration_af062050fb6a3aa099d41d44ca37b2783_icgraph" alt=""/></div>
+<map name="aclass_configuration_af062050fb6a3aa099d41d44ca37b2783_icgraph" id="aclass_configuration_af062050fb6a3aa099d41d44ca37b2783_icgraph">
+<area shape="rect" title="The setter of the currentDensity field." alt="" coords="220,5,386,48"/>
+<area shape="rect" href="class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,13,172,40"/>
+<area shape="poly" title=" " alt="" coords="204,29,172,29,172,24,204,24"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aafa638196229c9ab58910ec1ea57e5ed" name="aafa638196229c9ab58910ec1ea57e5ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafa638196229c9ab58910ec1ea57e5ed">&#9670;&#160;</a></span>SetCyclesNum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::SetCyclesNum </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cyclesNum</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The setter of the cyclesNum field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cyclesNum</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a5e29f30d5dbae4ed3fb67e12f14a3b52" title="The number of iterations of the simulation.">cyclesNum</a> </dd></dl>
+
+</div>
+</div>
+<a id="a41235c89934e1d2b5c2e69bb4628cc1d" name="a41235c89934e1d2b5c2e69bb4628cc1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41235c89934e1d2b5c2e69bb4628cc1d">&#9670;&#160;</a></span>SetCyclesToSkip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::SetCyclesToSkip </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cyclesToSkip</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The setter of the cyclesToSkip field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cyclesToSkip</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#acb3d4025b935f6a69d480e91a8f16fed" title="The number of iterations that will not be displayed.">cyclesToSkip</a> </dd></dl>
+
+</div>
+</div>
+<a id="a58b703fedf731c46d6662054b522af0b" name="a58b703fedf731c46d6662054b522af0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58b703fedf731c46d6662054b522af0b">&#9670;&#160;</a></span>SetSegmentsNum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::SetSegmentsNum </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>segmentsNum</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The setter of the segmentsNum field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">segmentsNum</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a645f0761f039228dc9353a262df23e75" title="The length of the road in segments.">segmentsNum</a> </dd></dl>
+
+</div>
+</div>
+<a id="ad7c3fc038e41d08fb8cf61faf3a93164" name="ad7c3fc038e41d08fb8cf61faf3a93164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7c3fc038e41d08fb8cf61faf3a93164">&#9670;&#160;</a></span>SetTestsNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::SetTestsNumber </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>testsNumber</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The setter of the testsNumber field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">testsNumber</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ad33c77693907f1b1b4fc0cffc8c47f40" title="The number of simulations that are averaged for a single density point on the fundamental diagram.">testsNumber</a> </dd></dl>
+
+</div>
+</div>
+<a id="ad329c9c901c0ababe58cb1b1152eaebe" name="ad329c9c901c0ababe58cb1b1152eaebe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad329c9c901c0ababe58cb1b1152eaebe">&#9670;&#160;</a></span>SetUseChangeLane()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::SetUseChangeLane </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>useChangeLane</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The setter of the useChangeLane field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">useChangeLane</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a1533587ccccb0ccc4be4eb31123425c2" title="The saved value defining if the lane changes will occur during the simulation.">useChangeLane</a> </dd></dl>
+
+</div>
+</div>
+<a id="ad409978c164fdc0825ee75c336282ce9" name="ad409978c164fdc0825ee75c336282ce9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad409978c164fdc0825ee75c336282ce9">&#9670;&#160;</a></span>SetVDriverType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Configuration::SetVDriverType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_driver_profile.html">DriverProfile</a> *</td>          <td class="paramname"><span class="paramname"><em>profile</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The setter of the vDriverProfiles field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vDriverProfiles</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a6953efa479161b2cdf8336f0d71574d2" title="Vector containing driver profiles.">vDriverProfiles</a> </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a3b998d6b7ed3bc20ab5d45376e464af4" name="a3b998d6b7ed3bc20ab5d45376e464af4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b998d6b7ed3bc20ab5d45376e464af4">&#9670;&#160;</a></span>currentDensity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::currentDensity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The road density percentage. </p>
+<dl class="section note"><dt>Note</dt><dd>Density represents the percentage value of the cars on the road during the whole simulation (closed loop) </dd></dl>
+
+</div>
+</div>
+<a id="acb3d4025b935f6a69d480e91a8f16fed" name="acb3d4025b935f6a69d480e91a8f16fed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb3d4025b935f6a69d480e91a8f16fed">&#9670;&#160;</a></span>cyclesToSkip</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Configuration::cyclesToSkip</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The number of iterations that will not be displayed. </p>
+<dl class="section note"><dt>Note</dt><dd>These iterations will not be displayed, but the simulation is still generated for them, allowing cars to spread out </dd></dl>
+
+</div>
+</div>
+<a id="a1695591cf80f696fef5248d2e07a8154" name="a1695591cf80f696fef5248d2e07a8154"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1695591cf80f696fef5248d2e07a8154">&#9670;&#160;</a></span>driverProfiles</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_driver_profile.html">DriverProfile</a>* Configuration::driverProfiles[MAX_NUMBER_OF_DRIVER_TYPES] = {NULL}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Array with all avaliable driver types (depricated) </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_driver_profile.html" title="The DriverProfile class describes all the parameters that driver profiles consist of.">DriverProfile</a> </dd></dl>
+
+</div>
+</div>
+<a id="a6953efa479161b2cdf8336f0d71574d2" name="a6953efa479161b2cdf8336f0d71574d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6953efa479161b2cdf8336f0d71574d2">&#9670;&#160;</a></span>vDriverProfiles</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="class_driver_profile.html">DriverProfile</a>&gt; Configuration::vDriverProfiles</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vector containing driver profiles. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_driver_profile.html" title="The DriverProfile class describes all the parameters that driver profiles consist of.">DriverProfile</a> </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>TrafficCore/<a class="el" href="_configuration_8h_source.html">Configuration.h</a></li>
-<li>TrafficCore/<b>Configuration.cpp</b></li>
+<li>ABMTrafSimCA/TrafficCore/<a class="el" href="_configuration_8h_source.html">Configuration.h</a></li>
+<li>ABMTrafSimCA/TrafficCore/<b>Configuration.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

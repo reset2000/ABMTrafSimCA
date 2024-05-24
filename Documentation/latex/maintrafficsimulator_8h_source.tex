@@ -1,5 +1,6 @@
 \doxysection{maintrafficsimulator.\+h}
-\hypertarget{maintrafficsimulator_8h_source}{}\label{maintrafficsimulator_8h_source}
+\hypertarget{maintrafficsimulator_8h_source}{}\label{maintrafficsimulator_8h_source}\index{ABMTrafSimCA/maintrafficsimulator.h@{ABMTrafSimCA/maintrafficsimulator.h}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MAINTRAFFICSIMULATOR\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MAINTRAFFICSIMULATOR\_H}}
@@ -15,116 +16,116 @@
 \DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }Ui\ \{\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_main_traffic_simulator}{MainTrafficSimulator}};\ \}}
 \DoxyCodeLine{00013\ QT\_END\_NAMESPACE}
 \DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ QString\ GenerateRoad(Ui::MainTrafficSimulator\ \&ui,\ \mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
+\DoxyCodeLine{00015\ QString\ GenerateRoad(Ui::MainTrafficSimulator\ \&\mbox{\hyperlink{class_main_traffic_simulator_af6030eab1ede80c5c7bc945c70f43a9a}{ui}},\ \mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
 \DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_main_traffic_simulator}{MainTrafficSimulator}}\ :\ \textcolor{keyword}{public}\ QMainWindow}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \{}
-\DoxyCodeLine{00020\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_main_traffic_simulator}{MainTrafficSimulator}}\ :\ \textcolor{keyword}{public}\ QMainWindow}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_main_traffic_simulator}{MainTrafficSimulator}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_main_traffic_simulator}{\string~MainTrafficSimulator}}();\ \ \ \ }
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \textcolor{keyword}{private}\ slots:}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnStartSimulationConsole\_clicked();}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnSTDiagram\_clicked();}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnFDiagram\_clicked();}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnAddDriverProfile\_clicked();}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnSTDiagramConfig\_clicked();}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnFDiagramConfig\_clicked();}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnReadData\_clicked();}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_tabWidget\_currentChanged(\textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_main_traffic_simulator_aaf4683faf19e8814550590ce1a5fa73a}{MainTrafficSimulator}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_main_traffic_simulator_ae45a57d4517f6c28d5f77927cdf959a0}{\string~MainTrafficSimulator}}();\ \ \ \ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a22c72631a2a083669b318171d88c9563}{on\_btnStartSimulationConsole\_clicked}}();}
 \DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnSaveSTDiagram\_clicked();}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_btnSaveFDiagram\_clicked();}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_cbApproximate\_stateChanged(\textcolor{keywordtype}{int}\ arg1);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_aff89a0b38cc189a764ae58795aa83ba7}{on\_btnSTDiagram\_clicked}}();}
 \DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_cbLegend\_currentIndexChanged(\textcolor{keywordtype}{int}\ index);}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_cbFont\_currentFontChanged(\textcolor{keyword}{const}\ QFont\ \&f);}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_sbFontSize\_valueChanged(\textcolor{keywordtype}{int}\ arg1);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a6dcc28b92858b0c562f3187c6965a5b3}{on\_btnFDiagram\_clicked}}();}
 \DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_cbTheme\_currentIndexChanged(\textcolor{keywordtype}{int}\ index);}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00058\ \ \ \ \ Ui::MainTrafficSimulator\ *ui;}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{class_db_manager}{DbManager}}\ dbm;}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ snapshot;}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{class_qt_diagram_f}{QtDiagramF}}\ qF;}
-\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{class_qt_diagram_s_t}{QtDiagramST}}\ qST;}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a1c5058209fba5cdf0e595418f8cd5be6}{on\_btnAddDriverProfile\_clicked}}();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a3f6c9f89f8ad5ab49da1da0a89b78caf}{on\_btnSTDiagramConfig\_clicked}}();}
 \DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \ \ \ \ QList<QtDiagramF*>\ qFList;}
-\DoxyCodeLine{00068\ \ \ \ \ QList<QtDiagramST*>\ qSTList;}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ firstStyleLoad\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00072\ \ \ \ \ QFutureWatcher<void>\ *futureWatcher;}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ \ \ \ \ QString\ checkCorrectProbabilitesAndCounts();}
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{bool}\ openNewDriverProfileDialog();}
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteThisLine();}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ InitializeDriverProfilesTable();}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ InitializeArchiveTable();}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteRecordFromTable();}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a56d358987d82056a4e98aa5ea553d450}{on\_btnFDiagramConfig\_clicked}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a5a238f8735a6464ea6e4fa18dbb77ec2}{on\_btnReadData\_clicked}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_ae9a3b61d08d37b62c15177ccb2f8669f}{on\_tabWidget\_currentChanged}}(\textcolor{keywordtype}{int}\ index);}
 \DoxyCodeLine{00085\ }
-\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ updateUiFromSnapshot();}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ updateDiagramStyleFromSnapshot();}
-\DoxyCodeLine{00089\ }
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ updateSnapshotFromUi();}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_ad583f01cdc543ac5ab18ed8787baaa23}{on\_btnSaveSTDiagram\_clicked}}();}
 \DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ showDiagramFData();}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ updateConfig();}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ InitializeDriverProfilesFromArchiveTable(QString\ dpList);}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a5f7bc45f17780bdcfe83564b9b7bc5e4}{on\_btnSaveFDiagram\_clicked}}();}
 \DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ deleteProfileFromArchive();}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{bool}\ runSimulation(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ paintSTDiagram(\textcolor{keywordtype}{string}\ data);}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{string}\ GetCurrentDate();}
-\DoxyCodeLine{00105\ }
-\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{void}\ paintFDiagram();}
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ changeLegend();}
-\DoxyCodeLine{00109\ }
-\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ changeFont();}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ changeTheme();}
-\DoxyCodeLine{00113\ }
-\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ populateThemeBox();}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ updateQtDiagramConfigData(\mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \&qtCfg,\ \mbox{\hyperlink{class_configuration}{Configuration}}\ \&cfg);}
-\DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ updateQtDiagramConfigData(\mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \&qtCfg,\ \mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \&cfg);}
-\DoxyCodeLine{00119\ }
-\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ closeEvent\ (QCloseEvent\ *event);}
-\DoxyCodeLine{00121\ }
-\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ msgBoxTEST();}
-\DoxyCodeLine{00123\ \};}
-\DoxyCodeLine{00124\ }
-\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAINTRAFFICSIMULATOR\_H}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a3a2de28b7d0cb8f5fc05f305caf4c8d1}{on\_cbApproximate\_stateChanged}}();}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a25bbc4a60b40385016d3ab6a03da381b}{on\_cbLegend\_currentIndexChanged}}();}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a5bcd3e1f72fdea1aaf0b0bd410735c4f}{on\_cbFont\_currentFontChanged}}();}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_ae712c01ce950dec9ab8288ed3e2b2e8f}{on\_sbFontSize\_valueChanged}}();}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a190ab656cf820a266b22eb88dd2d9ad6}{on\_cbTheme\_currentIndexChanged}}();}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00133\ \ \ \ \ Ui::MainTrafficSimulator\ *\mbox{\hyperlink{class_main_traffic_simulator_af6030eab1ede80c5c7bc945c70f43a9a}{ui}};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{class_db_manager}{DbManager}}\ \mbox{\hyperlink{class_main_traffic_simulator_a0e82aafd69e4b0207df9d0d3f5416917}{dbm}};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \mbox{\hyperlink{class_main_traffic_simulator_a9f2c95b76092e96ec72bd476eb00e245}{snapshot}};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00151\ \ \ \ \ \mbox{\hyperlink{class_qt_diagram_f}{QtDiagramF}}\ \mbox{\hyperlink{class_main_traffic_simulator_a1282089d943079fd2d7dea0a03c94e1c}{qF}};}
+\DoxyCodeLine{00156\ \ \ \ \ \mbox{\hyperlink{class_qt_diagram_s_t}{QtDiagramST}}\ \mbox{\hyperlink{class_main_traffic_simulator_a5bde2449251a1a1e3d0cce2e7d8d4186}{qST}};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00162\ \ \ \ \ QList<QtDiagramF*>\ \mbox{\hyperlink{class_main_traffic_simulator_a302f050f76a7803c05d87a07d747e9f1}{qFList}};}
+\DoxyCodeLine{00167\ \ \ \ \ QList<QtDiagramST*>\ \mbox{\hyperlink{class_main_traffic_simulator_a1a1dfba73971f570da9ac81feb357772}{qSTList}};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_main_traffic_simulator_a2a581bb3c524feea995274fba7b2d33f}{firstStyleLoad}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00177\ \ \ \ \ QFutureWatcher<void>\ *\mbox{\hyperlink{class_main_traffic_simulator_a205e51232f808845896dd31560e000c9}{futureWatcher}};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00185\ \ \ \ \ QString\ \mbox{\hyperlink{class_main_traffic_simulator_ab98b1290020263415db44fcfd4f67fed}{checkCorrectProbabilitesAndCounts}}();}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_main_traffic_simulator_a32275dc4eb762168cd635a5bec37efef}{openNewDriverProfileDialog}}();}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a36b15b87a701d8f44e108339635318a7}{deleteThisLine}}();}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a74a317abda9abf4f23216496dc106363}{InitializeDriverProfilesTable}}();}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_ac0ab9f89b3239f56c8d5028eebe55f1b}{InitializeArchiveTable}}();}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a76905e03051869b9de3a86ea060b2359}{deleteRecordFromTable}}();}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_abd862bdcdf471e715d052988575f5bea}{updateUiFromSnapshot}}();}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a7234a06469d92fcb51c6bf823e9afe43}{updateDiagramStyleFromSnapshot}}();}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_ada101fbdc68c16e6eced635c98744b56}{updateSnapshotFromUi}}();}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a8770da2771284635227d0d06b4aa8fa8}{showDiagramFData}}();}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a16a33a7af0e8bca673cfe2dd937a446c}{updateConfig}}();}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_abbf0a67882fd04803368d3d5941f3cb6}{InitializeDriverProfilesFromArchiveTable}}(QString\ dpList);}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a41548f27dafea4b2893ab46eafd0aa1f}{deleteProfileFromArchive}}();}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_main_traffic_simulator_ab771c274c61670bb263076ddadd6dd15}{runSimulation}}(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a78f37fc47c360b09939b1b055590a276}{paintSTDiagram}}(\textcolor{keywordtype}{string}\ data);}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_main_traffic_simulator_a603579004c246049bba10f090eed4cb6}{GetCurrentDate}}();}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_aff270618f603f2191e1e2f05867dadba}{paintFDiagram}}();}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_af04ce6ef04ca9b93a223ccc80bd23bb1}{changeLegend}}();}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00285\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a7020bcb4235b2314a1c93d722a706f5e}{changeFont}}();}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a92dd8b2d562a6747fc6c24cdb3d674d0}{changeTheme}}();}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a342ba6f2a37666908c1c3e9b354a70df}{populateThemeBox}}();}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a8e44c71742242f77c46a4493579962fd}{updateQtDiagramConfigData}}(\mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \&qtCfg,\ \mbox{\hyperlink{class_configuration}{Configuration}}\ \&cfg);}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a8e44c71742242f77c46a4493579962fd}{updateQtDiagramConfigData}}(\mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \&qtCfg,\ \mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \&cfg);}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_a94a23a6ee5fb715020cfd3c1ee2e9570}{closeEvent}}\ (QCloseEvent\ *event);}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_traffic_simulator_aba4346b20d7c9a57174064366fff3b4c}{msgBoxTEST}}();}
+\DoxyCodeLine{00325\ \};}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAINTRAFFICSIMULATOR\_H}}
 
 \end{DoxyCode}

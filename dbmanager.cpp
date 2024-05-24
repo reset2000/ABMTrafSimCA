@@ -108,17 +108,17 @@ void DbManager::createTables() {
                 );
 
             insertQuery.bindValue(":id", 1);
-            insertQuery.bindValue(":roadLength", 200);
-            insertQuery.bindValue(":cyclesNum", 100);
-            insertQuery.bindValue(":cyclesToSkip", 100);
-            insertQuery.bindValue(":changeLane", 1);
+            insertQuery.bindValue(":roadLength", 400);
+            insertQuery.bindValue(":cyclesNum", 300);
+            insertQuery.bindValue(":cyclesToSkip", 200);
+            insertQuery.bindValue(":changeLane", 0);
 
             insertQuery.bindValue(":currentDensity", 50);
             insertQuery.bindValue(":densityPoints", 100);
             insertQuery.bindValue(":densityTests", 1);
 
-            insertQuery.bindValue(":carsProbability", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0");
-            insertQuery.bindValue(":driverProfiles", "Standard Driver,24,16,2,6,100;Learning Driver,0,0,0,0,0;Aggresive Driver,0,0,0,0,0");
+            insertQuery.bindValue(":carsProbability", "0,0,0,0,0,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0");
+            insertQuery.bindValue(":driverProfiles", "Standard Driver,24,5,2,2,100;Learning Driver,0,0,0,0,0;Aggresive Driver,0,0,0,0,0");
 
             insertQuery.bindValue(":legend", 1);
             insertQuery.bindValue(":font", "Segoe UI");

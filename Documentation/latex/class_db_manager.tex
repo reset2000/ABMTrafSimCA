@@ -2,6 +2,15 @@
 \hypertarget{class_db_manager}{}\label{class_db_manager}\index{DbManager@{DbManager}}
 
 
+The \doxylink{class_db_manager}{Db\+Manager} class is responsible for managing database interactions, such as saving and reading diagram data and configuration snapshots.  
+
+
+
+
+{\ttfamily \#include $<$dbmanager.\+h$>$}
+
+
+
 Inheritance diagram for Db\+Manager\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -21,57 +30,274 @@ Collaboration diagram for Db\+Manager\+:\nopagebreak
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_db_manager_a443a6024735bd78041da461e55038fd9}\label{class_db_manager_a443a6024735bd78041da461e55038fd9} 
-{\bfseries Db\+Manager} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
-\item 
+\mbox{\hyperlink{class_db_manager_a443a6024735bd78041da461e55038fd9}{Db\+Manager}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em The constructor of DBManager class. \end{DoxyCompactList}\item 
 \Hypertarget{class_db_manager_a212075d7d81c67fd9bc4b9e7b1580061}\label{class_db_manager_a212075d7d81c67fd9bc4b9e7b1580061} 
 void {\bfseries create\+Tables} ()
-\item 
-\Hypertarget{class_db_manager_a991e632ae2a7913268a00062b369f4f2}\label{class_db_manager_a991e632ae2a7913268a00062b369f4f2} 
-void {\bfseries save\+Db} (\mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \&qF)
-\item 
-\Hypertarget{class_db_manager_a35b50ca08cccb1079cd11860d44abcf2}\label{class_db_manager_a35b50ca08cccb1079cd11860d44abcf2} 
-void {\bfseries save\+Db} (\mbox{\hyperlink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}} \&q\+ST)
-\item 
-\Hypertarget{class_db_manager_afff6656aab53762d8c91a9def0c61356}\label{class_db_manager_afff6656aab53762d8c91a9def0c61356} 
-void {\bfseries read\+Db} (QList$<$ \mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \texorpdfstring{$\ast$}{*} $>$ \&q\+FList)
-\item 
-\Hypertarget{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1}\label{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1} 
-void {\bfseries delete\+Db} (\mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \&qF)
-\item 
-\Hypertarget{class_db_manager_aa0ecc77c75117c8aefcb5614be1808bf}\label{class_db_manager_aa0ecc77c75117c8aefcb5614be1808bf} 
-void {\bfseries delete\+Db} (\mbox{\hyperlink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}} \&q\+ST)
-\item 
-\Hypertarget{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181}\label{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181} 
-void {\bfseries read\+Snapshot} (\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \&snapshot)
-\item 
-\Hypertarget{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead}\label{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead} 
-void {\bfseries update\+Snapshot} (\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \&snapshot)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This method is responsible for initializing all tables necessary to archive the data generated through simulations and save configuration snapshots. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_db_manager_a991e632ae2a7913268a00062b369f4f2}{save\+Db}} (\mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \&qF)
+\begin{DoxyCompactList}\small\item\em Method for saving fundamental diagrams to the database. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_db_manager_a35b50ca08cccb1079cd11860d44abcf2}{save\+Db}} (\mbox{\hyperlink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}} \&q\+ST)
+\begin{DoxyCompactList}\small\item\em Method for saving space-\/time diagrams to the database. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_db_manager_afff6656aab53762d8c91a9def0c61356}{read\+Db}} (QList$<$ \mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \texorpdfstring{$\ast$}{*} $>$ \&q\+FList)
+\begin{DoxyCompactList}\small\item\em Method for reading fundamental diagrams from the database. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1}{delete\+Db}} (\mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \&qF)
+\begin{DoxyCompactList}\small\item\em Method for deleting saved fundamaental diagram records from the database. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_db_manager_aa0ecc77c75117c8aefcb5614be1808bf}{delete\+Db}} (\mbox{\hyperlink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}} \&q\+ST)
+\begin{DoxyCompactList}\small\item\em Method for deleting space-\/time diagrams from the database. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181}{read\+Snapshot}} (\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \&snapshot)
+\begin{DoxyCompactList}\small\item\em Method for reading saved snapshot with configuration saved during the previous application session. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead}{update\+Snapshot}} (\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \&snapshot)
+\begin{DoxyCompactList}\small\item\em Method for updating snapshots with configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_db_manager_aef7a40f0a6fe870f53c6c8a0539930ba}\label{class_db_manager_aef7a40f0a6fe870f53c6c8a0539930ba} 
 void {\bfseries open\+Db} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Method for opening database. \end{DoxyCompactList}\item 
 \Hypertarget{class_db_manager_a9e26ac4e30fd6f8258835cb5a1c41072}\label{class_db_manager_a9e26ac4e30fd6f8258835cb5a1c41072} 
 void {\bfseries close\+Db} ()
-\item 
-\Hypertarget{class_db_manager_a5905248461fc77d70531bf8eadad6961}\label{class_db_manager_a5905248461fc77d70531bf8eadad6961} 
-int {\bfseries count\+Snapshot\+Rows} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method for closing database. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_db_manager_a5905248461fc77d70531bf8eadad6961}{count\+Snapshot\+Rows}} ()
+\begin{DoxyCompactList}\small\item\em Method that returns the index of the most recent snapshot. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_db_manager_a9bbc0ad3003674b8e5e71783e5067f7f}\label{class_db_manager_a9bbc0ad3003674b8e5e71783e5067f7f} 
 QSql\+Database {\bfseries db}
-\item 
+\begin{DoxyCompactList}\small\item\em QSql\+Database object necessary for storing data. \end{DoxyCompactList}\item 
 \Hypertarget{class_db_manager_ab2dc2fec27272f6fc779c63f227b7fcd}\label{class_db_manager_ab2dc2fec27272f6fc779c63f227b7fcd} 
 const QString {\bfseries DB\+\_\+\+NAME} = "{}traffic.\+sqlite"{}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constant that stores the name of database file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_db_manager}{Db\+Manager} class is responsible for managing database interactions, such as saving and reading diagram data and configuration snapshots. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_db_manager_a443a6024735bd78041da461e55038fd9}\label{class_db_manager_a443a6024735bd78041da461e55038fd9} 
+\index{DbManager@{DbManager}!DbManager@{DbManager}}
+\index{DbManager@{DbManager}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{DbManager()}{DbManager()}}
+{\footnotesize\ttfamily Db\+Manager\+::\+Db\+Manager (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+The constructor of DBManager class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & -\/ parent object of \doxylink{class_db_manager}{Db\+Manager}, null by default \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_db_manager_a443a6024735bd78041da461e55038fd9_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_db_manager_a5905248461fc77d70531bf8eadad6961}\label{class_db_manager_a5905248461fc77d70531bf8eadad6961} 
+\index{DbManager@{DbManager}!countSnapshotRows@{countSnapshotRows}}
+\index{countSnapshotRows@{countSnapshotRows}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{countSnapshotRows()}{countSnapshotRows()}}
+{\footnotesize\ttfamily int Db\+Manager\+::count\+Snapshot\+Rows (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Method that returns the index of the most recent snapshot. 
+
+\begin{DoxyReturn}{Returns}
+The most recent snapshot 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_db_manager_a5905248461fc77d70531bf8eadad6961_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1}\label{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1} 
+\index{DbManager@{DbManager}!deleteDb@{deleteDb}}
+\index{deleteDb@{deleteDb}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{deleteDb()}{deleteDb()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Db\+Manager\+::delete\+Db (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \&}]{qF }\end{DoxyParamCaption})}
+
+
+
+Method for deleting saved fundamaental diagram records from the database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em qF} & -\/ fundamental diagram to be deleted \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_db_manager_aa1171b572f33b03013d8d81cf11ca7b1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_db_manager_aa0ecc77c75117c8aefcb5614be1808bf}\label{class_db_manager_aa0ecc77c75117c8aefcb5614be1808bf} 
+\index{DbManager@{DbManager}!deleteDb@{deleteDb}}
+\index{deleteDb@{deleteDb}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{deleteDb()}{deleteDb()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Db\+Manager\+::delete\+Db (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}} \&}]{q\+ST }\end{DoxyParamCaption})}
+
+
+
+Method for deleting space-\/time diagrams from the database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em q\+ST} & -\/ space-\/time diagram to be deleted \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_db_manager_afff6656aab53762d8c91a9def0c61356}\label{class_db_manager_afff6656aab53762d8c91a9def0c61356} 
+\index{DbManager@{DbManager}!readDb@{readDb}}
+\index{readDb@{readDb}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{readDb()}{readDb()}}
+{\footnotesize\ttfamily void Db\+Manager\+::read\+Db (\begin{DoxyParamCaption}\item[{QList$<$ \mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \texorpdfstring{$\ast$}{*} $>$ \&}]{q\+FList }\end{DoxyParamCaption})}
+
+
+
+Method for reading fundamental diagrams from the database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em q\+FList} & -\/ pointer to the list of fundamental diagrams, to which \doxylink{class_qt_diagram_f}{Qt\+DiagramF} objects from database will be read \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{class_db_manager_afff6656aab53762d8c91a9def0c61356_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_db_manager_afff6656aab53762d8c91a9def0c61356_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181}\label{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181} 
+\index{DbManager@{DbManager}!readSnapshot@{readSnapshot}}
+\index{readSnapshot@{readSnapshot}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{readSnapshot()}{readSnapshot()}}
+{\footnotesize\ttfamily void Db\+Manager\+::read\+Snapshot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \&}]{snapshot }\end{DoxyParamCaption})}
+
+
+
+Method for reading saved snapshot with configuration saved during the previous application session. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & -\/ object, to which the snapshot will be read \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_db_manager_a037c9c39ffb291d5c53e0fcb32757181_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_db_manager_a991e632ae2a7913268a00062b369f4f2}\label{class_db_manager_a991e632ae2a7913268a00062b369f4f2} 
+\index{DbManager@{DbManager}!saveDb@{saveDb}}
+\index{saveDb@{saveDb}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{saveDb()}{saveDb()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Db\+Manager\+::save\+Db (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_diagram_f}{Qt\+DiagramF}} \&}]{qF }\end{DoxyParamCaption})}
+
+
+
+Method for saving fundamental diagrams to the database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em qF} & -\/ fundamental diagarm that is going to be saved \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{class_db_manager_a991e632ae2a7913268a00062b369f4f2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_db_manager_a991e632ae2a7913268a00062b369f4f2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_db_manager_a35b50ca08cccb1079cd11860d44abcf2}\label{class_db_manager_a35b50ca08cccb1079cd11860d44abcf2} 
+\index{DbManager@{DbManager}!saveDb@{saveDb}}
+\index{saveDb@{saveDb}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{saveDb()}{saveDb()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Db\+Manager\+::save\+Db (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}} \&}]{q\+ST }\end{DoxyParamCaption})}
+
+
+
+Method for saving space-\/time diagrams to the database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em q\+ST} & -\/ space-\/time diagram that is going to be saved \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead}\label{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead} 
+\index{DbManager@{DbManager}!updateSnapshot@{updateSnapshot}}
+\index{updateSnapshot@{updateSnapshot}!DbManager@{DbManager}}
+\doxysubsubsection{\texorpdfstring{updateSnapshot()}{updateSnapshot()}}
+{\footnotesize\ttfamily void Db\+Manager\+::update\+Snapshot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \&}]{snapshot }\end{DoxyParamCaption})}
+
+
+
+Method for updating snapshots with configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & -\/ object containing snapshot that will be updated \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_db_manager_aaefb755042bf99ab2643ec88bf0ccead_icgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-dbmanager.\+h\item 
-dbmanager.\+cpp\end{DoxyCompactItemize}
+ABMTraf\+Sim\+CA/dbmanager.\+h\item 
+ABMTraf\+Sim\+CA/dbmanager.\+cpp\end{DoxyCompactItemize}

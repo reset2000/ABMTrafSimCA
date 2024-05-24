@@ -1,62 +1,284 @@
 \doxysection{Car Class Reference}
 \hypertarget{class_car}{}\label{class_car}\index{Car@{Car}}
+
+
+The \doxylink{class_car}{Car} class decribes the structure of a single car on the road.  
+
+
+
+
+{\ttfamily \#include $<$Car.\+h$>$}
+
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_car_abb1e8326f59828af4364475f03a3acf3}\label{class_car_abb1e8326f59828af4364475f03a3acf3} 
-{\bfseries Car} (int speed, double car\+Length)
-\item 
-\Hypertarget{class_car_ae4a70399de6a3cf85fea3489de7c328b}\label{class_car_ae4a70399de6a3cf85fea3489de7c328b} 
-long {\bfseries Get\+Car\+ID} ()
-\item 
-\Hypertarget{class_car_a7e30566dea52c5c8df3b5959882f1280}\label{class_car_a7e30566dea52c5c8df3b5959882f1280} 
-void {\bfseries Set\+Car\+Speed} (int new\+Speed)
-\item 
-\Hypertarget{class_car_ab8cf9e1fe7c163b1237102521fe57d76}\label{class_car_ab8cf9e1fe7c163b1237102521fe57d76} 
-int {\bfseries Get\+Car\+Speed} ()
-\item 
-\Hypertarget{class_car_abaf405f42f6acfa964be8ba574a7bebe}\label{class_car_abaf405f42f6acfa964be8ba574a7bebe} 
-void {\bfseries Set\+Stop\+Changing\+Lane} (bool stop\+Changing\+Lane)
-\item 
-\Hypertarget{class_car_aaea0281ae41c71f6ced9368a3c66e5c8}\label{class_car_aaea0281ae41c71f6ced9368a3c66e5c8} 
-bool {\bfseries Get\+Stop\+Changing\+Lane} ()
-\item 
-\Hypertarget{class_car_a1a6c3f6dd16d32d94e7096d34283e1c7}\label{class_car_a1a6c3f6dd16d32d94e7096d34283e1c7} 
-int {\bfseries Get\+Tail\+Segments\+Num} ()
-\item 
-\Hypertarget{class_car_a7501279d4a43a1a908c5d81ec636f272}\label{class_car_a7501279d4a43a1a908c5d81ec636f272} 
-void {\bfseries Set\+Driver\+Type} (int driver\+Type)
-\item 
-\Hypertarget{class_car_a1c877a949c3b72e11c47d2968b0fb76c}\label{class_car_a1c877a949c3b72e11c47d2968b0fb76c} 
-int {\bfseries Get\+Driver\+Type} ()
-\end{DoxyCompactItemize}
+\Hypertarget{class_car_a1c803f7c5038d3e31b368b0d0a35493c}\label{class_car_a1c803f7c5038d3e31b368b0d0a35493c} 
+{\bfseries Car} ()
+\begin{DoxyCompactList}\small\item\em The default constructor of the \doxylink{class_car}{Car} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_car_abb1e8326f59828af4364475f03a3acf3}{Car}} (int \mbox{\hyperlink{class_car_a4c6d153ef3b6b34cc4feacb5c6fd9bfb}{speed}}, double car\+Length)
+\begin{DoxyCompactList}\small\item\em The overloaded constructor of the \doxylink{class_car}{Car} class. \end{DoxyCompactList}\item 
+\Hypertarget{class_car_a5933bb06e96b159fe339a128abda888a}\label{class_car_a5933bb06e96b159fe339a128abda888a} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Car} ()
+\begin{DoxyCompactList}\small\item\em The destructor of the \doxylink{class_car}{Car} class. \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{class_car_ae4a70399de6a3cf85fea3489de7c328b}{Get\+Car\+ID}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the car\+ID field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_car_a7e30566dea52c5c8df3b5959882f1280}{Set\+Car\+Speed}} (int new\+Speed)
+\begin{DoxyCompactList}\small\item\em The setter of the speed field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_car_ab8cf9e1fe7c163b1237102521fe57d76}{Get\+Car\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the speed field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_car_abaf405f42f6acfa964be8ba574a7bebe}{Set\+Stop\+Changing\+Lane}} (bool \mbox{\hyperlink{class_car_a6835c4875768b95c3f0b8cf9bb6c903c}{stop\+Changing\+Lane}})
+\begin{DoxyCompactList}\small\item\em The setter of the stop\+Changing\+Lane field. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_car_aaea0281ae41c71f6ced9368a3c66e5c8}{Get\+Stop\+Changing\+Lane}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the stop\+Changing\+Lane field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_car_a1a6c3f6dd16d32d94e7096d34283e1c7}{Get\+Tail\+Segments\+Num}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the tail\+Segments\+Num field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_car_a7501279d4a43a1a908c5d81ec636f272}{Set\+Driver\+Type}} (int \mbox{\hyperlink{class_car_a7cc89becff38d49d8e5080a1a3596304}{driver\+Type}})
+\begin{DoxyCompactList}\small\item\em The setter of the driver\+Type field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_car_a1c877a949c3b72e11c47d2968b0fb76c}{Get\+Driver\+Type}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the driver\+Type field. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_car_a5b8b8c3b8774c3afeaac6bd9a593cb97}\label{class_car_a5b8b8c3b8774c3afeaac6bd9a593cb97} 
 long {\bfseries car\+ID}
-\item 
+\begin{DoxyCompactList}\small\item\em The identifier of a signle car. \end{DoxyCompactList}\item 
 \Hypertarget{class_car_a4c6d153ef3b6b34cc4feacb5c6fd9bfb}\label{class_car_a4c6d153ef3b6b34cc4feacb5c6fd9bfb} 
 int {\bfseries speed}
-\item 
+\begin{DoxyCompactList}\small\item\em The speed value of a car. \end{DoxyCompactList}\item 
 \Hypertarget{class_car_a6835c4875768b95c3f0b8cf9bb6c903c}\label{class_car_a6835c4875768b95c3f0b8cf9bb6c903c} 
 bool {\bfseries stop\+Changing\+Lane}
-\item 
+\begin{DoxyCompactList}\small\item\em The value that determines if the car can change lanes or not. \end{DoxyCompactList}\item 
 \Hypertarget{class_car_abf00c6a99b612ced7adee0148d7f3494}\label{class_car_abf00c6a99b612ced7adee0148d7f3494} 
 int {\bfseries tail\+Segments\+Num}
-\item 
+\begin{DoxyCompactList}\small\item\em The number of segments of the car (excluding first segment -\/ head) \end{DoxyCompactList}\item 
 \Hypertarget{class_car_a7cc89becff38d49d8e5080a1a3596304}\label{class_car_a7cc89becff38d49d8e5080a1a3596304} 
 int {\bfseries driver\+Type}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The value representing assigned driver type value. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_car_a3e0b8b208ba750dd0a1bc28ce9d3a98d}\label{class_car_a3e0b8b208ba750dd0a1bc28ce9d3a98d} 
 static long {\bfseries next\+ID} = 0
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The static identifier of the next car to be added to the road. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_car}{Car} class decribes the structure of a single car on the road. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_car_abb1e8326f59828af4364475f03a3acf3}\label{class_car_abb1e8326f59828af4364475f03a3acf3} 
+\index{Car@{Car}!Car@{Car}}
+\index{Car@{Car}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{Car()}{Car()}}
+{\footnotesize\ttfamily Car\+::\+Car (\begin{DoxyParamCaption}\item[{int}]{speed,  }\item[{double}]{car\+Length }\end{DoxyParamCaption})}
+
+
+
+The overloaded constructor of the \doxylink{class_car}{Car} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & -\/ speed value of the vehicle (in segments) \\
+\hline
+{\em car\+Length} & -\/ the length of the car \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_car_ae4a70399de6a3cf85fea3489de7c328b}\label{class_car_ae4a70399de6a3cf85fea3489de7c328b} 
+\index{Car@{Car}!GetCarID@{GetCarID}}
+\index{GetCarID@{GetCarID}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{GetCarID()}{GetCarID()}}
+{\footnotesize\ttfamily long Car\+::\+Get\+Car\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the car\+ID field. 
+
+\begin{DoxyReturn}{Returns}
+car\+ID 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_car_a5b8b8c3b8774c3afeaac6bd9a593cb97}{car\+ID} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_car_ae4a70399de6a3cf85fea3489de7c328b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_car_ab8cf9e1fe7c163b1237102521fe57d76}\label{class_car_ab8cf9e1fe7c163b1237102521fe57d76} 
+\index{Car@{Car}!GetCarSpeed@{GetCarSpeed}}
+\index{GetCarSpeed@{GetCarSpeed}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{GetCarSpeed()}{GetCarSpeed()}}
+{\footnotesize\ttfamily int Car\+::\+Get\+Car\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the speed field. 
+
+\begin{DoxyReturn}{Returns}
+speed 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_car_a4c6d153ef3b6b34cc4feacb5c6fd9bfb}{speed} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_car_ab8cf9e1fe7c163b1237102521fe57d76_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_car_a1c877a949c3b72e11c47d2968b0fb76c}\label{class_car_a1c877a949c3b72e11c47d2968b0fb76c} 
+\index{Car@{Car}!GetDriverType@{GetDriverType}}
+\index{GetDriverType@{GetDriverType}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{GetDriverType()}{GetDriverType()}}
+{\footnotesize\ttfamily int Car\+::\+Get\+Driver\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the driver\+Type field. 
+
+\begin{DoxyReturn}{Returns}
+driver\+Type 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_car_a7cc89becff38d49d8e5080a1a3596304}{driver\+Type} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_car_a1c877a949c3b72e11c47d2968b0fb76c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_car_aaea0281ae41c71f6ced9368a3c66e5c8}\label{class_car_aaea0281ae41c71f6ced9368a3c66e5c8} 
+\index{Car@{Car}!GetStopChangingLane@{GetStopChangingLane}}
+\index{GetStopChangingLane@{GetStopChangingLane}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{GetStopChangingLane()}{GetStopChangingLane()}}
+{\footnotesize\ttfamily bool Car\+::\+Get\+Stop\+Changing\+Lane (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the stop\+Changing\+Lane field. 
+
+\begin{DoxyReturn}{Returns}
+stop\+Changing\+Lane 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_car_a6835c4875768b95c3f0b8cf9bb6c903c}{stop\+Changing\+Lane} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_car_aaea0281ae41c71f6ced9368a3c66e5c8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_car_a1a6c3f6dd16d32d94e7096d34283e1c7}\label{class_car_a1a6c3f6dd16d32d94e7096d34283e1c7} 
+\index{Car@{Car}!GetTailSegmentsNum@{GetTailSegmentsNum}}
+\index{GetTailSegmentsNum@{GetTailSegmentsNum}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{GetTailSegmentsNum()}{GetTailSegmentsNum()}}
+{\footnotesize\ttfamily int Car\+::\+Get\+Tail\+Segments\+Num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the tail\+Segments\+Num field. 
+
+\begin{DoxyReturn}{Returns}
+tail\+Segments\+Num 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_car_abf00c6a99b612ced7adee0148d7f3494}{tail\+Segments\+Num} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_car_a1a6c3f6dd16d32d94e7096d34283e1c7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_car_a7e30566dea52c5c8df3b5959882f1280}\label{class_car_a7e30566dea52c5c8df3b5959882f1280} 
+\index{Car@{Car}!SetCarSpeed@{SetCarSpeed}}
+\index{SetCarSpeed@{SetCarSpeed}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{SetCarSpeed()}{SetCarSpeed()}}
+{\footnotesize\ttfamily void Car\+::\+Set\+Car\+Speed (\begin{DoxyParamCaption}\item[{int}]{new\+Speed }\end{DoxyParamCaption})}
+
+
+
+The setter of the speed field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Speed} & -\/ new speed of the car \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_car_a4c6d153ef3b6b34cc4feacb5c6fd9bfb}{speed} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_car_a7e30566dea52c5c8df3b5959882f1280_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_car_a7501279d4a43a1a908c5d81ec636f272}\label{class_car_a7501279d4a43a1a908c5d81ec636f272} 
+\index{Car@{Car}!SetDriverType@{SetDriverType}}
+\index{SetDriverType@{SetDriverType}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{SetDriverType()}{SetDriverType()}}
+{\footnotesize\ttfamily void Car\+::\+Set\+Driver\+Type (\begin{DoxyParamCaption}\item[{int}]{driver\+Type }\end{DoxyParamCaption})}
+
+
+
+The setter of the driver\+Type field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver\+Type} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_car_a7cc89becff38d49d8e5080a1a3596304}{driver\+Type} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_car_a7501279d4a43a1a908c5d81ec636f272_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_car_abaf405f42f6acfa964be8ba574a7bebe}\label{class_car_abaf405f42f6acfa964be8ba574a7bebe} 
+\index{Car@{Car}!SetStopChangingLane@{SetStopChangingLane}}
+\index{SetStopChangingLane@{SetStopChangingLane}!Car@{Car}}
+\doxysubsubsection{\texorpdfstring{SetStopChangingLane()}{SetStopChangingLane()}}
+{\footnotesize\ttfamily void Car\+::\+Set\+Stop\+Changing\+Lane (\begin{DoxyParamCaption}\item[{bool}]{stop\+Changing\+Lane }\end{DoxyParamCaption})}
+
+
+
+The setter of the stop\+Changing\+Lane field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stop\+Changing\+Lane} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_car_a6835c4875768b95c3f0b8cf9bb6c903c}{stop\+Changing\+Lane} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_car_abaf405f42f6acfa964be8ba574a7bebe_icgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Traffic\+Core/Car.\+h\item 
-Traffic\+Core/Car.\+cpp\end{DoxyCompactItemize}
+ABMTraf\+Sim\+CA/\+Traffic\+Core/Car.\+h\item 
+ABMTraf\+Sim\+CA/\+Traffic\+Core/Car.\+cpp\end{DoxyCompactItemize}

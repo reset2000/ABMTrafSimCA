@@ -16,19 +16,64 @@ float DAcc(int currentSpeed, int accPlus, int dR, int nextCarSpeed);
 float DKeep(int currentSpeed, int dR, int nextCarSpeed);
 float DDec(int currentSpeed, int accMinus, int dR, int nextCarSpeed);
 
+///
+/// \brief The ChangeLaneConfig structure describes the cars that are checked during LAI model lane change formula
+///
 struct ChangeLaneConfig {
-
+    ///
+    /// \brief The CarStatus structure contains all the parameters that are necessary to the LAI model lange change formula
+    ///
     struct CarStatus {
+        ///
+        /// \brief The parameter describing car's velocity
+        ///
         int v;
+        ///
+        /// \brief The parameter describing car's acceleration
+        ///
         int accPlus;
+        ///
+        /// \brief The parameter describing car's deceleration
+        ///
         int accMinus;
+        ///
+        /// \brief The parameter describing car's distance from other vehicle
+        ///
         int dR;
+        ///
+        /// \brief The parameter describing car's delta value
+        ///
         int d;
+        ///
+        /// \brief The parameter describing number of segments the car consists of
+        ///
         int segment;
+        ///
+        /// \brief The parameter describing car's maximum velocity
+        ///
         int vMax;
 
+        ///
+        /// \brief Car object
+        ///
         Car *car;
-    } curr, next, pred, succ;
+    }
+    ///
+    /// \brief Currently examined car
+    ///
+    curr,
+    ///
+    /// \brief Succeeding car on the same lane
+    ///
+    next,
+    ///
+    /// \brief Preceding car on the other lane
+    ///
+    pred,
+    ///
+    /// \brief Succeeding car on the other lane
+    ///
+    succ;
 } ;
 
 Road::Road(Configuration &config) {

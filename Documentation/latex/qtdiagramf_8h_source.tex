@@ -1,5 +1,6 @@
 \doxysection{qtdiagramf.\+h}
-\hypertarget{qtdiagramf_8h_source}{}\label{qtdiagramf_8h_source}
+\hypertarget{qtdiagramf_8h_source}{}\label{qtdiagramf_8h_source}\index{ABMTrafSimCA/qtdiagramf.h@{ABMTrafSimCA/qtdiagramf.h}}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ QTDIAGRAMF\_H}}
@@ -13,44 +14,42 @@
 \DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}qtdiagramconfig.h"{}}}
 \DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QObject>}}
 \DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_qt_diagram_f}{QtDiagramF}}\ :\ \textcolor{keyword}{public}\ QObject}
-\DoxyCodeLine{00015\ \{}
-\DoxyCodeLine{00016\ \ \ \ \ Q\_OBJECT}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ SUM\_LANES\ =\ 2;}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ cfg;}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \ \ \ \ QChart\ chart[MAX\_ROAD\_LANES\ +\ 1];}
-\DoxyCodeLine{00024\ \ \ \ \ QScatterSeries\ *scatterSeries[MAX\_ROAD\_LANES\ +\ 1][MAX\_CARS\_SET];}
-\DoxyCodeLine{00025\ \ \ \ \ QSplineSeries\ *splineSeries[MAX\_ROAD\_LANES\ +\ 1][MAX\_CARS\_SET];}
-\DoxyCodeLine{00026\ \ \ \ \ QSplineSeries\ *splineSeriesApprox[MAX\_ROAD\_LANES\ +\ 1][MAX\_CARS\_SET];}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ QStringList\ laneNames\ =\ \{\ \textcolor{stringliteral}{"{}Left\ Lane"{}},\ \textcolor{stringliteral}{"{}Right\ Lane"{}},\ \textcolor{stringliteral}{"{}Both\ Lanes"{}}\ \};}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ QColor\ carsColors[MAX\_CARS\_SET]\ =\ \{}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#1f77b4"{}}),}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#ff7f0e"{}}),}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#2ca02c"{}}),}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#d62728"{}}),}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#9467bd"{}}),}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#8c564b"{}}),}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#e377c2"{}}),}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#7f7f7f"{}}),}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#bcbd22"{}}),}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#17becf"{}}),}
-\DoxyCodeLine{00041\ \ \ \ \ \};}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_qt_diagram_f}{QtDiagramF}}(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ShowDensitiesQtApprox(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&cfg,\ \textcolor{keywordtype}{string}\ *flowsStr,\ ShowSection\ section);}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ signals:}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ progressBarValueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_qt_diagram_f}{QtDiagramF}}\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_qt_diagram_f_af8a37348d01410155f7ac4f9de3be087}{SUM\_LANES}}\ =\ 2;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_qt_diagram_config}{QtDiagramConfig}}\ \mbox{\hyperlink{class_qt_diagram_f_adfd907acc5d50d63112c589599ff6dfb}{cfg}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ QChart\ \mbox{\hyperlink{class_qt_diagram_f_aa7a58818e7679e025bca67c1004b224e}{chart}}[MAX\_ROAD\_LANES\ +\ 1];}
+\DoxyCodeLine{00039\ \ \ \ \ QScatterSeries\ *\mbox{\hyperlink{class_qt_diagram_f_a2090f4859d0cfaf83960366832ea3299}{scatterSeries}}[MAX\_ROAD\_LANES\ +\ 1][MAX\_CARS\_SET];}
+\DoxyCodeLine{00043\ \ \ \ \ QSplineSeries\ *\mbox{\hyperlink{class_qt_diagram_f_a96e725d1503678e5b335b12c61050da0}{splineSeries}}[MAX\_ROAD\_LANES\ +\ 1][MAX\_CARS\_SET];}
+\DoxyCodeLine{00047\ \ \ \ \ QSplineSeries\ *\mbox{\hyperlink{class_qt_diagram_f_a2e63e5b12e392d689aa1ddf0e5eae9ff}{splineSeriesApprox}}[MAX\_ROAD\_LANES\ +\ 1][MAX\_CARS\_SET];}
 \DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \};}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ QTDIAGRAMF\_H}}
+\DoxyCodeLine{00052\ \ \ \ \ QStringList\ \mbox{\hyperlink{class_qt_diagram_f_ab881cf165f08e38de99902cc38ed1afe}{laneNames}}\ =\ \{\ \textcolor{stringliteral}{"{}Left\ Lane"{}},\ \textcolor{stringliteral}{"{}Right\ Lane"{}},\ \textcolor{stringliteral}{"{}Both\ Lanes"{}}\ \};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00057\ \ \ \ \ QColor\ \mbox{\hyperlink{class_qt_diagram_f_a5f6b7abe3e5a5581aff58a281353fa9f}{carsColors}}[MAX\_CARS\_SET]\ =\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#1f77b4"{}}),}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#ff7f0e"{}}),}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#2ca02c"{}}),}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#d62728"{}}),}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#9467bd"{}}),}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#8c564b"{}}),}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#e377c2"{}}),}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#7f7f7f"{}}),}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#bcbd22"{}}),}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ QColor::fromString(\textcolor{stringliteral}{"{}\#17becf"{}}),}
+\DoxyCodeLine{00068\ \ \ \ \ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_qt_diagram_f_a8b24945c4d02b70342f882d38278ab0e}{QtDiagramF}}(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_qt_diagram_f_a1401a3a490547544e10c6089d813e4e8}{ShowDensitiesQtApprox}}(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&\mbox{\hyperlink{class_qt_diagram_f_adfd907acc5d50d63112c589599ff6dfb}{cfg}},\ \textcolor{keywordtype}{string}\ *flowsStr,\ ShowSection\ section);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ signals:}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ QTDIAGRAMF\_H}}
 
 \end{DoxyCode}

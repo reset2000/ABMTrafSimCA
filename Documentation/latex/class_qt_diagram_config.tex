@@ -2,6 +2,15 @@
 \hypertarget{class_qt_diagram_config}{}\label{class_qt_diagram_config}\index{QtDiagramConfig@{QtDiagramConfig}}
 
 
+The \doxylink{class_qt_diagram_config}{Qt\+Diagram\+Config} class is responsible for saving configuration snapshots after the application is closed.  
+
+
+
+
+{\ttfamily \#include $<$qtdiagramconfig.\+h$>$}
+
+
+
 Inheritance diagram for Qt\+Diagram\+Config\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -21,63 +30,110 @@ Collaboration diagram for Qt\+Diagram\+Config\+:\nopagebreak
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_qt_diagram_config_ab55b89c6e40c87796506aad4978eb6d2}\label{class_qt_diagram_config_ab55b89c6e40c87796506aad4978eb6d2} 
-{\bfseries Qt\+Diagram\+Config} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_qt_diagram_config_ab55b89c6e40c87796506aad4978eb6d2}{Qt\+Diagram\+Config}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em The constructor of the \doxylink{class_qt_diagram_config}{Qt\+Diagram\+Config} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_qt_diagram_config_ad126c92c4c66129be7b08cea937e886b}\label{class_qt_diagram_config_ad126c92c4c66129be7b08cea937e886b} 
 int {\bfseries id}
-\item 
+\begin{DoxyCompactList}\small\item\em Database identifier of the configuration snapshot. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_aaee252871bad53ff14757d6ec14c03c0}\label{class_qt_diagram_config_aaee252871bad53ff14757d6ec14c03c0} 
 QDate\+Time {\bfseries date}
-\item 
+\begin{DoxyCompactList}\small\item\em Date and time the configuration was saved on. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a1b3cb3adecd9f68494793784a4372e25}\label{class_qt_diagram_config_a1b3cb3adecd9f68494793784a4372e25} 
 QString {\bfseries data}
-\item 
+\begin{DoxyCompactList}\small\item\em The saved configuration data in the form of a string. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a7279c67e9dd45ce0ebd45fc35384cde5}\label{class_qt_diagram_config_a7279c67e9dd45ce0ebd45fc35384cde5} 
 int {\bfseries road\+Length}
-\item 
+\begin{DoxyCompactList}\small\item\em The saved length of the road in segments. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a5b294bb513feba088994ea2cd07c4d78}\label{class_qt_diagram_config_a5b294bb513feba088994ea2cd07c4d78} 
 int {\bfseries cycles\+Num}
-\item 
-\Hypertarget{class_qt_diagram_config_ad9654750eb8778e4a00f13a693c453e6}\label{class_qt_diagram_config_ad9654750eb8778e4a00f13a693c453e6} 
-int {\bfseries cycles\+To\+Skip}
-\item 
+\begin{DoxyCompactList}\small\item\em The saved number of iterations of the simulation. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_qt_diagram_config_ad9654750eb8778e4a00f13a693c453e6}{cycles\+To\+Skip}}
+\begin{DoxyCompactList}\small\item\em The saved number of iterations that will not be displayed. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_ae2e7e7d460a90081854d15361c5ef57e}\label{class_qt_diagram_config_ae2e7e7d460a90081854d15361c5ef57e} 
 bool {\bfseries change\+Lane}
-\item 
-\Hypertarget{class_qt_diagram_config_a651aed6c590b30c27459ce00fff32a20}\label{class_qt_diagram_config_a651aed6c590b30c27459ce00fff32a20} 
-int {\bfseries current\+Density}
-\item 
+\begin{DoxyCompactList}\small\item\em The saved value defining if the lange changes will occur during the simulation. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_qt_diagram_config_a651aed6c590b30c27459ce00fff32a20}{current\+Density}}
+\begin{DoxyCompactList}\small\item\em The saved road density percentage. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a605fc31b85707e20979526013eea1082}\label{class_qt_diagram_config_a605fc31b85707e20979526013eea1082} 
 int {\bfseries density\+Points}
-\item 
+\begin{DoxyCompactList}\small\item\em The saved number of points of displayed on fundamental diagram. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a46227500e16e0ea4919e844a60189cc1}\label{class_qt_diagram_config_a46227500e16e0ea4919e844a60189cc1} 
 int {\bfseries density\+Tests}
-\item 
+\begin{DoxyCompactList}\small\item\em The saved number of simulations that are averaged for a single density point on the fundamental diagram. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a652442730735a8ddcf42d8be158fdb0b}\label{class_qt_diagram_config_a652442730735a8ddcf42d8be158fdb0b} 
 QString {\bfseries cars\+Probability}
-\item 
+\begin{DoxyCompactList}\small\item\em The saved string representing the probabilities of generation of different sized cars (from 1 to 24 segments) \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a1dd5ad045d4d8e67b998caac09401892}\label{class_qt_diagram_config_a1dd5ad045d4d8e67b998caac09401892} 
 QString {\bfseries driver\+Profiles}
-\item 
+\begin{DoxyCompactList}\small\item\em The saves string representing the probabilities of generation of cars with different characteristics previously set by users. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a048ff21ee77db6fb9f2bcfd53c63dc6a}\label{class_qt_diagram_config_a048ff21ee77db6fb9f2bcfd53c63dc6a} 
 int {\bfseries legend}
-\item 
+\begin{DoxyCompactList}\small\item\em This variable contains saved legend display position. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_af005325e4a00f2448bc60b7080d54b11}\label{class_qt_diagram_config_af005325e4a00f2448bc60b7080d54b11} 
 QString {\bfseries font}
-\item 
+\begin{DoxyCompactList}\small\item\em This variable contains saved font type. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_a6f400aec5a9a9824d1c8cebcfd25e581}\label{class_qt_diagram_config_a6f400aec5a9a9824d1c8cebcfd25e581} 
 int {\bfseries font\+Size}
-\item 
+\begin{DoxyCompactList}\small\item\em This variable contains saved font size. \end{DoxyCompactList}\item 
 \Hypertarget{class_qt_diagram_config_ae3659eb369d0725b71118c61967587eb}\label{class_qt_diagram_config_ae3659eb369d0725b71118c61967587eb} 
 int {\bfseries theme}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This variable contains saved diagram theme. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_qt_diagram_config}{Qt\+Diagram\+Config} class is responsible for saving configuration snapshots after the application is closed. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_qt_diagram_config_ab55b89c6e40c87796506aad4978eb6d2}\label{class_qt_diagram_config_ab55b89c6e40c87796506aad4978eb6d2} 
+\index{QtDiagramConfig@{QtDiagramConfig}!QtDiagramConfig@{QtDiagramConfig}}
+\index{QtDiagramConfig@{QtDiagramConfig}!QtDiagramConfig@{QtDiagramConfig}}
+\doxysubsubsection{\texorpdfstring{QtDiagramConfig()}{QtDiagramConfig()}}
+{\footnotesize\ttfamily Qt\+Diagram\+Config\+::\+Qt\+Diagram\+Config (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+The constructor of the \doxylink{class_qt_diagram_config}{Qt\+Diagram\+Config} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & -\/ parent object of \doxylink{class_qt_diagram_config}{Qt\+Diagram\+Config}, null by default \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_qt_diagram_config_a651aed6c590b30c27459ce00fff32a20}\label{class_qt_diagram_config_a651aed6c590b30c27459ce00fff32a20} 
+\index{QtDiagramConfig@{QtDiagramConfig}!currentDensity@{currentDensity}}
+\index{currentDensity@{currentDensity}!QtDiagramConfig@{QtDiagramConfig}}
+\doxysubsubsection{\texorpdfstring{currentDensity}{currentDensity}}
+{\footnotesize\ttfamily int Qt\+Diagram\+Config\+::current\+Density}
+
+
+
+The saved road density percentage. 
+
+\begin{DoxyNote}{Note}
+Density represents the percentage value of the cars on the road during the whole simulation (closed loop) 
+\end{DoxyNote}
+\Hypertarget{class_qt_diagram_config_ad9654750eb8778e4a00f13a693c453e6}\label{class_qt_diagram_config_ad9654750eb8778e4a00f13a693c453e6} 
+\index{QtDiagramConfig@{QtDiagramConfig}!cyclesToSkip@{cyclesToSkip}}
+\index{cyclesToSkip@{cyclesToSkip}!QtDiagramConfig@{QtDiagramConfig}}
+\doxysubsubsection{\texorpdfstring{cyclesToSkip}{cyclesToSkip}}
+{\footnotesize\ttfamily int Qt\+Diagram\+Config\+::cycles\+To\+Skip}
+
+
+
+The saved number of iterations that will not be displayed. 
+
+\begin{DoxyNote}{Note}
+These iterations will not be displayed, but the simulation is still generated for them, allowing cars to spread out 
+\end{DoxyNote}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-qtdiagramconfig.\+h\item 
-qtdiagramconfig.\+cpp\end{DoxyCompactItemize}
+ABMTraf\+Sim\+CA/qtdiagramconfig.\+h\item 
+ABMTraf\+Sim\+CA/qtdiagramconfig.\+cpp\end{DoxyCompactItemize}

@@ -1,11 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" title=" " alt="" coords="5,81,75,108"/>
-<area shape="rect" id="Node000001" href="$class_db_manager.html" title=" " alt="" coords="139,5,226,32"/>
+<area shape="rect" id="Node000001" href="$class_db_manager.html" title="The DbManager class is responsible for managing database interactions, such as saving and reading dia..." alt="" coords="139,5,226,32"/>
 <area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="73,70,121,42,146,30,148,35,124,46,75,75"/>
-<area shape="rect" id="Node000002" href="$class_qt_diagram_config.html" title=" " alt="" coords="123,56,242,83"/>
+<area shape="rect" id="Node000002" href="$class_qt_diagram_config.html" title="The QtDiagramConfig class is responsible for saving configuration snapshots after the application is ..." alt="" coords="123,56,242,83"/>
 <area shape="poly" id="edge3_Node000000_Node000002" title=" " alt="" coords="89,83,122,77,123,83,90,88"/>
-<area shape="rect" id="Node000003" href="$class_qt_diagram_f.html" title=" " alt="" coords="137,107,228,133"/>
+<area shape="rect" id="Node000003" href="$class_qt_diagram_f.html" title="The QtDiagramF class is responsible for saving data necessary to create and display fundamental diagr..." alt="" coords="137,107,228,133"/>
 <area shape="poly" id="edge4_Node000000_Node000003" title=" " alt="" coords="91,101,137,109,136,115,90,106"/>
-<area shape="rect" id="Node000004" href="$class_qt_diagram_s_t.html" title=" " alt="" coords="133,157,232,184"/>
+<area shape="rect" id="Node000004" href="$class_qt_diagram_s_t.html" title="The QtDiagramST class is responsible for saving data necessary to create and display space&#45;time diagr..." alt="" coords="133,157,232,184"/>
 <area shape="poly" id="edge5_Node000000_Node000004" title=" " alt="" coords="75,114,124,143,148,154,146,159,121,148,73,119"/>
 </map>

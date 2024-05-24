@@ -1,5 +1,5 @@
 \doxysection{Road.\+h}
-\hypertarget{_road_8h_source}{}\label{_road_8h_source}\index{TrafficCore/Road.h@{TrafficCore/Road.h}}
+\hypertarget{_road_8h_source}{}\label{_road_8h_source}\index{ABMTrafSimCA/TrafficCore/Road.h@{ABMTrafSimCA/TrafficCore/Road.h}}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
@@ -14,58 +14,58 @@
 \DoxyCodeLine{00010\ }
 \DoxyCodeLine{00011\ \textcolor{keyword}{using\ namespace\ }std;}
 \DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_road}{Road}}\ \{}
-\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ vanishedCars;}
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ changeLane;}
-\DoxyCodeLine{00018\ \ \ \ \ \}\ \mbox{\hyperlink{struct_road_1_1_c_a_r_s___s_t_a_t_s___t}{CARS\_STATS\_T}};}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_road}{Road}}(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
-\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_road}{\string~Road}}();}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ GenerateCycles();}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ GenerateDensities(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ GenerateDensitiesQt(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}\ GetVanishedCars(\textcolor{keywordtype}{int}\ lane,\ \textcolor{keywordtype}{int}\ carLength);}
-\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_configuration}{Configuration}}\ *cfg;}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_road_segment}{RoadSegment}}\ **startSegments;}
-\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_road_segment}{RoadSegment}}\ **cycleSegments;}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ map<long,\ Car>\ cars;}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ carsSet[MAX\_ROAD\_LANES][MAX\_CARS\_SET]\ =\ \{0\};}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ segmentsNum;}
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ carsNum[MAX\_ROAD\_LANES]\ =\ \{0\};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_road}{Road}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_aedaa19ffd4c27705c6fcaa07a63e4163}{vanishedCars}};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ changeLane;}
+\DoxyCodeLine{00026\ \ \ \ \ \}\ \mbox{\hyperlink{struct_road_1_1_c_a_r_s___s_t_a_t_s___t}{CARS\_STATS\_T}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_road_ac1eefc1e96b2b00f26d55524c2e586f1}{Road}}(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_road_a3fa0feda8a96c3763d5f5a1f06f2972e}{\string~Road}}();}
 \DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ CARS\_STATS\_T\ vanishedCars[MAX\_ROAD\_LANES][MAX\_CARS\_SET]\ =\ \{0\};}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ sumChangedLanes;}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ SetCarsSet();}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ SetStartingState(\textcolor{keywordtype}{bool}\ densities);}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{int}\ CalculateCarsAfter(\textcolor{keywordtype}{int}\ allCars);}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ GenerateRandomDriverTypeIndex();}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ GenerateRandomStartingCar();}
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ SetTails();}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ SetAccelerateByFormula();}
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ SetChangeLaneByFormula();}
-\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{int}\ CheckFrontSameLane(\textcolor{keywordtype}{int}\ lane,\ \textcolor{keywordtype}{int}\ segment);}
-\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{int}\ CheckFrontAltLane(\textcolor{keywordtype}{int}\ lane,\ \textcolor{keywordtype}{int}\ segment);}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{int}\ CheckBackAltLane(\textcolor{keywordtype}{int}\ lane,\ \textcolor{keywordtype}{int}\ segment);}
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{int}\ CalculateDistanceBetweenCars(\textcolor{keywordtype}{int}\ segment1,\ \textcolor{keywordtype}{int}\ segment2,\ \textcolor{keywordtype}{int}\ tail2);}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ MoveSingleCarChangeLane(\textcolor{keywordtype}{int}\ oldLane,\ \textcolor{keywordtype}{int}\ laneToChange,\ \textcolor{keywordtype}{int}\ segment);}
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ ClearStopChangingLane();}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ MoveCars();}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{string}\ *PrepareToShow(\textcolor{keywordtype}{int}\ cyclesNum);}
-\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_a58c1510d87a853400901912593aa1ed8}{GenerateCycles}}();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_a7937925d8ca8f35fcbda5cf67b2be215}{GenerateDensities}}(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_a280cfffacc4a57818b95aa7853d52eca}{GenerateDensitiesQt}}(\mbox{\hyperlink{class_configuration}{Configuration}}\ \&config);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_ab9974bf657e9cdeffb6ed246900f6825}{GetVanishedCars}}(\textcolor{keywordtype}{int}\ lane,\ \textcolor{keywordtype}{int}\ carLength);}
+\DoxyCodeLine{00065\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{class_configuration}{Configuration}}\ *\mbox{\hyperlink{class_road_a359fa09581fa98d548280e727b12a24e}{cfg}};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{class_road_segment}{RoadSegment}}\ **\mbox{\hyperlink{class_road_a10dda1fbec092c86ca72d8e1b4a45020}{startSegments}};}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{class_road_segment}{RoadSegment}}\ **\mbox{\hyperlink{class_road_a330c47c153ed354a914b3026b71a36fe}{cycleSegments}};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00083\ \ \ \ \ map<long,\ Car>\ \mbox{\hyperlink{class_road_a675b5028c0b67511ee7eef6443ffca19}{cars}};}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_a849399933b12eb0a6aeacb9c6c9a2bc2}{carsSet}}[MAX\_ROAD\_LANES][MAX\_CARS\_SET]\ =\ \{0\};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_a42a13d93d7641c7c4f98b361055d30bd}{segmentsNum}};}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_aa31a778efa5d008838c9aad284c76e40}{carsNum}}[MAX\_ROAD\_LANES]\ =\ \{0\};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{struct_road_1_1_c_a_r_s___s_t_a_t_s___t}{CARS\_STATS\_T}}\ \mbox{\hyperlink{class_road_aedaa19ffd4c27705c6fcaa07a63e4163}{vanishedCars}}[MAX\_ROAD\_LANES][MAX\_CARS\_SET]\ =\ \{0\};}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_a15bb28389a848d3e6e87402f36fa8079}{sumChangedLanes}};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_a8cd3e5493672e68dc4583e0e31a35b95}{SetCarsSet}}();}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_a8ee0c51b19a437b4eea175241f37ee38}{SetStartingState}}(\textcolor{keywordtype}{bool}\ densities);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_aeb792f88741118d3bafdfc1318e6b195}{CalculateCarsAfter}}(\textcolor{keywordtype}{int}\ allCars);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_a2c61bef04889834385fd6b40d5d6ef65}{GenerateRandomDriverTypeIndex}}();}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_aa1b08fc34c7916ef825501b8ad460b27}{GenerateRandomStartingCar}}();}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_ac362e1817347b9779afe5adbe922b661}{SetTails}}();}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_adfdd08e959cf3942869eae15b8d92114}{SetAccelerateByFormula}}();}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_ab1036d2ae3f35896281f01ef3dae04f7}{SetChangeLaneByFormula}}();}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_a5c098189a67c4f04bf752643eb810567}{CheckFrontSameLane}}(\textcolor{keywordtype}{int}\ lane,\ \textcolor{keywordtype}{int}\ segment);}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_aa199c3c6e0676c8f8bdf33c69eea43fd}{CheckFrontAltLane}}(\textcolor{keywordtype}{int}\ lane,\ \textcolor{keywordtype}{int}\ segment);}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_ad64d2b162f9debad13c1190a00dee8ee}{CheckBackAltLane}}(\textcolor{keywordtype}{int}\ lane,\ \textcolor{keywordtype}{int}\ segment);}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_road_a210f6a1bdc9796afe892c7f64bf7eaf8}{CalculateDistanceBetweenCars}}(\textcolor{keywordtype}{int}\ segment1,\ \textcolor{keywordtype}{int}\ segment2,\ \textcolor{keywordtype}{int}\ tail2);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_a5bb8c758c93f77f6e52e6e9bef6636e8}{MoveSingleCarChangeLane}}(\textcolor{keywordtype}{int}\ oldLane,\ \textcolor{keywordtype}{int}\ laneToChange,\ \textcolor{keywordtype}{int}\ segment);}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_a2fc593e668e5adfb3370504c8dcd8b99}{ClearStopChangingLane}}();}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_road_a2c2cea92f9c5980ec2be4e6ecf89f613}{MoveCars}}();}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordtype}{string}\ *\mbox{\hyperlink{class_road_a66f15924436326a8096b34e22170c36d}{PrepareToShow}}(\textcolor{keywordtype}{int}\ cyclesNum);}
+\DoxyCodeLine{00201\ \};}
 
 \end{DoxyCode}

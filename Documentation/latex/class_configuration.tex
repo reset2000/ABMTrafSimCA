@@ -2,8 +2,16 @@
 \hypertarget{class_configuration}{}\label{class_configuration}\index{Configuration@{Configuration}}
 
 
-Collaboration diagram for Configuration\+:
-\nopagebreak
+The \doxylink{class_configuration}{Configuration} class describes configuration parameters of the core simulation module.  
+
+
+
+
+{\ttfamily \#include $<$Configuration.\+h$>$}
+
+
+
+Collaboration diagram for Configuration\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,144 +21,791 @@ Collaboration diagram for Configuration\+:
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_configuration_a739e4e5868aabb5a9a0d7e80698ebe80}\label{class_configuration_a739e4e5868aabb5a9a0d7e80698ebe80} 
-{\bfseries Configuration} (bool calculate\+Densities=false)
-\item 
-\Hypertarget{class_configuration_a6510e64a8c07ef8f2c8e44657fbb9fc6}\label{class_configuration_a6510e64a8c07ef8f2c8e44657fbb9fc6} 
-void {\bfseries Add\+Show\+Function} (SHOW\+\_\+\+FUNCTION\+\_\+\+PTR show\+Function\+Ptr)
-\item 
-\Hypertarget{class_configuration_a18dbc1a570cedaa70e7330bfcc94eaf0}\label{class_configuration_a18dbc1a570cedaa70e7330bfcc94eaf0} 
-void {\bfseries Clear\+Show\+Functions} ()
-\item 
-\Hypertarget{class_configuration_a3aa075168273417cf9a8f28259ecf3d3}\label{class_configuration_a3aa075168273417cf9a8f28259ecf3d3} 
-int {\bfseries Get\+Show\+Functions\+Size} ()
-\item 
-\Hypertarget{class_configuration_a6373a2872a03b10a5bea81779eb75490}\label{class_configuration_a6373a2872a03b10a5bea81779eb75490} 
-SHOW\+\_\+\+FUNCTION\+\_\+\+PTR {\bfseries Get\+Show\+Functions\+Element} (int idx)
-\item 
-\Hypertarget{class_configuration_a58b703fedf731c46d6662054b522af0b}\label{class_configuration_a58b703fedf731c46d6662054b522af0b} 
-void {\bfseries Set\+Segments\+Num} (int segments\+Num)
-\item 
-\Hypertarget{class_configuration_a0cc3cefdde53c13b0796dbdefde231c6}\label{class_configuration_a0cc3cefdde53c13b0796dbdefde231c6} 
-int {\bfseries Get\+Segments\+Num} ()
-\item 
-\Hypertarget{class_configuration_a270e714be48abe9d813cb43112b10390}\label{class_configuration_a270e714be48abe9d813cb43112b10390} 
-void {\bfseries Set\+Current\+Density} (int starting\+Cars)
-\item 
-\Hypertarget{class_configuration_aabd72705d996304b8c3887f333072bdd}\label{class_configuration_aabd72705d996304b8c3887f333072bdd} 
-int {\bfseries Get\+Current\+Density} ()
-\item 
-\Hypertarget{class_configuration_a9436cfea3f610fa0ac59d4542e5df6a5}\label{class_configuration_a9436cfea3f610fa0ac59d4542e5df6a5} 
-void {\bfseries Set\+Calculate\+Densities} (bool calculate\+Densities)
-\item 
-\Hypertarget{class_configuration_a0eed82091f6f46856e00abacef051836}\label{class_configuration_a0eed82091f6f46856e00abacef051836} 
-bool {\bfseries Get\+Calculate\+Densities} ()
-\item 
-\Hypertarget{class_configuration_ad329c9c901c0ababe58cb1b1152eaebe}\label{class_configuration_ad329c9c901c0ababe58cb1b1152eaebe} 
-void {\bfseries Set\+Use\+Change\+Lane} (bool use\+Change\+Lane)
-\item 
-\Hypertarget{class_configuration_a215a9b6814065e9ed9be98afbc2a5f99}\label{class_configuration_a215a9b6814065e9ed9be98afbc2a5f99} 
-bool {\bfseries Get\+Use\+Change\+Lane} ()
-\item 
-\Hypertarget{class_configuration_afb6810ddc1019e15100e39f094e5d374}\label{class_configuration_afb6810ddc1019e15100e39f094e5d374} 
-bool {\bfseries Add\+Car\+Probability} (int car\+Length, float probabilty)
-\item 
-\Hypertarget{class_configuration_aa790f00031e09a557cbdc7a7a17c5e9b}\label{class_configuration_aa790f00031e09a557cbdc7a7a17c5e9b} 
-float {\bfseries Get\+Car\+Probability} (int car\+Length)
-\item 
-\Hypertarget{class_configuration_a6ca37a7360073508cbad82d2c2998192}\label{class_configuration_a6ca37a7360073508cbad82d2c2998192} 
-void {\bfseries Clear\+Probabilities} ()
-\item 
-\Hypertarget{class_configuration_a41235c89934e1d2b5c2e69bb4628cc1d}\label{class_configuration_a41235c89934e1d2b5c2e69bb4628cc1d} 
-void {\bfseries Set\+Cycles\+To\+Skip} (int cycles\+To\+Skip)
-\item 
-\Hypertarget{class_configuration_a276568f2c64b90d6c70fdd3197706418}\label{class_configuration_a276568f2c64b90d6c70fdd3197706418} 
-int {\bfseries Get\+Cycles\+To\+Skip} ()
-\item 
-\Hypertarget{class_configuration_aafa638196229c9ab58910ec1ea57e5ed}\label{class_configuration_aafa638196229c9ab58910ec1ea57e5ed} 
-void {\bfseries Set\+Cycles\+Num} (int cycles\+Num)
-\item 
-\Hypertarget{class_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51}\label{class_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51} 
-int {\bfseries Get\+Cycles\+Num} ()
-\item 
-\Hypertarget{class_configuration_a9460843b6bd10843cbc2c4417b4fe425}\label{class_configuration_a9460843b6bd10843cbc2c4417b4fe425} 
-void {\bfseries Add\+Density} (int density)
-\item 
-\Hypertarget{class_configuration_acaa8c145805e6cfcc73f6bebc31f1f89}\label{class_configuration_acaa8c145805e6cfcc73f6bebc31f1f89} 
-void {\bfseries Clear\+Densities} ()
-\item 
-\Hypertarget{class_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b}\label{class_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b} 
-int {\bfseries Get\+Densities\+Element} (int idx)
-\item 
-\Hypertarget{class_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6}\label{class_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6} 
-int {\bfseries Get\+Densities\+Size} ()
-\item 
-\Hypertarget{class_configuration_ad7c3fc038e41d08fb8cf61faf3a93164}\label{class_configuration_ad7c3fc038e41d08fb8cf61faf3a93164} 
-void {\bfseries Set\+Tests\+Number} (int tests\+Number)
-\item 
-\Hypertarget{class_configuration_ae7c49ca371344c753a57287604c09511}\label{class_configuration_ae7c49ca371344c753a57287604c09511} 
-int {\bfseries Get\+Tests\+Number} ()
-\item 
-\Hypertarget{class_configuration_ad409978c164fdc0825ee75c336282ce9}\label{class_configuration_ad409978c164fdc0825ee75c336282ce9} 
-void {\bfseries Set\+VDriver\+Type} (\mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} \texorpdfstring{$\ast$}{*}profile)
-\item 
-\Hypertarget{class_configuration_a5676b7c36b3053d2420162cf9c033717}\label{class_configuration_a5676b7c36b3053d2420162cf9c033717} 
-float {\bfseries Get\+Driver\+Type\+Probability} (int driver\+Type)
-\item 
-\Hypertarget{class_configuration_a90bac9684aa87e58b6811bcd207144e7}\label{class_configuration_a90bac9684aa87e58b6811bcd207144e7} 
-\mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} \texorpdfstring{$\ast$}{*} {\bfseries Get\+Driver\+Profile} (int driver\+Type)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_configuration_a739e4e5868aabb5a9a0d7e80698ebe80}{Configuration}} (bool \mbox{\hyperlink{class_configuration_a94cce8d9fc8d05b9f9dadfb368b89a5b}{calculate\+Densities}}=false)
+\begin{DoxyCompactList}\small\item\em The constructor of the \doxylink{class_configuration}{Configuration} class. \end{DoxyCompactList}\item 
+\Hypertarget{class_configuration_a0dd0fa189e239f4c9a036303f641441e}\label{class_configuration_a0dd0fa189e239f4c9a036303f641441e} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Configuration} ()
+\begin{DoxyCompactList}\small\item\em The destructor of the \doxylink{class_configuration}{Configuration} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_a6510e64a8c07ef8f2c8e44657fbb9fc6}{Add\+Show\+Function}} (SHOW\+\_\+\+FUNCTION\+\_\+\+PTR show\+Function\+Ptr)
+\begin{DoxyCompactList}\small\item\em Method that adds another function preparing display data (show function) to the array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_a18dbc1a570cedaa70e7330bfcc94eaf0}{Clear\+Show\+Functions}} ()
+\begin{DoxyCompactList}\small\item\em Method that clears show\+Functions vector. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_a3aa075168273417cf9a8f28259ecf3d3}{Get\+Show\+Functions\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Methods that calculates the size of show\+Functions vector. \end{DoxyCompactList}\item 
+SHOW\+\_\+\+FUNCTION\+\_\+\+PTR \mbox{\hyperlink{class_configuration_a6373a2872a03b10a5bea81779eb75490}{Get\+Show\+Functions\+Element}} (int idx)
+\begin{DoxyCompactList}\small\item\em Method that gets chosen show\+Functions vector element by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_a58b703fedf731c46d6662054b522af0b}{Set\+Segments\+Num}} (int \mbox{\hyperlink{class_configuration_a645f0761f039228dc9353a262df23e75}{segments\+Num}})
+\begin{DoxyCompactList}\small\item\em The setter of the segments\+Num field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_a0cc3cefdde53c13b0796dbdefde231c6}{Get\+Segments\+Num}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the segments\+Num field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_af062050fb6a3aa099d41d44ca37b2783}{Set\+Current\+Density}} (int \mbox{\hyperlink{class_configuration_a3b998d6b7ed3bc20ab5d45376e464af4}{current\+Density}})
+\begin{DoxyCompactList}\small\item\em The setter of the current\+Density field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_aabd72705d996304b8c3887f333072bdd}{Get\+Current\+Density}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the current\+Density field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_a9436cfea3f610fa0ac59d4542e5df6a5}{Set\+Calculate\+Densities}} (bool \mbox{\hyperlink{class_configuration_a94cce8d9fc8d05b9f9dadfb368b89a5b}{calculate\+Densities}})
+\begin{DoxyCompactList}\small\item\em The setter of the calculate\+Densities field. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_configuration_a0eed82091f6f46856e00abacef051836}{Get\+Calculate\+Densities}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the calculate\+Densities field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_ad329c9c901c0ababe58cb1b1152eaebe}{Set\+Use\+Change\+Lane}} (bool \mbox{\hyperlink{class_configuration_a1533587ccccb0ccc4be4eb31123425c2}{use\+Change\+Lane}})
+\begin{DoxyCompactList}\small\item\em The setter of the use\+Change\+Lane field. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_configuration_a215a9b6814065e9ed9be98afbc2a5f99}{Get\+Use\+Change\+Lane}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the use\+Change\+Lane field. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_configuration_afb6810ddc1019e15100e39f094e5d374}{Add\+Car\+Probability}} (int car\+Length, float probabilty)
+\begin{DoxyCompactList}\small\item\em Method that adds new car probability for a specified length to the car\+Probability array. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_configuration_aa790f00031e09a557cbdc7a7a17c5e9b}{Get\+Car\+Probability}} (int car\+Length)
+\begin{DoxyCompactList}\small\item\em The getter of the car\+Probability field of the specified length. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_a6ca37a7360073508cbad82d2c2998192}{Clear\+Probabilities}} ()
+\begin{DoxyCompactList}\small\item\em Method that clears all car probabilities from car\+Probability array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_a41235c89934e1d2b5c2e69bb4628cc1d}{Set\+Cycles\+To\+Skip}} (int \mbox{\hyperlink{class_configuration_acb3d4025b935f6a69d480e91a8f16fed}{cycles\+To\+Skip}})
+\begin{DoxyCompactList}\small\item\em The setter of the cycles\+To\+Skip field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_a276568f2c64b90d6c70fdd3197706418}{Get\+Cycles\+To\+Skip}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the cycles\+To\+Skip field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_aafa638196229c9ab58910ec1ea57e5ed}{Set\+Cycles\+Num}} (int \mbox{\hyperlink{class_configuration_a5e29f30d5dbae4ed3fb67e12f14a3b52}{cycles\+Num}})
+\begin{DoxyCompactList}\small\item\em The setter of the cycles\+Num field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51}{Get\+Cycles\+Num}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the cycles\+Num field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_a9460843b6bd10843cbc2c4417b4fe425}{Add\+Density}} (int density)
+\begin{DoxyCompactList}\small\item\em Methods that add new density to the densities array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_acaa8c145805e6cfcc73f6bebc31f1f89}{Clear\+Densities}} ()
+\begin{DoxyCompactList}\small\item\em Method that clears all densities from from densities array. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b}{Get\+Densities\+Element}} (int idx)
+\begin{DoxyCompactList}\small\item\em The getter of the is\+Tail field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6}{Get\+Densities\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Method that calculates number of densities in densities array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_ad7c3fc038e41d08fb8cf61faf3a93164}{Set\+Tests\+Number}} (int \mbox{\hyperlink{class_configuration_ad33c77693907f1b1b4fc0cffc8c47f40}{tests\+Number}})
+\begin{DoxyCompactList}\small\item\em The setter of the tests\+Number field. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_ae7c49ca371344c753a57287604c09511}{Get\+Tests\+Number}} ()
+\begin{DoxyCompactList}\small\item\em The getter of the tests\+Number field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_configuration_ad409978c164fdc0825ee75c336282ce9}{Set\+VDriver\+Type}} (\mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} \texorpdfstring{$\ast$}{*}profile)
+\begin{DoxyCompactList}\small\item\em The setter of the v\+Driver\+Profiles field. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_configuration_a5676b7c36b3053d2420162cf9c033717}{Get\+Driver\+Type\+Probability}} (int driver\+Type)
+\begin{DoxyCompactList}\small\item\em The getter of the v\+Driver\+Profiles probability by a specified index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_configuration_a90bac9684aa87e58b6811bcd207144e7}{Get\+Driver\+Profile}} (int driver\+Type)
+\begin{DoxyCompactList}\small\item\em The getter of the v\+Driver\+Profiles driver type by a specified index. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_configuration_abcfd2b1fa149406ff3a5fe8fd3613eea}\label{class_configuration_abcfd2b1fa149406ff3a5fe8fd3613eea} 
 string {\bfseries data}
-\item 
-\Hypertarget{class_configuration_a6953efa479161b2cdf8336f0d71574d2}\label{class_configuration_a6953efa479161b2cdf8336f0d71574d2} 
-vector$<$ \mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} $>$ {\bfseries v\+Driver\+Profiles}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Simulation data in the form of a string. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} $>$ \mbox{\hyperlink{class_configuration_a6953efa479161b2cdf8336f0d71574d2}{v\+Driver\+Profiles}}
+\begin{DoxyCompactList}\small\item\em Vector containing driver profiles. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_configuration_a1ee4fcdfeb6d6698b75265b2b46fd65d}\label{class_configuration_a1ee4fcdfeb6d6698b75265b2b46fd65d} 
 vector$<$ SHOW\+\_\+\+FUNCTION\+\_\+\+PTR $>$ {\bfseries show\+Functions}
-\item 
+\begin{DoxyCompactList}\small\item\em Vector with all the functions that are responsible for gathering data necessary to display diagrams. \end{DoxyCompactList}\item 
 \Hypertarget{class_configuration_a90925c5b9673eefb81c679cc2cf34153}\label{class_configuration_a90925c5b9673eefb81c679cc2cf34153} 
 vector$<$ int $>$ {\bfseries densities}
-\item 
+\begin{DoxyCompactList}\small\item\em Vector with all avaliable density points. \end{DoxyCompactList}\item 
 \Hypertarget{class_configuration_a5e29f30d5dbae4ed3fb67e12f14a3b52}\label{class_configuration_a5e29f30d5dbae4ed3fb67e12f14a3b52} 
 int {\bfseries cycles\+Num}
-\item 
-\Hypertarget{class_configuration_acb3d4025b935f6a69d480e91a8f16fed}\label{class_configuration_acb3d4025b935f6a69d480e91a8f16fed} 
-int {\bfseries cycles\+To\+Skip}
-\item 
+\begin{DoxyCompactList}\small\item\em The number of iterations of the simulation. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_acb3d4025b935f6a69d480e91a8f16fed}{cycles\+To\+Skip}}
+\begin{DoxyCompactList}\small\item\em The number of iterations that will not be displayed. \end{DoxyCompactList}\item 
 \Hypertarget{class_configuration_a645f0761f039228dc9353a262df23e75}\label{class_configuration_a645f0761f039228dc9353a262df23e75} 
 int {\bfseries segments\+Num}
-\item 
-\Hypertarget{class_configuration_a3b998d6b7ed3bc20ab5d45376e464af4}\label{class_configuration_a3b998d6b7ed3bc20ab5d45376e464af4} 
-int {\bfseries current\+Density}
-\item 
+\begin{DoxyCompactList}\small\item\em The length of the road in segments. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_configuration_a3b998d6b7ed3bc20ab5d45376e464af4}{current\+Density}}
+\begin{DoxyCompactList}\small\item\em The road density percentage. \end{DoxyCompactList}\item 
 \Hypertarget{class_configuration_a94cce8d9fc8d05b9f9dadfb368b89a5b}\label{class_configuration_a94cce8d9fc8d05b9f9dadfb368b89a5b} 
 bool {\bfseries calculate\+Densities}
-\item 
+\begin{DoxyCompactList}\small\item\em The value determining if the result of the simulation will be space-\/time or fundamental diagram. \end{DoxyCompactList}\item 
 \Hypertarget{class_configuration_ad33c77693907f1b1b4fc0cffc8c47f40}\label{class_configuration_ad33c77693907f1b1b4fc0cffc8c47f40} 
 int {\bfseries tests\+Number}
-\item 
+\begin{DoxyCompactList}\small\item\em The number of simulations that are averaged for a single density point on the fundamental diagram. \end{DoxyCompactList}\item 
 \Hypertarget{class_configuration_a1533587ccccb0ccc4be4eb31123425c2}\label{class_configuration_a1533587ccccb0ccc4be4eb31123425c2} 
 bool {\bfseries use\+Change\+Lane}
-\item 
+\begin{DoxyCompactList}\small\item\em The saved value defining if the lane changes will occur during the simulation. \end{DoxyCompactList}\item 
 \Hypertarget{class_configuration_a9b5e53554349f1085d67112e47e9bbc3}\label{class_configuration_a9b5e53554349f1085d67112e47e9bbc3} 
 float {\bfseries car\+Probability} \mbox{[}MAX\+\_\+\+CARS\+\_\+\+SET\mbox{]} = \{0\}
-\item 
+\begin{DoxyCompactList}\small\item\em Array with probabilites for generating car with random lengths. \end{DoxyCompactList}\item 
 \Hypertarget{class_configuration_a961b65130cc45dc3984c4244de338073}\label{class_configuration_a961b65130cc45dc3984c4244de338073} 
 float {\bfseries driver\+Type\+Probabiltities} \mbox{[}MAX\+\_\+\+NUMBER\+\_\+\+OF\+\_\+\+DRIVER\+\_\+\+TYPES\mbox{]} = \{0.\+0\}
-\item 
+\begin{DoxyCompactList}\small\item\em Array with probabilites for assigning random driver types to cars. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_configuration_a1695591cf80f696fef5248d2e07a8154}{driver\+Profiles}} \mbox{[}MAX\+\_\+\+NUMBER\+\_\+\+OF\+\_\+\+DRIVER\+\_\+\+TYPES\mbox{]} = \{NULL\}
+\begin{DoxyCompactList}\small\item\em Array with all avaliable driver types (depricated) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_configuration}{Configuration} class describes configuration parameters of the core simulation module. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_configuration_a739e4e5868aabb5a9a0d7e80698ebe80}\label{class_configuration_a739e4e5868aabb5a9a0d7e80698ebe80} 
+\index{Configuration@{Configuration}!Configuration@{Configuration}}
+\index{Configuration@{Configuration}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{Configuration()}{Configuration()}}
+{\footnotesize\ttfamily Configuration\+::\+Configuration (\begin{DoxyParamCaption}\item[{bool}]{calculate\+Densities = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+The constructor of the \doxylink{class_configuration}{Configuration} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em calculate\+Densities} & -\/ parameter determining if the space-\/time or fundamental diagram will be generated \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a739e4e5868aabb5a9a0d7e80698ebe80_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_configuration_afb6810ddc1019e15100e39f094e5d374}\label{class_configuration_afb6810ddc1019e15100e39f094e5d374} 
+\index{Configuration@{Configuration}!AddCarProbability@{AddCarProbability}}
+\index{AddCarProbability@{AddCarProbability}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{AddCarProbability()}{AddCarProbability()}}
+{\footnotesize\ttfamily bool Configuration\+::\+Add\+Car\+Probability (\begin{DoxyParamCaption}\item[{int}]{car\+Length,  }\item[{float}]{probabilty }\end{DoxyParamCaption})}
+
+
+
+Method that adds new car probability for a specified length to the car\+Probability array. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a9b5e53554349f1085d67112e47e9bbc3}{car\+Probability} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em car\+Length} & -\/ length of a car in segments \\
+\hline
+{\em probabilty} & -\/ probability of choosing car of a specified length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Flag that indicates if the operation was successful or not 
+\end{DoxyReturn}
+\Hypertarget{class_configuration_a9460843b6bd10843cbc2c4417b4fe425}\label{class_configuration_a9460843b6bd10843cbc2c4417b4fe425} 
+\index{Configuration@{Configuration}!AddDensity@{AddDensity}}
+\index{AddDensity@{AddDensity}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{AddDensity()}{AddDensity()}}
+{\footnotesize\ttfamily void Configuration\+::\+Add\+Density (\begin{DoxyParamCaption}\item[{int}]{density }\end{DoxyParamCaption})}
+
+
+
+Methods that add new density to the densities array. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a90925c5b9673eefb81c679cc2cf34153}{densities} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em densities} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a9460843b6bd10843cbc2c4417b4fe425_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a6510e64a8c07ef8f2c8e44657fbb9fc6}\label{class_configuration_a6510e64a8c07ef8f2c8e44657fbb9fc6} 
+\index{Configuration@{Configuration}!AddShowFunction@{AddShowFunction}}
+\index{AddShowFunction@{AddShowFunction}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{AddShowFunction()}{AddShowFunction()}}
+{\footnotesize\ttfamily void Configuration\+::\+Add\+Show\+Function (\begin{DoxyParamCaption}\item[{SHOW\+\_\+\+FUNCTION\+\_\+\+PTR}]{show\+Function\+Ptr }\end{DoxyParamCaption})}
+
+
+
+Method that adds another function preparing display data (show function) to the array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em show\+Function\+Ptr} & -\/ pointer to the show function \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a1ee4fcdfeb6d6698b75265b2b46fd65d}{show\+Functions} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_acaa8c145805e6cfcc73f6bebc31f1f89}\label{class_configuration_acaa8c145805e6cfcc73f6bebc31f1f89} 
+\index{Configuration@{Configuration}!ClearDensities@{ClearDensities}}
+\index{ClearDensities@{ClearDensities}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{ClearDensities()}{ClearDensities()}}
+{\footnotesize\ttfamily void Configuration\+::\+Clear\+Densities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method that clears all densities from from densities array. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a90925c5b9673eefb81c679cc2cf34153}{densities} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_a6ca37a7360073508cbad82d2c2998192}\label{class_configuration_a6ca37a7360073508cbad82d2c2998192} 
+\index{Configuration@{Configuration}!ClearProbabilities@{ClearProbabilities}}
+\index{ClearProbabilities@{ClearProbabilities}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{ClearProbabilities()}{ClearProbabilities()}}
+{\footnotesize\ttfamily void Configuration\+::\+Clear\+Probabilities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method that clears all car probabilities from car\+Probability array. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a9b5e53554349f1085d67112e47e9bbc3}{car\+Probability} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_a18dbc1a570cedaa70e7330bfcc94eaf0}\label{class_configuration_a18dbc1a570cedaa70e7330bfcc94eaf0} 
+\index{Configuration@{Configuration}!ClearShowFunctions@{ClearShowFunctions}}
+\index{ClearShowFunctions@{ClearShowFunctions}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{ClearShowFunctions()}{ClearShowFunctions()}}
+{\footnotesize\ttfamily void Configuration\+::\+Clear\+Show\+Functions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method that clears show\+Functions vector. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a1ee4fcdfeb6d6698b75265b2b46fd65d}{show\+Functions} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_a0eed82091f6f46856e00abacef051836}\label{class_configuration_a0eed82091f6f46856e00abacef051836} 
+\index{Configuration@{Configuration}!GetCalculateDensities@{GetCalculateDensities}}
+\index{GetCalculateDensities@{GetCalculateDensities}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetCalculateDensities()}{GetCalculateDensities()}}
+{\footnotesize\ttfamily bool Configuration\+::\+Get\+Calculate\+Densities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the calculate\+Densities field. 
+
+\begin{DoxyReturn}{Returns}
+calculate\+Densities 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a94cce8d9fc8d05b9f9dadfb368b89a5b}{calculate\+Densities} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a0eed82091f6f46856e00abacef051836_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_aa790f00031e09a557cbdc7a7a17c5e9b}\label{class_configuration_aa790f00031e09a557cbdc7a7a17c5e9b} 
+\index{Configuration@{Configuration}!GetCarProbability@{GetCarProbability}}
+\index{GetCarProbability@{GetCarProbability}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetCarProbability()}{GetCarProbability()}}
+{\footnotesize\ttfamily float Configuration\+::\+Get\+Car\+Probability (\begin{DoxyParamCaption}\item[{int}]{car\+Length }\end{DoxyParamCaption})}
+
+
+
+The getter of the car\+Probability field of the specified length. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em car\+Length} & -\/ length of a car in segments \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a9b5e53554349f1085d67112e47e9bbc3}{car\+Probability} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_aa790f00031e09a557cbdc7a7a17c5e9b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_aabd72705d996304b8c3887f333072bdd}\label{class_configuration_aabd72705d996304b8c3887f333072bdd} 
+\index{Configuration@{Configuration}!GetCurrentDensity@{GetCurrentDensity}}
+\index{GetCurrentDensity@{GetCurrentDensity}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetCurrentDensity()}{GetCurrentDensity()}}
+{\footnotesize\ttfamily int Configuration\+::\+Get\+Current\+Density (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the current\+Density field. 
+
+\begin{DoxyReturn}{Returns}
+current\+Density 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a3b998d6b7ed3bc20ab5d45376e464af4}{current\+Density} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_aabd72705d996304b8c3887f333072bdd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51}\label{class_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51} 
+\index{Configuration@{Configuration}!GetCyclesNum@{GetCyclesNum}}
+\index{GetCyclesNum@{GetCyclesNum}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetCyclesNum()}{GetCyclesNum()}}
+{\footnotesize\ttfamily int Configuration\+::\+Get\+Cycles\+Num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the cycles\+Num field. 
+
+\begin{DoxyReturn}{Returns}
+cycles\+Num 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a5e29f30d5dbae4ed3fb67e12f14a3b52}{cycles\+Num} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_ab2fa15d0d0d6a8a7afc5b1a4d0082a51_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a276568f2c64b90d6c70fdd3197706418}\label{class_configuration_a276568f2c64b90d6c70fdd3197706418} 
+\index{Configuration@{Configuration}!GetCyclesToSkip@{GetCyclesToSkip}}
+\index{GetCyclesToSkip@{GetCyclesToSkip}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetCyclesToSkip()}{GetCyclesToSkip()}}
+{\footnotesize\ttfamily int Configuration\+::\+Get\+Cycles\+To\+Skip (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the cycles\+To\+Skip field. 
+
+\begin{DoxyReturn}{Returns}
+cycles\+To\+Skip 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_acb3d4025b935f6a69d480e91a8f16fed}{cycles\+To\+Skip} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a276568f2c64b90d6c70fdd3197706418_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b}\label{class_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b} 
+\index{Configuration@{Configuration}!GetDensitiesElement@{GetDensitiesElement}}
+\index{GetDensitiesElement@{GetDensitiesElement}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetDensitiesElement()}{GetDensitiesElement()}}
+{\footnotesize\ttfamily int Configuration\+::\+Get\+Densities\+Element (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})}
+
+
+
+The getter of the is\+Tail field. 
+
+\begin{DoxyReturn}{Returns}
+is\+Tail 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+is\+Tail 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_af6b18cc20fec5c18bd6b4cb788e3a22b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6}\label{class_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6} 
+\index{Configuration@{Configuration}!GetDensitiesSize@{GetDensitiesSize}}
+\index{GetDensitiesSize@{GetDensitiesSize}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetDensitiesSize()}{GetDensitiesSize()}}
+{\footnotesize\ttfamily int Configuration\+::\+Get\+Densities\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method that calculates number of densities in densities array. 
+
+\begin{DoxyReturn}{Returns}
+Number of densities in densities array 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a90925c5b9673eefb81c679cc2cf34153}{densities} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a37e4fee49efe2ad0dff9c6a660ae9ed6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a90bac9684aa87e58b6811bcd207144e7}\label{class_configuration_a90bac9684aa87e58b6811bcd207144e7} 
+\index{Configuration@{Configuration}!GetDriverProfile@{GetDriverProfile}}
+\index{GetDriverProfile@{GetDriverProfile}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetDriverProfile()}{GetDriverProfile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} \texorpdfstring{$\ast$}{*} Configuration\+::\+Get\+Driver\+Profile (\begin{DoxyParamCaption}\item[{int}]{driver\+Type }\end{DoxyParamCaption})}
+
+
+
+The getter of the v\+Driver\+Profiles driver type by a specified index. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a6953efa479161b2cdf8336f0d71574d2}{v\+Driver\+Profiles} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em driver\+Type} & -\/ index of the specified driver type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Specified driver type object 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_driver_profile}{Driver\+Profile} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a90bac9684aa87e58b6811bcd207144e7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a5676b7c36b3053d2420162cf9c033717}\label{class_configuration_a5676b7c36b3053d2420162cf9c033717} 
+\index{Configuration@{Configuration}!GetDriverTypeProbability@{GetDriverTypeProbability}}
+\index{GetDriverTypeProbability@{GetDriverTypeProbability}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetDriverTypeProbability()}{GetDriverTypeProbability()}}
+{\footnotesize\ttfamily float Configuration\+::\+Get\+Driver\+Type\+Probability (\begin{DoxyParamCaption}\item[{int}]{driver\+Type }\end{DoxyParamCaption})}
+
+
+
+The getter of the v\+Driver\+Profiles probability by a specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver\+Type} & -\/ index of the specified driver type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Probability from v\+Driver\+Profiles vector 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a6953efa479161b2cdf8336f0d71574d2}{v\+Driver\+Profiles} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_a0cc3cefdde53c13b0796dbdefde231c6}\label{class_configuration_a0cc3cefdde53c13b0796dbdefde231c6} 
+\index{Configuration@{Configuration}!GetSegmentsNum@{GetSegmentsNum}}
+\index{GetSegmentsNum@{GetSegmentsNum}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetSegmentsNum()}{GetSegmentsNum()}}
+{\footnotesize\ttfamily int Configuration\+::\+Get\+Segments\+Num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the segments\+Num field. 
+
+\begin{DoxyReturn}{Returns}
+segments\+Num 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a645f0761f039228dc9353a262df23e75}{segments\+Num} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a0cc3cefdde53c13b0796dbdefde231c6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a6373a2872a03b10a5bea81779eb75490}\label{class_configuration_a6373a2872a03b10a5bea81779eb75490} 
+\index{Configuration@{Configuration}!GetShowFunctionsElement@{GetShowFunctionsElement}}
+\index{GetShowFunctionsElement@{GetShowFunctionsElement}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetShowFunctionsElement()}{GetShowFunctionsElement()}}
+{\footnotesize\ttfamily SHOW\+\_\+\+FUNCTION\+\_\+\+PTR Configuration\+::\+Get\+Show\+Functions\+Element (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})}
+
+
+
+Method that gets chosen show\+Functions vector element by index. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a1ee4fcdfeb6d6698b75265b2b46fd65d}{show\+Functions} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em idx} & -\/ index of chosen show function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Chosen show function 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a6373a2872a03b10a5bea81779eb75490_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a3aa075168273417cf9a8f28259ecf3d3}\label{class_configuration_a3aa075168273417cf9a8f28259ecf3d3} 
+\index{Configuration@{Configuration}!GetShowFunctionsSize@{GetShowFunctionsSize}}
+\index{GetShowFunctionsSize@{GetShowFunctionsSize}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetShowFunctionsSize()}{GetShowFunctionsSize()}}
+{\footnotesize\ttfamily int Configuration\+::\+Get\+Show\+Functions\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Methods that calculates the size of show\+Functions vector. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a1ee4fcdfeb6d6698b75265b2b46fd65d}{show\+Functions} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+Number of elements in show\+Functions vector 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a3aa075168273417cf9a8f28259ecf3d3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_ae7c49ca371344c753a57287604c09511}\label{class_configuration_ae7c49ca371344c753a57287604c09511} 
+\index{Configuration@{Configuration}!GetTestsNumber@{GetTestsNumber}}
+\index{GetTestsNumber@{GetTestsNumber}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetTestsNumber()}{GetTestsNumber()}}
+{\footnotesize\ttfamily int Configuration\+::\+Get\+Tests\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the tests\+Number field. 
+
+\begin{DoxyReturn}{Returns}
+tests\+Number 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_ad33c77693907f1b1b4fc0cffc8c47f40}{tests\+Number} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_ae7c49ca371344c753a57287604c09511_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a215a9b6814065e9ed9be98afbc2a5f99}\label{class_configuration_a215a9b6814065e9ed9be98afbc2a5f99} 
+\index{Configuration@{Configuration}!GetUseChangeLane@{GetUseChangeLane}}
+\index{GetUseChangeLane@{GetUseChangeLane}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{GetUseChangeLane()}{GetUseChangeLane()}}
+{\footnotesize\ttfamily bool Configuration\+::\+Get\+Use\+Change\+Lane (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The getter of the use\+Change\+Lane field. 
+
+\begin{DoxyReturn}{Returns}
+use\+Change\+Lane 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a1533587ccccb0ccc4be4eb31123425c2}{use\+Change\+Lane} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_a215a9b6814065e9ed9be98afbc2a5f99_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_a9436cfea3f610fa0ac59d4542e5df6a5}\label{class_configuration_a9436cfea3f610fa0ac59d4542e5df6a5} 
+\index{Configuration@{Configuration}!SetCalculateDensities@{SetCalculateDensities}}
+\index{SetCalculateDensities@{SetCalculateDensities}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{SetCalculateDensities()}{SetCalculateDensities()}}
+{\footnotesize\ttfamily void Configuration\+::\+Set\+Calculate\+Densities (\begin{DoxyParamCaption}\item[{bool}]{calculate\+Densities }\end{DoxyParamCaption})}
+
+
+
+The setter of the calculate\+Densities field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em calculate\+Densities} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a94cce8d9fc8d05b9f9dadfb368b89a5b}{calculate\+Densities} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_af062050fb6a3aa099d41d44ca37b2783}\label{class_configuration_af062050fb6a3aa099d41d44ca37b2783} 
+\index{Configuration@{Configuration}!SetCurrentDensity@{SetCurrentDensity}}
+\index{SetCurrentDensity@{SetCurrentDensity}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{SetCurrentDensity()}{SetCurrentDensity()}}
+{\footnotesize\ttfamily void Configuration\+::\+Set\+Current\+Density (\begin{DoxyParamCaption}\item[{int}]{current\+Density }\end{DoxyParamCaption})}
+
+
+
+The setter of the current\+Density field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Density} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a3b998d6b7ed3bc20ab5d45376e464af4}{current\+Density} 
+\end{DoxySeeAlso}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_configuration_af062050fb6a3aa099d41d44ca37b2783_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_configuration_aafa638196229c9ab58910ec1ea57e5ed}\label{class_configuration_aafa638196229c9ab58910ec1ea57e5ed} 
+\index{Configuration@{Configuration}!SetCyclesNum@{SetCyclesNum}}
+\index{SetCyclesNum@{SetCyclesNum}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{SetCyclesNum()}{SetCyclesNum()}}
+{\footnotesize\ttfamily void Configuration\+::\+Set\+Cycles\+Num (\begin{DoxyParamCaption}\item[{int}]{cycles\+Num }\end{DoxyParamCaption})}
+
+
+
+The setter of the cycles\+Num field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cycles\+Num} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a5e29f30d5dbae4ed3fb67e12f14a3b52}{cycles\+Num} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_a41235c89934e1d2b5c2e69bb4628cc1d}\label{class_configuration_a41235c89934e1d2b5c2e69bb4628cc1d} 
+\index{Configuration@{Configuration}!SetCyclesToSkip@{SetCyclesToSkip}}
+\index{SetCyclesToSkip@{SetCyclesToSkip}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{SetCyclesToSkip()}{SetCyclesToSkip()}}
+{\footnotesize\ttfamily void Configuration\+::\+Set\+Cycles\+To\+Skip (\begin{DoxyParamCaption}\item[{int}]{cycles\+To\+Skip }\end{DoxyParamCaption})}
+
+
+
+The setter of the cycles\+To\+Skip field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cycles\+To\+Skip} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_acb3d4025b935f6a69d480e91a8f16fed}{cycles\+To\+Skip} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_a58b703fedf731c46d6662054b522af0b}\label{class_configuration_a58b703fedf731c46d6662054b522af0b} 
+\index{Configuration@{Configuration}!SetSegmentsNum@{SetSegmentsNum}}
+\index{SetSegmentsNum@{SetSegmentsNum}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{SetSegmentsNum()}{SetSegmentsNum()}}
+{\footnotesize\ttfamily void Configuration\+::\+Set\+Segments\+Num (\begin{DoxyParamCaption}\item[{int}]{segments\+Num }\end{DoxyParamCaption})}
+
+
+
+The setter of the segments\+Num field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em segments\+Num} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a645f0761f039228dc9353a262df23e75}{segments\+Num} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_ad7c3fc038e41d08fb8cf61faf3a93164}\label{class_configuration_ad7c3fc038e41d08fb8cf61faf3a93164} 
+\index{Configuration@{Configuration}!SetTestsNumber@{SetTestsNumber}}
+\index{SetTestsNumber@{SetTestsNumber}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{SetTestsNumber()}{SetTestsNumber()}}
+{\footnotesize\ttfamily void Configuration\+::\+Set\+Tests\+Number (\begin{DoxyParamCaption}\item[{int}]{tests\+Number }\end{DoxyParamCaption})}
+
+
+
+The setter of the tests\+Number field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tests\+Number} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_ad33c77693907f1b1b4fc0cffc8c47f40}{tests\+Number} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_ad329c9c901c0ababe58cb1b1152eaebe}\label{class_configuration_ad329c9c901c0ababe58cb1b1152eaebe} 
+\index{Configuration@{Configuration}!SetUseChangeLane@{SetUseChangeLane}}
+\index{SetUseChangeLane@{SetUseChangeLane}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{SetUseChangeLane()}{SetUseChangeLane()}}
+{\footnotesize\ttfamily void Configuration\+::\+Set\+Use\+Change\+Lane (\begin{DoxyParamCaption}\item[{bool}]{use\+Change\+Lane }\end{DoxyParamCaption})}
+
+
+
+The setter of the use\+Change\+Lane field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em use\+Change\+Lane} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a1533587ccccb0ccc4be4eb31123425c2}{use\+Change\+Lane} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_ad409978c164fdc0825ee75c336282ce9}\label{class_configuration_ad409978c164fdc0825ee75c336282ce9} 
+\index{Configuration@{Configuration}!SetVDriverType@{SetVDriverType}}
+\index{SetVDriverType@{SetVDriverType}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{SetVDriverType()}{SetVDriverType()}}
+{\footnotesize\ttfamily void Configuration\+::\+Set\+VDriver\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} \texorpdfstring{$\ast$}{*}}]{profile }\end{DoxyParamCaption})}
+
+
+
+The setter of the v\+Driver\+Profiles field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v\+Driver\+Profiles} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_configuration_a6953efa479161b2cdf8336f0d71574d2}{v\+Driver\+Profiles} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_configuration_a3b998d6b7ed3bc20ab5d45376e464af4}\label{class_configuration_a3b998d6b7ed3bc20ab5d45376e464af4} 
+\index{Configuration@{Configuration}!currentDensity@{currentDensity}}
+\index{currentDensity@{currentDensity}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{currentDensity}{currentDensity}}
+{\footnotesize\ttfamily int Configuration\+::current\+Density\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The road density percentage. 
+
+\begin{DoxyNote}{Note}
+Density represents the percentage value of the cars on the road during the whole simulation (closed loop) 
+\end{DoxyNote}
+\Hypertarget{class_configuration_acb3d4025b935f6a69d480e91a8f16fed}\label{class_configuration_acb3d4025b935f6a69d480e91a8f16fed} 
+\index{Configuration@{Configuration}!cyclesToSkip@{cyclesToSkip}}
+\index{cyclesToSkip@{cyclesToSkip}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{cyclesToSkip}{cyclesToSkip}}
+{\footnotesize\ttfamily int Configuration\+::cycles\+To\+Skip\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The number of iterations that will not be displayed. 
+
+\begin{DoxyNote}{Note}
+These iterations will not be displayed, but the simulation is still generated for them, allowing cars to spread out 
+\end{DoxyNote}
 \Hypertarget{class_configuration_a1695591cf80f696fef5248d2e07a8154}\label{class_configuration_a1695591cf80f696fef5248d2e07a8154} 
-\mbox{\hyperlink{class_driver_profile}{Driver\+Profile}} \texorpdfstring{$\ast$}{*} {\bfseries driver\+Profiles} \mbox{[}MAX\+\_\+\+NUMBER\+\_\+\+OF\+\_\+\+DRIVER\+\_\+\+TYPES\mbox{]} = \{NULL\}
-\end{DoxyCompactItemize}
+\index{Configuration@{Configuration}!driverProfiles@{driverProfiles}}
+\index{driverProfiles@{driverProfiles}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{driverProfiles}{driverProfiles}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_driver_profile}{Driver\+Profile}}\texorpdfstring{$\ast$}{*} Configuration\+::driver\+Profiles\mbox{[}MAX\+\_\+\+NUMBER\+\_\+\+OF\+\_\+\+DRIVER\+\_\+\+TYPES\mbox{]} = \{NULL\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Array with all avaliable driver types (depricated) 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_driver_profile}{Driver\+Profile} 
+\end{DoxySeeAlso}
+\Hypertarget{class_configuration_a6953efa479161b2cdf8336f0d71574d2}\label{class_configuration_a6953efa479161b2cdf8336f0d71574d2} 
+\index{Configuration@{Configuration}!vDriverProfiles@{vDriverProfiles}}
+\index{vDriverProfiles@{vDriverProfiles}!Configuration@{Configuration}}
+\doxysubsubsection{\texorpdfstring{vDriverProfiles}{vDriverProfiles}}
+{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{class_driver_profile}{Driver\+Profile}}$>$ Configuration\+::v\+Driver\+Profiles}
+
+
+
+Vector containing driver profiles. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_driver_profile}{Driver\+Profile} 
+\end{DoxySeeAlso}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Traffic\+Core/Configuration.\+h\item 
-Traffic\+Core/Configuration.\+cpp\end{DoxyCompactItemize}
+ABMTraf\+Sim\+CA/\+Traffic\+Core/Configuration.\+h\item 
+ABMTraf\+Sim\+CA/\+Traffic\+Core/Configuration.\+cpp\end{DoxyCompactItemize}

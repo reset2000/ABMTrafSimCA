@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['infinity_0',['Infinity',['../namespace_eigen.html#a7951593b031e13d90223c83d022ce99e',1,'Eigen']]]
+  ['lanenames_0',['laneNames',['../class_qt_diagram_f.html#ab881cf165f08e38de99902cc38ed1afe',1,'QtDiagramF']]],
+  ['legend_1',['legend',['../class_qt_diagram_config.html#a048ff21ee77db6fb9f2bcfd53c63dc6a',1,'QtDiagramConfig']]]
 ];

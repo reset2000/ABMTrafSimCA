@@ -2,6 +2,15 @@
 \hypertarget{class_qt_diagram_s_t}{}\label{class_qt_diagram_s_t}\index{QtDiagramST@{QtDiagramST}}
 
 
+The \doxylink{class_qt_diagram_s_t}{Qt\+Diagram\+ST} class is responsible for saving data necessary to create and display space-\/time diagrams.  
+
+
+
+
+{\ttfamily \#include $<$qtdiagramst.\+h$>$}
+
+
+
 Inheritance diagram for Qt\+Diagram\+ST\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -21,24 +30,83 @@ Collaboration diagram for Qt\+Diagram\+ST\+:\nopagebreak
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_qt_diagram_s_t_a9fee4b9540c615be25cd7afe67dc400c}\label{class_qt_diagram_s_t_a9fee4b9540c615be25cd7afe67dc400c} 
-{\bfseries Qt\+Diagram\+ST} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_qt_diagram_s_t_a9fee4b9540c615be25cd7afe67dc400c}{Qt\+Diagram\+ST}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em The constructor of the \doxylink{class_qt_diagram_s_t}{Qt\+Diagram\+ST} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_qt_diagram_s_t_a5ba03cf7fb8e4a019b4805edcfbd7767}\label{class_qt_diagram_s_t_a5ba03cf7fb8e4a019b4805edcfbd7767} 
-static void {\bfseries Show\+Space\+Time\+Qt} (\mbox{\hyperlink{class_configuration}{Configuration}} \&cfg, string \texorpdfstring{$\ast$}{*}cycle, Show\+Section section)
-\end{DoxyCompactItemize}
+static void \mbox{\hyperlink{class_qt_diagram_s_t_a5ba03cf7fb8e4a019b4805edcfbd7767}{Show\+Space\+Time\+Qt}} (\mbox{\hyperlink{class_configuration}{Configuration}} \&\mbox{\hyperlink{class_qt_diagram_s_t_ad8300a4614b8eff9830452d6156c52e1}{cfg}}, string \texorpdfstring{$\ast$}{*}cycle, Show\+Section section)
+\begin{DoxyCompactList}\small\item\em Class responsible for saving data necessary to create and display space-\/time diagram. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} \mbox{\hyperlink{class_qt_diagram_s_t_ad8300a4614b8eff9830452d6156c52e1}{cfg}}
+\begin{DoxyCompactList}\small\item\em Parameter storing the base space-\/time diagram configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{class_qt_diagram_s_t}{Qt\+Diagram\+ST} class is responsible for saving data necessary to create and display space-\/time diagrams. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_qt_diagram_s_t_a9fee4b9540c615be25cd7afe67dc400c}\label{class_qt_diagram_s_t_a9fee4b9540c615be25cd7afe67dc400c} 
+\index{QtDiagramST@{QtDiagramST}!QtDiagramST@{QtDiagramST}}
+\index{QtDiagramST@{QtDiagramST}!QtDiagramST@{QtDiagramST}}
+\doxysubsubsection{\texorpdfstring{QtDiagramST()}{QtDiagramST()}}
+{\footnotesize\ttfamily Qt\+Diagram\+ST\+::\+Qt\+Diagram\+ST (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+The constructor of the \doxylink{class_qt_diagram_s_t}{Qt\+Diagram\+ST} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & -\/ parent object of \doxylink{class_qt_diagram_s_t}{Qt\+Diagram\+ST}, null by default \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_qt_diagram_s_t_a5ba03cf7fb8e4a019b4805edcfbd7767}\label{class_qt_diagram_s_t_a5ba03cf7fb8e4a019b4805edcfbd7767} 
+\index{QtDiagramST@{QtDiagramST}!ShowSpaceTimeQt@{ShowSpaceTimeQt}}
+\index{ShowSpaceTimeQt@{ShowSpaceTimeQt}!QtDiagramST@{QtDiagramST}}
+\doxysubsubsection{\texorpdfstring{ShowSpaceTimeQt()}{ShowSpaceTimeQt()}}
+{\footnotesize\ttfamily void Qt\+Diagram\+ST\+::\+Show\+Space\+Time\+Qt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_configuration}{Configuration}} \&}]{cfg,  }\item[{string \texorpdfstring{$\ast$}{*}}]{cycle,  }\item[{Show\+Section}]{section }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Class responsible for saving data necessary to create and display space-\/time diagram. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cfg} & -\/ the configuration of current simulation \\
+\hline
+{\em cycle} & -\/ the current iteration that will be analyzed \\
+\hline
+{\em section} & -\/ the correct section of the space-\/time diagram string (SHOW\+\_\+\+INIT, SHOW\+\_\+\+MID, SHOW\+\_\+\+FINAL) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This method saves data in cfg object. 
+\end{DoxyNote}
+
+
+\doxysubsection{Member Data Documentation}
 \Hypertarget{class_qt_diagram_s_t_ad8300a4614b8eff9830452d6156c52e1}\label{class_qt_diagram_s_t_ad8300a4614b8eff9830452d6156c52e1} 
-\mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} {\bfseries cfg}
-\end{DoxyCompactItemize}
+\index{QtDiagramST@{QtDiagramST}!cfg@{cfg}}
+\index{cfg@{cfg}!QtDiagramST@{QtDiagramST}}
+\doxysubsubsection{\texorpdfstring{cfg}{cfg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_qt_diagram_config}{Qt\+Diagram\+Config}} Qt\+Diagram\+ST\+::cfg}
+
+
+
+Parameter storing the base space-\/time diagram configuration. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_qt_diagram_config}{Qt\+Diagram\+Config} 
+\end{DoxySeeAlso}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-qtdiagramst.\+h\item 
-qtdiagramst.\+cpp\end{DoxyCompactItemize}
+ABMTraf\+Sim\+CA/qtdiagramst.\+h\item 
+ABMTraf\+Sim\+CA/qtdiagramst.\+cpp\end{DoxyCompactItemize}

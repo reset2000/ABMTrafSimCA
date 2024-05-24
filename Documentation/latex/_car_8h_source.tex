@@ -1,40 +1,39 @@
 \doxysection{Car.\+h}
-\hypertarget{_car_8h_source}{}\label{_car_8h_source}\index{TrafficCore/Car.h@{TrafficCore/Car.h}}
+\hypertarget{_car_8h_source}{}\label{_car_8h_source}\index{ABMTrafSimCA/TrafficCore/Car.h@{ABMTrafSimCA/TrafficCore/Car.h}}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00002\ }
 \DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Configuration.h"{}}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keyword}{using\ namespace\ }std;}
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_car}{Car}}\ \{}
-\DoxyCodeLine{00009\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{long}\ nextID;}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{long}\ carID;}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ speed;}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{bool}\ stopChangingLane;}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ tailSegmentsNum;}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ driverType;}
-\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_car}{Car}}();}
-\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_car}{Car}}(\textcolor{keywordtype}{int}\ speed,\ \textcolor{keywordtype}{double}\ carLength);}
-\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_car}{\string~Car}}();}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{long}\ GetCarID();}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ SetCarSpeed(\textcolor{keywordtype}{int}\ newSpeed);}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ GetCarSpeed();}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ SetStopChangingLane(\textcolor{keywordtype}{bool}\ stopChangingLane);}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ GetStopChangingLane();}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ GetTailSegmentsNum();}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ SetDriverType(\textcolor{keywordtype}{int}\ driverType);}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{int}\ GetDriverType();}
-\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_car}{Car}}\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{class_car_a3e0b8b208ba750dd0a1bc28ce9d3a98d}{nextID}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{class_car_a5b8b8c3b8774c3afeaac6bd9a593cb97}{carID}};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_car_a4c6d153ef3b6b34cc4feacb5c6fd9bfb}{speed}};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_car_a6835c4875768b95c3f0b8cf9bb6c903c}{stopChangingLane}};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_car_abf00c6a99b612ced7adee0148d7f3494}{tailSegmentsNum}};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_car_a7cc89becff38d49d8e5080a1a3596304}{driverType}};}
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_car_a1c803f7c5038d3e31b368b0d0a35493c}{Car}}();}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_car_a1c803f7c5038d3e31b368b0d0a35493c}{Car}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_car_a4c6d153ef3b6b34cc4feacb5c6fd9bfb}{speed}},\ \textcolor{keywordtype}{double}\ carLength);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_car_a5933bb06e96b159fe339a128abda888a}{\string~Car}}();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{class_car_ae4a70399de6a3cf85fea3489de7c328b}{GetCarID}}();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_car_a7e30566dea52c5c8df3b5959882f1280}{SetCarSpeed}}(\textcolor{keywordtype}{int}\ newSpeed);}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_car_ab8cf9e1fe7c163b1237102521fe57d76}{GetCarSpeed}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_car_abaf405f42f6acfa964be8ba574a7bebe}{SetStopChangingLane}}(\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_car_a6835c4875768b95c3f0b8cf9bb6c903c}{stopChangingLane}});}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_car_aaea0281ae41c71f6ced9368a3c66e5c8}{GetStopChangingLane}}();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_car_a1a6c3f6dd16d32d94e7096d34283e1c7}{GetTailSegmentsNum}}();}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_car_a7501279d4a43a1a908c5d81ec636f272}{SetDriverType}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_car_a7cc89becff38d49d8e5080a1a3596304}{driverType}});}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_car_a1c877a949c3b72e11c47d2968b0fb76c}{GetDriverType}}();}
+\DoxyCodeLine{00106\ \};}
 
 \end{DoxyCode}

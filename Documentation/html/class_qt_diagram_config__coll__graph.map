@@ -1,5 +1,5 @@
 <map id="QtDiagramConfig" name="QtDiagramConfig">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,125,107"/>
+<area shape="rect" id="Node000001" title="The QtDiagramConfig class is responsible for saving configuration snapshots after the application is ..." alt="" coords="5,80,125,107"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="30,5,100,32"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,48,68,80,62,80,62,48"/>
 </map>

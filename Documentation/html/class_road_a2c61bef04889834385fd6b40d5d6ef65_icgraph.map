@@ -1,0 +1,9 @@
+<map id="Road::GenerateRandomDriverTypeIndex" name="Road::GenerateRandomDriverTypeIndex">
+<area shape="rect" id="Node000001" title="Method that randomly generates indices for driver types based on constraints from the configuration." alt="" coords="560,5,753,48"/>
+<area shape="rect" id="Node000002" href="$class_road.html#a8ee0c51b19a437b4eea175241f37ee38" title="Method that sets up the initial state of the road." alt="" coords="357,13,512,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="545,29,513,29,513,24,545,24"/>
+<area shape="rect" id="Node000003" href="$class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="220,13,309,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="341,29,309,29,309,24,341,24"/>
+<area shape="rect" id="Node000004" href="$class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,13,172,40"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="204,29,172,29,172,24,204,24"/>
+</map>

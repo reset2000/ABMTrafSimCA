@@ -1,0 +1,5 @@
+<map id="Road::GenerateRandomStartingCar" name="Road::GenerateRandomStartingCar">
+<area shape="rect" id="Node000001" title="Method that randomly generates car lengths based on constraints from the configuration." alt="" coords="5,5,231,32"/>
+<area shape="rect" id="Node000002" href="$class_configuration.html#aa790f00031e09a557cbdc7a7a17c5e9b" title="The getter of the carProbability field of the specified length." alt="" coords="279,5,485,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,16,263,16,263,21,231,21"/>
+</map>

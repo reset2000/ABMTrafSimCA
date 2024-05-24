@@ -1,0 +1,23 @@
+<map id="Configuration::GetDensitiesSize" name="Configuration::GetDensitiesSize">
+<area shape="rect" id="Node000001" title="Method that calculates number of densities in densities array." alt="" coords="920,59,1125,85"/>
+<area shape="rect" id="Node000002" href="$class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="692,29,858,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="904,61,858,55,859,50,904,55"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="678,80,872,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="904,89,873,92,872,87,904,83"/>
+<area shape="rect" id="Node000004" href="$class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="458,5,630,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="691,77,612,51,613,46,693,72"/>
+<area shape="rect" id="Node000005" href="$class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="464,72,624,131"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="663,104,625,104,625,99,663,99"/>
+<area shape="rect" id="Node000006" href="$class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="473,155,615,197"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="693,131,613,157,612,151,691,126"/>
+<area shape="rect" id="Node000007" href="$class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,155,410,197"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="457,188,411,187,411,182,457,182"/>
+<area shape="poly" id="edge11_Node000007_Node000006" title=" " alt="" coords="425,164,472,165,472,170,425,170"/>
+<area shape="rect" id="Node000008" href="$class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,121,192,164"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="245,174,192,166,193,161,246,169"/>
+<area shape="rect" id="Node000009" href="$class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,188,196,231"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="245,192,197,199,196,194,245,187"/>
+<area shape="rect" id="Node000010" href="$class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,255,213,297"/>
+<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="287,208,214,245,184,257,182,252,212,240,284,203"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="208,146,261,154,260,159,207,151"/>
+</map>

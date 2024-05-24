@@ -1,0 +1,9 @@
+<map id="Road::PrepareToShow" name="Road::PrepareToShow">
+<area shape="rect" id="Node000001" title="Method that prepares the string with the road cycles for further analysis." alt="" coords="5,56,156,83"/>
+<area shape="rect" id="Node000002" href="$class_road_segment.html#af1cc5cbdddc354e566aedf5201ee2f5a" title="The getter of the carID field." alt="" coords="211,5,376,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,53,219,34,220,39,140,58"/>
+<area shape="rect" id="Node000003" href="$class_car.html#ab8cf9e1fe7c163b1237102521fe57d76" title="The getter of the speed field." alt="" coords="230,56,357,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,67,214,67,214,72,156,72"/>
+<area shape="rect" id="Node000004" href="$class_car.html#aaea0281ae41c71f6ced9368a3c66e5c8" title="The getter of the stopChangingLane field." alt="" coords="204,107,383,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="140,81,220,100,219,105,139,86"/>
+</map>

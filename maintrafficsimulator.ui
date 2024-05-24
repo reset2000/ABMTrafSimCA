@@ -41,7 +41,31 @@
        </widget>
       </item>
       <item row="0" column="7">
-       <widget class="QComboBox" name="cbTheme"/>
+       <widget class="QComboBox" name="cbTheme">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Light</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Blue Cerulean</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Brown Sand</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>High Contrast</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item row="0" column="1">
        <widget class="QComboBox" name="cbLegend">

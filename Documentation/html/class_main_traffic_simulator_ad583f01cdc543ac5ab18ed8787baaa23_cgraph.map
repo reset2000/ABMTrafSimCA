@@ -1,0 +1,5 @@
+<map id="MainTrafficSimulator::on_btnSaveSTDiagram_clicked" name="MainTrafficSimulator::on_btnSaveSTDiagram_clicked">
+<area shape="rect" id="Node000001" title="Method that activates after &quot;Save diagram&quot; button on &quot;Space&#45;time diagram&quot; tab is clicked." alt="" coords="5,5,166,64"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a603579004c246049bba10f090eed4cb6" title="Method that creates a string used as a record title based on current date." alt="" coords="214,13,352,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,32,198,32,198,37,166,37"/>
+</map>

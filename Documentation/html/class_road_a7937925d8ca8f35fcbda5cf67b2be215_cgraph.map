@@ -1,0 +1,138 @@
+<map id="Road::GenerateDensities" name="Road::GenerateDensities">
+<area shape="rect" id="Node000001" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,1049,172,1076"/>
+<area shape="rect" id="Node000002" href="$class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="246,569,399,596"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,1048,305,609,310,611,99,1050"/>
+<area shape="rect" id="Node000008" href="$class_configuration.html#a6373a2872a03b10a5bea81779eb75490" title="Method that gets chosen showFunctions vector element by index." alt="" coords="486,1253,700,1296"/>
+<area shape="poly" id="edge65_Node000001_Node000008" title=" " alt="" coords="107,1047,166,1009,206,988,250,970,296,957,342,953,387,961,407,970,427,983,452,1013,462,1044,461,1077,456,1110,450,1143,448,1176,455,1208,475,1240,477,1242,473,1245,471,1243,450,1210,442,1176,444,1142,450,1109,456,1076,456,1045,447,1015,423,987,405,975,385,966,342,958,297,962,252,975,208,993,169,1013,110,1051"/>
+<area shape="rect" id="Node000009" href="$class_configuration.html#a3aa075168273417cf9a8f28259ecf3d3" title="Methods that calculates the size of showFunctions vector." alt="" coords="473,1320,713,1347"/>
+<area shape="poly" id="edge66_Node000001_Node000009" title=" " alt="" coords="115,1046,177,1020,217,1006,260,996,304,991,348,993,389,1005,427,1027,442,1043,454,1060,463,1094,462,1130,455,1166,448,1202,445,1237,452,1272,461,1289,475,1306,477,1309,474,1312,471,1310,457,1292,447,1274,440,1238,442,1201,450,1165,457,1129,458,1095,449,1062,438,1046,423,1031,387,1010,347,999,304,997,260,1002,218,1012,179,1024,117,1051"/>
+<area shape="rect" id="Node000037" href="$class_configuration.html#af6b18cc20fec5c18bd6b4cb788e3a22b" title="The getter of the isTail field." alt="" coords="233,1041,412,1084"/>
+<area shape="poly" id="edge63_Node000001_Node000037" title=" " alt="" coords="172,1060,217,1060,217,1065,172,1065"/>
+<area shape="rect" id="Node000038" href="$class_configuration.html#a37e4fee49efe2ad0dff9c6a660ae9ed6" title="Method that calculates number of densities in densities array." alt="" coords="220,1108,425,1135"/>
+<area shape="poly" id="edge64_Node000001_Node000038" title=" " alt="" coords="144,1074,220,1093,251,1101,250,1106,219,1099,143,1079"/>
+<area shape="rect" id="Node000039" href="$class_configuration.html#ae7c49ca371344c753a57287604c09511" title="The getter of the testsNumber field." alt="" coords="221,1159,424,1185"/>
+<area shape="poly" id="edge67_Node000001_Node000039" title=" " alt="" coords="109,1074,158,1109,221,1144,239,1151,237,1156,219,1149,155,1114,106,1079"/>
+<area shape="rect" id="Node000040" href="$class_road.html#ab9974bf657e9cdeffb6ed246900f6825" title="The getter of the vanished cars field from CARS_STATS_T structure." alt="" coords="242,1209,403,1236"/>
+<area shape="poly" id="edge68_Node000001_Node000040" title=" " alt="" coords="101,1075,148,1134,182,1167,221,1195,232,1201,230,1205,218,1200,179,1171,144,1137,97,1078"/>
+<area shape="rect" id="Node000041" href="$class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="549,148,638,175"/>
+<area shape="poly" id="edge69_Node000001_Node000041" title=" " alt="" coords="89,1048,101,972,125,849,163,702,188,628,217,556,268,437,313,344,340,303,373,264,416,225,472,184,501,170,532,162,534,168,503,175,474,189,420,229,377,268,344,306,317,347,273,439,222,558,193,630,168,704,130,850,106,973,94,1049"/>
+<area shape="rect" id="Node000049" href="$class_configuration.html#af062050fb6a3aa099d41d44ca37b2783" title="The setter of the currentDensity field." alt="" coords="239,1260,406,1303"/>
+<area shape="poly" id="edge87_Node000001_Node000049" title=" " alt="" coords="98,1075,115,1110,142,1156,177,1204,221,1246,227,1250,224,1254,218,1250,173,1208,137,1159,110,1112,93,1078"/>
+<area shape="rect" id="Node000003" href="$class_road.html#aeb792f88741118d3bafdfc1318e6b195" title="Method that counts the number of cars after they are alredy placed on the road and after every iterat..." alt="" coords="510,316,677,343"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="326,568,343,526,373,467,416,405,442,377,472,352,494,341,496,345,474,357,446,380,420,408,377,470,348,528,331,570"/>
+<area shape="rect" id="Node000004" href="$class_road.html#a2fc593e668e5adfb3370504c8dcd8b99" title="Method that clears the lane change flags for cars after all vehicles are moved." alt="" coords="494,367,692,393"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="330,567,351,535,382,492,423,448,472,410,499,396,501,401,474,414,427,452,387,496,355,538,334,570"/>
+<area shape="rect" id="Node000005" href="$class_configuration.html#a0eed82091f6f46856e00abacef051836" title="The getter of the calculateDensities field." alt="" coords="792,275,972,317"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="335,567,391,515,430,485,472,460,507,446,539,439,596,436,651,431,680,421,712,403,727,387,735,370,743,352,760,334,778,322,781,327,763,338,748,355,740,372,732,390,715,407,682,426,652,436,596,442,540,445,509,451,474,465,433,490,394,519,338,571"/>
+<area shape="rect" id="Node000006" href="$class_configuration.html#ab2fa15d0d0d6a8a7afc5b1a4d0082a51" title="The getter of the cyclesNum field." alt="" coords="497,199,689,225"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="328,568,369,483,422,364,433,327,438,295,447,265,471,235,482,228,485,232,475,239,452,267,443,296,439,328,428,366,374,485,333,570"/>
+<area shape="rect" id="Node000007" href="$class_configuration.html#a276568f2c64b90d6c70fdd3197706418" title="The getter of the cyclesToSkip field." alt="" coords="511,249,676,292"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="327,568,389,430,432,353,452,322,471,302,495,288,497,292,475,306,456,326,436,355,394,433,332,570"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="331,596,374,732,402,831,428,934,435,982,435,1025,428,1100,428,1134,434,1168,448,1203,475,1240,476,1241,472,1245,471,1243,444,1205,428,1170,423,1135,423,1100,430,1025,429,982,422,935,397,833,369,734,326,597"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="330,596,373,752,428,985,434,1058,438,1153,449,1245,460,1281,475,1306,477,1308,473,1312,471,1310,455,1283,444,1246,433,1154,429,1058,422,986,368,753,325,597"/>
+<area shape="rect" id="Node000010" href="$class_configuration.html#a215a9b6814065e9ed9be98afbc2a5f99" title="The getter of the useChangeLane field." alt="" coords="483,569,703,596"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="399,580,467,580,467,585,399,585"/>
+<area shape="rect" id="Node000011" href="$class_road.html#a2c2cea92f9c5980ec2be4e6ecf89f613" title="Method that moves every car according to their speed at the end of each iteration." alt="" coords="535,620,651,647"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="398,594,521,617,520,622,397,599"/>
+<area shape="rect" id="Node000016" href="$class_road_segment.html#a83fc5b68a472ff8eba54cbf9125eee20" title="The setter of the carID field." alt="" coords="1082,341,1245,368"/>
+<area shape="poly" id="edge34_Node000002_Node000016" title=" " alt="" coords="398,570,424,560,438,551,447,542,457,532,472,522,507,507,539,500,596,496,651,490,680,479,712,461,727,443,734,424,742,405,760,387,796,369,835,355,916,339,995,334,1066,338,1066,343,995,340,917,344,837,360,799,374,763,392,746,408,739,426,732,446,715,465,682,484,652,495,597,502,540,505,509,512,474,526,460,536,451,545,441,556,426,565,400,575"/>
+<area shape="rect" id="Node000017" href="$class_road.html#ac362e1817347b9779afe5adbe922b661" title="Method that iterates over the initial state of the road and marks all segments that contain any part ..." alt="" coords="829,493,935,520"/>
+<area shape="poly" id="edge62_Node000002_Node000017" title=" " alt="" coords="399,567,473,555,813,511,814,517,473,560,400,572"/>
+<area shape="rect" id="Node000019" href="$class_road.html#a66f15924436326a8096b34e22170c36d" title="Method that prepares the string with the road cycles for further analysis." alt="" coords="518,772,668,799"/>
+<area shape="poly" id="edge20_Node000002_Node000019" title=" " alt="" coords="344,594,563,760,560,764,340,599"/>
+<area shape="rect" id="Node000021" href="$class_road.html#adfdd08e959cf3942869eae15b8d92114" title="Method that accelerates cars based on LAI model formula." alt="" coords="491,1203,695,1229"/>
+<area shape="poly" id="edge24_Node000002_Node000021" title=" " alt="" coords="330,596,428,934,438,986,443,1028,452,1067,475,1113,493,1137,514,1158,557,1192,554,1196,510,1162,489,1140,471,1116,447,1069,438,1029,433,987,422,935,325,597"/>
+<area shape="rect" id="Node000029" href="$class_road.html#ab1036d2ae3f35896281f01ef3dae04f7" title="Method that checks for potential car lane changes based on LAI model formulas." alt="" coords="486,1076,700,1103"/>
+<area shape="poly" id="edge35_Node000002_Node000029" title=" " alt="" coords="333,595,580,1061,575,1064,328,597"/>
+<area shape="rect" id="Node000012" href="$class_car.html#ae4a70399de6a3cf85fea3489de7c328b" title="The getter of the carID field." alt="" coords="1112,443,1215,469"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="651,630,683,622,712,606,724,591,731,576,734,543,737,510,745,494,760,479,799,456,842,439,888,429,934,425,1022,427,1097,438,1096,443,1022,432,934,430,888,435,844,445,802,460,763,483,749,497,742,511,739,544,736,577,729,594,715,610,685,627,652,635"/>
+<area shape="rect" id="Node000013" href="$class_road_segment.html#af1cc5cbdddc354e566aedf5201ee2f5a" title="The getter of the carID field." alt="" coords="1081,721,1246,748"/>
+<area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="652,641,1069,715,1068,721,651,646"/>
+<area shape="rect" id="Node000014" href="$class_car.html#ab8cf9e1fe7c163b1237102521fe57d76" title="The getter of the speed field." alt="" coords="818,797,946,824"/>
+<area shape="poly" id="edge13_Node000011_Node000014" title=" " alt="" coords="618,645,847,787,844,791,616,650"/>
+<area shape="rect" id="Node000015" href="$class_car.html#a1a6c3f6dd16d32d94e7096d34283e1c7" title="The getter of the tailSegmentsNum field." alt="" coords="1075,544,1252,571"/>
+<area shape="poly" id="edge14_Node000011_Node000015" title=" " alt="" coords="651,622,712,606,736,592,760,580,838,563,917,554,992,550,1060,549,1060,555,992,555,917,559,838,569,762,585,738,597,714,610,652,627"/>
+<area shape="poly" id="edge15_Node000011_Node000016" title=" " alt="" coords="651,631,683,623,712,606,727,586,734,565,735,522,735,478,743,455,760,434,775,425,802,417,880,398,1066,366,1067,371,881,404,803,422,777,430,763,438,747,458,740,478,740,522,740,566,732,589,715,610,686,628,652,636"/>
+<area shape="poly" id="edge16_Node000011_Node000017" title=" " alt="" coords="651,627,683,620,712,606,727,590,735,573,743,554,760,537,785,523,813,513,814,518,787,527,763,541,748,557,740,575,732,593,715,610,684,625,652,633"/>
+<area shape="poly" id="edge17_Node000017_Node000013" title=" " alt="" coords="910,518,955,545,1004,581,1029,605,1053,631,1137,709,1133,713,1049,635,1025,609,1001,585,952,550,907,523"/>
+<area shape="poly" id="edge18_Node000017_Node000015" title=" " alt="" coords="936,514,1071,538,1070,543,935,519"/>
+<area shape="rect" id="Node000018" href="$class_road_segment.html#a59a59c58bb953b1592f485af11492491" title="The setter of the isTail field." alt="" coords="1083,493,1244,520"/>
+<area shape="poly" id="edge19_Node000017_Node000018" title=" " alt="" coords="936,504,1067,504,1067,509,936,509"/>
+<area shape="poly" id="edge21_Node000019_Node000013" title=" " alt="" coords="668,776,1066,741,1066,746,669,781"/>
+<area shape="poly" id="edge22_Node000019_Node000014" title=" " alt="" coords="669,789,803,801,803,806,669,795"/>
+<area shape="rect" id="Node000020" href="$class_car.html#aaea0281ae41c71f6ced9368a3c66e5c8" title="The getter of the stopChangingLane field." alt="" coords="792,848,972,875"/>
+<area shape="poly" id="edge23_Node000019_Node000020" title=" " alt="" coords="637,797,762,833,796,842,795,847,761,839,636,802"/>
+<area shape="poly" id="edge27_Node000021_Node000013" title=" " alt="" coords="681,1199,880,1165,963,1149,1001,1138,1024,1111,1033,1083,1038,1051,1048,1012,1148,762,1153,764,1053,1014,1043,1052,1038,1084,1029,1113,1004,1142,964,1154,881,1170,682,1205"/>
+<area shape="poly" id="edge28_Node000021_Node000014" title=" " alt="" coords="618,1200,667,1165,691,1141,711,1113,727,1074,732,1038,730,1003,725,969,722,935,723,902,734,868,759,834,779,820,802,811,804,816,782,824,763,838,739,871,728,903,727,935,731,968,736,1002,737,1038,732,1076,716,1116,695,1144,670,1169,621,1204"/>
+<area shape="rect" id="Node000022" href="$class_driver_profile.html#aa216d3db24865a8acd2a0956535637ec" title="The getter of the accMinus field." alt="" coords="794,1304,970,1331"/>
+<area shape="poly" id="edge25_Node000021_Node000022" title=" " alt="" coords="688,1227,715,1239,730,1252,740,1265,748,1278,763,1290,781,1298,778,1303,760,1294,744,1282,735,1268,726,1255,712,1244,686,1232"/>
+<area shape="rect" id="Node000023" href="$class_driver_profile.html#a1eeca295acf1357d95aecc9442cf6e9e" title="The getter of the accPlus field." alt="" coords="798,1355,966,1381"/>
+<area shape="poly" id="edge26_Node000021_Node000023" title=" " alt="" coords="696,1228,715,1239,727,1252,734,1265,740,1291,745,1317,752,1329,763,1341,785,1353,783,1358,760,1345,748,1332,740,1319,735,1293,729,1267,723,1255,712,1243,693,1232"/>
+<area shape="rect" id="Node000024" href="$class_driver_profile.html#afc4daf3ddafe9bab65e2608eeaf2b73d" title="The getter of the dR field." alt="" coords="814,1405,950,1432"/>
+<area shape="poly" id="edge29_Node000021_Node000024" title=" " alt="" coords="697,1227,715,1239,731,1258,738,1278,740,1317,742,1356,749,1374,763,1391,780,1403,800,1411,798,1416,778,1408,760,1395,744,1376,736,1357,735,1317,733,1279,726,1261,712,1243,694,1231"/>
+<area shape="rect" id="Node000025" href="$class_configuration.html#a90bac9684aa87e58b6811bcd207144e7" title="The getter of the vDriverProfiles driver type by a specified index." alt="" coords="803,1456,961,1499"/>
+<area shape="poly" id="edge30_Node000021_Node000025" title=" " alt="" coords="697,1226,715,1239,734,1265,742,1290,743,1316,741,1342,738,1368,739,1393,746,1418,763,1442,790,1461,787,1465,759,1446,741,1420,733,1394,733,1368,735,1342,738,1316,737,1291,729,1267,711,1243,694,1231"/>
+<area shape="rect" id="Node000026" href="$class_car.html#a1c877a949c3b72e11c47d2968b0fb76c" title="The getter of the driverType field." alt="" coords="817,1523,947,1549"/>
+<area shape="poly" id="edge31_Node000021_Node000026" title=" " alt="" coords="697,1226,715,1239,739,1273,747,1308,746,1342,740,1376,734,1410,733,1444,741,1476,763,1509,781,1522,803,1530,801,1535,779,1527,759,1513,736,1479,727,1444,729,1410,735,1376,741,1342,742,1308,734,1276,711,1243,694,1230"/>
+<area shape="rect" id="Node000027" href="$class_driver_profile.html#a80d26a4df4695717d645842fc3e1e851" title="The getter of the maxSpeed field." alt="" coords="792,1253,972,1280"/>
+<area shape="poly" id="edge32_Node000021_Node000027" title=" " alt="" coords="674,1227,788,1247,787,1253,673,1233"/>
+<area shape="rect" id="Node000028" href="$class_car.html#a7e30566dea52c5c8df3b5959882f1280" title="The setter of the speed field." alt="" coords="819,1573,945,1600"/>
+<area shape="poly" id="edge33_Node000021_Node000028" title=" " alt="" coords="698,1226,715,1239,731,1260,742,1280,751,1321,748,1361,740,1402,731,1442,729,1482,738,1521,748,1540,763,1559,782,1573,805,1582,803,1587,780,1578,759,1563,743,1543,733,1523,723,1482,726,1441,735,1401,743,1361,746,1321,737,1282,727,1263,711,1243,694,1230"/>
+<area shape="poly" id="edge46_Node000029_Node000013" title=" " alt="" coords="611,1073,675,1030,717,1006,760,986,796,973,829,967,885,963,939,956,969,946,1001,928,1049,890,1090,844,1123,798,1146,760,1150,763,1127,801,1094,848,1053,894,1004,933,971,951,941,961,886,968,829,972,798,978,762,990,719,1011,678,1035,614,1078"/>
+<area shape="poly" id="edge47_Node000029_Node000014" title=" " alt="" coords="597,1075,616,1028,649,962,697,892,727,861,760,834,780,823,803,815,804,820,783,828,763,838,730,865,701,896,654,965,620,1030,602,1077"/>
+<area shape="poly" id="edge53_Node000029_Node000015" title=" " alt="" coords="604,1074,665,1008,710,971,760,939,796,925,830,920,891,923,919,923,946,919,973,908,1001,885,1015,866,1025,848,1034,811,1032,773,1024,735,1016,697,1014,658,1023,619,1034,600,1049,581,1060,571,1063,575,1053,585,1038,603,1028,621,1020,658,1022,696,1029,734,1037,773,1039,811,1030,850,1020,869,1005,889,976,912,948,925,919,929,890,928,830,926,797,930,763,944,713,975,669,1012,608,1077"/>
+<area shape="poly" id="edge52_Node000029_Node000020" title=" " alt="" coords="600,1074,623,1037,658,988,705,936,760,891,787,878,789,882,763,896,708,939,662,991,627,1040,604,1077"/>
+<area shape="poly" id="edge44_Node000029_Node000022" title=" " alt="" coords="617,1101,665,1138,692,1162,716,1189,731,1218,737,1244,744,1267,763,1290,781,1301,778,1306,760,1294,739,1270,731,1245,726,1220,711,1192,688,1166,662,1142,614,1105"/>
+<area shape="poly" id="edge45_Node000029_Node000023" title=" " alt="" coords="619,1101,668,1137,693,1162,716,1189,727,1211,733,1232,735,1271,740,1306,748,1323,763,1341,785,1355,782,1359,760,1345,744,1326,735,1308,730,1271,727,1233,722,1213,711,1192,689,1165,664,1141,616,1105"/>
+<area shape="poly" id="edge48_Node000029_Node000024" title=" " alt="" coords="620,1101,669,1137,694,1161,716,1189,729,1219,735,1246,733,1297,732,1321,735,1345,745,1368,763,1391,780,1404,800,1412,798,1417,777,1408,759,1395,740,1371,730,1346,727,1322,728,1297,729,1247,724,1220,711,1192,690,1165,666,1141,617,1105"/>
+<area shape="poly" id="edge49_Node000029_Node000025" title=" " alt="" coords="620,1101,670,1136,695,1161,716,1189,731,1226,737,1260,733,1323,730,1353,732,1382,742,1412,763,1442,791,1461,787,1466,759,1446,737,1414,727,1383,725,1353,727,1323,732,1260,726,1227,711,1192,691,1164,666,1140,617,1105"/>
+<area shape="poly" id="edge50_Node000029_Node000026" title=" " alt="" coords="621,1101,670,1136,695,1161,716,1189,734,1236,739,1279,736,1320,729,1359,724,1397,725,1434,736,1471,763,1509,781,1522,803,1531,801,1536,779,1527,759,1513,731,1473,719,1435,719,1396,724,1358,731,1319,734,1279,729,1237,711,1192,691,1164,667,1140,618,1105"/>
+<area shape="poly" id="edge51_Node000029_Node000027" title=" " alt="" coords="614,1101,715,1189,738,1217,747,1228,763,1239,779,1247,776,1251,760,1244,744,1232,734,1220,711,1193,610,1105"/>
+<area shape="rect" id="Node000030" href="$class_road.html#a210f6a1bdc9796afe892c7f64bf7eaf8" title="Method that calculates distance between two cars." alt="" coords="761,1051,1003,1077"/>
+<area shape="poly" id="edge36_Node000029_Node000030" title=" " alt="" coords="700,1077,745,1073,746,1079,701,1083"/>
+<area shape="rect" id="Node000032" href="$class_road.html#ad64d2b162f9debad13c1190a00dee8ee" title="Method that checks LAI model constraits for changing lanes (looking for succeeding cars on the other ..." alt="" coords="797,1101,967,1128"/>
+<area shape="poly" id="edge38_Node000029_Node000032" title=" " alt="" coords="701,1096,782,1103,781,1109,700,1101"/>
+<area shape="rect" id="Node000033" href="$class_road.html#aa199c3c6e0676c8f8bdf33c69eea43fd" title="Method that checks LAI model constraits for changing lanes (looking for preceding cars on the other l..." alt="" coords="797,1203,967,1229"/>
+<area shape="poly" id="edge40_Node000029_Node000033" title=" " alt="" coords="627,1101,836,1193,834,1198,625,1106"/>
+<area shape="rect" id="Node000034" href="$class_road.html#a5c098189a67c4f04bf752643eb810567" title="Method that checks LAI model constraits for changing lanes (looking for preceding cars on the same la..." alt="" coords="788,1000,976,1027"/>
+<area shape="poly" id="edge42_Node000029_Node000034" title=" " alt="" coords="636,1073,761,1036,795,1028,796,1033,762,1041,637,1078"/>
+<area shape="rect" id="Node000035" href="$class_road.html#a5bb8c758c93f77f6e52e6e9bef6636e8" title="Method that moves the car who was marked as one that needs to change lane during the previous step." alt="" coords="773,595,991,621"/>
+<area shape="poly" id="edge54_Node000029_Node000035" title=" " alt="" coords="599,1075,662,954,759,784,860,633,864,636,764,787,667,957,604,1077"/>
+<area shape="rect" id="Node000031" href="$class_configuration.html#a0cc3cefdde53c13b0796dbdefde231c6" title="The getter of the segmentsNum field." alt="" coords="1058,1025,1269,1052"/>
+<area shape="poly" id="edge37_Node000030_Node000031" title=" " alt="" coords="1003,1050,1042,1047,1042,1052,1003,1056"/>
+<area shape="poly" id="edge39_Node000032_Node000031" title=" " alt="" coords="954,1098,1002,1087,1107,1055,1109,1060,1003,1092,956,1103"/>
+<area shape="poly" id="edge41_Node000033_Node000031" title=" " alt="" coords="956,1200,1001,1182,1043,1155,1081,1123,1139,1062,1143,1066,1085,1127,1046,1159,1004,1186,958,1205"/>
+<area shape="poly" id="edge43_Node000034_Node000031" title=" " alt="" coords="977,1019,1043,1025,1042,1030,976,1024"/>
+<area shape="poly" id="edge55_Node000035_Node000012" title=" " alt="" coords="907,592,952,565,1001,530,1014,516,1023,503,1033,491,1049,479,1096,462,1098,467,1052,484,1037,495,1028,507,1019,520,1004,534,955,569,910,597"/>
+<area shape="poly" id="edge56_Node000035_Node000013" title=" " alt="" coords="949,619,1004,638,1074,673,1132,710,1129,714,1071,678,1002,642,947,624"/>
+<area shape="poly" id="edge58_Node000035_Node000015" title=" " alt="" coords="960,591,1070,571,1071,577,961,597"/>
+<area shape="poly" id="edge59_Node000035_Node000016" title=" " alt="" coords="913,592,958,566,981,550,1001,530,1017,505,1024,481,1032,456,1049,429,1083,397,1119,373,1122,378,1086,402,1053,432,1037,458,1029,482,1022,507,1005,534,984,554,961,571,916,596"/>
+<area shape="poly" id="edge60_Node000035_Node000018" title=" " alt="" coords="908,592,972,561,1050,529,1075,522,1077,527,1052,535,974,566,910,597"/>
+<area shape="poly" id="edge57_Node000035_Node000031" title=" " alt="" coords="974,620,1005,638,1153,1010,1148,1012,1001,642,971,624"/>
+<area shape="rect" id="Node000036" href="$class_car.html#abaf405f42f6acfa964be8ba574a7bebe" title="The setter of the stopChangingLane field." alt="" coords="1074,595,1253,621"/>
+<area shape="poly" id="edge61_Node000035_Node000036" title=" " alt="" coords="991,605,1059,605,1059,611,991,611"/>
+<area shape="poly" id="edge70_Node000041_Node000005" title=" " alt="" coords="639,160,677,168,715,184,732,202,740,220,748,237,763,254,781,265,778,270,760,258,743,240,735,222,728,205,712,189,676,173,638,166"/>
+<area shape="poly" id="edge73_Node000041_Node000016" title=" " alt="" coords="639,161,726,167,832,177,933,193,974,204,1004,216,1021,230,1031,245,1039,260,1053,277,1089,306,1126,331,1123,335,1086,311,1049,281,1035,263,1026,248,1017,234,1001,221,972,209,932,199,832,182,725,172,638,166"/>
+<area shape="poly" id="edge79_Node000041_Node000018" title=" " alt="" coords="639,164,676,172,715,184,739,201,762,216,798,227,831,229,890,225,919,224,947,227,975,238,1005,261,1025,288,1033,316,1034,344,1030,372,1026,399,1026,427,1034,453,1053,479,1070,492,1067,496,1049,483,1029,456,1021,427,1021,399,1025,371,1028,343,1028,316,1020,290,1001,265,973,243,945,232,918,229,891,230,831,235,797,232,760,221,736,205,712,189,675,177,638,169"/>
+<area shape="poly" id="edge72_Node000041_Node000031" title=" " alt="" coords="638,156,679,163,699,171,715,185,727,202,735,223,744,276,747,338,745,406,744,538,749,592,764,632,789,665,816,688,845,703,874,714,938,736,971,755,1005,783,1054,842,1096,905,1130,964,1152,1011,1148,1013,1125,967,1092,908,1050,845,1001,787,968,760,935,741,873,719,842,707,813,692,785,669,759,635,744,593,738,538,740,406,741,338,739,276,730,224,722,204,711,188,696,176,678,168,638,161"/>
+<area shape="rect" id="Node000042" href="$class_configuration.html#aabd72705d996304b8c3887f333072bdd" title="The getter of the currentDensity field." alt="" coords="1080,5,1247,48"/>
+<area shape="poly" id="edge71_Node000041_Node000042" title=" " alt="" coords="610,145,673,100,715,76,760,57,839,38,919,26,996,21,1064,20,1064,25,996,26,919,31,840,43,762,63,718,81,676,105,613,150"/>
+<area shape="rect" id="Node000043" href="$class_road.html#a8cd3e5493672e68dc4583e0e31a35b95" title="Method that sets up the initial car array." alt="" coords="819,72,945,99"/>
+<area shape="poly" id="edge74_Node000041_Node000043" title=" " alt="" coords="636,145,761,108,803,98,805,103,762,113,637,150"/>
+<area shape="rect" id="Node000046" href="$class_road.html#a8ee0c51b19a437b4eea175241f37ee38" title="Method that sets up the initial state of the road." alt="" coords="804,123,960,149"/>
+<area shape="poly" id="edge80_Node000041_Node000046" title=" " alt="" coords="638,155,789,141,789,147,638,160"/>
+<area shape="poly" id="edge78_Node000043_Node000042" title=" " alt="" coords="945,70,1064,45,1065,50,946,75"/>
+<area shape="rect" id="Node000044" href="$class_road.html#aa1b08fc34c7916ef825501b8ad460b27" title="Method that randomly generates car lengths based on constraints from the configuration." alt="" coords="1051,123,1276,149"/>
+<area shape="poly" id="edge75_Node000043_Node000044" title=" " alt="" coords="946,94,1071,117,1070,122,945,99"/>
+<area shape="rect" id="Node000045" href="$class_configuration.html#aa790f00031e09a557cbdc7a7a17c5e9b" title="The getter of the carProbability field of the specified length." alt="" coords="1324,97,1530,124"/>
+<area shape="poly" id="edge77_Node000043_Node000045" title=" " alt="" coords="946,86,1309,103,1309,108,945,91"/>
+<area shape="poly" id="edge76_Node000044_Node000045" title=" " alt="" coords="1276,122,1308,119,1309,125,1277,128"/>
+<area shape="poly" id="edge83_Node000046_Node000012" title=" " alt="" coords="916,148,962,176,985,195,1005,217,1018,239,1025,260,1029,299,1033,337,1040,357,1053,378,1084,409,1119,433,1116,437,1080,414,1049,382,1035,359,1028,338,1024,300,1020,262,1013,242,1001,220,981,199,959,180,913,152"/>
+<area shape="poly" id="edge84_Node000046_Node000015" title=" " alt="" coords="904,148,955,194,982,226,1005,261,1020,301,1024,338,1018,405,1016,437,1018,468,1029,498,1053,530,1063,539,1060,543,1049,534,1024,501,1013,469,1010,437,1013,405,1019,338,1014,302,1000,264,978,229,951,198,900,152"/>
+<area shape="poly" id="edge85_Node000046_Node000016" title=" " alt="" coords="961,143,984,152,1004,166,1017,180,1025,193,1032,220,1037,248,1053,277,1086,308,1122,331,1119,336,1082,312,1049,280,1032,250,1026,222,1020,195,1013,183,1001,170,981,157,959,148"/>
+<area shape="poly" id="edge82_Node000046_Node000044" title=" " alt="" coords="960,133,1035,133,1035,139,960,139"/>
+<area shape="rect" id="Node000047" href="$class_road.html#a2c61bef04889834385fd6b40d5d6ef65" title="Method that randomly generates indices for driver types based on constraints from the configuration." alt="" coords="1067,173,1260,216"/>
+<area shape="poly" id="edge81_Node000046_Node000047" title=" " alt="" coords="950,147,1053,169,1051,174,949,153"/>
+<area shape="rect" id="Node000048" href="$class_car.html#a7501279d4a43a1a908c5d81ec636f272" title="The setter of the driverType field." alt="" coords="1099,240,1228,267"/>
+<area shape="poly" id="edge86_Node000046_Node000048" title=" " alt="" coords="961,146,1004,166,1020,181,1029,197,1037,212,1052,226,1085,240,1083,245,1049,230,1033,215,1024,199,1016,184,1001,170,959,151"/>
+</map>

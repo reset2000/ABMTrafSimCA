@@ -1,0 +1,5 @@
+<map id="Road::GetVanishedCars" name="Road::GetVanishedCars">
+<area shape="rect" id="Node000001" title="The getter of the vanished cars field from CARS_STATS_T structure." alt="" coords="220,5,381,32"/>
+<area shape="rect" id="Node000002" href="$class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,5,172,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,21,172,21,172,16,204,16"/>
+</map>

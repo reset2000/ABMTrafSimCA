@@ -1,0 +1,7 @@
+<map id="DbManager::saveDb" name="DbManager::saveDb">
+<area shape="rect" id="Node000001" title="Method for saving fundamental diagrams to the database." alt="" coords="226,51,363,77"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a6dcc28b92858b0c562f3187c6965a5b3" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Fundamental Diagram&quot; tab is ..." alt="" coords="5,5,178,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,51,178,45,179,40,211,46"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#a56d358987d82056a4e98aa5ea553d450" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="11,72,172,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="211,82,173,89,172,84,210,77"/>
+</map>

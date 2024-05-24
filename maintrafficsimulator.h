@@ -290,11 +290,6 @@ private:
     void changeTheme();
 
     ///
-    /// \brief Method that adds records containing different themes to the "Theme" combobox at the start of the application
-    ///
-    void populateThemeBox();
-
-    ///
     /// \brief Method that updated configuration data for both space-time and fundamental diagrams based on current data from "Configuration" tab
     /// \param qtCfg - configuration that will be updated
     /// \param cfg - configuration, from which the data will be recieved

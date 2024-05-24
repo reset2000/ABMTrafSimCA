@@ -1,0 +1,12 @@
+<map id="MainTrafficSimulator::updateConfig" name="MainTrafficSimulator::updateConfig">
+<area shape="rect" id="Node000001" title="Method that updates configuration based on chosen archived record." alt="" coords="5,39,144,81"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#abbf0a67882fd04803368d3d5941f3cb6" title="Method that initializes driver profiles from a chosen achived record." alt="" coords="192,31,373,89"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,57,176,57,176,63,144,63"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#a41548f27dafea4b2893ab46eafd0aa1f" title="Method that deletes record from the archive database." alt="" coords="426,5,598,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="373,44,410,39,411,44,374,49"/>
+<area shape="rect" id="Node000004" href="$class_main_traffic_simulator.html#a74a317abda9abf4f23216496dc106363" title="Method that initializes &quot;Driver profiles&quot; table at the start of the application." alt="" coords="421,72,603,115"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="374,71,406,75,405,81,373,76"/>
+<area shape="rect" id="Node000005" href="$class_main_traffic_simulator.html#a36b15b87a701d8f44e108339635318a7" title="Method that deletes driver profiles." alt="" coords="651,72,790,115"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="604,100,636,100,636,105,604,105"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="651,87,619,87,619,82,651,82"/>
+</map>

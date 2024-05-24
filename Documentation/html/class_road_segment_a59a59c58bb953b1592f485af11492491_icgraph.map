@@ -1,0 +1,20 @@
+<map id="RoadSegment::SetIsTail" name="RoadSegment::SetIsTail">
+<area shape="rect" id="Node000001" title="The setter of the isTail field." alt="" coords="948,43,1109,69"/>
+<area shape="rect" id="Node000002" href="$class_road.html#a5bb8c758c93f77f6e52e6e9bef6636e8" title="Method that moves the car who was marked as one that needs to change lane during the previous step." alt="" coords="682,43,900,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="932,59,900,59,900,53,932,53"/>
+<area shape="rect" id="Node000006" href="$class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="251,5,341,32"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="953,42,899,33,738,21,579,17,341,20,341,14,579,11,739,16,900,28,954,36"/>
+<area shape="rect" id="Node000007" href="$class_road.html#ac362e1817347b9779afe5adbe922b661" title="Method that iterates over the initial state of the road and marks all segments that contain any part ..." alt="" coords="738,93,844,120"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="948,76,845,98,844,93,947,71"/>
+<area shape="rect" id="Node000003" href="$class_road.html#ab1036d2ae3f35896281f01ef3dae04f7" title="Method that checks for potential car lane changes based on LAI model formulas." alt="" coords="420,43,634,69"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="667,59,635,59,635,53,667,53"/>
+<area shape="rect" id="Node000004" href="$class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="220,68,372,95"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="405,72,373,76,372,70,404,67"/>
+<area shape="rect" id="Node000005" href="$class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,43,172,69"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="204,73,172,69,172,64,205,68"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="236,32,167,45,166,39,235,27"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="723,124,659,135,583,143,501,144,419,135,366,118,321,98,324,93,368,113,421,129,501,138,583,137,659,130,723,119"/>
+<area shape="rect" id="Node000008" href="$class_road.html#a2c2cea92f9c5980ec2be4e6ecf89f613" title="Method that moves every car according to their speed at the end of each iteration." alt="" coords="469,93,585,120"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="722,109,586,109,586,104,722,104"/>
+<area shape="poly" id="edge10_Node000008_Node000004" title=" " alt="" coords="453,101,372,92,373,87,454,96"/>
+</map>

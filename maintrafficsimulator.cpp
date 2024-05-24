@@ -48,8 +48,6 @@ MainTrafficSimulator::MainTrafficSimulator(QWidget *parent)
     InitializeCarLengthTable(*ui);
     InitializeDriverProfilesTable();
 
-    populateThemeBox();
-
     ui->lblDPFromArchive->hide();
     ui->tbwDPFromArchive->hide();
 
@@ -247,14 +245,6 @@ void MainTrafficSimulator::deleteThisLine()
 
         InitializeDriverProfilesTable();
     }
-}
-
-void MainTrafficSimulator::populateThemeBox()
-{
-    ui->cbTheme->addItem("Light", QChart::ChartThemeLight);
-    ui->cbTheme->addItem("Blue Cerulean", QChart::ChartThemeBlueCerulean);
-    ui->cbTheme->addItem("Brown Sand", QChart::ChartThemeBrownSand);
-    ui->cbTheme->addItem("High Contrast", QChart::ChartThemeHighContrast);
 }
 
 void MainTrafficSimulator::updateUiFromSnapshot () {
@@ -1038,17 +1028,17 @@ void MainTrafficSimulator::updateQtDiagramConfigData(QtDiagramConfig &qtCfg, Con
     qtCfg.driverProfiles.clear();
     for (int r = 0; r < cfg.vDriverProfiles.size(); r++) {
         qtCfg.driverProfiles.append( r == 0 ? "" : ";" );
-        qtCfg.driverProfiles.append( cfg.vDriverProfiles[r].GetName() );
+        qtCfg.driverProfiles.append( QString::fromStdString( cfg.vDriverProfiles[r].GetName() ) );
         qtCfg.driverProfiles.append(",");
-        qtCfg.driverProfiles.append( std::to_string( cfg.vDriverProfiles[r].GetMaxSpeed() ) );
+        qtCfg.driverProfiles.append( QString::fromStdString( std::to_string( cfg.vDriverProfiles[r].GetMaxSpeed() ) ) );
         qtCfg.driverProfiles.append(",");
-        qtCfg.driverProfiles.append( std::to_string( cfg.vDriverProfiles[r].GetDR() ) );
+        qtCfg.driverProfiles.append( QString::fromStdString( std::to_string( cfg.vDriverProfiles[r].GetDR() ) ) );
         qtCfg.driverProfiles.append(",");
-        qtCfg.driverProfiles.append( std::to_string( cfg.vDriverProfiles[r].GetAccPlus() )  );
+        qtCfg.driverProfiles.append( QString::fromStdString( std::to_string( cfg.vDriverProfiles[r].GetAccPlus() ) ) );
         qtCfg.driverProfiles.append(",");
-        qtCfg.driverProfiles.append( std::to_string( cfg.vDriverProfiles[r].GetAccMinus() ) );
+        qtCfg.driverProfiles.append( QString::fromStdString( std::to_string( cfg.vDriverProfiles[r].GetAccMinus() ) ) );
         qtCfg.driverProfiles.append(",");
-        qtCfg.driverProfiles.append( std::to_string( (int)(cfg.vDriverProfiles[r].GetProbability() * 100) ) );
+        qtCfg.driverProfiles.append( QString::fromStdString( std::to_string( (int)(cfg.vDriverProfiles[r].GetProbability() * 100) ) ) );
     }
 }
 
@@ -1300,7 +1290,7 @@ void MainTrafficSimulator::on_btnSaveSTDiagram_clicked()
     QDir().mkdir(dirName.c_str());
 
     QString currentDate = "";
-    currentDate.append(dirName);
+    currentDate.append( QString::fromStdString( dirName ) );
     currentDate.append("/");
     currentDate.append("Space_Time_Diagram__");
     currentDate.append(QString::fromStdString(GetCurrentDate()));
@@ -1484,7 +1474,7 @@ void MainTrafficSimulator::on_btnSaveFDiagram_clicked()
     QDir().mkdir(dirName.c_str());
 
     QString currentDate = "";
-    currentDate.append(dirName);
+    currentDate.append( QString::fromStdString( dirName ) );
     currentDate.append("/");
     currentDate.append("Fundamental_Diagram__");
     currentDate.append(QString::fromStdString(GetCurrentDate()));
@@ -1968,7 +1958,20 @@ void MainTrafficSimulator::on_sbFontSize_valueChanged()
 }
 
 void MainTrafficSimulator::changeTheme() {
-    QChart::ChartTheme theme = static_cast<QChart::ChartTheme>( ui->cbTheme->itemData(ui->cbTheme->currentIndex()).toInt() );
+    QChart::ChartTheme theme;
+    switch ( ui->cbTheme->currentIndex() ) {
+    case 1:
+        theme = QChart::ChartThemeBlueCerulean;
+        break;
+    case 2:
+        theme = QChart::ChartThemeBrownSand;
+        break;
+    case 3:
+        theme = QChart::ChartThemeHighContrast;
+        break;
+    default:
+        theme = QChart::ChartThemeLight;
+    }
 
     ui->qcvFDiagramLeft->chart()->setTheme(theme);
     ui->qcvFDiagramRight->chart()->setTheme(theme);

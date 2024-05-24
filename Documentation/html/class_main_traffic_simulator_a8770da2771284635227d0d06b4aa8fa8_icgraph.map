@@ -1,0 +1,13 @@
+<map id="MainTrafficSimulator::showDiagramFData" name="MainTrafficSimulator::showDiagramFData">
+<area shape="rect" id="Node000001" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="458,39,600,81"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,39,410,81"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="442,72,411,71,411,66,442,66"/>
+<area shape="poly" id="edge6_Node000002_Node000001" title=" " alt="" coords="426,48,458,49,458,54,426,54"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,5,192,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="245,58,192,50,193,45,246,53"/>
+<area shape="rect" id="Node000004" href="$class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,72,196,115"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="245,76,197,83,196,78,245,71"/>
+<area shape="rect" id="Node000005" href="$class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,139,213,181"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="287,92,214,129,184,141,182,136,212,124,284,87"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="208,30,261,38,260,43,207,35"/>
+</map>

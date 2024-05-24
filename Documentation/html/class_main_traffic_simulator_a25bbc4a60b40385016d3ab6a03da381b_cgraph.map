@@ -1,0 +1,5 @@
+<map id="MainTrafficSimulator::on_cbLegend_currentIndexChanged" name="MainTrafficSimulator::on_cbLegend_currentIndexChanged">
+<area shape="rect" id="Node000001" title="Method that activates after changing &quot;Legend&quot; field value in the top bar." alt="" coords="5,5,241,48"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#af04ce6ef04ca9b93a223ccc80bd23bb1" title="Method that modifies diagram legend based on the current selection." alt="" coords="289,5,427,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="241,24,273,24,273,29,241,29"/>
+</map>

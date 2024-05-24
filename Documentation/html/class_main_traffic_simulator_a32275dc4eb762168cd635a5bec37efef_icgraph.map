@@ -1,0 +1,5 @@
+<map id="MainTrafficSimulator::openNewDriverProfileDialog" name="MainTrafficSimulator::openNewDriverProfileDialog">
+<area shape="rect" id="Node000001" title="Method that activates after clicking the &quot;Add driver profile&quot; button on the &quot;Configuration&quot; tab." alt="" coords="213,13,399,56"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a1c5058209fba5cdf0e595418f8cd5be6" title="Method that is activated after &quot;Add driver profile&quot; button on &quot;Configuration&quot; tab is clicked." alt="" coords="5,5,165,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,37,165,37,165,32,197,32"/>
+</map>

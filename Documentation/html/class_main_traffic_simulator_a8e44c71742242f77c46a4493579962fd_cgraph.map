@@ -1,0 +1,17 @@
+<map id="MainTrafficSimulator::updateQtDiagramConfigData" name="MainTrafficSimulator::updateQtDiagramConfigData">
+<area shape="rect" id="Node000001" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="5,181,199,224"/>
+<area shape="rect" id="Node000002" href="$class_configuration.html#aabd72705d996304b8c3887f333072bdd" title="The getter of the currentDensity field." alt="" coords="273,5,441,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,179,170,119,206,86,245,58,258,51,260,56,248,62,209,90,174,123,121,183"/>
+<area shape="rect" id="Node000003" href="$class_configuration.html#ab2fa15d0d0d6a8a7afc5b1a4d0082a51" title="The getter of the cyclesNum field." alt="" coords="261,72,453,99"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,179,182,143,246,108,265,101,267,106,248,113,184,147,132,183"/>
+<area shape="rect" id="Node000004" href="$class_configuration.html#a276568f2c64b90d6c70fdd3197706418" title="The getter of the cyclesToSkip field." alt="" coords="274,123,440,165"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="197,178,259,164,260,169,198,183"/>
+<area shape="rect" id="Node000005" href="$class_configuration.html#a37e4fee49efe2ad0dff9c6a660ae9ed6" title="Method that calculates number of densities in densities array." alt="" coords="254,189,460,216"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="199,200,238,200,238,205,199,205"/>
+<area shape="rect" id="Node000006" href="$class_configuration.html#a0cc3cefdde53c13b0796dbdefde231c6" title="The getter of the segmentsNum field." alt="" coords="251,240,463,267"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="200,219,272,234,271,239,199,225"/>
+<area shape="rect" id="Node000007" href="$class_configuration.html#ae7c49ca371344c753a57287604c09511" title="The getter of the testsNumber field." alt="" coords="256,291,458,317"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="139,222,190,250,248,276,270,284,268,289,246,281,187,255,137,227"/>
+<area shape="rect" id="Node000008" href="$class_configuration.html#a215a9b6814065e9ed9be98afbc2a5f99" title="The getter of the useChangeLane field." alt="" coords="247,341,467,368"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="123,222,176,275,210,303,248,327,261,333,259,338,245,332,207,308,172,279,119,226"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="DbManager::countSnapshotRows" name="DbManager::countSnapshotRows">
+<area shape="rect" id="Node000001" title="Method that returns the index of the most recent snapshot." alt="" coords="432,5,646,32"/>
+<area shape="rect" id="Node000002" href="$class_db_manager.html#a212075d7d81c67fd9bc4b9e7b1580061" title="This method is responsible for initializing all tables necessary to archive the data generated throug..." alt="" coords="215,5,384,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="416,21,384,21,384,16,416,16"/>
+<area shape="rect" id="Node000003" href="$class_db_manager.html#a443a6024735bd78041da461e55038fd9" title="The constructor of DBManager class." alt="" coords="5,5,167,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="199,21,167,21,167,16,199,16"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="DbManager::deleteDb" name="DbManager::deleteDb">
+<area shape="rect" id="Node000001" title="Method for deleting saved fundamaental diagram records from the database." alt="" coords="672,113,819,140"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="458,105,624,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="657,129,625,129,625,124,657,124"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,105,410,148"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="443,138,410,138,411,133,443,133"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="426,115,458,115,458,120,425,120"/>
+<area shape="rect" id="Node000004" href="$class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,5,196,48"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="284,100,212,62,182,51,184,46,214,58,287,95"/>
+<area shape="rect" id="Node000005" href="$class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,72,213,115"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="245,116,213,111,214,106,245,111"/>
+<area shape="rect" id="Node000006" href="$class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="38,139,180,181"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="246,151,181,161,180,155,245,146"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="195,136,260,127,261,132,196,141"/>
+</map>

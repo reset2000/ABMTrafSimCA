@@ -1,0 +1,5 @@
+<map id="Road::CheckFrontSameLane" name="Road::CheckFrontSameLane">
+<area shape="rect" id="Node000001" title="Method that checks LAI model constraits for changing lanes (looking for preceding cars on the same la..." alt="" coords="5,5,194,32"/>
+<area shape="rect" id="Node000002" href="$class_configuration.html#a0cc3cefdde53c13b0796dbdefde231c6" title="The getter of the segmentsNum field." alt="" coords="242,5,453,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,16,226,16,226,21,194,21"/>
+</map>

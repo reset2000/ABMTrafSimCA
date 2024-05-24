@@ -1,0 +1,7 @@
+<map id="DbManager::readSnapshot" name="DbManager::readSnapshot">
+<area shape="rect" id="Node000001" title="Method for reading saved snapshot with configuration saved during the previous application session." alt="" coords="5,31,181,57"/>
+<area shape="rect" id="Node000002" href="$class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="229,5,371,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,31,213,27,214,32,181,36"/>
+<area shape="rect" id="Node000003" href="$class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="230,56,370,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,52,215,56,214,62,181,57"/>
+</map>

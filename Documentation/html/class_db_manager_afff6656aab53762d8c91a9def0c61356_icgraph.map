@@ -1,0 +1,18 @@
+<map id="DbManager::readDb" name="DbManager::readDb">
+<area shape="rect" id="Node000001" title="Method for reading fundamental diagrams from the database." alt="" coords="672,101,809,128"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="458,64,624,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="657,105,625,100,625,95,658,100"/>
+<area shape="rect" id="Node000004" href="$class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,5,196,48"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="707,95,668,72,624,55,568,41,510,31,394,21,286,19,196,22,196,17,286,13,394,15,511,26,569,36,625,49,670,68,709,90"/>
+<area shape="rect" id="Node000005" href="$class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,156,213,199"/>
+<area shape="poly" id="edge9_Node000001_Node000005" title=" " alt="" coords="657,130,625,135,404,157,213,173,213,168,404,152,624,129,657,125"/>
+<area shape="rect" id="Node000006" href="$class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="38,72,180,115"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="657,123,475,128,368,127,260,121,180,110,181,105,261,116,368,122,475,123,657,117"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,64,410,107"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="443,97,410,97,411,91,443,92"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="426,74,458,74,458,79,425,79"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="245,65,193,51,195,46,246,60"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="268,115,165,158,163,153,266,111"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="245,100,181,102,181,97,245,95"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="196,79,260,77,260,82,196,84"/>
+</map>

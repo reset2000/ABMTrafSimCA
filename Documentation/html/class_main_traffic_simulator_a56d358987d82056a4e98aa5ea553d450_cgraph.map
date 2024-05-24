@@ -1,0 +1,37 @@
+<map id="MainTrafficSimulator::on_btnFDiagramConfig_clicked" name="MainTrafficSimulator::on_btnFDiagramConfig_clicked">
+<area shape="rect" id="Node000001" title="Method that is activated after &quot;Generate fundamental diagram&quot; button on &quot;Configuration&quot; tab is clicke..." alt="" coords="5,227,166,285"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#ab98b1290020263415db44fcfd4f67fed" title="A method that checks the probabilities and counts for car lengths and driver profiles." alt="" coords="214,89,411,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,224,163,191,212,158,221,153,223,158,215,162,166,195,123,228"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#aff270618f603f2191e1e2f05867dadba" title="Method that draws fundamental diagram in the &quot;Space&#45;time diagram&quot; tab after the simulation is complet..." alt="" coords="243,172,382,215"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,231,227,214,229,219,167,236"/>
+<area shape="rect" id="Node000008" href="$class_db_manager.html#a991e632ae2a7913268a00062b369f4f2" title="Method for saving fundamental diagrams to the database." alt="" coords="244,272,381,299"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="166,264,228,272,228,277,166,269"/>
+<area shape="rect" id="Node000011" href="$class_main_traffic_simulator.html#a8e44c71742242f77c46a4493579962fd" title="Method that updated configuration data for both space&#45;time and fundamental diagrams based on current ..." alt="" coords="216,520,409,563"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="112,284,287,506,282,509,108,288"/>
+<area shape="rect" id="Node000004" href="$class_main_traffic_simulator.html#a7020bcb4235b2314a1c93d722a706f5e" title="Method that modifies font style and size based on the current selection." alt="" coords="506,5,644,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="380,176,409,158,420,146,426,134,432,109,438,84,445,71,457,58,490,39,492,44,461,62,450,74,443,85,437,110,431,136,424,149,413,162,383,180"/>
+<area shape="rect" id="Node000005" href="$class_main_traffic_simulator.html#af04ce6ef04ca9b93a223ccc80bd23bb1" title="Method that modifies diagram legend based on the current selection." alt="" coords="506,72,644,115"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="381,170,410,158,433,141,458,124,489,112,491,117,460,129,436,145,412,162,383,175"/>
+<area shape="rect" id="Node000006" href="$class_main_traffic_simulator.html#a92dd8b2d562a6747fc6c24cdb3d674d0" title="Method that modifies theme based on the current selection." alt="" coords="506,139,644,181"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="382,182,490,168,490,173,382,187"/>
+<area shape="rect" id="Node000007" href="$class_main_traffic_simulator.html#a7234a06469d92fcb51c6bf823e9afe43" title="Method that updates diagram style based on last saved snapshot." alt="" coords="459,205,690,248"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="382,199,444,207,443,213,382,205"/>
+<area shape="rect" id="Node000009" href="$class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="504,272,646,299"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="382,283,488,283,488,288,382,288"/>
+<area shape="rect" id="Node000010" href="$class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="505,323,644,349"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="382,296,490,317,489,322,381,301"/>
+<area shape="rect" id="Node000012" href="$class_configuration.html#aabd72705d996304b8c3887f333072bdd" title="The getter of the currentDensity field." alt="" coords="491,373,658,416"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="334,517,388,471,422,447,458,426,475,418,478,422,460,430,425,451,391,476,338,522"/>
+<area shape="rect" id="Node000013" href="$class_configuration.html#ab2fa15d0d0d6a8a7afc5b1a4d0082a51" title="The getter of the cyclesNum field." alt="" coords="479,440,671,467"/>
+<area shape="poly" id="edge12_Node000011_Node000013" title=" " alt="" coords="357,517,458,476,486,468,487,473,460,481,359,522"/>
+<area shape="rect" id="Node000014" href="$class_configuration.html#a276568f2c64b90d6c70fdd3197706418" title="The getter of the cyclesToSkip field." alt="" coords="492,491,657,533"/>
+<area shape="poly" id="edge13_Node000011_Node000014" title=" " alt="" coords="409,528,476,520,477,526,410,533"/>
+<area shape="rect" id="Node000015" href="$class_configuration.html#a37e4fee49efe2ad0dff9c6a660ae9ed6" title="Method that calculates number of densities in densities array." alt="" coords="472,557,677,584"/>
+<area shape="poly" id="edge14_Node000011_Node000015" title=" " alt="" coords="410,550,457,555,456,560,409,555"/>
+<area shape="rect" id="Node000016" href="$class_configuration.html#a0cc3cefdde53c13b0796dbdefde231c6" title="The getter of the segmentsNum field." alt="" coords="469,608,680,635"/>
+<area shape="poly" id="edge15_Node000011_Node000016" title=" " alt="" coords="367,561,460,593,489,601,487,606,458,599,366,566"/>
+<area shape="rect" id="Node000017" href="$class_configuration.html#ae7c49ca371344c753a57287604c09511" title="The getter of the testsNumber field." alt="" coords="474,659,676,685"/>
+<area shape="poly" id="edge16_Node000011_Node000017" title=" " alt="" coords="339,561,392,604,425,626,460,644,478,651,476,656,458,649,422,630,389,608,335,565"/>
+<area shape="rect" id="Node000018" href="$class_configuration.html#a215a9b6814065e9ed9be98afbc2a5f99" title="The getter of the useChangeLane field." alt="" coords="465,709,685,736"/>
+<area shape="poly" id="edge17_Node000011_Node000018" title=" " alt="" coords="329,561,381,628,418,665,460,695,472,701,470,706,458,700,415,669,377,632,325,564"/>
+</map>

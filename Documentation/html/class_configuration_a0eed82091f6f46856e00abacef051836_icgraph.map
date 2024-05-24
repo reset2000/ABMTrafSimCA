@@ -1,0 +1,10 @@
+<map id="Configuration::GetCalculateDensities" name="Configuration::GetCalculateDensities">
+<area shape="rect" id="Node000001" title="The getter of the calculateDensities field." alt="" coords="420,23,599,65"/>
+<area shape="rect" id="Node000002" href="$class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="220,5,372,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="404,34,372,30,373,25,405,29"/>
+<area shape="rect" id="Node000004" href="$class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="251,56,341,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="405,59,341,67,341,61,404,54"/>
+<area shape="rect" id="Node000003" href="$class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,31,172,57"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="205,32,172,36,172,31,204,27"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="235,65,172,57,172,52,236,59"/>
+</map>

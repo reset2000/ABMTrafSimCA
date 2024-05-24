@@ -1,0 +1,11 @@
+<map id="MainTrafficSimulator::closeEvent" name="MainTrafficSimulator::closeEvent">
+<area shape="rect" id="Node000001" title="Method that closes ongoing Qt events." alt="" coords="5,52,144,95"/>
+<area shape="rect" id="Node000002" href="$class_db_manager.html#aaefb755042bf99ab2643ec88bf0ccead" title="Method for updating snapshots with configuration." alt="" coords="192,31,381,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,61,176,57,177,62,145,66"/>
+<area shape="rect" id="Node000005" href="$class_main_traffic_simulator.html#ada101fbdc68c16e6eced635c98744b56" title="Method that updates all fields in the &quot;Configuration&quot; tab based on last saved snapshot." alt="" coords="204,81,369,124"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="145,80,189,86,188,92,144,86"/>
+<area shape="rect" id="Node000003" href="$class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="429,5,571,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="381,30,413,26,414,32,382,35"/>
+<area shape="rect" id="Node000004" href="$class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="431,56,570,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="382,53,415,57,414,62,381,58"/>
+</map>

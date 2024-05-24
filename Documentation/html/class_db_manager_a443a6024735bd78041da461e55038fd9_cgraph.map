@@ -1,0 +1,11 @@
+<map id="DbManager::DbManager" name="DbManager::DbManager">
+<area shape="rect" id="Node000001" title="The constructor of DBManager class." alt="" coords="5,56,167,83"/>
+<area shape="rect" id="Node000002" href="$class_db_manager.html#a212075d7d81c67fd9bc4b9e7b1580061" title="This method is responsible for initializing all tables necessary to archive the data generated throug..." alt="" coords="215,56,384,83"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,67,199,67,199,72,167,72"/>
+<area shape="rect" id="Node000003" href="$class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="468,5,610,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="366,53,457,33,458,38,367,58"/>
+<area shape="rect" id="Node000004" href="$class_db_manager.html#a5905248461fc77d70531bf8eadad6961" title="Method that returns the index of the most recent snapshot." alt="" coords="432,56,646,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="385,67,416,67,416,72,385,72"/>
+<area shape="rect" id="Node000005" href="$class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="470,107,609,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="367,81,458,100,457,106,366,86"/>
+</map>

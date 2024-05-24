@@ -1,0 +1,7 @@
+<map id="MainTrafficSimulator::GetCurrentDate" name="MainTrafficSimulator::GetCurrentDate">
+<area shape="rect" id="Node000001" title="Method that creates a string used as a record title based on current date." alt="" coords="214,55,352,97"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a5f7bc45f17780bdcfe83564b9b7bc5e4" title="Method that activates after &quot;Save diagram&quot; button on &quot;Fundamental diagram&quot; tab is clicked." alt="" coords="9,5,162,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,61,162,53,163,48,199,56"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#ad583f01cdc543ac5ab18ed8787baaa23" title="Method that activates after &quot;Save diagram&quot; button on &quot;Space&#45;time diagram&quot; tab is clicked." alt="" coords="5,88,166,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,96,167,103,166,98,198,91"/>
+</map>

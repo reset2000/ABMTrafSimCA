@@ -1,0 +1,5 @@
+<map id="MainTrafficSimulator::on_cbTheme_currentIndexChanged" name="MainTrafficSimulator::on_cbTheme_currentIndexChanged">
+<area shape="rect" id="Node000001" title="Method that activates after changing &quot;Theme&quot; field value in the top bar." alt="" coords="5,5,238,48"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a92dd8b2d562a6747fc6c24cdb3d674d0" title="Method that modifies theme based on the current selection." alt="" coords="286,5,424,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,24,270,24,270,29,238,29"/>
+</map>

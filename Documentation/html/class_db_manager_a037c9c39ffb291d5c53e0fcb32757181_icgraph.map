@@ -1,0 +1,5 @@
+<map id="DbManager::readSnapshot" name="DbManager::readSnapshot">
+<area shape="rect" id="Node000001" title="Method for reading saved snapshot with configuration saved during the previous application session." alt="" coords="200,13,375,40"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#aaf4683faf19e8814550590ce1a5fa73a" title="The constructor of the MainTrafficSimulator class." alt="" coords="5,5,152,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,29,152,29,152,24,184,24"/>
+</map>

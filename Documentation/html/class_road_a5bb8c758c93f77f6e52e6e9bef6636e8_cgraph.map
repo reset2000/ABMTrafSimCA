@@ -1,0 +1,17 @@
+<map id="Road::MoveSingleCarChangeLane" name="Road::MoveSingleCarChangeLane">
+<area shape="rect" id="Node000001" title="Method that moves the car who was marked as one that needs to change lane during the previous step." alt="" coords="5,157,223,184"/>
+<area shape="rect" id="Node000002" href="$class_car.html#ae4a70399de6a3cf85fea3489de7c328b" title="The getter of the carID field." alt="" coords="325,5,428,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,155,184,100,225,68,270,42,309,27,311,32,272,46,228,73,188,104,130,159"/>
+<area shape="rect" id="Node000003" href="$class_road_segment.html#af1cc5cbdddc354e566aedf5201ee2f5a" title="The getter of the carID field." alt="" coords="294,56,459,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,155,197,124,270,92,293,85,295,90,272,97,199,128,141,159"/>
+<area shape="rect" id="Node000004" href="$class_configuration.html#a0cc3cefdde53c13b0796dbdefde231c6" title="The getter of the segmentsNum field." alt="" coords="271,107,482,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="186,154,288,134,289,139,187,159"/>
+<area shape="rect" id="Node000005" href="$class_car.html#a1a6c3f6dd16d32d94e7096d34283e1c7" title="The getter of the tailSegmentsNum field." alt="" coords="288,157,465,184"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="223,168,272,168,272,173,223,173"/>
+<area shape="rect" id="Node000006" href="$class_road_segment.html#a83fc5b68a472ff8eba54cbf9125eee20" title="The setter of the carID field." alt="" coords="295,208,458,235"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="187,182,289,202,288,207,186,187"/>
+<area shape="rect" id="Node000007" href="$class_road_segment.html#a59a59c58bb953b1592f485af11492491" title="The setter of the isTail field." alt="" coords="296,259,457,285"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="141,182,199,213,272,244,295,252,293,257,270,249,197,218,138,187"/>
+<area shape="rect" id="Node000008" href="$class_car.html#abaf405f42f6acfa964be8ba574a7bebe" title="The setter of the stopChangingLane field." alt="" coords="287,309,466,336"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="130,183,188,237,228,269,272,295,287,302,285,306,269,300,225,273,184,242,126,186"/>
+</map>

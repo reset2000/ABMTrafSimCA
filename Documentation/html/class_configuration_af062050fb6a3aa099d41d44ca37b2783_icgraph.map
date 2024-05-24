@@ -1,0 +1,5 @@
+<map id="Configuration::SetCurrentDensity" name="Configuration::SetCurrentDensity">
+<area shape="rect" id="Node000001" title="The setter of the currentDensity field." alt="" coords="220,5,386,48"/>
+<area shape="rect" id="Node000002" href="$class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,13,172,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,29,172,29,172,24,204,24"/>
+</map>

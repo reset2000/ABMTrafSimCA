@@ -1,0 +1,5 @@
+<map id="Road::CheckFrontAltLane" name="Road::CheckFrontAltLane">
+<area shape="rect" id="Node000001" title="Method that checks LAI model constraits for changing lanes (looking for preceding cars on the other l..." alt="" coords="5,5,176,32"/>
+<area shape="rect" id="Node000002" href="$class_configuration.html#a0cc3cefdde53c13b0796dbdefde231c6" title="The getter of the segmentsNum field." alt="" coords="224,5,435,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,16,208,16,208,21,176,21"/>
+</map>

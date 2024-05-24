@@ -1,0 +1,17 @@
+<map id="MainTrafficSimulator::InitializeDriverProfilesFromArchiveTable" name="MainTrafficSimulator::InitializeDriverProfilesFromArchiveTable">
+<area shape="rect" id="Node000001" title="Method that initializes driver profiles from a chosen achived record." alt="" coords="644,97,826,156"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a16a33a7af0e8bca673cfe2dd937a446c" title="Method that updates configuration based on chosen archived record." alt="" coords="458,105,596,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="628,129,597,129,597,124,628,124"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#ac0ab9f89b3239f56c8d5028eebe55f1b" title="Method that initializes &quot;Archive&quot; table at the start of the application." alt="" coords="261,105,410,148"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="442,129,411,129,411,124,442,124"/>
+<area shape="rect" id="Node000004" href="$class_main_traffic_simulator.html#a76905e03051869b9de3a86ea060b2359" title="Method that deletes records from archive database." alt="" coords="26,5,192,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="264,100,212,74,149,51,151,46,214,70,267,95"/>
+<area shape="rect" id="Node000005" href="$class_main_traffic_simulator.html#a5a238f8735a6464ea6e4fa18dbb77ec2" title="Method that activates after &quot;Read data&quot; button on &quot;Archive&quot; tab is clicked." alt="" coords="22,72,196,115"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="245,116,196,109,197,103,245,111"/>
+<area shape="rect" id="Node000006" href="$class_main_traffic_simulator.html#ae9a3b61d08d37b62c15177ccb2f8669f" title="Method that activates after current tab is changed." alt="" coords="5,139,213,181"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="245,143,214,147,213,142,245,137"/>
+<area shape="rect" id="Node000007" href="$class_main_traffic_simulator.html#a8770da2771284635227d0d06b4aa8fa8" title="Method that reads fundamental diagram from a chosen saved archived record." alt="" coords="38,205,180,248"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="302,159,261,185,214,208,181,220,179,215,212,203,258,180,300,155"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="208,43,214,46,269,73,315,103,312,107,266,78,212,50,205,48"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="163,197,212,179,278,146,280,151,214,184,165,202"/>
+</map>

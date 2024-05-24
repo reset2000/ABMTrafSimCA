@@ -1,0 +1,7 @@
+<map id="DbManager::saveDb" name="DbManager::saveDb">
+<area shape="rect" id="Node000001" title="Method for saving fundamental diagrams to the database." alt="" coords="5,31,143,57"/>
+<area shape="rect" id="Node000002" href="$class_db_manager.html#a9e26ac4e30fd6f8258835cb5a1c41072" title="Method for closing database." alt="" coords="191,5,333,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,32,175,28,176,33,144,37"/>
+<area shape="rect" id="Node000003" href="$class_db_manager.html#aef7a40f0a6fe870f53c6c8a0539930ba" title="Method for opening database." alt="" coords="192,56,332,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,51,177,55,176,61,143,56"/>
+</map>

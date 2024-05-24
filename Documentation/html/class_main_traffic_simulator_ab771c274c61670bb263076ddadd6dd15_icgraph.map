@@ -1,0 +1,5 @@
+<map id="MainTrafficSimulator::runSimulation" name="MainTrafficSimulator::runSimulation">
+<area shape="rect" id="Node000001" title="Method that starts the simulation based on configuration set in the &quot;Configuration&quot; tab." alt="" coords="258,13,396,56"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a22c72631a2a083669b318171d88c9563" title="Method that is activated after &quot;Generate space&#45;time diagram&quot; button on &quot;Console&quot; tab is clicked." alt="" coords="5,5,210,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,37,210,37,210,32,242,32"/>
+</map>

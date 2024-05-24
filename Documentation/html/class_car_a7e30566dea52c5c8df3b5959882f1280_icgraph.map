@@ -1,0 +1,9 @@
+<map id="Car::SetCarSpeed" name="Car::SetCarSpeed">
+<area shape="rect" id="Node000001" title="The setter of the speed field." alt="" coords="672,5,799,32"/>
+<area shape="rect" id="Node000002" href="$class_road.html#adfdd08e959cf3942869eae15b8d92114" title="Method that accelerates cars based on LAI model formula." alt="" coords="420,5,624,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="657,21,625,21,625,16,657,16"/>
+<area shape="rect" id="Node000003" href="$class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="220,5,372,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="404,21,372,21,372,16,404,16"/>
+<area shape="rect" id="Node000004" href="$class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,5,172,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="204,21,172,21,172,16,204,16"/>
+</map>

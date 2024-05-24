@@ -1,0 +1,21 @@
+<map id="RoadSegment::SetCarID" name="RoadSegment::SetCarID">
+<area shape="rect" id="Node000001" title="The setter of the carID field." alt="" coords="948,93,1111,119"/>
+<area shape="rect" id="Node000002" href="$class_road.html#a58c1510d87a853400901912593aa1ed8" title="Main method that carries out the simulation." alt="" coords="220,67,372,94"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="987,88,945,70,899,55,766,25,660,10,609,8,554,12,421,33,368,49,324,69,321,64,366,44,419,27,554,6,609,3,661,4,767,19,900,50,947,65,989,83"/>
+<area shape="rect" id="Node000004" href="$class_road.html#a2c2cea92f9c5980ec2be4e6ecf89f613" title="Method that moves every car according to their speed at the end of each iteration." alt="" coords="469,42,585,69"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="950,92,899,83,729,67,586,60,586,54,729,62,900,78,951,87"/>
+<area shape="rect" id="Node000005" href="$class_road.html#a5bb8c758c93f77f6e52e6e9bef6636e8" title="Method that moves the car who was marked as one that needs to change lane during the previous step." alt="" coords="682,93,900,119"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="933,109,900,109,900,103,933,103"/>
+<area shape="rect" id="Node000007" href="$class_road.html#ac1eefc1e96b2b00f26d55524c2e586f1" title="The constructor of the Road class." alt="" coords="483,143,572,170"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="951,126,900,134,718,151,572,158,572,153,718,146,899,129,950,120"/>
+<area shape="rect" id="Node000008" href="$class_road.html#a8ee0c51b19a437b4eea175241f37ee38" title="Method that sets up the initial state of the road." alt="" coords="713,194,869,221"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="994,130,950,154,901,178,848,196,846,191,899,173,948,150,991,125"/>
+<area shape="rect" id="Node000003" href="$class_road.html#a7937925d8ca8f35fcbda5cf67b2be215" title="The method thar packages individual calls of GenerateCycles method for each density point of the fund..." alt="" coords="5,93,172,119"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="205,95,172,99,172,93,204,89"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="454,66,373,75,372,70,453,61"/>
+<area shape="rect" id="Node000006" href="$class_road.html#ab1036d2ae3f35896281f01ef3dae04f7" title="Method that checks for potential car lane changes based on LAI model formulas." alt="" coords="420,93,634,119"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="667,109,635,109,635,103,667,103"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="404,95,372,92,373,86,405,90"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="467,153,172,118,172,113,467,147"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="703,193,572,168,573,163,704,188"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="MainTrafficSimulator::on_btnSTDiagramConfig_clicked" name="MainTrafficSimulator::on_btnSTDiagramConfig_clicked">
+<area shape="rect" id="Node000001" title="Method that is activated after &quot;Generate space&#45;time diagram&quot; button on &quot;Configuration&quot; tab is clicked..." alt="" coords="5,43,174,101"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#ab98b1290020263415db44fcfd4f67fed" title="A method that checks the probabilities and counts for car lengths and driver profiles." alt="" coords="222,5,419,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,56,206,50,207,56,174,61"/>
+<area shape="rect" id="Node000003" href="$class_main_traffic_simulator.html#a78f37fc47c360b09939b1b055590a276" title="Method that draws space&#45;time diagram in the &quot;Space&#45;time diagram&quot; tab after the simulation is complete..." alt="" coords="251,88,390,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,83,236,93,235,98,173,88"/>
+</map>

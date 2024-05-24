@@ -1,0 +1,5 @@
+<map id="MainTrafficSimulator::on_sbFontSize_valueChanged" name="MainTrafficSimulator::on_sbFontSize_valueChanged">
+<area shape="rect" id="Node000001" title="Method that activates after changing &quot;Fonnt size&quot; field value in the top bar." alt="" coords="5,5,209,48"/>
+<area shape="rect" id="Node000002" href="$class_main_traffic_simulator.html#a7020bcb4235b2314a1c93d722a706f5e" title="Method that modifies font style and size based on the current selection." alt="" coords="257,5,395,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,24,241,24,241,29,209,29"/>
+</map>

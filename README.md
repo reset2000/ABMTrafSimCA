@@ -15,7 +15,7 @@ ABMTrafSimCA is a desktop application written in C++ with a user interface imple
 - C++ 17+
 - Qt 6.5.0+
 - Qt Creator 10.0.0+
-# How to run the application
+# How to run the project
 The application should be run through Qt Creator (version 10.0.0+). The software can be downloaded from the official Qt Group website avaliable under <a href="https://www.qt.io/download" target="_blank">THIS</a> adress.
 
 <img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/5a3ba80c-5eac-41c4-93a2-35362a20230a" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
@@ -36,7 +36,15 @@ Then choose “CMakeLists.txt” file from the downloaded and unpacked repositor
 
 <img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/b711b48c-fade-4114-8a32-0696a58ab5b5" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
 
-After opening the project, the user should run the application using “Run” button (or Ctrl + R shortcut on Windows).
+After opening the project, choose the correct configuration (MinGW):
+
+<img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/d63c5506-c18d-4867-8745-e2234224ba6e" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
+
+Change the build configuration of the project to "Release":
+
+<img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/cae71a1a-2b2e-49de-b10e-dd70e5d37f10" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
+
+The user should run the application using “Run” button (or Ctrl + R shortcut on Windows).
 
 <img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/a8b0a613-5826-48dc-9242-d8e7bc136692" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
 

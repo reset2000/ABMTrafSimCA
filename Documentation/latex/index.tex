@@ -20,9 +20,28 @@ ABMTraf\+Sim\+CA is a desktop application written in C++ with a user interface i
 \item Windows or Linux 64-\/bit operating system
 \item C++ 17+
 \item Qt 6.\+5.\+0+
-\item Qt Creator 10.\+0.\+0+ 
+\item Qt Creator 10.\+0.\+0+
 \end{DoxyItemize}\hypertarget{index_autotoc_md3}{}\doxysection{\texorpdfstring{How to run the application}{How to run the application}}\label{index_autotoc_md3}
-The application should be run through Qt Creator (version 10.\+0.\+0+). The software can be downloaded from the official Qt Group website avaliable under \href{https://doc.qt.io/qt-6/gpl.html}{\texttt{ THIS}} adress.
+To use the application, first you needs to download the repository from this Git\+Hub page.
+
+
+
+After the repository is downoaded, the executable package can be found in "{}\+Executable"{} folder.
+
+
+
+Inside the "{}\+Executable"{} folder there is a .zip file that needs to be unpacked first.
+
+
+
+After you unpack the .zip file, open the ABMTraf\+Sim\+CA\+\_\+executable folder and click on the Traffic\+Simulator.\+exe file to launch the application.
+
+
+
+The main window of the application should appear.
+
+\hypertarget{index_autotoc_md4}{}\doxysection{\texorpdfstring{How to run the project}{How to run the project}}\label{index_autotoc_md4}
+The project should be run through Qt Creator (version 10.\+0.\+0+). The software can be downloaded from the official Qt Group website avaliable under \href{https://www.qt.io/download}{\texttt{ THIS}} adress.
 
 
 
@@ -42,19 +61,27 @@ Then choose “\+CMake\+Lists.\+txt” file from the downloaded and unpacked rep
 
 
 
-After opening the project, the user should run the application using “\+Run” button (or Ctrl + R shortcut on Windows).
+After opening the project, choose the correct configuration (Min\+GW)\+:
+
+
+
+Change the build configuration of the project to "{}\+Release"{}\+:
+
+
+
+The user should run the application using “\+Run” button (or Ctrl + R shortcut on Windows).
 
 
 
 After running the programm through Qt Creator, the main window of the application should appear.
 
-\hypertarget{index_autotoc_md4}{}\doxysection{\texorpdfstring{Authors}{Authors}}\label{index_autotoc_md4}
+\hypertarget{index_autotoc_md5}{}\doxysection{\texorpdfstring{Authors}{Authors}}\label{index_autotoc_md5}
 Patryk Górka~\newline
  \href{mailto:gp46518@zut.edu.pl}{\texttt{ gp46518@zut.\+edu.\+pl}}
 
 Krzysztof Małecki~\newline
- \href{mailto:krzysztof.malecki@zut.edu.pl}{\texttt{ krzysztof.\+malecki@zut.\+edu.\+pl}} \hypertarget{index_autotoc_md5}{}\doxysection{\texorpdfstring{Licenses}{Licenses}}\label{index_autotoc_md5}
-ABMTraf\+Sim\+CA was created using GPL v.\+3.\+0 license (see \href{./LICENSE}{\texttt{ LICENSE.\+TXT}}). Qt library is also avaliable under the same \href{https://doc.qt.io/qt-6/gpl.html}{\texttt{ GPL version 3}} license. Eigen package, which was used in this application, is avaliable under \href{https://www.mozilla.org/en-US/MPL/2.0/}{\texttt{ MPL2}} license. \hypertarget{index_autotoc_md6}{}\doxysection{\texorpdfstring{Version history}{Version history}}\label{index_autotoc_md6}
+ \href{mailto:krzysztof.malecki@zut.edu.pl}{\texttt{ krzysztof.\+malecki@zut.\+edu.\+pl}} \hypertarget{index_autotoc_md6}{}\doxysection{\texorpdfstring{Licenses}{Licenses}}\label{index_autotoc_md6}
+ABMTraf\+Sim\+CA was created using GPL v.\+3.\+0 license (see \href{./LICENSE}{\texttt{ LICENSE.\+TXT}}). Qt library is also avaliable under the same \href{https://doc.qt.io/qt-6/gpl.html}{\texttt{ GPL version 3}} license. Eigen package, which was used in this application, is avaliable under \href{https://www.mozilla.org/en-US/MPL/2.0/}{\texttt{ MPL2}} license. \hypertarget{index_autotoc_md7}{}\doxysection{\texorpdfstring{Version history}{Version history}}\label{index_autotoc_md7}
 
 \begin{DoxyItemize}
 \item 1.\+0.\+0 – implementation of console-\/based traffic simulator
@@ -69,7 +96,12 @@ ABMTraf\+Sim\+CA was created using GPL v.\+3.\+0 license (see \href{./LICENSE}{\
 \item 2.\+4.\+0 – saving and loading driver types using database
 \item 2.\+5.\+0 – added different diagram styles and fonts
 \begin{DoxyItemize}
-\item 2.\+5.\+1 – fixed colour being displayed incorrectly depending on the motive 
+\item 2.\+5.\+1 – fixed colour being displayed incorrectly depending on the motive
+\end{DoxyItemize}
+\item 2.\+6.\+0 – updated project with the addition of the documentation in the "{}\+Documentation"{} folder
+\begin{DoxyItemize}
+\item 2.\+6.\+1 -\/ fixed string conversions and themes not working in Debug mode
+\item 2.\+6.\+2 -\/ added executable package in "{}\+Executable"{} directory 
 \end{DoxyItemize}
 \end{DoxyItemize}
 \end{DoxyItemize}

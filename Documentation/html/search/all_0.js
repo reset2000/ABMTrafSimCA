@@ -7,5 +7,5 @@ var searchData=
   ['adddensity_4',['AddDensity',['../class_configuration.html#a9460843b6bd10843cbc2c4417b4fe425',1,'Configuration']]],
   ['addshowfunction_5',['AddShowFunction',['../class_configuration.html#a6510e64a8c07ef8f2c8e44657fbb9fc6',1,'Configuration']]],
   ['application_6',['How to run the application',['../index.html#autotoc_md3',1,'']]],
-  ['authors_7',['Authors',['../index.html#autotoc_md4',1,'']]]
+  ['authors_7',['Authors',['../index.html#autotoc_md5',1,'']]]
 ];

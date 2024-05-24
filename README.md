@@ -16,7 +16,7 @@ ABMTrafSimCA is a desktop application written in C++ with a user interface imple
 - Qt 6.5.0+
 - Qt Creator 10.0.0+
 # How to run the application
-The application should be run through Qt Creator (version 10.0.0+). The software can be downloaded from the official Qt Group website avaliable under <a href="https://doc.qt.io/qt-6/gpl.html" target="_blank">THIS</a> adress.
+The application should be run through Qt Creator (version 10.0.0+). The software can be downloaded from the official Qt Group website avaliable under <a href="https://www.qt.io/download" target="_blank">THIS</a> adress.
 
 <img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/5a3ba80c-5eac-41c4-93a2-35362a20230a" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
 

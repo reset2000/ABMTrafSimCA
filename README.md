@@ -95,3 +95,5 @@ Eigen package, which was used in this application, is avaliable under <a href="h
   - 2.5.0 – added different diagram styles and fonts
     - 2.5.1 – fixed colour being displayed incorrectly depending on the motive
   - 2.6.0 – updated project with the addition of the documentation in the "Documentation" folder
+    	- 2.6.1 - fixed string conversions and themes not working in Debug mode
+	    - 2.6.2 - added executable package in "Executable" directory

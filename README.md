@@ -15,8 +15,30 @@ ABMTrafSimCA is a desktop application written in C++ with a user interface imple
 - C++ 17+
 - Qt 6.5.0+
 - Qt Creator 10.0.0+
+
+# How to run the application
+To use the application, first you needs to download the repository from this GitHub page.
+
+<img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/ffca1f9d-c7c8-43f1-8694-b258903970dd" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
+
+After the repository is downoaded, the executable package can be found in "Executable" folder.
+
+<img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/43ca3645-9e28-4c45-b427-e0c3dde215f5" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
+
+Inside the "Executable" folder there is a .zip file that needs to be unpacked first.
+
+<img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/f7bc3181-c73d-4fb4-a5c6-7a7a42c2c935" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
+
+After you unpack the .zip file, open the ABMTrafSimCA_executable folder and click on the TrafficSimulator.exe file to launch the application.
+
+<img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/f321a537-a9ba-49a9-95cb-89b4fe218be0" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
+
+The main window of the application should appear.
+
+<img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/f2adbac3-7b39-4620-a642-e77944db47c0" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
+
 # How to run the project
-The application should be run through Qt Creator (version 10.0.0+). The software can be downloaded from the official Qt Group website avaliable under <a href="https://www.qt.io/download" target="_blank">THIS</a> adress.
+The project should be run through Qt Creator (version 10.0.0+). The software can be downloaded from the official Qt Group website avaliable under <a href="https://www.qt.io/download" target="_blank">THIS</a> adress.
 
 <img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/5a3ba80c-5eac-41c4-93a2-35362a20230a" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
 

@@ -1,5 +1,5 @@
 # ABMTrafSimCA
-ABMTrafSimCA is a desktop application written in C++ with a user interface implemented with the Qt library. It contains all the basic functions which are necessary to carry out traffic modelling and simulation based on the CA model. The developed software enables users to adapt the system to their needs freely and allows the observation of the traffic phenomenon through two types of diagrams (space-time and fundamental diagrams). Such diagrams are the most expected by researchers dealing with the indicated topics. The implemented model serves a straight, two-lane road with a determined density of vehicles and periodic boundary conditions. Thanks to that, a constant percentage of occupied CA cells during the simulation is maintained.
+ABMTrafSimCA is a Windows desktop application written in C++ with a user interface implemented with the Qt library. It contains all the basic functions which are necessary to carry out traffic modelling and simulation based on the CA model. The developed software enables users to adapt the system to their needs freely and allows the observation of the traffic phenomenon through two types of diagrams (space-time and fundamental diagrams). Such diagrams are the most expected by researchers dealing with the indicated topics. The implemented model serves a straight, two-lane road with a determined density of vehicles and periodic boundary conditions. Thanks to that, a constant percentage of occupied CA cells during the simulation is maintained.
 # Features
 - Simulating traffic based on parameters set by the user.
 - Creating agents (driver profiles) with certain simulation properties.
@@ -17,7 +17,7 @@ ABMTrafSimCA is a desktop application written in C++ with a user interface imple
 - Qt Creator 10.0.0+
 
 # How to run the application
-To use the application, first you needs to download the repository from this GitHub page.
+To use the application on Windows operating system, first you needs to download the repository from this GitHub page.
 
 <img src="https://github.com/reset2000/ABMTrafSimCA/assets/59997339/ffca1f9d-c7c8-43f1-8694-b258903970dd" width="70%" alt="image" style="display: block; margin-left: auto; margin-right: auto;" />
 
@@ -95,5 +95,5 @@ Eigen package, which was used in this application, is avaliable under <a href="h
   - 2.5.0 – added different diagram styles and fonts
     - 2.5.1 – fixed colour being displayed incorrectly depending on the motive
   - 2.6.0 – updated project with the addition of the documentation in the "Documentation" folder
-    	- 2.6.1 - fixed string conversions and themes not working in Debug mode
-	    - 2.6.2 - added executable package in "Executable" directory
+    - 2.6.1 – fixed string conversions and themes not working in Debug mode
+    - 2.6.2 – added executable package in "Executable" directory
